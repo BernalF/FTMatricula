@@ -1,0 +1,88 @@
+﻿@model FTMatricula.Models.LoginModel
+@section styles {
+    <link rel="stylesheet" href="~/Content/styles/login.css">
+}
+
+@if (User.Identity.IsAuthenticated && Request.QueryString["returnUrl"] != null)
+{
+    Response.Redirect("~/Account/notAuthorized");
+}
+<header>
+    <h2 class="logo60">User Login</h2>
+</header>
+
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{   
+    <section class="barHolder">
+
+        <article class="loginWindow">
+
+            <aside class="userImage bg">
+                <img src="~/Content/images/user_image.png" alt="User Image" />
+            </aside>
+            <ul class="loginData">
+                <li class="font">@Html.LabelFor(m => m.UserName)</li>
+                <li>
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "input", @placeholder = "User name" })
+                </li>
+                <li class="font">@Html.LabelFor(m => m.Password)</li>
+                <li>
+                    @Html.PasswordFor(m => m.Password, new { @class = "input", placeholder = "Password" })
+                </li>
+                <li>&nbsp;</li>
+                <li>
+                    @if (Model.RememberMe)
+                    {  
+                        <label class="checkHolder hit">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    }
+                    else
+                    {
+                        <label class="checkHolder">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    }
+
+                    <input class="button right" type="submit" value="Sign In" />
+                </li>
+            </ul>
+        </article>
+
+        <p style="text-align: center">
+            @Html.ValidationSummary(true, "")
+        </p>
+
+    </section>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        // SELECT SET
+        $('select.select').each(function () {
+            if ($('option:selected', this).val() != '') {
+                title = $('option:selected', this).text();
+            }
+            $(this).after('<span class="selectText">' + title + '</span>');
+            $(this).change(function () {
+                $("option:selected", this).each(function () {
+                    title = $(this).text() + "";
+                });
+                $(this).closest('.selectHolder').children('.selectText').html(title);
+            }).change();
+        });
+
+        $(document).ready(function () {
+            $('.checkHolder').click(function () {
+                if ($(this).children('input').is(':checked')) {
+                    $(this).css('background-position', 'left top');
+                } else {
+                    $(this).css('background-position', 'left bottom');
+                }
+            });
+        });
+    </script>
+}

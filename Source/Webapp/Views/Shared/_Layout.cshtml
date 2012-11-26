@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Sistema Matricula FundaTEC</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    @Styles.Render("~/bundles/FTMatriculaCSS")
+    @Scripts.Render("~/bundles/modernizr")
+
+    @RenderSection("styles", required: false)
+</head>
+<body class="eis">
+    <!-- CENTER INFORMATION HOLDER -->
+    <section class="Main">
+        @RenderBody()
+    </section>
+    <footer class="footer">
+        <p class="textCenter">BYB development.</p>
+    </footer>
+</body>
+</html>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/FTMatriculaJS")
+@RenderSection("scripts", required: false)

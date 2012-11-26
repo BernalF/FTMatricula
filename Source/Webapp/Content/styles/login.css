@@ -1,0 +1,188 @@
+body, html{
+	background-image:url(../images/sample1.jpg);
+	background-position:center center;
+	background-attachment:fixed;
+	background-repeat:no-repeat;
+	
+	/*-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;*/
+}
+
+body{
+	overflow:hidden;
+}
+
+#Top{
+    display:none;
+}
+
+header{
+	padding:50px;
+}
+
+.barHolder{
+	margin:0px auto;
+	padding:50px 0 30px 0;
+	/*background:#f5f5f5;*/
+	background:rgba(0, 0 , 0, .6);
+}
+
+/* LOGIN STARTS */
+
+.userImage{
+	width:100px;
+	height:100px;
+    border:1px solid #fff;
+	float:left;
+	margin:0 10px 0 0;
+}
+
+.userImage img{
+	max-width:100px;
+}
+
+.logo60 {
+	display:block;
+	background-image:url(../images/logo_60px.png);
+	background-position:center;
+	height:62px;
+	width:220px;
+	text-indent:-9999px;
+	padding:0;
+	margin:0px auto;
+	/*margin:0 auto 20px auto;*/
+}
+
+.loginWindow{
+	width:470px;
+	padding:0;
+	margin:0 auto;
+	overflow:hidden;
+}
+
+.loginWindow h2{
+	font-size:24px;
+	font-weight:bold;
+	padding:6px 0 0 10px;
+	background:none;
+	vertical-align:bottom;
+}
+
+.loginData{
+	overflow:hidden;
+	width:350px;
+	float:right;
+}
+
+.loginData li{
+	line-height:24px;
+	float:left;
+	color:#fff;
+}
+
+.loginData li:nth-child(odd){
+	width:30%;
+}
+
+.loginWindow li:nth-child(even){
+	padding:0 0 10px 0;
+	width:70%;
+}
+
+.loginWindow .input {
+	width:100%;
+	height:24px;
+	line-height:24px;
+	font-size:12px;
+	font-family:Verdana, Geneva, sans-serif;
+	padding:0;
+    text-indent:5px;
+	background:#c6c6c6;
+}
+
+.checkHolder {
+    width:150px;
+}
+
+.loginWindow a.button{
+	width:55px;
+	float:right;
+	padding:0 24px 0 0;
+}
+
+/* LOGIN ENDS */
+
+#Main{
+    background:none;
+}
+
+a#Notif,
+#InfoBar{
+    display:none;
+}
+
+
+footer {
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	position:absolute;
+	width:100%;
+	bottom:0;
+    background:none;
+	color:#fff;
+	/*background:#FFF;
+	color:#999;*/
+    z-index:20;
+	padding:0px;
+}
+
+footer p{
+    color:#fff;
+    line-height:40px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
