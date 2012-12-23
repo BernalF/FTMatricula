@@ -3,86 +3,119 @@
     <link rel="stylesheet" href="~/Content/styles/login.css">
 }
 
-@if (User.Identity.IsAuthenticated && Request.QueryString["returnUrl"] != null)
+@if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
 {
-    Response.Redirect("~/Account/notAuthorized");
+    Response.Redirect("~/Account/NotAuthorized");
 }
-<header>
-    <h2 class="logo60">User Login</h2>
-</header>
 
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-{   
-    <section class="barHolder">
 
-        <article class="loginWindow">
+<ul id="SectionHolder">
+    <li style="padding-bottom:100px;"></li>
+    <li>
 
-            <aside class="userImage bg">
-                <img src="~/Content/images/user_image.png" alt="User Image" />
-            </aside>
-            <ul class="loginData">
-                <li class="font">@Html.LabelFor(m => m.UserName)</li>
-                <li>
-                    @Html.TextBoxFor(m => m.UserName, new { @class = "input", @placeholder = "User name" })
+
+        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+        {
+            
+            <div class="mainBox" style="padding: 0 10px 10px 10px; width: 400px;">
+                <h2 class="title">Login / Enter your user name and password.</h2>
+
+                <ul style="margin: 0 auto; padding: 0;">
+                    <li>
+                        <ul style="color: #000;">
+                            <li>
+                                <ul class="login">
+                                    <li class="logUser">
+                                        <h2 class="title">User Login</h2>
+                                        <ul class="logForm">
+                                            <li>
+                                                @Html.LabelFor(m => m.UserName)
+                                            </li>
+                                            <li>
+                                                @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                                            </li>
+                                            <li>
+                                                @Html.LabelFor(m => m.Password)
+                                            </li>
+                                            <li>
+                                                @Html.PasswordFor(m => m.Password, new { @class = "input", @id = "txtPassword", @onkeypress = "javascript: return keypressHandler(event);" })
+                                            </li>
+
+
+                                            <li></li>
+                                            <li>
+                                                @if (Model.RememberMe)
+                                                { 
+                                                    <label class="checkHolder hit">
+                                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                                        @Html.DisplayNameFor(m => m.RememberMe)
+                                                    </label>
+                                                }
+                                                else
+                                                {
+                                                    <label class="checkHolder">
+                                                        @Html.CheckBoxFor(m => m.RememberMe)
+                                                        @Html.DisplayNameFor(m => m.RememberMe)
+                                                    </label>
+                                                }
+                                            </li>
+                                            <li></li>
+                                            <li class="subBtn">
+                                                @Html.ValidationSummary(true, "")
+                                                <span class="block right"><a href="#" onclick="javascript: submit_form()">Sign In</a></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+
+                                @Html.ValidationSummary()
+
+                            </li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+
+
+
+                <div class="clear"></div>
+            </div>
+
+            
+@*<ul>
+                <li class="textCenter invert">
+                
+                    @Html.ActionLink("Register", "Register") if you don't have an account.                
                 </li>
-                <li class="font">@Html.LabelFor(m => m.Password)</li>
-                <li>
-                    @Html.PasswordFor(m => m.Password, new { @class = "input", placeholder = "Password" })
-                </li>
-                <li>&nbsp;</li>
-                <li>
-                    @if (Model.RememberMe)
-                    {  
-                        <label class="checkHolder hit">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    }
-                    else
-                    {
-                        <label class="checkHolder">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.DisplayNameFor(m => m.RememberMe)
-                        </label>
-                    }
-
-                    <input class="button right" type="submit" value="Sign In" />
-                </li>
-            </ul>
-        </article>
-
-        <p style="text-align: center">
-            @Html.ValidationSummary(true, "")
-        </p>
-
-    </section>
-}
+            </ul>*@
+        }
+    </li>
+</ul>
 
 @section scripts {
-    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
-        // SELECT SET
-        $('select.select').each(function () {
-            if ($('option:selected', this).val() != '') {
-                title = $('option:selected', this).text();
-            }
-            $(this).after('<span class="selectText">' + title + '</span>');
-            $(this).change(function () {
-                $("option:selected", this).each(function () {
-                    title = $(this).text() + "";
-                });
-                $(this).closest('.selectHolder').children('.selectText').html(title);
-            }).change();
-        });
 
-        $(document).ready(function () {
-            $('.checkHolder').click(function () {
-                if ($(this).children('input').is(':checked')) {
-                    $(this).css('background-position', 'left top');
-                } else {
-                    $(this).css('background-position', 'left bottom');
-                }
-            });
-        });
+        function keypressHandler(event) {
+            var key = event.which || event.keyCode;
+
+            switch (key) {
+                default:
+                    return true;
+                case 13:
+                    submit_form();
+                    return false;
+            }
+        }
+
+        function submit_form() {
+            //$('.modalBg').fadeIn();
+            //$('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+
+
     </script>
 }

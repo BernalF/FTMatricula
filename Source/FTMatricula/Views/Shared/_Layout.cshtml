@@ -1,24 +1,82 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Sistema Matricula FundaTEC</title>
+    <meta charset="utf-8" />
+    <title>Sales</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="description" content="iSales App HTML5">
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="~/bookmark-icon1.png" />
+    <link rel="apple-touch-icon" href="~/apple-touch-icon.png" />
+
     @Styles.Render("~/bundles/FTMatriculaCSS")
+    @RenderSection("styles", required: false)
+
     @Scripts.Render("~/bundles/modernizr")
 
-    @RenderSection("styles", required: false)
 </head>
-<body class="eis">
-    <!-- CENTER INFORMATION HOLDER -->
-    <section class="Main">
-        @RenderBody()
-    </section>
-    <footer class="footer">
-        <p class="textCenter">BYB development.</p>
+<body>
+
+    <div class="mainHolder">
+
+
+        <!-- CENTER INFORMATION HOLDER STARTS -->
+        <section class="contentHolder">
+            <header class="top">
+                <a  href="@Url.Action("Index", "Home", routeValues: null)">
+                <h1>
+                    
+                </h1>
+                </a>
+                <nav>
+                    <ul>
+                    @Html.Partial("_LoginPartial")
+                    </ul>
+                </nav>
+            </header>
+
+
+            <!-- SECTION HOLDER STARTS -->
+            @RenderBody()
+            <!-- SECTION HOLDER ENDS -->
+
+        </section>
+        <!-- CENTER INFORMATION HOLDER ENDS -->
+        
+    </div>
+    <footer>
+        <ul id="Footer">
+            <li class="browsers">We Support</li>
+            <li class="lined">B&B Development</li>
+        </ul>
     </footer>
+<div class="modalBg">
+    modal
+</div>
+<div class="loading">
+    <img src="~/Content/images/defaults/loader.gif" alt="loading" />
+    <p>Please wait!</p>
+</div>
 </body>
 </html>
+
+
+
 @Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
 @Scripts.Render("~/bundles/FTMatriculaJS")
+
+
 @RenderSection("scripts", required: false)
+
+<script type="text/javascript">
+    $(function () {
+
+        $("a").click(function (event) {
+            event.preventDefault();
+            window.location = $(this).attr("href");
+        });
+    });
+</script>

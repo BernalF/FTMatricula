@@ -1,0 +1,100 @@
+﻿@model FTMatricula.Models.RegisterModel
+
+@section styles {
+    <link rel="stylesheet" href="~/Content/styles/login.css">
+}
+
+<header>
+    <h2 class="logo60">Register / Create a new account</h2>
+</header>
+
+
+@using (Html.BeginForm())
+{   
+            
+    <section class="barHolder">
+
+        <article class="loginWindow">
+
+            <ul>
+                <li>
+                    <h2 class="title">Register / Create a new account</h2>
+                    <br />
+                    
+                    <ul class="loginData">
+                        <li>
+                            @Html.LabelFor(m => m.UserName)
+                        </li>
+                        <li>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Email)
+                        </li>
+                        <li>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.Password)
+                        </li>
+                        <li>
+                            @Html.PasswordFor(m => m.Password, new { @class = "input" })
+                        </li>
+                        <li>
+                            @Html.LabelFor(m => m.ConfirmPassword)
+                        </li>
+                        <li>
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", @onkeypress = "javascript: return keypressHandler(event);" })
+                        </li>
+                        <li></li>
+                        <li>
+
+                            @Html.ValidationSummary()
+
+                        </li>
+                        <li></li>
+                        <li class="subBtn2">
+                            <input class="button right" type="submit" value="Register" />
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </article>
+        <p class="invert textCenter" style="color:white;">Passwords must be at least @Membership.MinRequiredPasswordLength characters long.</p>
+    </section>
+}
+
+
+
+
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        function keypressHandler(event) {
+            var key = event.which || event.keyCode;
+
+            switch (key) {
+                default:
+                    return true;
+                case 13:
+                    submit_form();
+                    return false;
+            }
+        }
+
+        function submit_form() {
+            $('.modalBg').fadeIn();
+            $('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+
+
+    </script>
+}

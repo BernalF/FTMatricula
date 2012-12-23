@@ -8,25 +8,25 @@ namespace FTMatricula
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Content/scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
+                        "~/Content/scripts/jquery-ui-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.unobtrusive*",
-                        "~/Scripts/jquery.validate*"));
+                        "~/Content/scripts/jquery.unobtrusive*",
+                        "~/Content/scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/Content/scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/FTMatriculaJS").Include(
-                        "~/Scripts/checks.js",                        
-                        "~/Scripts/layout_page.js"));
+                        "~/Content/scripts/checks.js",
+                        "~/Content/scripts/layout.js"));
 
             bundles.Add(new StyleBundle("~/bundles/FTMatriculaCSS").Include(
                         "~/Content/styles/defaults.css",
-                        "~/Content/styles/internal_pages.css"));
+                        "~/Content/styles/internal.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -41,6 +41,18 @@ namespace FTMatricula
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            //Kendo Bundles
+            bundles.Add(new ScriptBundle("~/bundles/kendoJS").Include(
+                        "~/Content/kendo/js/jquery.min.js",
+                        "~/Content/kendo/js/kendo.web.min.js",
+                        "~/Content/kendo/js/kendo.aspnetmvc.min.js",
+                        "~/Content//kendo/js/console.min.js",
+                        "~/Content/kendo/js/prettify.min.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/kendoCSS").Include(
+                        "~/Content/kendo/css/kendo.common.min.css",
+                        "~/Content/kendo/css/kendo.default.min.css"));
         }
     }
 }
