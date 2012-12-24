@@ -8,80 +8,80 @@
     Response.Redirect("~/Account/NotAuthorized");
 }
 
+<div id="login_content">
+    <ul id="SectionHolder">
+        <li style="padding-bottom: 100px;"></li>
+        <li>
 
-<ul id="SectionHolder">
-    <li style="padding-bottom:100px;"></li>
-    <li>
 
-
-        @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-        {
+            @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+            {
             
-            <div class="mainBox" style="padding: 0 10px 10px 10px; width: 400px;">
-                <h2 class="title">Login / Enter your user name and password.</h2>
+                <div class="mainBox" style="padding: 0px 10px 10px 10px; width: 400px;">
+                    <h2 class="title">Login / Enter your user name and password.</h2>
 
-                <ul style="margin: 0 auto; padding: 0;">
-                    <li>
-                        <ul style="color: #000;">
-                            <li>
-                                <ul class="login">
-                                    <li class="logUser">
-                                        <h2 class="title">User Login</h2>
-                                        <ul class="logForm">
-                                            <li>
-                                                @Html.LabelFor(m => m.UserName)
-                                            </li>
-                                            <li>
-                                                @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
-                                            </li>
-                                            <li>
-                                                @Html.LabelFor(m => m.Password)
-                                            </li>
-                                            <li>
-                                                @Html.PasswordFor(m => m.Password, new { @class = "input", @id = "txtPassword", @onkeypress = "javascript: return keypressHandler(event);" })
-                                            </li>
-
-
-                                            <li></li>
-                                            <li>
-                                                @if (Model.RememberMe)
-                                                { 
-                                                    <label class="checkHolder hit">
-                                                        @Html.CheckBoxFor(m => m.RememberMe)
-                                                        @Html.DisplayNameFor(m => m.RememberMe)
-                                                    </label>
-                                                }
-                                                else
-                                                {
-                                                    <label class="checkHolder">
-                                                        @Html.CheckBoxFor(m => m.RememberMe)
-                                                        @Html.DisplayNameFor(m => m.RememberMe)
-                                                    </label>
-                                                }
-                                            </li>
-                                            <li></li>
-                                            <li class="subBtn">
-                                                @Html.ValidationSummary(true, "")
-                                                <span class="block right"><a href="#" onclick="javascript: submit_form()">Sign In</a></span>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-
-                                @Html.ValidationSummary()
-
-                            </li>
-                            
-                        </ul>
-                    </li>
-                </ul>
+                    <ul style="margin: 0 auto; padding: 0;">
+                        <li>
+                            <ul style="color: #000;">
+                                <li>
+                                    <ul class="login">
+                                        <li class="logUser">
+                                            <h2 class="title">User Login</h2>
+                                            <ul class="logForm">
+                                                <li>
+                                                    @Html.LabelFor(m => m.UserName)
+                                                </li>
+                                                <li>
+                                                    @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                                                </li>
+                                                <li>
+                                                    @Html.LabelFor(m => m.Password)
+                                                </li>
+                                                <li>
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "input", @id = "txtPassword", @onkeypress = "javascript: return keypressHandler(event);" })
+                                                </li>
 
 
+                                                <li></li>
+                                                <li>
+                                                    @if (Model.RememberMe)
+                                                    { 
+                                                        <label class="checkHolder hit">
+                                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                                            @Html.DisplayNameFor(m => m.RememberMe)
+                                                        </label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label class="checkHolder">
+                                                            @Html.CheckBoxFor(m => m.RememberMe)
+                                                            @Html.DisplayNameFor(m => m.RememberMe)
+                                                        </label>
+                                                    }
+                                                </li>
+                                                <li></li>
+                                                <li class="subBtn">
+                                                    @Html.ValidationSummary(true, "")
+                                                    <span class="block right"><a href="#" onclick="javascript: submit_form()">Sign In</a></span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
 
-                <div class="clear"></div>
-            </div>
+                                    @Html.ValidationSummary()
+
+                                </li>
+
+                            </ul>
+                        </li>
+                    </ul>
+
+
+
+                    <div class="clear"></div>
+                </div>
 
             
 @*<ul>
@@ -90,10 +90,19 @@
                     @Html.ActionLink("Register", "Register") if you don't have an account.                
                 </li>
             </ul>*@
-        }
-    </li>
-</ul>
+            }
+        </li>
+    </ul>
+</div>
 
+<div id="footer_support">
+        <footer>
+            <ul>
+                 <li class="browsers">We Support</li>
+            </ul>
+        </footer>
+
+    </div>
 @section scripts {
     <script type="text/javascript">
 

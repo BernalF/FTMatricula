@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>Sales</title>
 
-    <meta name="apple-mobile-web-app-capable" content="yes" />    
+    <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="description" content="iSales App HTML5">
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="apple-touch-icon-precomposed" href="~/bookmark-icon1.png" />
@@ -18,8 +18,7 @@
 </head>
 <body>
 
-    <div class="mainHolder">
-
+    @*<div class="mainHolder">
 
         <!-- CENTER INFORMATION HOLDER STARTS -->
         <section class="contentHolder">
@@ -50,14 +49,40 @@
             <li class="browsers">We Support</li>
             <li class="lined">B&B Development</li>
         </ul>
-    </footer>
-<div class="modalBg">
-    modal
-</div>
-<div class="loading">
-    <img src="~/Content/images/defaults/loader.gif" alt="loading" />
-    <p>Please wait!</p>
-</div>
+    </footer>*@
+
+    <div id="header">
+        <header class="top">
+            <a  href="@Url.Action("Index", "Home", routeValues: null)">
+                <h1></h1>
+            </a>
+            <nav>
+                <ul>
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- SECTION CONTENT STARTS -->
+        @RenderBody()
+    <!-- SECTION CONTENT ENDS -->
+    <div id="footer">
+        <footer>
+            <ul>
+                <li class="lined">B&B Development</li>
+            </ul>
+        </footer>
+
+    </div>
+    ​
+
+    <div class="modalBg">
+        modal
+    </div>
+    <div class="loading">
+        <img src="~/Content/images/defaults/loader.gif" alt="loading" />
+        <p>Please wait!</p>
+    </div>
 </body>
 </html>
 
