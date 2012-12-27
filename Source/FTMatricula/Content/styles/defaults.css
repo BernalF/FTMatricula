@@ -698,18 +698,18 @@ h2.mainTitle{
 }
 
 .item{
-    height: 130px;
+    height: 120px;
     float:left;
 	padding:0px;
 	margin: 0px;
 	overflow:hidden;
 	color:#FFF;
-    min-height: 130px;
-    min-width:130px;
+    min-height: 120px;
+    min-width:120px;
 }
 
 .itemContent{
-    margin: 10px;
+    margin: 5px;
     height:110px;   
 }
 
