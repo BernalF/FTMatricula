@@ -9,8 +9,6 @@
 }
 <div id="content">
     <h2>This is a School View</h2>
-
-
     <!-- ADDRESS SECTION STARTS -->
     <div>
         <ul id="formHolder data2" class="blacked">
@@ -25,7 +23,7 @@
                   columns.Bound(m => m.Code).Title("Codigo Escuela");
                   columns.Command(command =>
                   {
-                      command.Edit().Text("Editar");
+                      command.Edit().Text("Editar").UpdateText("Actualizar").CancelText("Cancelar");
                       command.Destroy().Text("Eliminar");
                   }).Width(180);
               })
@@ -34,9 +32,9 @@
                           editable.Mode(GridEditMode.PopUp)
                               .Window(m =>
                               {
-                                  m.Title("Editar Escuela").Draggable();                                  
-                              });                          
-                          editable.DisplayDeleteConfirmation("Esta seguro que desea eliminar el registro");                   
+                                  m.Title("Editar Escuela").Draggable();
+                              });
+                          editable.DisplayDeleteConfirmation("Esta seguro que desea eliminar el registro");
                       })
               .Sortable()
               .Filterable(filter =>
