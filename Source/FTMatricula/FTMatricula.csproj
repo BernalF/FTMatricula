@@ -60,7 +60,7 @@
     <Reference Include="EntityFramework">
       <HintPath>..\Packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Kendo.Mvc, Version=2012.2.710.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+    <Reference Include="Kendo.Mvc, Version=2012.3.1114.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Content\kendo\lib\Kendo.Mvc.dll</HintPath>
     </Reference>
@@ -491,11 +491,6 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LayoutKendo.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\School\Index1.cshtml" />
-    <Content Include="Views\School\Details.cshtml" />
-    <Content Include="Views\School\Create.cshtml" />
-    <Content Include="Views\School\Edit.cshtml" />
-    <Content Include="Views\School\Delete.cshtml" />
     <EntityDeploy Include="Models\matrifunDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>matrifunDB.Designer.cs</LastGenOutput>
