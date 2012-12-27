@@ -66,14 +66,14 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateSchool([DataSourceRequest] DataSourceRequest request, School model)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
                 model.ModifyDate = DateTime.Today;
                 model.IpAddress = Network.GetIpAddress(Request);
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
-            }
+            //}
             return Json(ModelState.ToDataSourceResult());
         }
 
