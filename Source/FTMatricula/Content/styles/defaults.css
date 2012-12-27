@@ -797,12 +797,71 @@ h2.mainTitle{
     
 }
 
+.subMenuOpts{
+	width:100%;
+	margin:0;
+    overflow:hidden;
+    
+}
+
 .subMenuOpt{
 	width:100%;
 	margin:0;
     overflow:hidden;
-    background-color:red;
     
+}
+
+.optList{
+	width:100%;
+	margin:0;
+    padding-left: 40px;
+    overflow:hidden;
+    
+}
+
+
+
+.optList .opt{
+	width:100%;
+	margin:0;
+    overflow:hidden;
+}
+
+.opt:hover{
+	background-color: #26A0DA;
+}
+
+.optList .opt div{
+	width:100%;
+	margin:0;
+    padding:3px;
+    overflow:hidden;
+    color:#FFF;
+    font-family:'Segoe UI', 'Segoe condensed' sans-serif;
+    background-position:5px center;
+	background-repeat:no-repeat;
+    height: 80px;
+    
+}
+
+.optList .opt div ul{
+	padding: 5px 5px 5px 85px;
+}
+
+.optList .opt div li{
+	width:90%;
+    padding:5px;
+}
+
+.optList .opt div span{
+    font-size:18px;
+    margin:0;
+}
+
+.optList .opt div p{
+    font-size:10px;
+    margin:0;
+    text-align:justify;
 }
 
 .item{
@@ -855,4 +914,23 @@ ul li.item .menuImage{
     width: 43%;
 }
 
+
+.subMenuOpt .optTitle{
+    
+    background-image:url("../images/icons/arrow-Left.png");
+    background-position:left right;
+	background-repeat:no-repeat;
+    height:32PX;
+    color:#FF9900;
+    font-family:'Segoe UI', 'Segoe condensed' sans-serif;
+    font-size:24px;
+    padding-left: 40px;
+    padding-bottom: 30px;
+    display:block;
+    clear:both;
+}
+
+.subMenuOpt .optTitle:hover{
+    background-image:url("../images/icons/arrow-Left_hover.png");
+}
 
