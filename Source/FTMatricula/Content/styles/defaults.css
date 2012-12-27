@@ -641,6 +641,7 @@ h2.mainTitle{
 
 #content_left {
     width:50%;
+    min-width:500px;
     top: 61px;
     left: 0;
     right: 0;
@@ -650,6 +651,7 @@ h2.mainTitle{
 
 #content_right {
     width:50%;
+    min-width:500px;
     top: 61px;
     left: 50%;
     right: 0;
@@ -685,6 +687,80 @@ h2.mainTitle{
 /*End BRL Custom Layout*/
 
 
+.maintenance{
+    background-color:#3B659C;
+}
+
+.maintenance:hover{
+    background-color:rgba(59, 101, 156,.8);
+    border: solid 1px #FF9900;
+}
+
+.student{
+    background-color:#CC3333;
+}
+
+.student:hover{
+    background-color:rgba(204, 51, 51,.8);
+    border: solid 1px #FF9900;
+}
+
+.programs{
+    background-color:#FE2020;
+}
+
+.programs:hover{
+    background-color:rgba(254, 32, 32,.8);
+    border: solid 1px #FF9900;
+}
+
+.enrollment {
+    background-color:#668000;
+}
+
+.enrollment:hover{
+    background-color:rgba(102, 128, 0,.8);
+    border: solid 1px #FF9900;
+}
+
+.notes {
+    background-color:#F09609;
+}
+
+.notes:hover{
+    background-color:rgba(240, 150, 9,.8);
+    border: solid 1px #FF9900;
+}
+
+.records {
+    background-color:#603CBA;
+}
+
+.records:hover{
+    background-color:rgba(96, 60, 186,.8);
+    border: solid 1px #FF9900;
+}
+
+
+.certifications {
+    background-color:#CD4900;
+}
+
+.certifications:hover{
+    background-color:rgba(205, 73, 0,.8);
+    border: solid 1px #FF9900;
+}
+
+.auditing {
+    background-color:#FF1EA5;
+}
+
+.auditing:hover {
+    background-color:rgba(255, 30, 165,.8);
+    border: solid 1px #FF9900;
+}
+
+
 .desk{
 	margin: 30px;
 }
@@ -694,6 +770,14 @@ h2.mainTitle{
 	width:100%;
 	margin:0;
     overflow:hidden;
+    
+}
+
+.subMenuOpt{
+	width:100%;
+	margin:0;
+    overflow:hidden;
+    background-color:red;
     
 }
 
@@ -707,6 +791,7 @@ h2.mainTitle{
     min-height: 120px;
     min-width:120px;
 }
+
 
 .itemContent{
     margin: 5px;
@@ -747,33 +832,3 @@ ul li.item .menuImage{
 }
 
 
-._3B659C{
-    background-color:#3B659C;
-}
-
-._CC3333{
-    background-color:#CC3333;
-}
-
-._FE2020 {
-    background-color:#FE2020;
-}
-
-._668000 {
-    background-color:#668000;
-}
-
-._F09609 {
-    background-color:#F09609;
-}
-._603CBA {
-    background-color:#603CBA;
-}
-
-._CD4900 {
-    background-color:#CD4900;
-}
-
-._FF1EA5 {
-    background-color:#FF1EA5;
-}
