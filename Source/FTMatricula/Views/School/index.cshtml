@@ -19,28 +19,64 @@
                 @(Html.Kendo().Grid<FTMatricula.Models.School>()
               .Name("Grid")
               .Columns(columns =>
-              {                  
-                  columns.Bound(m => m.Name);
-                  columns.Bound(m => m.Description);
-                  columns.Bound(m => m.Code);
-                  columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+              {
+                  columns.Bound(m => m.Name).Title("Nombre");
+                  columns.Bound(m => m.Description).Title("Descripcion");
+                  columns.Bound(m => m.Code).Title("Codigo");
+                  columns.Command(command =>
+                  {
+                      command.Edit().Text("Editar");
+                      command.Destroy().Text("Eliminar");
+                  })
+                  .Width(180);
 
               })
-              .Editable(editable => editable.Mode(GridEditMode.PopUp))
-              .Filterable()
+                      .Editable(editable =>
+                      {
+                          editable.Mode(GridEditMode.PopUp)
+                              .Window(m =>
+                              {
+                                  m.Title("Editar Escuela").Draggable();
+                              });
+                          editable.DisplayDeleteConfirmation(true);
+                      })
               .Sortable()
+                              .Filterable(filter =>
+                              {
+                                  filter.Enabled(true);
+                                  filter.Messages(msj =>
+                                  {
+                                      msj.Filter("Buscar");
+                                      msj.And("Y");
+                                  });
+                              })
+              .ToolBar(create => create.Create().Text("Nueva Escuela"))
               .Pageable(pager => pager
                     .Input(true)
                     .Numeric(true)
                     .Info(true)
                     .PreviousNext(true)
                     .Refresh(true)
-                    .PageSizes(true))
+                            .PageSizes(true).
+                            Messages(messages =>
+                            {
+                                messages.Empty("No hay escuelas registradas");
+                                messages.Display("{0} - {1} de {2} registros");
+                                messages.ItemsPerPage("Registros por pagina");
+                                messages.Page("Pagina");
+                                messages.Of("de {0}");
+                                messages.First("Primera Pagina");
+                                messages.Previous("Pagina Anterior");
+                                messages.Next("Siguiente Pagina");
+                                messages.Last("Ultima Pagina");
+                                messages.Refresh("Actualizar");
+                            }))
               .DataSource(dataSource => dataSource
                     .Ajax()
                     .Read(read => read.Action("PagingSchools", "School"))
-                    .Update(update => update.Action("UpdateUsers", "School"))
-                    .Destroy(update => update.Action("DestroyUsers", "School"))
+                    .Create(create => create.Action("CreateSchool", "School"))
+                    .Update(update => update.Action("UpdateSchool", "School"))
+                    .Destroy(destroy => destroy.Action("DestroySchool", "School"))
                     .Model(model => model.Id(m => m.SchoolID))
               )
         )
