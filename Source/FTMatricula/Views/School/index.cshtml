@@ -1,0 +1,61 @@
+﻿@model FTMatricula.Models.School
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml"; ;
+    ViewBag.Title = "Escuelas";
+}
+
+@section styles {
+
+}
+<div id="content">
+    <h2>This is a School View</h2>
+
+
+    <!-- ADDRESS SECTION STARTS -->
+    <div>
+        <ul id="formHolder data2" class="blacked">
+
+            <li>
+                @(Html.Kendo().Grid<FTMatricula.Models.School>()
+              .Name("Grid")
+              .Columns(columns =>
+              {                  
+                  columns.Bound(m => m.Name);
+                  columns.Bound(m => m.Description);
+                  columns.Bound(m => m.Code);
+                  columns.Command(command => { command.Edit(); command.Destroy(); }).Width(180);
+
+              })
+              .Editable(editable => editable.Mode(GridEditMode.PopUp))
+              .Filterable()
+              .Sortable()
+              .Pageable(pager => pager
+                    .Input(true)
+                    .Numeric(true)
+                    .Info(true)
+                    .PreviousNext(true)
+                    .Refresh(true)
+                    .PageSizes(true))
+              .DataSource(dataSource => dataSource
+                    .Ajax()
+                    .Read(read => read.Action("PagingSchools", "School"))
+                    .Update(update => update.Action("UpdateUsers", "School"))
+                    .Destroy(update => update.Action("DestroyUsers", "School"))
+                    .Model(model => model.Id(m => m.SchoolID))
+              )
+        )
+            </li>
+        </ul>
+
+        <div style="width: 700px; margin: 10px auto;">
+            @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "button home", style = "margin-left:290px" })
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+</div>
+
+
+@section Scripts {
+}

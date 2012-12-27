@@ -57,11 +57,20 @@
     <Reference Include="DotNetOpenAuth.OpenId.RelyingParty">
       <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Kendo.Mvc, Version=2012.2.710.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Content\kendo\lib\Kendo.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -155,9 +164,86 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Classroom.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Course.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enrollment.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Location.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\matrifunDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>matrifunDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\matrifunDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\matrifunDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>matrifunDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Modality.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Place.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Plan.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Plan_Course.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Record.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Requirement.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Scheme.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Scheme_Plan.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Scheme_Requirement.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\School.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\School_Scheme.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Score.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Student.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Student_Course.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Type.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\Helper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -232,6 +318,32 @@
     <Content Include="Content\kendo\css\kendo.common.min.css" />
     <Content Include="Content\kendo\css\kendo.default.min.css" />
     <Content Include="Content\kendo\css\kendo.metro.min.css" />
+    <Content Include="Content\kendo\css\textures\brushed-metal.png" />
+    <Content Include="Content\kendo\css\textures\dots1.png" />
+    <Content Include="Content\kendo\css\textures\dots10.png" />
+    <Content Include="Content\kendo\css\textures\dots11.png" />
+    <Content Include="Content\kendo\css\textures\dots12.png" />
+    <Content Include="Content\kendo\css\textures\dots13.png" />
+    <Content Include="Content\kendo\css\textures\dots2.png" />
+    <Content Include="Content\kendo\css\textures\dots3.png" />
+    <Content Include="Content\kendo\css\textures\dots4.png" />
+    <Content Include="Content\kendo\css\textures\dots5.png" />
+    <Content Include="Content\kendo\css\textures\dots6.png" />
+    <Content Include="Content\kendo\css\textures\dots7.png" />
+    <Content Include="Content\kendo\css\textures\dots8.png" />
+    <Content Include="Content\kendo\css\textures\dots9.png" />
+    <Content Include="Content\kendo\css\textures\glass-lighter.png" />
+    <Content Include="Content\kendo\css\textures\glass.png" />
+    <Content Include="Content\kendo\css\textures\highlight.png" />
+    <Content Include="Content\kendo\css\textures\leather1.png" />
+    <Content Include="Content\kendo\css\textures\leather2.png" />
+    <Content Include="Content\kendo\css\textures\noise.png" />
+    <Content Include="Content\kendo\css\textures\stripe1.png" />
+    <Content Include="Content\kendo\css\textures\stripe2.png" />
+    <Content Include="Content\kendo\css\textures\stripe3.png" />
+    <Content Include="Content\kendo\css\textures\stripe4.png" />
+    <Content Include="Content\kendo\css\textures\stripe5.png" />
+    <Content Include="Content\kendo\css\textures\stripe6.png" />
     <Content Include="Content\kendo\js\console.js" />
     <Content Include="Content\kendo\js\console.min.js" />
     <Content Include="Content\kendo\js\jquery-ui.min.js" />
@@ -379,12 +491,38 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LayoutKendo.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\School\Index1.cshtml" />
+    <Content Include="Views\School\Details.cshtml" />
+    <Content Include="Views\School\Create.cshtml" />
+    <Content Include="Views\School\Edit.cshtml" />
+    <Content Include="Views\School\Delete.cshtml" />
+    <EntityDeploy Include="Models\matrifunDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>matrifunDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\matrifunDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>matrifunDB.edmx</DependentUpon>
+      <LastGenOutput>matrifunDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\matrifunDB.edmx.diagram">
+      <DependentUpon>matrifunDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\matrifunDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>matrifunDB.edmx</DependentUpon>
+      <LastGenOutput>matrifunDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Views\School\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
