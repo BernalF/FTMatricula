@@ -613,7 +613,7 @@ h2.mainTitle{
 
 
 /*Begin BRL Custom Layout*/
-#header, #content, #footer, #login_content, #content_left, #content_right {
+#header, #content, #footer, #login_content, #content_left, #content_right, #content_left2 {
     position: absolute;
 }
 #header{
@@ -649,6 +649,16 @@ h2.mainTitle{
     background:rgba(0,0,0,.2);
 }
 
+#content_left2{
+    width:50%;
+    min-width:500px;
+    top: 61px;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    background:rgba(0,0,0,.5);
+}
+
 #content_right {
     width:50%;
     min-width:500px;
@@ -656,7 +666,11 @@ h2.mainTitle{
     left: 50%;
     right: 0;
     bottom: 25px;
-    background:rgba(0,0,0,.35);
+    background:rgba(0,0,0,.4);
+}
+
+#content_right.icon_selected {
+    background:rgba(0,0,0,.7);
 }
 
 #footer {
@@ -691,6 +705,11 @@ h2.mainTitle{
     background-color:#3B659C;
 }
 
+.maintenance.current{
+    background-color:rgba(59, 101, 156,.8);
+    border: solid 1px #FF9900;
+}
+
 .maintenance:hover{
     background-color:rgba(59, 101, 156,.8);
     border: solid 1px #FF9900;
@@ -698,6 +717,11 @@ h2.mainTitle{
 
 .student{
     background-color:#CC3333;
+}
+
+.student.current{
+    background-color:rgba(204, 51, 51,.8);
+    border: solid 1px #FF9900;
 }
 
 .student:hover{
