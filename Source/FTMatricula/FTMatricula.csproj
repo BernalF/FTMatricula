@@ -163,9 +163,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ClassroomController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -511,14 +509,11 @@
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
     <Content Include="Views\School\index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Home\_maintenance.cshtml" />
     <Content Include="Views\Home\_student.cshtml" />
     <Content Include="Views\Home\_programs.cshtml" />
-=======
-    <Content Include="Views\Classroom\index.cshtml" />
-    <Content Include="Views\Location\index.cshtml" />
->>>>>>> 5f11c8ce5c0d451ca5eb1c362b21817a0277205f
+    <Content Include="Views\Home\_enrollment.cshtml" />
+    <Content Include="Views\Home\_notes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
