@@ -11,6 +11,7 @@ namespace FTMatricula.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Location
     {
@@ -18,17 +19,38 @@ namespace FTMatricula.Models
         {
             this.Plans = new HashSet<Plan>();
         }
-    
+
+        [ScaffoldColumn(false)]    
         public System.Guid LocationID { get; set; }
+
+        [Display(Name = "Nombre Lugar")]
         public string Name { get; set; }
+
+        [Display(Name = "Direccion")]
         public string Line1 { get; set; }
+
+        [Display(Name = "Otras Señas")]
         public string Line2 { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> InsertDate { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<System.Guid> InsertUserID { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> ModifyDate { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<System.Guid> ModifyUserID { get; set; }
+
+        [ScaffoldColumn(false)]
         public string IpAddress { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<decimal> Latitude { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<decimal> Longitude { get; set; }
     
         public virtual ICollection<Plan> Plans { get; set; }
