@@ -11,7 +11,7 @@ namespace FTMatricula.Utilities.Helper
 {
     public static class ModelResources
     {
-        #PROPERTIES#
+#PROPERTIES#
 
     }
 }
@@ -22,7 +22,7 @@ SET @properties = ''
 
 UPDATE [dbo].[Resource]
 SET @properties = 
-			@properties + '\t\tpublic static string '+ResourceKey+' { get { return Resources.GetValue("'+ResourceKey+'"); } }' + '\n'
+			@properties + CHAR(9) + CHAR(9)  + 'public static string '+ResourceKey+' { get { return Resources.GetValue("'+ResourceKey+'"); } }' + CHAR(13)
  
  SET @template = REPLACE(@template,'#PROPERTIES#',@properties)
  
