@@ -1,7 +1,7 @@
 ﻿@model FTMatricula.Models.Classroom
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml"; ;
-    ViewBag.Title = "Mantenimiento Aulas";
+    ViewBag.Title = @Resources.GetValue("CLASSROOM_MANT");
 }
 
 @section styles {
@@ -16,12 +16,12 @@
                 @(Html.Kendo().Grid<FTMatricula.Models.Classroom>()
               .Name("Grid")
               .Columns(columns =>
-              {                                  
-                  columns.Bound(m => m.Code).Title("Codigo del Aula");
+              {
+                  columns.Bound(m => m.Code).Title(@Resources.GetValue("CLASSROOM_CODE"));
                   columns.Command(command =>
                   {
-                      command.Edit().Text("Editar").UpdateText("Actualizar").CancelText("Cancelar");
-                      command.Destroy().Text("Eliminar");
+                      command.Edit().Text("Editar").UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                      command.Destroy().Text(@Resources.GetValue("DELETE"));
                   }).Width(180);
               })
              .Editable(editable =>
@@ -29,9 +29,9 @@
                           editable.Mode(GridEditMode.PopUp)
                               .Window(m =>
                               {
-                                  m.Title("Editar Aula").Draggable();
+                                  m.Title(@Resources.GetValue("EDIT")).Draggable();
                               });
-                          editable.DisplayDeleteConfirmation("Esta seguro que desea eliminar el registro");
+                          editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
                       })
               .Sortable()
               .Filterable(filter =>
@@ -42,22 +42,22 @@
                   {
                       oper.ForString(ostr =>
                       {
-                          ostr.IsEqualTo("Sean iguales a");
-                          ostr.IsNotEqualTo("Sean diferentes de");
-                          ostr.StartsWith("Empiezan con");
-                          ostr.Contains("Contienen");
-                          ostr.DoesNotContain("No Contienen");
-                          ostr.EndsWith("Terminan con");
+                          ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
+                          ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
+                          ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
+                          ostr.Contains(@Resources.GetValue("CONTAINS"));
+                          ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
+                          ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
                       });
                   });
                   filter.Messages(msj =>
                   {
-                      msj.Filter("Buscar");
-                      msj.Clear("Limpiar");
-                      msj.Info("Buscar valores que:");
+                      msj.Filter(@Resources.GetValue("FIND"));
+                      msj.Clear(@Resources.GetValue("CLEAN"));
+                      msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                   });
               })
-              .ToolBar(create => create.Create().Text("Nueva Aula"))
+              .ToolBar(create => create.Create().Text(@Resources.GetValue("ADD_CLASSROOM")))
               .Pageable(pager => pager
                     .Input(true)
                     .Numeric(true)
@@ -67,16 +67,16 @@
                             .PageSizes(true).
                             Messages(messages =>
                             {
-                                messages.Empty("No hay Aulas registradas");
-                                messages.Display("{0} - {1} de {2} registros");
-                                messages.ItemsPerPage("Registros por pagina");
-                                messages.Page("Pagina");
-                                messages.Of("de {0}");
-                                messages.First("Primera Pagina");
-                                messages.Previous("Pagina Anterior");
-                                messages.Next("Siguiente Pagina");
-                                messages.Last("Ultima Pagina");
-                                messages.Refresh("Actualizar");
+                                messages.Empty(@Resources.GetValue("NO_RECORDS"));
+                                messages.Display(@Resources.GetValue("DISPLAY_GRID"));
+                                messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
+                                messages.Page(@Resources.GetValue("PAGE"));
+                                messages.Of(@Resources.GetValue("OF_GRID"));
+                                messages.First(@Resources.GetValue("FIRST_PAGE"));
+                                messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
+                                messages.Next(@Resources.GetValue("NEXT_PAGE"));
+                                messages.Last(@Resources.GetValue("LAST_PAGE"));
+                                messages.Refresh(@Resources.GetValue("UPDATE"));
                             }))
               .DataSource(dataSource => dataSource
                     .Ajax()
