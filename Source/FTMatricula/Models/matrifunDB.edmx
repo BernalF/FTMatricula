@@ -302,9 +302,11 @@
         </EntityType>
         <EntityType Name="Resource">
           <Key>
-            <PropertyRef Name="ResourceKey" />
+            <PropertyRef Name="ResourceID" />
           </Key>
+          <Property Name="ResourceID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ResourceKey" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Culture" Type="varchar" Nullable="false" MaxLength="6" />
           <Property Name="ResourceValue" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Scheme">
@@ -1212,9 +1214,11 @@
         </Association>
         <EntityType Name="Resource">
           <Key>
-            <PropertyRef Name="ResourceKey" />
+            <PropertyRef Name="ResourceID" />
           </Key>
+          <Property Type="Guid" Name="ResourceID" Nullable="false" />
           <Property Type="String" Name="ResourceKey" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Culture" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ResourceValue" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
@@ -1560,7 +1564,9 @@
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Resource">
               <MappingFragment StoreEntitySet="Resource">
                 <ScalarProperty Name="ResourceValue" ColumnName="ResourceValue" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
                 <ScalarProperty Name="ResourceKey" ColumnName="ResourceKey" />
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

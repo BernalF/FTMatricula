@@ -25,28 +25,24 @@ namespace FTMatricula.Utilities.Helper
         }
     }
 
+
+
     public static class Resources
     {
+
         public static string GetValue(string key)
         {
 
-            return getCacheResources()[key];
-            
+            return new CacheStorageService().Get<Dictionary<string, string>>("LOCAL_RESOURCE", GetResources, hours: 720)[key];
+
         }
 
-        private static Dictionary<string, string> getCacheResources()
+        private static Dictionary<string,string> GetResources()
         {
-            CacheStorageService cache = new CacheStorageService();
-            object data = cache.GetData("GLOBAL_RESOURCES");
-
-            if (data == null)
-            {
-                matrifunDBEntities db = new matrifunDBEntities();
-                data = db.Resources.ToDictionary(k => k.ResourceKey, v => v.ResourceValue);
-                cache.SetData("GLOBAL_RESOURCES", data, hours: 720);
-            }
-            return data as Dictionary<string, string>;
+            string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.ToString();
+            return new matrifunDBEntities().Resources.Where(p => p.Culture == culture).ToDictionary(k => k.ResourceKey, v => v.ResourceValue);
         }
+
     }
 
 
