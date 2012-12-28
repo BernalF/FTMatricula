@@ -1,26 +1,23 @@
-﻿@model FTMatricula.Models.School
+﻿@model FTMatricula.Models.Classroom
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml"; ;
-    ViewBag.Title = "Mantenimiento Escuelas";
+    ViewBag.Title = "Mantenimiento Aulas";
 }
 
 @section styles {
 
 }
 <div id="content">
-    <h2>This is a School View</h2>
+    <h2>This is a Classroom View</h2>
     <!-- ADDRESS SECTION STARTS -->
     <div>
         <ul id="formHolder data2" class="blacked">
-
             <li>
-                @(Html.Kendo().Grid<FTMatricula.Models.School>()
+                @(Html.Kendo().Grid<FTMatricula.Models.Classroom>()
               .Name("Grid")
               .Columns(columns =>
-              {
-                  columns.Bound(m => m.Name).Title("Nombre Escuela");
-                  columns.Bound(m => m.Description).Title("Descripcion");
-                  columns.Bound(m => m.Code).Title("Codigo Escuela");
+              {                                  
+                  columns.Bound(m => m.Code).Title("Codigo del Aula");
                   columns.Command(command =>
                   {
                       command.Edit().Text("Editar").UpdateText("Actualizar").CancelText("Cancelar");
@@ -32,7 +29,7 @@
                           editable.Mode(GridEditMode.PopUp)
                               .Window(m =>
                               {
-                                  m.Title("Editar Escuela").Draggable();
+                                  m.Title("Editar Aula").Draggable();
                               });
                           editable.DisplayDeleteConfirmation("Esta seguro que desea eliminar el registro");
                       })
@@ -60,7 +57,7 @@
                       msj.Info("Buscar valores que:");
                   });
               })
-              .ToolBar(create => create.Create().Text("Nueva Escuela"))
+              .ToolBar(create => create.Create().Text("Nueva Aula"))
               .Pageable(pager => pager
                     .Input(true)
                     .Numeric(true)
@@ -70,7 +67,7 @@
                             .PageSizes(true).
                             Messages(messages =>
                             {
-                                messages.Empty("No hay escuelas registradas");
+                                messages.Empty("No hay Aulas registradas");
                                 messages.Display("{0} - {1} de {2} registros");
                                 messages.ItemsPerPage("Registros por pagina");
                                 messages.Page("Pagina");
@@ -83,11 +80,11 @@
                             }))
               .DataSource(dataSource => dataSource
                     .Ajax()
-                    .Read(read => read.Action("PagingSchools", "School"))
-                    .Create(create => create.Action("CreateSchool", "School"))
-                    .Update(update => update.Action("UpdateSchool", "School"))
-                    .Destroy(destroy => destroy.Action("DestroySchool", "School"))
-                    .Model(model => model.Id(m => m.SchoolID))
+                    .Read(read => read.Action("PagingClassrooms", "Classroom"))
+                    .Create(create => create.Action("CreateClassrooms", "Classroom"))
+                    .Update(update => update.Action("UpdateClassrooms", "Classroom"))
+                    .Destroy(destroy => destroy.Action("DestroyClassrooms", "Classroom"))
+                    .Model(model => model.Id(m => m.ClassroomID))
               )
         )
             </li>

@@ -5,16 +5,14 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-
 using FTMatricula.Utilities.Helper;
 using FTMatricula.Models;
 
 namespace FTMatricula.Controllers
 {
-    public class SchoolController : Controller
+    public class ClassroomController : Controller
     {
         private matrifunDBEntities db = new matrifunDBEntities();
 
@@ -31,9 +29,9 @@ namespace FTMatricula.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult PagingSchools([DataSourceRequest] DataSourceRequest request)
+        public ActionResult PagingClassrooms([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Schools.ToList().Select(m => new { m.SchoolID, m.Name, m.Description, m.Code }).ToDataSourceResult(request));
+            return Json(db.Classrooms.ToList().Select(m => new { m.ClassroomID, m.Code }).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -43,13 +41,13 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CreateSchool([DataSourceRequest] DataSourceRequest request, School model)
-        {
-                model.SchoolID = Guid.NewGuid();                
+        public ActionResult CreateClassrooms([DataSourceRequest] DataSourceRequest request, Classroom model)
+        {            
+                model.ClassroomID = Guid.NewGuid();
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 model.InsertDate = DateTime.Today;
-                model.IpAddress = Network.GetIpAddress(Request);                
-                db.Schools.Add(model);
+                model.IpAddress = Network.GetIpAddress(Request);
+                db.Classrooms.Add(model);                
                 db.SaveChanges();
                 db.Entry(model).State = EntityState.Added;
             return Json(ModelState.ToDataSourceResult());
@@ -62,13 +60,13 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateSchool([DataSourceRequest] DataSourceRequest request, School model)
+        public ActionResult UpdateClassrooms([DataSourceRequest] DataSourceRequest request, Classroom model)
         {
-                model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
-                model.ModifyDate = DateTime.Today;
-                model.IpAddress = Network.GetIpAddress(Request);
-                db.Entry(model).State = EntityState.Modified;
-                db.SaveChanges();
+            model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+            model.ModifyDate = DateTime.Today;
+            model.IpAddress = Network.GetIpAddress(Request);
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
             return Json(ModelState.ToDataSourceResult());
         }
 
@@ -79,10 +77,10 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult DestroySchool([DataSourceRequest] DataSourceRequest request, School model)
+        public ActionResult DestroyClassrooms([DataSourceRequest] DataSourceRequest request, Classroom model)
         {
-            School school = db.Schools.Find(model.SchoolID);
-            db.Schools.Remove(school);            
+            Classroom classroom = db.Classrooms.Find(model.ClassroomID);
+            db.Classrooms.Remove(classroom);            
             db.SaveChanges();
             db.Entry(model).State = EntityState.Deleted;
             return Json(ModelState.ToDataSourceResult());
