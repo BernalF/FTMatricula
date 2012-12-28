@@ -845,7 +845,7 @@ h2.mainTitle{
 }
 
 .optList .opt div ul{
-	padding: 5px 5px 5px 85px;
+	padding: 5px 5px 5px 75px;
 }
 
 .optList .opt div li{
@@ -922,7 +922,7 @@ ul li.item .menuImage{
     background-image:url("../images/icons/arrow-Left.png");
     background-position:left right;
 	background-repeat:no-repeat;
-    height:32PX;
+    height:32px;
     color:#FF9900;
     font-family:'Segoe UI', 'Segoe condensed' sans-serif;
     font-size:24px;
@@ -934,5 +934,6 @@ ul li.item .menuImage{
 
 .subMenuOpt .optTitle:hover{
     background-image:url("../images/icons/arrow-Left_hover.png");
+    font-weight:600;
 }
 

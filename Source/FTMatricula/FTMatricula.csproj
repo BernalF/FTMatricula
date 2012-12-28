@@ -509,6 +509,9 @@
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
     <Content Include="Views\School\index.cshtml" />
+    <Content Include="Views\Home\_maintenance.cshtml" />
+    <Content Include="Views\Home\_student.cshtml" />
+    <Content Include="Views\Home\_programs.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
