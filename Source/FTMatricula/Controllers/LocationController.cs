@@ -5,6 +5,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
+using FTMatricula.Utilities.Helper;
 using FTMatricula.Models;
 
 namespace FTMatricula.Controllers
@@ -16,100 +19,72 @@ namespace FTMatricula.Controllers
         //
         // GET: /Location/
 
-        public ActionResult Index()
-        {
-            return View(db.Locations.ToList());
-        }
-
-        //
-        // GET: /Location/Details/5
-
-        public ActionResult Details(Guid? id)
-        {
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
-        }
-
-        //
-        // GET: /Location/Create
-
-        public ActionResult Create()
+        public ActionResult index()
         {
             return View();
         }
 
-        //
-        // POST: /Location/Create
-
+        /// <summary>
+        /// Paging Users
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult Create(Location location)
+        public ActionResult PagingLocation([DataSourceRequest] DataSourceRequest request)
         {
-            if (ModelState.IsValid)
-            {
-                location.LocationID = Guid.NewGuid();
-                db.Locations.Add(location);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(location);
+            return Json(db.Locations.ToList().Select(m => new { m.LocationID, m.Name, m.Line1, m.Line2}).ToDataSourceResult(request));
         }
 
-        //
-        // GET: /Location/Edit/5
-
-        public ActionResult Edit(Guid? id)
+        /// <summary>
+        /// Update Users
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CreateLocation([DataSourceRequest] DataSourceRequest request, Location model)
         {
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
+            model.LocationID = Guid.NewGuid();
+            model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+            model.InsertDate = DateTime.Today;
+            model.IpAddress = Network.GetIpAddress(Request);
+            db.Locations.Add(model);
+            db.SaveChanges();
+            db.Entry(model).State = EntityState.Added;
+            return Json(ModelState.ToDataSourceResult());
         }
 
-        //
-        // POST: /Location/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(Location location)
+        /// <summary>
+        /// Update Users
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UpdateLocation([DataSourceRequest] DataSourceRequest request, Location model)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(location).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(location);
+            model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+            model.ModifyDate = DateTime.Today;
+            model.IpAddress = Network.GetIpAddress(Request);
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(ModelState.ToDataSourceResult());
         }
 
-        //
-        // GET: /Location/Delete/5
-
-        public ActionResult Delete(Guid? id)
+        /// <summary>
+        /// Destroy Users
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DestroyLocation([DataSourceRequest] DataSourceRequest request, Location model)
         {
-            Location location = db.Locations.Find(id);
-            if (location == null)
-            {
-                return HttpNotFound();
-            }
-            return View(location);
-        }
-
-        //
-        // POST: /Location/Delete/5
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(Guid id)
-        {
-            Location location = db.Locations.Find(id);
+            Location location = db.Locations.Find(model.LocationID);
             db.Locations.Remove(location);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            db.Entry(model).State = EntityState.Deleted;
+            return Json(ModelState.ToDataSourceResult());
         }
 
         protected override void Dispose(bool disposing)
