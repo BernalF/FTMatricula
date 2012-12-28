@@ -566,11 +566,9 @@
     <Content Include="Views\Home\_records.cshtml" />
     <Content Include="Views\Home\_certifications.cshtml" />
     <Content Include="Views\Home\_auditing.cshtml" />
-    <Content Include="Views\Account\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Type\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

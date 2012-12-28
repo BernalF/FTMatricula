@@ -18,7 +18,7 @@
             {
             
                 <div class="mainBox" style="padding: 0px 10px 10px 10px; width: 400px;">
-                    <h2 class="title">Login / Enter your user name and password.</h2>
+                    <h2 class="title">@Resources.GetValue("LOGIN_TITLE")</h2>
 
                     <ul style="margin: 0 auto; padding: 0;">
                         <li>
@@ -26,7 +26,7 @@
                                 <li>
                                     <ul class="login">
                                         <li class="logUser">
-                                            <h2 class="title">User Login</h2>
+                                            
                                             <ul class="logForm">
                                                 <li>
                                                     @Html.LabelFor(m => m.UserName)
@@ -62,31 +62,22 @@
                                                 <li></li>
                                                 <li class="subBtn">
                                                     @Html.ValidationSummary(true, "")
-                                                    <span class="block right"><a href="#" onclick="javascript: submit_form()">Sign In</a></span>
+                                                    <span class="block right"><a href="#" onclick="javascript: submit_form()">@Resources.GetValue("SIGNIN")</a></span>
                                                 </li>
                                             </ul>
                                         </li>
                                     </ul>
                                 </li>
                                 <li>
-
                                     @Html.ValidationSummary()
-
                                 </li>
-
                             </ul>
                         </li>
-                    </ul>
-
-
-
+                    </ul>                    
                     <div class="clear"></div>
-                </div>
-
-            
+                </div>            
 @*<ul>
                 <li class="textCenter invert">
-                
                     @Html.ActionLink("Register", "Register") if you don't have an account.                
                 </li>
             </ul>*@
@@ -101,14 +92,12 @@
                  <li class="browsers">We Support</li>
             </ul>
         </footer>
-
     </div>
 @section scripts {
     <script type="text/javascript">
 
         function keypressHandler(event) {
             var key = event.which || event.keyCode;
-
             switch (key) {
                 default:
                     return true;
@@ -124,7 +113,5 @@
             document.forms[0].submit();
             return true;
         }
-
-
     </script>
 }
