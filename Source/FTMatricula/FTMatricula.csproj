@@ -69,6 +69,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
@@ -163,7 +164,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ClassroomController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -213,6 +216,9 @@
     <Compile Include="Models\Requirement.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Resource.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Scheme.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
@@ -237,15 +243,14 @@
     <Compile Include="Models\Student_Course.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>matrifunDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Type.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\CacheStorageService .cs" />
     <Compile Include="Utilities\Helper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ICacheStorageService .cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\defaults\arrow.png" />
@@ -485,12 +490,21 @@
     <Content Include="Content\scripts\_references.js" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LayoutKendo.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\School\index.cshtml" />
+    <Content Include="Views\Home\_maintenance.cshtml" />
+    <Content Include="Views\Home\_student.cshtml" />
+    <Content Include="Views\Home\_programs.cshtml" />
+    <Content Include="Views\Home\_enrollment.cshtml" />
+    <Content Include="Views\Home\_notes.cshtml" />
+    <Content Include="Views\Classroom\index.cshtml" />
     <EntityDeploy Include="Models\matrifunDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>matrifunDB.Designer.cs</LastGenOutput>
@@ -508,12 +522,7 @@
       <DependentUpon>matrifunDB.edmx</DependentUpon>
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\School\index.cshtml" />
-    <Content Include="Views\Home\_maintenance.cshtml" />
-    <Content Include="Views\Home\_student.cshtml" />
-    <Content Include="Views\Home\_programs.cshtml" />
-    <Content Include="Views\Home\_enrollment.cshtml" />
-    <Content Include="Views\Home\_notes.cshtml" />
+    <Content Include="Views\Location\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

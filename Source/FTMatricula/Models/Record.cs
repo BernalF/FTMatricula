@@ -15,7 +15,6 @@ namespace FTMatricula.Models
     public partial class Record
     {
         public System.Guid RecordID { get; set; }
-        public System.Guid ScoreID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

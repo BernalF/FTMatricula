@@ -22,7 +22,6 @@ namespace FTMatricula.Models
     
         public System.Guid StudentID { get; set; }
         public System.Guid UserID { get; set; }
-        public System.Guid IdentificationTypeID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

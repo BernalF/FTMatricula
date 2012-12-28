@@ -16,7 +16,6 @@ namespace FTMatricula.Models
     {
         public System.Guid EnrollmentID { get; set; }
         public string Description { get; set; }
-        public System.Guid PlanID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

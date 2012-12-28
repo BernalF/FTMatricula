@@ -20,8 +20,6 @@ namespace FTMatricula.Models
         }
     
         public System.Guid ScoreID { get; set; }
-        public System.Guid CourseID { get; set; }
-        public Nullable<System.Guid> StudentID { get; set; }
         public string Result { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }

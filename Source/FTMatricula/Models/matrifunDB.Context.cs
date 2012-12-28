@@ -43,7 +43,7 @@ namespace FTMatricula.Models
         public DbSet<Score> Scores { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Student_Course> Student_Course { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Type> Types { get; set; }
+        public DbSet<Resource> Resources { get; set; }
     }
 }

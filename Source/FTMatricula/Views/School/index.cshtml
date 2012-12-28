@@ -1,7 +1,7 @@
 ﻿@model FTMatricula.Models.School
 @{
-    Layout = "~/Views/Shared/_LayoutKendo.cshtml"; ;
-    ViewBag.Title = "Mantenimiento Escuelas";
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = @Resources.GetValue("TEST_KEY_2");
 }
 
 @section styles {
@@ -18,10 +18,10 @@
               .Name("Grid")
               .Columns(columns =>
               {
-                  columns.Bound(m => m.Name).Title("Nombre Escuela");
+                  columns.Bound(m => m.Name).Title(@Resources.GetValue("TEST_KEY_1"));
                   columns.Bound(m => m.Description).Title("Descripcion");
                   columns.Bound(m => m.Code).Title("Codigo Escuela");
-                  columns.Command(command =>
+                  columns.Command(command => 
                   {
                       command.Edit().Text("Editar").UpdateText("Actualizar").CancelText("Cancelar");
                       command.Destroy().Text("Eliminar");
