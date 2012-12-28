@@ -511,8 +511,14 @@
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
     <Content Include="Views\School\index.cshtml" />
+<<<<<<< HEAD
+    <Content Include="Views\Home\_maintenance.cshtml" />
+    <Content Include="Views\Home\_student.cshtml" />
+    <Content Include="Views\Home\_programs.cshtml" />
+=======
     <Content Include="Views\Classroom\index.cshtml" />
     <Content Include="Views\Location\index.cshtml" />
+>>>>>>> 5f11c8ce5c0d451ca5eb1c362b21817a0277205f
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
