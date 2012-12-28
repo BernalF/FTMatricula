@@ -11,24 +11,37 @@ namespace FTMatricula.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class School
     {
         public School()
         {
             this.School_Scheme = new HashSet<School_Scheme>();
         }
-    
+
+        [ScaffoldColumn(false)]
         public System.Guid SchoolID { get; set; }
+
+        [Display(Name = "Nombre Escuela")]
         public string Name { get; set; }
+        [Display(Name = "Descripcion")]
         public string Description { get; set; }
+
+        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> InsertDate { get; set; }
+        [ScaffoldColumn(false)]
         public Nullable<System.Guid> InsertUserID { get; set; }
+        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> ModifyDate { get; set; }
+        [ScaffoldColumn(false)]
         public Nullable<System.Guid> ModifyUserID { get; set; }
+        [ScaffoldColumn(false)]
         public string IpAddress { get; set; }
+
+        [Display(Name = "Codigo Escuela")]
         public string Code { get; set; }
-    
+
         public virtual ICollection<School_Scheme> School_Scheme { get; set; }
     }
 }
