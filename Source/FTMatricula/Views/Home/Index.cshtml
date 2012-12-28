@@ -109,16 +109,16 @@
 </div>
 
 <!-- change to class ..> icon_selected -->
-<div id="content_right" class="">
+<div id="content_right">
 
     <div class="desk">
         <ul class="subMenuOpts">
 
-            <li menu-option="default">
+            <li id="defaultMenuOpts">
                 <ul class="subMenuOpt">
                     <li class="defaultOptList">
-                        <img src="~/Content/images/icons/graduate.png"/>
-                        <img src="~/Content/images/icons/funda_tec.png"/>
+                        <img src="~/Content/images/icons/graduate.png" />
+                        <img src="~/Content/images/icons/funda_tec.png" />
                     </li>
                 </ul>
             </li>
@@ -150,4 +150,39 @@
 </div>
 
 @section Scripts {
+
+    <script type="text/javascript">
+
+        $(function () {
+            $('.item').off('click.item_section').on('click.item_section', function () {
+                $('.item div .current').removeClass('current');
+                $(this).children().addClass('current');
+                $('#content_left2').removeClass('hide');
+                $('#defaultMenuOpts').addClass('hide');
+                var actionMenu = $(this).children().attr('class').split(' ')[1];
+                $('.subMenuOpts').children().addClass('hide');
+                $('.subMenuOpts').children().each(function (i, obj) {
+                    if (actionMenu == $(this).attr('menu-option')) {
+                        $(obj).removeClass('hide');
+                    }
+                });
+                $('#content_right').addClass('icon_selected');
+                handle_clickBack();
+                return false;
+            });
+
+            function handle_clickBack() {
+                $('.subMenuOpts li[class!=hide]').children('.subMenuOpt li a').off('click.backMenu').on('click.backMenu', function () {
+                    $('#content_right').removeClass('icon_selected');
+                    $('#defaultMenuOpts').removeClass('hide');
+                    $('#content_left2').addClass('hide');
+                    $($(this).parent().parent()).parent().addClass('hide');
+                    $('.item div').removeClass('current');
+                    return false;
+                });
+            }
+
+        });
+
+    </script>
 }
