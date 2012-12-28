@@ -514,6 +514,9 @@
     <Content Include="Views\Home\_programs.cshtml" />
     <Content Include="Views\Home\_enrollment.cshtml" />
     <Content Include="Views\Home\_notes.cshtml" />
+    <Content Include="Views\Home\_records.cshtml" />
+    <Content Include="Views\Home\_certifications.cshtml" />
+    <Content Include="Views\Home\_auditing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

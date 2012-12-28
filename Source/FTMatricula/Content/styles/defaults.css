@@ -816,10 +816,15 @@ h2.mainTitle{
 	margin:0;
     padding-left: 40px;
     overflow:hidden;
-    
 }
 
-
+.defaultOptList{
+	overflow:hidden;
+    margin: 45% 0px;
+    
+    text-align:center;
+    vertical-align:bottom;
+}
 
 .optList .opt{
 	width:100%;
