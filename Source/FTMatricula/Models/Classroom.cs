@@ -11,7 +11,6 @@ namespace FTMatricula.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Classroom
     {
@@ -19,25 +18,13 @@ namespace FTMatricula.Models
         {
             this.Courses = new HashSet<Course>();
         }
-        [ScaffoldColumn(false)]
+    
         public System.Guid ClassroomID { get; set; }
-
-        [Display(Name = "Codigo Aula")]
         public string Code { get; set; }
-        
-        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> InsertDate { get; set; }
-
-        [ScaffoldColumn(false)]
         public Nullable<System.Guid> InsertUserID { get; set; }
-
-        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> ModifyDate { get; set; }
-
-        [ScaffoldColumn(false)]
         public Nullable<System.Guid> ModifyUserID { get; set; }
-
-        [ScaffoldColumn(false)]
         public string IpAddress { get; set; }
     
         public virtual ICollection<Course> Courses { get; set; }

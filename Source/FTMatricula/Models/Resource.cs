@@ -14,7 +14,9 @@ namespace FTMatricula.Models
     
     public partial class Resource
     {
+        public System.Guid ResourceID { get; set; }
         public string ResourceKey { get; set; }
+        public string Culture { get; set; }
         public string ResourceValue { get; set; }
     }
 }

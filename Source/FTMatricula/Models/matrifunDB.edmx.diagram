@@ -43,7 +43,7 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Student" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Type" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Course_Student" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.Resource" Width="1.5" PointX="9.5" PointY="12.625" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.Resource" Width="1.5" PointX="6.75" PointY="1.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
