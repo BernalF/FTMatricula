@@ -522,7 +522,19 @@
       <DependentUpon>matrifunDB.edmx</DependentUpon>
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
+<<<<<<< HEAD
     <Content Include="Views\Location\index.cshtml" />
+=======
+    <Content Include="Views\School\index.cshtml" />
+    <Content Include="Views\Home\_maintenance.cshtml" />
+    <Content Include="Views\Home\_student.cshtml" />
+    <Content Include="Views\Home\_programs.cshtml" />
+    <Content Include="Views\Home\_enrollment.cshtml" />
+    <Content Include="Views\Home\_notes.cshtml" />
+    <Content Include="Views\Home\_records.cshtml" />
+    <Content Include="Views\Home\_certifications.cshtml" />
+    <Content Include="Views\Home\_auditing.cshtml" />
+>>>>>>> 47f704abefebe8f813881439a62069dc6ca8c948
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
