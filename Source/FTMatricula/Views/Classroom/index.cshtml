@@ -57,7 +57,7 @@
                       msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                   });
               })
-              .ToolBar(create => create.Create().Text(@Resources.GetValue("ADD_CLASSROOM")))
+              .ToolBar(create => create.Create().Text(@Resources.GetValue("ADD_CLASSROOM")).HtmlAttributes(new { @class = "kendoAddbutton" }))
               .Pageable(pager => pager
                     .Input(true)
                     .Numeric(true)
