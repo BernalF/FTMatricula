@@ -68,15 +68,17 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .ToolBar(create => create.Create().Text(@Resources.GetValue("ADD_SCHOOL")))
+                                      .ToolBar(create => create.Create()
+                                          .Text(@Resources.GetValue("ADD_SCHOOL"))
+                                          .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
                                             .Input(true)
                                             .Numeric(true)
                                             .Info(true)
                                             .PreviousNext(true)
                                             .Refresh(true)
-                                                    .PageSizes(true).
-                                                    Messages(messages =>
+                                                    .PageSizes(true)
+                                                    .Messages(messages =>
                                                     {
                                                         messages.Empty(@Resources.GetValue("NO_RECORDS"));
                                                         messages.Display(@Resources.GetValue("DISPLAY_GRID"));
