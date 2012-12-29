@@ -1,0 +1,73 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    ViewBag.Title = "Error";
+}
+
+<h2 class="title">Server Error</h2>
+<br />
+<div class="errorBox">
+
+    <ul>
+        <li class="errorTitle">
+            <span>Oops!</span> There was an error reported by the Server.
+        </li>
+
+        <li class="errorDetail">
+            <ul>
+
+                @{
+                    if (Request.IsLocal)
+                    {
+                        if (@Model != null && @Model.Exception != null)
+                        {
+                    <li>
+                        Exception was : @Model.Exception.Message
+                    </li>
+                    
+                    <li>
+                        Stack Trace: <a href="javascript: showStackTrace();">View Details</a>
+                    </li>
+                    <li id="li_StackTrace" class="hide">
+                        @Model.Exception.StackTrace
+                    </li>
+                        }
+                        else
+                        {
+                    <li>
+                        Exception was null
+                    </li>
+                        }
+                    }
+                    else
+                    {
+                    <li>
+                        The Error has been reported to the Administrator
+                    </li>
+                    }
+                }
+
+            </ul>
+        </li>
+    </ul>
+    <div style="width: 100px; margin: 20px auto;">
+        @Html.ActionLink("Home", "index", "Home", routeValues: null, htmlAttributes: new { @class = "button home" })
+    </div>
+    <div class="clear"></div>
+</div>
+
+@section Scripts {
+        
+    <script type="text/javascript">
+        var stackTrace = false;
+        function showStackTrace() {
+            if (!stackTrace)
+                $('#li_StackTrace').fadeIn('slow');
+            else
+                $('#li_StackTrace').fadeOut('slow');
+
+            stackTrace = !stackTrace;
+        }
+
+    </script>
+
+}

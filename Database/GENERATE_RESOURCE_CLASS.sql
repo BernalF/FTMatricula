@@ -26,4 +26,4 @@ SET @properties =
  
  SET @template = REPLACE(@template,'#PROPERTIES#',@properties)
  
- print @template
+ select convert(xml,@template)

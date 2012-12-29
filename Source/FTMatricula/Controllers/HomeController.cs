@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FTMatricula.Controllers
 {
+    [HandleError]
     public class HomeController : Controller
     {
         public ActionResult Index()
