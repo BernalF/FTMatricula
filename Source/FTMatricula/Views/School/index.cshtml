@@ -8,96 +8,109 @@
 
 }
 <div id="content">
-    <h2>This is a School View</h2>
-    <!-- ADDRESS SECTION STARTS -->
-    <div>
-        <ul id="formHolder data2" class="blacked">
 
-            <li>
-                @(Html.Kendo().Grid<FTMatricula.Models.School>()
-              .Name("Grid")
-              .Columns(columns =>
-              {
-                  columns.Bound(m => m.Name).Title(@Resources.GetValue("SCHOOL_NAME"));
-                  columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
-                  columns.Bound(m => m.Code).Title(@Resources.GetValue("SCHOOL_CODE"));
-                  columns.Command(command => 
-                  {
-                      command.Edit().Text("Editar").UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
-                      command.Destroy().Text(@Resources.GetValue("DELETE"));
-                  }).Width(180);
-              })
-             .Editable(editable =>
-                      {
-                          editable.Mode(GridEditMode.PopUp)
-                              .Window(m =>
-                              {
-                                  m.Title(@Resources.GetValue("EDIT")).Draggable();
-                              });
-                          editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
-                      })
-              .Sortable()
-              .Filterable(filter =>
-              {
-                  filter.Enabled(true);
-                  filter.Extra(false);
-                  filter.Operators(oper =>
-                  {
-                      oper.ForString(ostr =>
-                      {
-                          ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
-                          ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
-                          ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
-                          ostr.Contains(@Resources.GetValue("CONTAINS"));
-                          ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
-                          ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
-                      });
-                  });
-                  filter.Messages(msj =>
-                  {
-                      msj.Filter(@Resources.GetValue("FIND"));
-                      msj.Clear(@Resources.GetValue("CLEAN"));
-                      msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
-                  });
-              })
-              .ToolBar(create => create.Create().Text(@Resources.GetValue("ADD_SCHOOL")))
-              .Pageable(pager => pager
-                    .Input(true)
-                    .Numeric(true)
-                    .Info(true)
-                    .PreviousNext(true)
-                    .Refresh(true)
-                            .PageSizes(true).
-                            Messages(messages =>
-                            {
-                                messages.Empty(@Resources.GetValue("NO_RECORDS"));
-                                messages.Display(@Resources.GetValue("DISPLAY_GRID"));
-                                messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
-                                messages.Page(@Resources.GetValue("PAGE"));
-                                messages.Of(@Resources.GetValue("OF_GRID"));
-                                messages.First(@Resources.GetValue("FIRST_PAGE"));
-                                messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
-                                messages.Next(@Resources.GetValue("NEXT_PAGE"));
-                                messages.Last(@Resources.GetValue("LAST_PAGE"));
-                                messages.Refresh(@Resources.GetValue("UPDATE"));
-                            }))
-              .DataSource(dataSource => dataSource
-                    .Ajax()
-                    .Read(read => read.Action("PagingSchools", "School"))
-                    .Create(create => create.Action("CreateSchool", "School"))
-                    .Update(update => update.Action("UpdateSchool", "School"))
-                    .Destroy(destroy => destroy.Action("DestroySchool", "School"))
-                    .Model(model => model.Id(m => m.SchoolID))
-              )
-        )
-            </li>
-        </ul>
+    <div class="mainBox">
 
-        <div style="width: 700px; margin: 10px auto;">
-            @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "button home", style = "margin-left:290px" })
+        <h2 class="title"><a href="#" class="optTitle">Inicio/Auditoría</a></h2>
+
+        <div>
+            <ul id="formHolder data2" class="blacked">
+
+                <li>
+
+                    <div>
+                        <ul>
+
+                            <li>
+                                @(Html.Kendo().Grid<FTMatricula.Models.School>()
+                                      .Name("Grid")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("SCHOOL_NAME"));
+                                          columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
+                                          columns.Bound(m => m.Code).Title(@Resources.GetValue("SCHOOL_CODE"));
+                                          columns.Command(command =>
+                                          {
+                                              command.Edit().Text("Editar").UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                              command.Destroy().Text(@Resources.GetValue("DELETE"));
+                                          }).Width(180);
+                                      })
+                                     .Editable(editable =>
+                                              {
+                                                  editable.Mode(GridEditMode.PopUp)
+                                                      .Window(m =>
+                                                      {
+                                                          m.Title(@Resources.GetValue("EDIT")).Draggable();
+                                                      });
+                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
+                                              })
+                                      .Sortable()
+                                      .Filterable(filter =>
+                                      {
+                                          filter.Enabled(true);
+                                          filter.Extra(false);
+                                          filter.Operators(oper =>
+                                          {
+                                              oper.ForString(ostr =>
+                                              {
+                                                  ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
+                                                  ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
+                                                  ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
+                                                  ostr.Contains(@Resources.GetValue("CONTAINS"));
+                                                  ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
+                                                  ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
+                                              });
+                                          });
+                                          filter.Messages(msj =>
+                                          {
+                                              msj.Filter(@Resources.GetValue("FIND"));
+                                              msj.Clear(@Resources.GetValue("CLEAN"));
+                                              msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
+                                          });
+                                      })
+                                      .ToolBar(create => create.Create().Text(@Resources.GetValue("ADD_SCHOOL")))
+                                      .Pageable(pager => pager
+                                            .Input(true)
+                                            .Numeric(true)
+                                            .Info(true)
+                                            .PreviousNext(true)
+                                            .Refresh(true)
+                                                    .PageSizes(true).
+                                                    Messages(messages =>
+                                                    {
+                                                        messages.Empty(@Resources.GetValue("NO_RECORDS"));
+                                                        messages.Display(@Resources.GetValue("DISPLAY_GRID"));
+                                                        messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
+                                                        messages.Page(@Resources.GetValue("PAGE"));
+                                                        messages.Of(@Resources.GetValue("OF_GRID"));
+                                                        messages.First(@Resources.GetValue("FIRST_PAGE"));
+                                                        messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
+                                                        messages.Next(@Resources.GetValue("NEXT_PAGE"));
+                                                        messages.Last(@Resources.GetValue("LAST_PAGE"));
+                                                        messages.Refresh(@Resources.GetValue("UPDATE"));
+                                                    }))
+                                      .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Read(read => read.Action("PagingSchools", "School"))
+                                            .Create(create => create.Action("CreateSchool", "School"))
+                                            .Update(update => update.Action("UpdateSchool", "School"))
+                                            .Destroy(destroy => destroy.Action("DestroySchool", "School"))
+                                            .Model(model => model.Id(m => m.SchoolID))
+                                      )
+                                )
+                            </li>
+                        </ul>
+
+                        <div style="width: 700px; margin: 10px auto;">
+                            @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "button home", style = "margin-left:290px" })
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </li>
+            </ul>
         </div>
-        <div class="clear"></div>
     </div>
+
 
 
 </div>

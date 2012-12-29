@@ -859,10 +859,11 @@ ul.k-menu-vertical .k-separator, .k-menu .k-group .k-separator {
 }
 .k-grid-header .k-header .k-link {
     display: block;
-    min-height: 18px;
-	font-size:18px;
-    line-height: 18px;
-	padding:20px 10px;/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+    min-height: 20px;
+	font-size:13px;
+    font-weight:bold;
+    line-height: 20px;  
+	padding:5px 2px 5px 2px;
     /*margin: -.5em -.6em -.4em -.6em;
     padding: .5em .6em .4em .6em;*/
 }
@@ -950,7 +951,7 @@ div.k-grid-header .k-header {
     width: auto;
 }
 .k-grid-toolbar {
-   /* border-style: solid;
+    /*border-style: solid;
     border-width: 1px 0 0;*/
 }
 .k-grid-header .k-header:first-child, .k-grid tbody td:first-child, .k-grid tfoot td:first-child {
@@ -1076,7 +1077,7 @@ div.k-grid-header .k-header {
 }
 .k-grid-filter, .k-header-column-menu {
     float: right;
-    margin: -.5em -.6em -.4em;
+    margin: 0;
     padding: .5em .2em .4em;
 }
 .k-grid .k-animation-container {

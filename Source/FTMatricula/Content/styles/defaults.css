@@ -949,7 +949,7 @@ ul li.item .menuImage{
 }
 
 
-.subMenuOpt .optTitle{
+.optTitle{
     
     background-image:url("../images/icons/arrow-Left.png");
     background-position:left right;
@@ -964,7 +964,7 @@ ul li.item .menuImage{
     clear:both;
 }
 
-.subMenuOpt .optTitle:hover{
+.optTitle:hover{
     background-image:url("../images/icons/arrow-Left_hover.png");
     font-weight:600;
 }

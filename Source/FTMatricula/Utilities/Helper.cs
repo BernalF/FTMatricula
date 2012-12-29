@@ -21,7 +21,7 @@ namespace FTMatricula.Utilities.Helper
     {
         public static Guid GetUserID(string Username)
         {
-            return (Guid)Membership.GetUser(Username).ProviderUserKey;            
+            return (Guid)Membership.GetUser(Username).ProviderUserKey;
         }
     }
 

@@ -29,10 +29,7 @@ namespace FTMatricula.Controllers
         public ActionResult Login(LoginModel model, string returnUrl)
         {
             if (ModelState.IsValid)
-            {
-                FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
-                return RedirectToAction("Index", "Home");
-
+            {                
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
@@ -81,7 +78,7 @@ namespace FTMatricula.Controllers
             {
                 // Attempt to register the user
                 MembershipCreateStatus createStatus;
-                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: false, providerUserKey: null, status: out createStatus);
+                Membership.CreateUser(model.UserName, model.Password, model.Email, passwordQuestion: null, passwordAnswer: null, isApproved: true, providerUserKey: null, status: out createStatus);
                 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
