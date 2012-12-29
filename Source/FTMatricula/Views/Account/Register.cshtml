@@ -6,58 +6,60 @@
 @section styles {
     <link rel="stylesheet" href="~/Content/styles/login.css">}
 <div id="content">
-    @using (Html.BeginForm())
-    {               
-        <section class="barHolder">
+    <div class="mainBox">
+        @using (Html.BeginForm())
+        {               
+            <section class="barHolder">
 
-            <article class="loginWindow">
+                <article class="loginWindow">
 
-                <ul>
-                    <li>
-                        <h2 class="title">@Resources.GetValue("NEW_USER")</h2>
-                        <br />
+                    <ul>
+                        <li>
+                            <h2 class="title">@Resources.GetValue("NEW_USER")</h2>
+                            <br />
 
-                        <ul class="loginData">
-                            <li>
-                                @Html.LabelFor(m => m.UserName)
-                            </li>
-                            <li>
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
-                            </li>
-                            <li>
-                                @Html.LabelFor(m => m.Email)
-                            </li>
-                            <li>
-                                @Html.TextBoxFor(m => m.Email, new { @class = "input" })
-                            </li>
-                            <li>
-                                @Html.LabelFor(m => m.Password)
-                            </li>
-                            <li>
-                                @Html.PasswordFor(m => m.Password, new { @class = "input" })
-                            </li>
-                            <li>
-                                @Html.LabelFor(m => m.ConfirmPassword)
-                            </li>
-                            <li>
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", @onkeypress = "javascript: return keypressHandler(event);" })
-                            </li>
-                            <li></li>
-                            <li>
-                                @Html.ValidationSummary()
-                            </li>
-                            <li></li>
-                            <li class="subBtn2">
-                                <input class="button right" type="submit" value="@Resources.GetValue("REGISTER")" />
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                            <ul class="loginData">
+                                <li>
+                                    @Html.LabelFor(m => m.UserName)
+                                </li>
+                                <li>
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                                </li>
+                                <li>
+                                    @Html.LabelFor(m => m.Email)
+                                </li>
+                                <li>
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "input" })
+                                </li>
+                                <li>
+                                    @Html.LabelFor(m => m.Password)
+                                </li>
+                                <li>
+                                    @Html.PasswordFor(m => m.Password, new { @class = "input" })
+                                </li>
+                                <li>
+                                    @Html.LabelFor(m => m.ConfirmPassword)
+                                </li>
+                                <li>
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "input", @onkeypress = "javascript: return keypressHandler(event);" })
+                                </li>
+                                <li></li>
+                                <li>
+                                    @Html.ValidationSummary()
+                                </li>
+                                <li></li>
+                                <li class="subBtn2">
+                                    <input class="button right" type="submit" value="@Resources.GetValue("REGISTER")" />
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-            </article>
-            <p class="invert textCenter" style="color: white;">@Resources.GetValue("PASS_STRING_LENGTH1") @Membership.MinRequiredPasswordLength @Resources.GetValue("PASS_STRING_LENGTH2")</p>
-        </section>
-    }
+                </article>
+                <p class="invert textCenter" style="color: white;">@Resources.GetValue("PASS_STRING_LENGTH1") @Membership.MinRequiredPasswordLength @Resources.GetValue("PASS_STRING_LENGTH2")</p>
+            </section>
+        }
+    </div>
 </div>
 @section Scripts {
 
