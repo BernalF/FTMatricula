@@ -147,8 +147,9 @@
 <div id="content_left2" class="hide">
 </div>
 
-@section Scripts {
 
+@section Scripts {
+        
     <script type="text/javascript">
 
         $(function () {
@@ -180,7 +181,17 @@
                 });
             }
 
+            
+            var backOpt = "@ViewBag.Message";            
+            if (backOpt.length > 0) {
+                $('.item').children('div .' + backOpt).parent().trigger('click');
+            }
+
+            
         });
 
+
+        
     </script>
+
 }

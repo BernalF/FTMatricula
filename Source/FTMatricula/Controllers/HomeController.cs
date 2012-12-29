@@ -10,9 +10,19 @@ namespace FTMatricula.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
+            ViewBag.Message = "";
+            object opt;
+            if(TempData.TryGetValue("opt", out opt)){
+                ViewBag.Message = opt.ToString();
+            }
             return View();
+        }
+
+        public ActionResult Back(string opt)
+        {
+            TempData.Add("opt", opt);
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult About()
