@@ -128,3 +128,5 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'LINK_PLAN_TEMPLATE_DETAIL', 'es-C
 --Auditing Details
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'RECORDS1', 'es-CR', 'Notas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'AUDIT_DETAIL', 'es-CR', 'Esta opción permite listar o detallar lo referente al historial de este catálogo')
+--Footer
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'SIGN', 'es-CR', 'B&B Development, Todos los derechos reservados')
