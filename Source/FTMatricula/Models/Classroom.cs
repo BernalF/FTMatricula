@@ -9,6 +9,7 @@
 
 namespace FTMatricula.Models
 {
+    using FTMatricula.Utilities.Helper;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -22,7 +23,7 @@ namespace FTMatricula.Models
         [ScaffoldColumn(false)]
         public System.Guid ClassroomID { get; set; }
 
-        [Display(Name = "Codigo Aula")]
+        [Display(ResourceType = typeof(ModelResources), Name = "CLASSROOM_CODE")]
         public string Code { get; set; }
 
         [ScaffoldColumn(false)]

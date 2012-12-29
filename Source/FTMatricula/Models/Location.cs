@@ -9,6 +9,7 @@
 
 namespace FTMatricula.Models
 {
+    using FTMatricula.Utilities.Helper;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -23,13 +24,13 @@ namespace FTMatricula.Models
         [ScaffoldColumn(false)]    
         public System.Guid LocationID { get; set; }
 
-        [Display(Name = "Nombre Lugar")]
+        [Display(ResourceType = typeof(ModelResources), Name = "LOCATION_NAME")]
         public string Name { get; set; }
 
-        [Display(Name = "Direccion")]
+        [Display(ResourceType = typeof(ModelResources), Name = "LOCATION_LINE1")]
         public string Line1 { get; set; }
 
-        [Display(Name = "Otras Señas")]
+        [Display(ResourceType = typeof(ModelResources), Name = "LOCATION_LINE2")]
         public string Line2 { get; set; }
 
         [ScaffoldColumn(false)]
