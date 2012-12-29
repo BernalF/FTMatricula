@@ -1,0 +1,8 @@
+﻿@model FTMatricula.Models.Classroom
+ 
+<div class="editor-label">
+    @Html.LabelFor(model => model.Code, @Resources.GetValue("CLASSROOM_CODE"))
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Code)    
+</div>
