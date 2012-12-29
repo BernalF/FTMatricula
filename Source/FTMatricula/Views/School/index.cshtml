@@ -11,7 +11,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance"})" class="internalTitle">TITULO?</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("SCHOOL")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -22,7 +22,7 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.School>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.School>().Name("AddSchool")
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
@@ -38,13 +38,13 @@
                                      .Editable(editable =>
                                               {
                                                   editable.Mode(GridEditMode.PopUp)
-                                                      .Window(m =>
-                                                      {
-                                                          m.Title(@Resources.GetValue("EDIT")).Draggable();
-                                                      });
+                                                  .Window(m =>
+                                                  {
+                                                      m.Title(@Resources.GetValue("EDIT")).Draggable();
+                                                  }).TemplateName("School");
                                                   editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
                                               })
-                                      .Sortable()
+                                      .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
                                           filter.Enabled(true);
@@ -72,12 +72,12 @@
                                           .Text(@Resources.GetValue("ADD_SCHOOL"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
-                                            .Input(true)
+                                            .PageSizes(new int[] { 5, 10, 15 })                                            
+                                            .Input(true)                                            
                                             .Numeric(true)
                                             .Info(true)
                                             .PreviousNext(true)
                                             .Refresh(true)
-                                                    .PageSizes(true)
                                                     .Messages(messages =>
                                                     {
                                                         messages.Empty(@Resources.GetValue("NO_RECORDS"));
@@ -102,11 +102,6 @@
                                 )
                             </li>
                         </ul>
-
-                        <div style="width: 700px; margin: 10px auto;">
-                            @Html.ActionLink("Home", "Index", "Home", routeValues: null, htmlAttributes: new { @class = "button home", style = "margin-left:290px" })
-                        </div>
-                        <div class="clear"></div>
                     </div>
                 </li>
             </ul>

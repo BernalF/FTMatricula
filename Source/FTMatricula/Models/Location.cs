@@ -20,38 +20,27 @@ namespace FTMatricula.Models
         {
             this.Plans = new HashSet<Plan>();
         }
-
-        [ScaffoldColumn(false)]    
+        
         public System.Guid LocationID { get; set; }
-
-        [Display(ResourceType = typeof(ModelResources), Name = "LOCATION_NAME")]
+        
         public string Name { get; set; }
-
-        [Display(ResourceType = typeof(ModelResources), Name = "LOCATION_LINE1")]
+        
         public string Line1 { get; set; }
-
-        [Display(ResourceType = typeof(ModelResources), Name = "LOCATION_LINE2")]
+       
         public string Line2 { get; set; }
 
-        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> InsertDate { get; set; }
 
-        [ScaffoldColumn(false)]
         public Nullable<System.Guid> InsertUserID { get; set; }
 
-        [ScaffoldColumn(false)]
         public Nullable<System.DateTime> ModifyDate { get; set; }
 
-        [ScaffoldColumn(false)]
         public Nullable<System.Guid> ModifyUserID { get; set; }
 
-        [ScaffoldColumn(false)]
         public string IpAddress { get; set; }
 
-        [ScaffoldColumn(false)]
         public Nullable<decimal> Latitude { get; set; }
 
-        [ScaffoldColumn(false)]
         public Nullable<decimal> Longitude { get; set; }
     
         public virtual ICollection<Plan> Plans { get; set; }

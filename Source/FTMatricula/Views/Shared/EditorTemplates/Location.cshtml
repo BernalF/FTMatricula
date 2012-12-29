@@ -1,0 +1,24 @@
+﻿@model FTMatricula.Models.Location
+ 
+<div class="editor-label">
+    @Html.LabelFor(model => model.Name, @Resources.GetValue("LOCATION_NAME"))
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Name)
+    @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Line1, @Resources.GetValue("LOCATION_LINE1"))
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Line1)
+    @Html.ValidationMessageFor(model => model.Line1)
+</div>
+<div class="editor-label">
+    @Html.LabelFor(model => model.Line2, @Resources.GetValue("LOCATION_LINE2"))
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Line2)
+    @Html.ValidationMessageFor(model => model.Line2)
+</div>
