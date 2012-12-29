@@ -970,3 +970,22 @@ ul li.item .menuImage{
 }
 
 
+.internalTitle{
+    
+    background-image:url("../images/icons/arrow-Left.png");
+    background-position:left right;
+	background-repeat:no-repeat;
+    height:32px;
+    color:#FF9900;
+    font-family:'Segoe UI', 'Segoe condensed' sans-serif;
+    font-size:24px;
+    padding-left: 40px;
+    padding-bottom: 10px;
+    display:block;
+    clear:both;
+}
+
+.internalTitle:hover{
+    background-image:url("../images/icons/arrow-Left_hover.png");
+    font-weight:600;
+}
