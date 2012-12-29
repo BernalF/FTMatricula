@@ -199,9 +199,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>matrifunDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Modality.cs">
-      <DependentUpon>matrifunDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Place.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>

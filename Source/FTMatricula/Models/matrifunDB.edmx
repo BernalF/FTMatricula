@@ -10,7 +10,6 @@
           <EntitySet Name="Course" EntityType="FTMatricula.DBModel.Store.Course" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Enrollment" EntityType="FTMatricula.DBModel.Store.Enrollment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Location" EntityType="FTMatricula.DBModel.Store.Location" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Modality" EntityType="FTMatricula.DBModel.Store.Modality" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Place" EntityType="FTMatricula.DBModel.Store.Place" store:Type="Tables" store:Schema="dbo" store:Name="Place">
             <DefiningQuery>SELECT 
       [Place].[PlaseID] AS [PlaseID], 
@@ -213,19 +212,6 @@
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="Latitude" Type="decimal" Precision="9" Scale="6" />
           <Property Name="Longitude" Type="decimal" Precision="9" Scale="6" />
-          <Property Name="InsertUserID" Type="uniqueidentifier" />
-          <Property Name="ModifyDate" Type="datetime" />
-          <Property Name="ModifyUserID" Type="uniqueidentifier" />
-          <Property Name="IpAddress" Type="varchar" MaxLength="200" />
-        </EntityType>
-        <EntityType Name="Modality">
-          <Key>
-            <PropertyRef Name="ModalityID" />
-          </Key>
-          <Property Name="ModalityID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="120" />
-          <Property Name="Description" Type="varchar" MaxLength="300" />
-          <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
@@ -680,7 +666,6 @@
           <EntitySet Name="Courses" EntityType="FTMatricula.DBModel.Course" />
           <EntitySet Name="Enrollments" EntityType="FTMatricula.DBModel.Enrollment" />
           <EntitySet Name="Locations" EntityType="FTMatricula.DBModel.Location" />
-          <EntitySet Name="Modalities" EntityType="FTMatricula.DBModel.Modality" />
           <EntitySet Name="Places" EntityType="FTMatricula.DBModel.Place" />
           <EntitySet Name="Plans" EntityType="FTMatricula.DBModel.Plan" />
           <EntitySet Name="Plan_Course" EntityType="FTMatricula.DBModel.Plan_Course" />
@@ -833,19 +818,6 @@
           <NavigationProperty Name="Plans" Relationship="FTMatricula.DBModel.FK_Plan_Location" FromRole="Location" ToRole="Plan" />
           <Property Type="Decimal" Name="Latitude" Precision="9" Scale="6" />
           <Property Type="Decimal" Name="Longitude" Precision="9" Scale="6" />
-        </EntityType>
-        <EntityType Name="Modality">
-          <Key>
-            <PropertyRef Name="ModalityID" />
-          </Key>
-          <Property Name="ModalityID" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
-          <Property Name="InsertDate" Type="DateTime" Precision="3" />
-          <Property Name="InsertUserID" Type="Guid" />
-          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifyUserID" Type="Guid" />
-          <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -1276,20 +1248,6 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Line1" ColumnName="Line1" />
                 <ScalarProperty Name="Line2" ColumnName="Line2" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Modalities">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.Modality">
-              <MappingFragment StoreEntitySet="Modality">
-                <ScalarProperty Name="ModalityID" ColumnName="ModalityID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
