@@ -29,7 +29,6 @@ namespace FTMatricula.Models
         public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Location> Locations { get; set; }
-        public DbSet<Modality> Modalities { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Plan_Course> Plan_Course { get; set; }
