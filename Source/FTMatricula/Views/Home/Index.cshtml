@@ -1,13 +1,11 @@
 ﻿@model FTMatricula.Models.UserModel
 @{
-    ViewBag.Title = "Home";
+    ViewBag.Title = @Resources.GetValue("HOME");
 }
 
 @section styles {
 
 }
-
-
 <div id="content_left">
     <!-- DESKTOPS STARTS -->
     <div class="desk">
@@ -15,7 +13,7 @@
 
             <li class="item">
                 <div class="itemContent maintenance">
-                    <a href="#" class="itemTitle">Mantenimiento</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("MAINTENANCE")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/gear.png" alt="" />
@@ -26,7 +24,7 @@
 
             <li class="item">
                 <div class="itemContent student">
-                    <a href="#" class="itemTitle">Estudiante</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("STUDENT")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/student.png" alt="" />
@@ -37,7 +35,7 @@
 
             <li class="item">
                 <div class="itemContent programs">
-                    <a href="#" class="itemTitle">Programas, Planes y Cursos</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("PROGRAM_PLAN_COURSE")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/programs.png" alt="" />
@@ -48,7 +46,7 @@
 
             <li class="item">
                 <div class="itemContent enrollment">
-                    <a href="#" class="itemTitle">Matrícula</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("ENROLLMENT")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/matricula.png" alt="" />
@@ -59,7 +57,7 @@
 
             <li class="item">
                 <div class="itemContent notes">
-                    <a href="#" class="itemTitle">Registro de Notas</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("NOTES_REGISTER")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/reg_notes.png" alt="" />
@@ -70,7 +68,7 @@
 
             <li class="item">
                 <div class="itemContent records">
-                    <a href="#" class="itemTitle">Actas</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("RECORDS")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/archive.png" alt="" />
@@ -81,7 +79,7 @@
 
             <li class="item">
                 <div class="itemContent certifications">
-                    <a href="#" class="itemTitle">Certificaciones</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("CERTIFICATIONS")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/degree.png" alt="" />
@@ -92,7 +90,7 @@
 
             <li class="item">
                 <div class="itemContent auditing">
-                    <a href="#" class="itemTitle">Auditoría</a>
+                    <a href="#" class="itemTitle">@Resources.GetValue("AUDIT")</a>
                     <div class="menuImage">
                         <a href="#">
                             <img src="~/Content/images/icons/auditoria.png" alt="" />

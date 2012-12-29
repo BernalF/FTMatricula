@@ -1,17 +1,17 @@
 ﻿<!-- BEGIN Maintenance -->
 <li menu-option="maintenance" class="hide">
     <ul class="subMenuOpt">
-        <li><a href="#" class="optTitle">Inicio/Mantenimiento</a></li>
+        <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")</a></li>
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index", "School", routeValues: null)">
                     <div style="background-image: url('Content/images/icons/school.png');">
                         <ul>
                             <li>
-                                <span>Escuelas</span>
+                                <span>@Resources.GetValue("SCHOOL")</span>
                             </li>
                             <li>
-                                <p>Esta opción permite listar, agregar, modificar y eliminar una escuela</p>
+                                <p>@Resources.GetValue("SCHOOL_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
@@ -24,10 +24,10 @@
                     <div style="background-image: url('Content/images/icons/aulas.png');">
                         <ul>
                             <li>
-                                <span>Aulas</span>
+                                <span>@Resources.GetValue("CLASSROOM")</span>
                             </li>
                             <li>
-                                <p>Esta opción permite listar, agregar, modificar y eliminar un aula o espacio donde se imparte </p>
+                                <p>@Resources.GetValue("CLASSROOM_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
@@ -40,10 +40,10 @@
                     <div style="background-image: url('Content/images/icons/place.png');">
                         <ul>
                             <li>
-                                <span>Lugares Físicos</span>
+                                <span>@Resources.GetValue("LOCATION")</span>
                             </li>
                             <li>
-                                <p>Esta opción permite listar, agregar, modificar y eliminar un lugar físico o geográfico</p>
+                                <p>@Resources.GetValue("LOCATION_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
@@ -56,10 +56,10 @@
                     <div style="background-image: url('Content/images/icons/category.png');">
                         <ul>
                             <li>
-                                <span>Tipos de Modalidad</span>
+                                <span>@Resources.GetValue("MODALITY_TYPE")</span>
                             </li>
                             <li>
-                                <p>Esta opción permite listar, agregar, modificar y eliminar los tipos de modalidades</p>
+                                <p>@Resources.GetValue("MODALITY_TYPE_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
@@ -72,10 +72,10 @@
                     <div style="background-image: url('Content/images/icons/tipos_requisitos.png');">
                         <ul>
                             <li>
-                                <span>Tipos de Requisitos</span>
+                                <span>@Resources.GetValue("REQUERIMENT")</span>
                             </li>
                             <li>
-                                <p>Esta opción permite listar, agregar, modificar y eliminar los tipos de requisitos</p>
+                                <p>@Resources.GetValue("REQUERIMENT_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
@@ -88,10 +88,10 @@
                     <div style="background-image: url('Content/images/icons/user_man.png');">
                         <ul>
                             <li>
-                                <span>Usuarios</span>
+                                <span>@Resources.GetValue("USERS")</span>
                             </li>
                             <li>
-                                <p>Esta opción permite listar, agregar, modificar y eliminar usuarios del sistema. </p>
+                                <p>@Resources.GetValue("USERS_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
