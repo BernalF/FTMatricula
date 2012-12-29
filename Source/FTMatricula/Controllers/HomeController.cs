@@ -26,6 +26,7 @@ namespace FTMatricula.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [Authorize(Roles = "AdministratorX")]
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";

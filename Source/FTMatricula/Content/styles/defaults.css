@@ -993,3 +993,70 @@ ul li.item .menuImage{
     position: absolute;    
    right:20px;
 }
+
+
+.errorBox {
+    width:90%;
+    margin:20px auto 20px auto;
+    background:rgba(0,0,0,.3);
+    padding:10px;
+}
+
+.errorTitle {
+    font-size:18px;
+    color:#fff;
+    padding: 5px;
+    background:rgba(0,0,0,.6);
+}
+
+.errorTitle span{
+    font-size:24px;
+    padding-right: 15px;
+}
+
+.errorDetail li{
+    background:rgba(0,0,0,.4);
+    font-size:14px;
+    color: #fff;
+    padding:10px;
+}
+
+#li_StackTrace {
+    font-size:12px;
+}
+
+#error_content {
+    margin: 20px 0 -220px 210px;
+    min-width: 336px;
+    height: 536px;
+    background: url(../images/defaults/404.png) no-repeat 190px top;
+}
+
+#error_not_authorized
+{
+    min-width: 336px;
+    height: 200px;
+    background: url(../images/defaults/accessDenied.png) no-repeat 220px center;
+}
+
+#error_text_not_authorized {
+    padding: 80px 0 0 350px;
+    
+}
+
+#error_text {
+    margin: 110px 0 -220px 210px;
+}
+
+#error_content div {
+padding: 120px 0 0 270px;
+}
+
+#error_content, #error_not_authorized div h2 {
+font-weight: bold;
+text-transform: uppercase;
+color:#fff;
+}
+#error_content, #error_not_authorized div p {
+color:#ABA29C;
+}
