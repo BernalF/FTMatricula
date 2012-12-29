@@ -1029,7 +1029,7 @@ ul li.item .menuImage{
     margin: 20px 0 -220px 210px;
     min-width: 336px;
     height: 536px;
-    background: url(../images/defaults/404.png) no-repeat 190px top;
+    background: url(../images/defaults/404.png) no-repeat 50px top;
 }
 
 #error_not_authorized
@@ -1045,7 +1045,7 @@ ul li.item .menuImage{
 }
 
 #error_text {
-    margin: 110px 0 -220px 210px;
+    margin: 110px 0 -220px 100px;
 }
 
 #error_content div {
