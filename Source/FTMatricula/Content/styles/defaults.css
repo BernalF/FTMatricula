@@ -989,3 +989,8 @@ ul li.item .menuImage{
     background-image:url("../images/icons/arrow-Left_hover.png");
     font-weight:600;
 }
+.kendoAddbutton {
+    top: 10px;    
+    position: absolute;    
+   right:20px;
+}
