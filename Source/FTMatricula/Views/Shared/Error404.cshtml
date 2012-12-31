@@ -1,5 +1,4 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-@{
+﻿@{
     ViewBag.Title = "Fail Whale";
 }
 
@@ -8,43 +7,26 @@
 <div class="errorBox">
 
     <ul>
+        
+        <li class="errorTitle">
+            <span>Oops!</span>
+        </li>
 
-        @if (@Model != null)
-        {
-            <li class="errorTitle">
-                <span>Oops!</span> There was an error reported by the Server.
-            </li>
-
-            <li class="errorDetail">
-                <ul>
-                    <li>
-                        @Model.Exception
-                    </li>
-
-                </ul>
-            </li>
-        }
-        else
-        { 
-            <li class="errorTitle">
-                <span>Oops!</span>
-            </li>
-
-            <li class="errorDetail">
-                <ul>
-                    <li>
-                        <div id="error_content">
-						<div id="error_text">
-							<h2>Error <em>Page Not Found</em></h2>
-							<p>sorry, we moved a bunch of stuff…</p>
-						</div>
-					    </div>
-                    </li>
+        <li class="errorDetail" >
+            <ul>
+                <li>
+                    <div id="error_content">
+                        <div id="error_text">
+                            <h2>Error <em>Page Not Found</em></h2>
+                            <p>sorry, we moved a bunch of stuff…</p>
+                        </div>
+                    </div>
+                </li>
 
 
-                </ul>
-            </li>
-        }
+            </ul>
+        </li>
+
     </ul>
     <div style="width: 100px; margin: 20px auto;">
         @Html.ActionLink("Home", "index", "Home", routeValues: null, htmlAttributes: new { @class = "button home" })
