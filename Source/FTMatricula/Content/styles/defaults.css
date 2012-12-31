@@ -1026,10 +1026,9 @@ ul li.item .menuImage{
 }
 
 #error_content {
-    margin: 20px 0 -220px 210px;
     min-width: 336px;
-    height: 536px;
-    background: url(../images/defaults/404.png) no-repeat 50px top;
+    height: 280px;
+    background: url(../images/defaults/404.png) no-repeat center top;    
 }
 
 #error_not_authorized
@@ -1041,22 +1040,21 @@ ul li.item .menuImage{
 
 #error_text_not_authorized {
     padding: 80px 0 0 350px;
-    
 }
 
 #error_text {
-    margin: 110px 0 -220px 100px;
+    text-align:right;
 }
 
 #error_content div {
-padding: 120px 0 0 270px;
+padding: 30px 0 0 270px;
 }
 
-#error_content, #error_not_authorized div h2 {
+#error_content div h2, #error_not_authorized div h2 {
 font-weight: bold;
 text-transform: uppercase;
 color:#fff;
 }
-#error_content, #error_not_authorized div p {
-color:#ABA29C;
+#error_content div p, #error_not_authorized div p {
+color:#fff;
 }
