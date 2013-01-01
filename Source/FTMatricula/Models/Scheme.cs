@@ -21,10 +21,10 @@ namespace FTMatricula.Models
             this.School_Scheme = new HashSet<School_Scheme>();
         }
     
-        public System.Guid SchemeID { get; set; }
+        public System.Guid? SchemeID { get; set; }
         public string Description { get; set; }
-        public System.Guid OwnerUserId { get; set; }
-        public System.Guid CoordinatorUserId { get; set; }
+        public System.Guid? OwnerUserId { get; set; }
+        public System.Guid? CoordinatorUserId { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

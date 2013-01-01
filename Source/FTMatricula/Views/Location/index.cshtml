@@ -31,7 +31,7 @@
                                       columns.Bound(m => m.Line2).Title(@Resources.GetValue("LOCATION_LINE2"));
                                       columns.Command(command =>
                                       {
-                                          command.Edit().Text("Editar").UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                          command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
                                           command.Destroy().Text(@Resources.GetValue("DELETE"));
                                       }).Width(180);
                                   })
@@ -91,6 +91,8 @@
                                                 }))
                                   .DataSource(dataSource => dataSource
                                         .Ajax()
+                                        .Events(events => events.Error("error_handler"))
+                                        .ServerOperation(false)
                                         .Read(read => read.Action("PagingLocation", "Location"))
                                         .Create(create => create.Action("CreateLocation", "Location"))
                                         .Update(update => update.Action("UpdateLocation", "Location"))

@@ -45,14 +45,17 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateSchool([DataSourceRequest] DataSourceRequest request, School model)
         {
-                model.SchoolID = Guid.NewGuid();                
+            if (ModelState.IsValid)
+            {
+                model.SchoolID = Guid.NewGuid();
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 model.InsertDate = DateTime.Today;
-                model.IpAddress = Network.GetIpAddress(Request);                
+                model.IpAddress = Network.GetIpAddress(Request);
                 db.Schools.Add(model);
-                db.SaveChanges();
-                db.Entry(model).State = EntityState.Added;
-            return Json(ModelState.ToDataSourceResult());
+                db.SaveChanges();                
+            }
+
+            return Json(new[] { new { SchoolID = model.SchoolID, Name = model.Name, Description = model.Description, Code = model.Code } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -69,7 +72,7 @@ namespace FTMatricula.Controllers
                 model.IpAddress = Network.GetIpAddress(Request);
                 db.Entry(model).State = EntityState.Modified;
                 db.SaveChanges();
-            return Json(ModelState.ToDataSourceResult());
+                return Json(new[] { new { SchoolID = model.SchoolID, Name = model.Name, Description = model.Description, Code = model.Code } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -84,8 +87,7 @@ namespace FTMatricula.Controllers
             School school = db.Schools.Find(model.SchoolID);
             db.Schools.Remove(school);            
             db.SaveChanges();
-            db.Entry(model).State = EntityState.Deleted;
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }
 
         protected override void Dispose(bool disposing)

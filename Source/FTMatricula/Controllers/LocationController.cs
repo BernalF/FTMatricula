@@ -32,7 +32,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingLocation([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Locations.ToList().Select(m => new { m.LocationID, m.Name, m.Line1, m.Line2}).ToDataSourceResult(request));
+            return Json(db.Locations.ToList().Select(m => new { m.LocationID, m.Name, m.Line1, m.Line2 }).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -44,14 +44,16 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateLocation([DataSourceRequest] DataSourceRequest request, Location model)
         {
-            model.LocationID = Guid.NewGuid();
-            model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-            model.InsertDate = DateTime.Today;
-            model.IpAddress = Network.GetIpAddress(Request);
-            db.Locations.Add(model);
-            db.SaveChanges();
-            db.Entry(model).State = EntityState.Added;
-            return Json(ModelState.ToDataSourceResult());
+            if (ModelState.IsValid)
+            {
+                model.LocationID = Guid.NewGuid();
+                model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+                model.InsertDate = DateTime.Today;
+                model.IpAddress = Network.GetIpAddress(Request);
+                db.Locations.Add(model);
+                db.SaveChanges();                
+            }
+            return Json(new[] { new { LocationID = model.LocationID, Name = model.Name, Line1 = model.Line1, Line2 = model.Line2 } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -68,7 +70,7 @@ namespace FTMatricula.Controllers
             model.IpAddress = Network.GetIpAddress(Request);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[] { new { LocationID = model.LocationID, Name = model.Name, Line1 = model.Line1, Line2 = model.Line2 } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -82,9 +84,8 @@ namespace FTMatricula.Controllers
         {
             Location location = db.Locations.Find(model.LocationID);
             db.Locations.Remove(location);
-            db.SaveChanges();
-            db.Entry(model).State = EntityState.Deleted;
-            return Json(ModelState.ToDataSourceResult());
+            db.SaveChanges();            
+            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }
 
         protected override void Dispose(bool disposing)

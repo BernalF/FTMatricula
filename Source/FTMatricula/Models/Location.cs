@@ -21,7 +21,7 @@ namespace FTMatricula.Models
             this.Plans = new HashSet<Plan>();
         }
         
-        public System.Guid LocationID { get; set; }
+        public System.Guid? LocationID { get; set; }
         
         public string Name { get; set; }
         

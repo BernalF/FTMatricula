@@ -20,7 +20,7 @@ namespace FTMatricula.Models
             this.Students = new HashSet<Student>();
         }
     
-        public System.Guid TypeID { get; set; }
+        public System.Guid? TypeID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string Usage { get; set; }

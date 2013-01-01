@@ -14,7 +14,7 @@ namespace FTMatricula.Models
     
     public partial class Place
     {
-        public System.Guid PlaseID { get; set; }
+        public System.Guid? PlaseID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

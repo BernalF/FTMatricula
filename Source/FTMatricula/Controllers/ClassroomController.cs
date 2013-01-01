@@ -42,15 +42,17 @@ namespace FTMatricula.Controllers
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CreateClassrooms([DataSourceRequest] DataSourceRequest request, Classroom model)
-        {            
+        {
+            if (ModelState.IsValid)
+            {
                 model.ClassroomID = Guid.NewGuid();
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 model.InsertDate = DateTime.Today;
                 model.IpAddress = Network.GetIpAddress(Request);
-                db.Classrooms.Add(model);                
-                db.SaveChanges();
-                db.Entry(model).State = EntityState.Added;
-            return Json(ModelState.ToDataSourceResult());
+                db.Classrooms.Add(model);
+                db.SaveChanges();                
+            }
+            return Json(new[] { new { ClassroomID = model.ClassroomID, Code = model.Code } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -67,7 +69,7 @@ namespace FTMatricula.Controllers
             model.IpAddress = Network.GetIpAddress(Request);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[] { new { ClassroomID = model.ClassroomID, Code = model.Code } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -82,8 +84,7 @@ namespace FTMatricula.Controllers
             Classroom classroom = db.Classrooms.Find(model.ClassroomID);
             db.Classrooms.Remove(classroom);            
             db.SaveChanges();
-            db.Entry(model).State = EntityState.Deleted;
-            return Json(ModelState.ToDataSourceResult());
+            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }
 
         protected override void Dispose(bool disposing)

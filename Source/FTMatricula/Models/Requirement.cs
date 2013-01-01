@@ -20,9 +20,9 @@ namespace FTMatricula.Models
             this.Scheme_Requirement = new HashSet<Scheme_Requirement>();
         }
     
-        public System.Guid RequirementID { get; set; }
+        public System.Guid? RequirementID { get; set; }
         public string Name { get; set; }
-        public System.Guid TypeID { get; set; }
+        public System.Guid? TypeID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

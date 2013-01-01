@@ -5,15 +5,13 @@
     <title>@ViewBag.Title</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="description" content="iSales App HTML5">
+    <meta name="description" content="Sistema Matricula FundaTEC">
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link rel="apple-touch-icon-precomposed" href="~/bookmark-icon1.png" />
     <link rel="apple-touch-icon" href="~/apple-touch-icon.png" />
 
-    @Styles.Render("~/bundles/FTMatriculaCSS")
-
     @Styles.Render("~/bundles/kendoCSS")
-
+    @Styles.Render("~/bundles/FTMatriculaCSS")
     @Scripts.Render("~/bundles/KendoJS")
 
     @RenderSection("styles", required: false)
@@ -55,6 +53,27 @@
 </body>
 </html>
 
-
+<script type="text/javascript">
+    function error_handler(e) {    
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function() {
+                        message += this + "\n";
+                    });
+                }
+            });        
+            alert(message);
+        }
+    }
+</script>
 
 @RenderSection("scripts", required: false)
+@*    <script>
+        //$(function () {
+        //    $("#grid").data("kendoGrid").bind("dataBinding", function (e) {
+        //        e.preventDefault();
+        //    });
+        //});
+</script>*@

@@ -20,8 +20,8 @@ namespace FTMatricula.Models
             this.Student_Course = new HashSet<Student_Course>();
         }
     
-        public System.Guid StudentID { get; set; }
-        public System.Guid UserID { get; set; }
+        public System.Guid? StudentID { get; set; }
+        public System.Guid? UserID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

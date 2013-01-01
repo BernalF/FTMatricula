@@ -21,7 +21,7 @@ namespace FTMatricula.Models
             this.Scheme_Plan = new HashSet<Scheme_Plan>();
         }
     
-        public System.Guid PlanID { get; set; }
+        public System.Guid? PlanID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }

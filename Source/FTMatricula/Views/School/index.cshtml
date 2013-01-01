@@ -22,7 +22,7 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.School>().Name("AddSchool")
+                                @(Html.Kendo().Grid<FTMatricula.Models.School>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
@@ -31,7 +31,7 @@
                                           columns.Bound(m => m.Code).Title(@Resources.GetValue("SCHOOL_CODE"));
                                           columns.Command(command =>
                                           {
-                                              command.Edit().Text("Editar").UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                              command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
@@ -93,6 +93,8 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
+                                            .Events(events => events.Error("error_handler"))
+                                            .ServerOperation(false)
                                             .Read(read => read.Action("PagingSchools", "School"))
                                             .Create(create => create.Action("CreateSchool", "School"))
                                             .Update(update => update.Action("UpdateSchool", "School"))
@@ -113,4 +115,5 @@
 </div>
 
 @section Scripts {
+
 }

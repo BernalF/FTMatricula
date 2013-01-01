@@ -19,7 +19,7 @@ namespace FTMatricula.Models
             this.Records = new HashSet<Record>();
         }
     
-        public System.Guid ScoreID { get; set; }
+        public System.Guid? ScoreID { get; set; }
         public string Result { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }

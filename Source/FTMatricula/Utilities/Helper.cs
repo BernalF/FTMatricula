@@ -32,9 +32,14 @@ namespace FTMatricula.Utilities.Helper
 
         public static string GetValue(string key)
         {
-
-            return new CacheStorageService().Get<Dictionary<string, string>>("LOCAL_RESOURCE", GetResources, hours: 720)[key];
-
+            try
+            {
+                return new CacheStorageService().Get<Dictionary<string, string>>("LOCAL_RESOURCE", GetResources, hours: 720)[key];
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException("The key '" + key + "' was not found. " + e.Message);
+            }            
         }
 
         private static Dictionary<string,string> GetResources()

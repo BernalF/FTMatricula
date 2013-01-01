@@ -68,6 +68,7 @@ namespace FTMatricula
 
             bundles.Add(new StyleBundle("~/bundles/kendoCSS").Include(
                         "~/Content/kendo/css/kendo.common.min.css",
+                        "~/Content/kendo/css/kendo.rtl.min.css",
                         "~/Content/kendo/css/kendo.default.min.css"));
 
            // BundleTable.EnableOptimizations = true;
