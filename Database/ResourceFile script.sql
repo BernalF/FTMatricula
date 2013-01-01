@@ -130,3 +130,9 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'RECORDS1', 'es-CR', 'Notas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'AUDIT_DETAIL', 'es-CR', 'Esta opción permite listar o detallar lo referente al historial de este catálogo')
 --Footer
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SIGN', 'es-CR', 'B&B Development, Todos los derechos reservados')
+--Modality View
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_MANT', 'es-CR', 'Mantenimiento de Modalidades')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY', 'es-CR', 'Tipos de Modalidad')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_NAME', 'es-CR', 'Modalidad')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERIOD', 'es-CR', 'Periodo')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_MODALITY', 'es-CR', 'Agregar Modalidad')
