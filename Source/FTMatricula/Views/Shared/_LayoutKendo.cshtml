@@ -54,26 +54,34 @@
 </html>
 
 <script type="text/javascript">
-    function error_handler(e) {    
+    function error_handler(e) {
         if (e.errors) {
             var message = "Errors:\n";
             $.each(e.errors, function (key, value) {
                 if ('errors' in value) {
-                    $.each(value.errors, function() {
+                    $.each(value.errors, function () {
                         message += this + "\n";
                     });
                 }
-            });        
+            });
             alert(message);
         }
     }
 </script>
 
 @RenderSection("scripts", required: false)
-@*    <script>
-        //$(function () {
-        //    $("#grid").data("kendoGrid").bind("dataBinding", function (e) {
-        //        e.preventDefault();
-        //    });
-        //});
-</script>*@
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>
