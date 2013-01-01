@@ -12,6 +12,7 @@ using FTMatricula.Models;
 
 namespace FTMatricula.Controllers
 {
+    [KendoAjaxErrorHandler]
     public class ModalityController : Controller
     {
         private matrifunDBEntities db = new matrifunDBEntities();
