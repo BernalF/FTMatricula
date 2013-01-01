@@ -14,6 +14,7 @@ using FTMatricula.Models;
 
 namespace FTMatricula.Controllers
 {
+    [AjaxErrorHandler]
     public class SchoolController : Controller
     {
         private matrifunDBEntities db = new matrifunDBEntities();
@@ -33,6 +34,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingSchools([DataSourceRequest] DataSourceRequest request)
         {
+            throw new ApplicationException("TEST");
             return Json(db.Schools.ToList().Select(m => new { m.SchoolID, m.Name, m.Description, m.Code }).ToDataSourceResult(request));
         }
 

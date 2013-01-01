@@ -50,5 +50,19 @@ namespace FTMatricula.Utilities.Helper
 
     }
 
+    public class AjaxErrorHandlerAttribute : FilterAttribute, IExceptionFilter
+    {
+        public void OnException(ExceptionContext filterContext)
+        {
+            filterContext.ExceptionHandled = true;
+            filterContext.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
+            filterContext.Result = new JsonResult
+            {
+                Data = new { success = false, error = filterContext.Exception.ToString(), errors = filterContext.Exception.ToString() },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+    }
+
 
 }
