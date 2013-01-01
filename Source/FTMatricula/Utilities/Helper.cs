@@ -50,15 +50,23 @@ namespace FTMatricula.Utilities.Helper
 
     }
 
-    public class AjaxErrorHandlerAttribute : FilterAttribute, IExceptionFilter
+    public class KendoAjaxErrorHandlerAttribute : FilterAttribute, IExceptionFilter
     {
         public void OnException(ExceptionContext filterContext)
         {
             filterContext.ExceptionHandled = true;
-            filterContext.HttpContext.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
+            filterContext.HttpContext.Response.StatusCode = 200;
             filterContext.Result = new JsonResult
             {
-                Data = new { success = false, error = filterContext.Exception.ToString(), errors = filterContext.Exception.ToString() },
+                Data = new { Data = new { }, Total = 0, Errors = new object[] 
+                    { 
+                        new { Exception = "Exception", errors = new[] { filterContext.Exception.Message.ToString() } },
+                        new { Detail = "Detail", errors = new[] { 
+                            "Source: " + filterContext.Exception.TargetSite.ToString().Replace(" ","+")
+                             //System.Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes((filterContext.Exception.Source.ToString())))
+                        } }
+                    }
+                },
                 JsonRequestBehavior = JsonRequestBehavior.AllowGet
             };
         }

@@ -523,6 +523,7 @@
     <Content Include="Views\Shared\NotAuthorized.cshtml" />
     <Content Include="Views\Modality\index.cshtml" />
     <Content Include="Views\Modality\EditorTemplates\AddModality.cshtml" />
+    <Content Include="Views\Shared\AjaxError.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
