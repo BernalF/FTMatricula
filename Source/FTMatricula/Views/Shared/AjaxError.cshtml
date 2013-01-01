@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "Error";
+    string error_exception = "", error_detail = "";
+
+    if ((ViewBag.Exception != null) && (ViewBag.Detail != null))
+    {
+        error_exception = ViewBag.Exception;
+        error_detail = ViewBag.Detail;
+    }
+    
+}
+
+<h2 class="title">Server Error</h2>
+<br />
+<div class="errorBox">
+
+    <ul>
+        <li class="errorTitle">
+            <span>Oops!</span> There was an error reported by the Server.
+        </li>
+
+        <li class="errorDetail">
+            <ul>
+
+                        
+                    <li>
+                        Exception was : @error_exception
+                    </li>
+                    
+                    <li>
+                        Stack Trace: <a href="javascript: showStackTrace();">View Details</a>
+                    </li>
+                    <li id="li_StackTrace" class="hide">
+                        @error_detail
+                    </li>
+                        
+            </ul>
+        </li>
+    </ul>
+    <div style="width: 100px; margin: 20px auto;">
+        @Html.ActionLink("Home", "index", "Home", routeValues: null, htmlAttributes: new { @class = "button home" })
+    </div>
+    <div class="clear"></div>
+</div>
+
+@section Scripts {
+        
+    <script type="text/javascript">
+        var stackTrace = false;
+        function showStackTrace() {
+            if (!stackTrace)
+                $('#li_StackTrace').fadeIn('slow');
+            else
+                $('#li_StackTrace').fadeOut('slow');
+
+            stackTrace = !stackTrace;
+        }
+
+    </script>
+
+}
