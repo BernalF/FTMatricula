@@ -9,17 +9,11 @@
 
 namespace FTMatricula.Models
 {
-    using FTMatricula.Utilities.Helper;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Classroom
     {
-        public Classroom()
-        {
-            this.Courses = new HashSet<Course>();
-        }
         public System.Guid? ClassroomID { get; set; }
         public string Code { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
@@ -27,6 +21,5 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
-        public virtual ICollection<Course> Courses { get; set; }
     }
 }

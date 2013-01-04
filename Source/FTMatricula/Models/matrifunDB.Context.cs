@@ -26,7 +26,6 @@ namespace FTMatricula.Models
         }
     
         public DbSet<Classroom> Classrooms { get; set; }
-        public DbSet<Course> Courses { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Place> Places { get; set; }
@@ -44,5 +43,6 @@ namespace FTMatricula.Models
         public DbSet<Student_Course> Student_Course { get; set; }
         public DbSet<Type> Types { get; set; }
         public DbSet<Resource> Resources { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

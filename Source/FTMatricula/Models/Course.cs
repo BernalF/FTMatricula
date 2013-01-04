@@ -29,8 +29,8 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public Nullable<bool> IsActive { get; set; }
     
-        public virtual Classroom Classroom { get; set; }
         public virtual Requirement Requirement { get; set; }
         public virtual ICollection<Plan_Course> Plan_Course { get; set; }
         public virtual ICollection<Score> Scores { get; set; }

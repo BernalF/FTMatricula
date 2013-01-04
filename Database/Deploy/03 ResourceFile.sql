@@ -136,3 +136,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY', 'es-CR', 'Tipos de Mod
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_NAME', 'es-CR', 'Modalidad')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERIOD', 'es-CR', 'Periodo')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_MODALITY', 'es-CR', 'Agregar Modalidad')
+--Course View
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_MANT', 'es-CR', 'Mantenimiento de Cursos')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_NAME', 'es-CR', 'Nombre del Curso')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_COURSE', 'es-CR', 'Agregar Curso')
