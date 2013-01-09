@@ -1,6 +1,18 @@
 USE [matriFunDB]
 GO
 
+DECLARE @CountryID uniqueidentifier
+SET @CountryID = NEWID()
+
+
+INSERT INTO Country(
+	 CountryID
+	,CountryName
+)
+SELECT
+	 @CountryID
+	,'Costa Rica'
+
 DECLARE @IdentificationTypeID uniqueidentifier
 SET @IdentificationTypeID = NEWID()
 
@@ -108,7 +120,7 @@ SELECT
 	,'Romero'
 	,'M'
 	,'19810310'
-	,null --CountryID
+	,@CountryID --CountryID
 	,@MaritalStatusTypeID
 	,'+50688203956'
 	,'+50688203956'
