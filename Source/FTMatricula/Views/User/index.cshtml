@@ -1,0 +1,111 @@
+﻿@model FTMatricula.Models.ApplicationUser
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = "Mantenimiento Usuarios";
+}
+
+@section styles {
+
+}
+<div id="content">
+
+    <div class="mainBox">
+
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/Usuarios</a></h2>
+
+        <div>
+            <ul id="formHolder data2" class="blacked">
+
+                <li>
+
+                    <div>
+                        <ul>
+
+                            <li>
+                                @(Html.Kendo().Grid<FTMatricula.Models.ApplicationUser>()
+                                      .Name("Grid")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(m => m.UserName).Title("Identificacion");
+                                          columns.Bound(m => m.FirstName).Title("Nombre");
+                                          columns.Bound(m => m.LastName).Title("Apellido");
+                                          columns.Command(command =>
+                                          {
+                                             //command.Custom("Edit").Text("Edit").Action("Edit", "User");
+                                             command
+                                                 .Destroy()
+                                                 .Text(@Resources.GetValue("DELETE"));
+                                          }).Width(180);                                                                                  
+                                      })                                     
+                                      .Sortable(sor => sor.AllowUnsort(true))
+                                      .Filterable(filter =>
+                                      {
+                                          filter.Enabled(true);
+                                          filter.Extra(false);
+                                          filter.Operators(oper =>
+                                          {
+                                              oper.ForString(ostr =>
+                                              {
+                                                  ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
+                                                  ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
+                                                  ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
+                                                  ostr.Contains(@Resources.GetValue("CONTAINS"));
+                                                  ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
+                                                  ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
+                                              });
+                                          });
+                                          filter.Messages(msj =>
+                                          {
+                                              msj.Filter(@Resources.GetValue("FIND"));
+                                              msj.Clear(@Resources.GetValue("CLEAN"));
+                                              msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
+                                          });
+                                      }) 
+                                      .ToolBar(create => create.Custom()
+                                          .Action("Create", "User", routeValues: null)
+                                          .Text("Add User")
+                                          .HtmlAttributes(new { @class = "kendoAddbutton" }))                                 
+                                      .Pageable(pager => pager
+                                            .PageSizes(new int[] { 5, 10, 15 })                                            
+                                            .Input(true)                                            
+                                            .Numeric(true)
+                                            .Info(true)
+                                            .PreviousNext(true)
+                                            .Refresh(true)
+                                                    .Messages(messages =>
+                                                    {
+                                                        messages.Empty(@Resources.GetValue("NO_RECORDS"));
+                                                        messages.Display(@Resources.GetValue("DISPLAY_GRID"));
+                                                        messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
+                                                        messages.Page(@Resources.GetValue("PAGE"));
+                                                        messages.Of(@Resources.GetValue("OF_GRID"));
+                                                        messages.First(@Resources.GetValue("FIRST_PAGE"));
+                                                        messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
+                                                        messages.Next(@Resources.GetValue("NEXT_PAGE"));
+                                                        messages.Last(@Resources.GetValue("LAST_PAGE"));
+                                                        messages.Refresh(@Resources.GetValue("UPDATE"));
+                                                    }))
+                                      .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Events(events => events.Error("error_handler"))
+                                            .ServerOperation(false)
+                                            .Read(read => read.Action("PagingUsers", "User"))
+                                            .Destroy(destroy => destroy.Action("DestroyUser", "User"))                                                                                        
+                                            .Model(model => model.Id(m => m.StudentID))
+                                      )
+                                )
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+
+</div>
+
+@section Scripts {
+   
+}

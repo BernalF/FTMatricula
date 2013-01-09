@@ -12,23 +12,19 @@ namespace FTMatricula.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Score
+    public partial class StudiesInformation
     {
-        public Score()
-        {
-            this.Records = new HashSet<Record>();
-        }
-    
-        public System.Guid? ScoreID { get; set; }
-        public Nullable<System.Guid> StudentID { get; set; }
-        public string Result { get; set; }
+        public System.Guid? StudyID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public string SchoolName { get; set; }
+        public string Degree { get; set; }
+        public Nullable<int> Year { get; set; }
+        public string SchoolPlace { get; set; }
     
-        public virtual Course Course { get; set; }
-        public virtual ICollection<Record> Records { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

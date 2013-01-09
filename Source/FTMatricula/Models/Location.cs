@@ -24,12 +24,12 @@ namespace FTMatricula.Models
         public string Line1 { get; set; }
         public string Line2 { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
+        public Nullable<decimal> Latitude { get; set; }
+        public Nullable<decimal> Longitude { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
-        public Nullable<decimal> Latitude { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
     
         public virtual ICollection<Plan> Plans { get; set; }
     }

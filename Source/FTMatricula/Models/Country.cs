@@ -12,23 +12,21 @@ namespace FTMatricula.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Score
+    public partial class Country
     {
-        public Score()
+        public Country()
         {
-            this.Records = new HashSet<Record>();
+            this.Students = new HashSet<Student>();
         }
     
-        public System.Guid? ScoreID { get; set; }
-        public Nullable<System.Guid> StudentID { get; set; }
-        public string Result { get; set; }
+        public System.Guid? CountryID { get; set; }
+        public string CountryName { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual Course Course { get; set; }
-        public virtual ICollection<Record> Records { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

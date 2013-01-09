@@ -1,3 +1,6 @@
+USE [matriFunDB]
+GO
+
 TRUNCATE TABLE [Resource] 
 GO
 --SCHOOL VIEW 

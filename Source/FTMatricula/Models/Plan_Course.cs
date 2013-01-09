@@ -22,7 +22,7 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual Plan Plan { get; set; }
         public virtual Course Course { get; set; }
+        public virtual Plan Plan { get; set; }
     }
 }

@@ -16,20 +16,31 @@ namespace FTMatricula.Models
     {
         public Student()
         {
-            this.Scores = new HashSet<Score>();
             this.Student_Course = new HashSet<Student_Course>();
+            this.StudiesInformations = new HashSet<StudiesInformation>();
         }
     
         public System.Guid? StudentID { get; set; }
-        public System.Guid? UserID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public System.Guid? UserID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
+        public string Phone3 { get; set; }
+        public Nullable<bool> IsAppUser { get; set; }
     
-        public virtual ICollection<Score> Scores { get; set; }
+        public virtual Country Country { get; set; }
         public virtual Type Type { get; set; }
+        public virtual Type Type1 { get; set; }
+        public virtual StudentAdditionalData StudentAdditionalData { get; set; }
         public virtual ICollection<Student_Course> Student_Course { get; set; }
+        public virtual ICollection<StudiesInformation> StudiesInformations { get; set; }
     }
 }

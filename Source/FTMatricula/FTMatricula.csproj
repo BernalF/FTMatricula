@@ -165,6 +165,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -174,7 +175,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ApplicationUser.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Classroom.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Country.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Course.cs">
@@ -210,6 +217,9 @@
     <Compile Include="Models\Plan_Course.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Profile.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Record.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
@@ -240,7 +250,13 @@
     <Compile Include="Models\Student.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\StudentAdditionalData.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student_Course.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudiesInformation.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Type.cs">
@@ -495,6 +511,21 @@
     <Content Include="Views\Home\_enrollment.cshtml" />
     <Content Include="Views\Home\_notes.cshtml" />
     <Content Include="Views\Classroom\index.cshtml" />
+    <Content Include="Views\Location\index.cshtml" />
+    <Content Include="Views\Home\_records.cshtml" />
+    <Content Include="Views\Home\_certifications.cshtml" />
+    <Content Include="Views\Home\_auditing.cshtml" />
+    <Content Include="Views\School\EditorTemplates\AddSchool.cshtml" />
+    <Content Include="Views\Classroom\EditorTemplates\AddClassroom.cshtml" />
+    <Content Include="Views\Location\EditorTemplates\AddLocation.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Error404.cshtml" />
+    <Content Include="Views\Shared\NotAuthorized.cshtml" />
+    <Content Include="Views\Modality\index.cshtml" />
+    <Content Include="Views\Modality\EditorTemplates\AddModality.cshtml" />
+    <Content Include="Views\Shared\AjaxError.cshtml" />
+    <Content Include="Views\Course\index.cshtml" />
+    <Content Include="Views\Course\EditorTemplates\AddCourse.cshtml" />
     <EntityDeploy Include="Models\matrifunDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>matrifunDB.Designer.cs</LastGenOutput>
@@ -512,21 +543,10 @@
       <DependentUpon>matrifunDB.edmx</DependentUpon>
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Location\index.cshtml" />
-    <Content Include="Views\Home\_records.cshtml" />
-    <Content Include="Views\Home\_certifications.cshtml" />
-    <Content Include="Views\Home\_auditing.cshtml" />
-    <Content Include="Views\School\EditorTemplates\AddSchool.cshtml" />
-    <Content Include="Views\Classroom\EditorTemplates\AddClassroom.cshtml" />
-    <Content Include="Views\Location\EditorTemplates\AddLocation.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\Error404.cshtml" />
-    <Content Include="Views\Shared\NotAuthorized.cshtml" />
-    <Content Include="Views\Modality\index.cshtml" />
-    <Content Include="Views\Modality\EditorTemplates\AddModality.cshtml" />
-    <Content Include="Views\Shared\AjaxError.cshtml" />
-    <Content Include="Views\Course\index.cshtml" />
-    <Content Include="Views\Course\EditorTemplates\AddCourse.cshtml" />
+    <Content Include="Views\User\index.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Destroy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,6 +7,7 @@
     <Schema Namespace="FTMatricula.DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="FTMatriculaDBModelStoreContainer">
           <EntitySet Name="Classroom" EntityType="FTMatricula.DBModel.Store.Classroom" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Country" EntityType="FTMatricula.DBModel.Store.Country" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Course" EntityType="FTMatricula.DBModel.Store.Course" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Enrollment" EntityType="FTMatricula.DBModel.Store.Enrollment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Location" EntityType="FTMatricula.DBModel.Store.Location" store:Type="Tables" Schema="dbo" />
@@ -32,6 +33,7 @@
       [Plan-Course].[IpAddress] AS [IpAddress]
       FROM [dbo].[Plan-Course] AS [Plan-Course]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="Profiles" EntityType="FTMatricula.DBModel.Store.Profiles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Record" EntityType="FTMatricula.DBModel.Store.Record" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Requirement" EntityType="FTMatricula.DBModel.Store.Requirement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Resource" EntityType="FTMatricula.DBModel.Store.Resource" store:Type="Tables" Schema="dbo" />
@@ -72,6 +74,7 @@
           </EntitySet>
           <EntitySet Name="Score" EntityType="FTMatricula.DBModel.Store.Score" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Student" EntityType="FTMatricula.DBModel.Store.Student" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StudentAdditionalData" EntityType="FTMatricula.DBModel.Store.StudentAdditionalData" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Student-Course" EntityType="FTMatricula.DBModel.Store.Student-Course" store:Type="Tables" store:Schema="dbo" store:Name="Student-Course">
             <DefiningQuery>SELECT 
       [Student-Course].[StudentID] AS [StudentID], 
@@ -83,7 +86,26 @@
       [Student-Course].[IpAddress] AS [IpAddress]
       FROM [dbo].[Student-Course] AS [Student-Course]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="StudiesInformation" EntityType="FTMatricula.DBModel.Store.StudiesInformation" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Type" EntityType="FTMatricula.DBModel.Store.Type" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ApplicationUser" EntityType="FTMatricula.DBModel.Store.ApplicationUser" store:Type="Views" store:Schema="dbo" store:Name="ApplicationUser">
+            <DefiningQuery>SELECT 
+      [ApplicationUser].[UserId] AS [UserId], 
+      [ApplicationUser].[StudentID] AS [StudentID], 
+      [ApplicationUser].[UserName] AS [UserName], 
+      [ApplicationUser].[Email] AS [Email], 
+      [ApplicationUser].[FirstName] AS [FirstName], 
+      [ApplicationUser].[LastName] AS [LastName], 
+      [ApplicationUser].[Gender] AS [Gender], 
+      [ApplicationUser].[DateOfBirth] AS [DateOfBirth], 
+      [ApplicationUser].[CountryID] AS [CountryID], 
+      [ApplicationUser].[CountryName] AS [CountryName], 
+      [ApplicationUser].[MaritalStatusTypeID] AS [MaritalStatusTypeID], 
+      [ApplicationUser].[Phone1] AS [Phone1], 
+      [ApplicationUser].[Phone2] AS [Phone2], 
+      [ApplicationUser].[Phone3] AS [Phone3]
+      FROM [dbo].[ApplicationUser] AS [ApplicationUser]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Course_Requirement" Association="FTMatricula.DBModel.Store.FK_Course_Requirement">
             <End Role="Requirement" EntitySet="Requirement" />
             <End Role="Course" EntitySet="Course" />
@@ -140,13 +162,29 @@
             <End Role="Course" EntitySet="Course" />
             <End Role="Score" EntitySet="Score" />
           </AssociationSet>
-          <AssociationSet Name="FK_Score_Student" Association="FTMatricula.DBModel.Store.FK_Score_Student">
+          <AssociationSet Name="FK_Student_Country" Association="FTMatricula.DBModel.Store.FK_Student_Country">
+            <End Role="Country" EntitySet="Country" />
             <End Role="Student" EntitySet="Student" />
-            <End Role="Score" EntitySet="Score" />
           </AssociationSet>
           <AssociationSet Name="FK_Student_Type" Association="FTMatricula.DBModel.Store.FK_Student_Type">
             <End Role="Type" EntitySet="Type" />
             <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Type_MaritalStatus" Association="FTMatricula.DBModel.Store.FK_Student_Type_MaritalStatus">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAdditionalData_Student" Association="FTMatricula.DBModel.Store.FK_StudentAdditionalData_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentAdditionalData" EntitySet="StudentAdditionalData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAdditionalData_Type_HowYouKnow" Association="FTMatricula.DBModel.Store.FK_StudentAdditionalData_Type_HowYouKnow">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="StudentAdditionalData" EntitySet="StudentAdditionalData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAdditionalData_Type_WhoPays" Association="FTMatricula.DBModel.Store.FK_StudentAdditionalData_Type_WhoPays">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="StudentAdditionalData" EntitySet="StudentAdditionalData" />
           </AssociationSet>
           <AssociationSet Name="FK_Student-Course_Course" Association="FTMatricula.DBModel.Store.FK_Student-Course_Course">
             <End Role="Course" EntitySet="Course" />
@@ -155,6 +193,10 @@
           <AssociationSet Name="FK_Student-Course_Student" Association="FTMatricula.DBModel.Store.FK_Student-Course_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Student-Course" EntitySet="Student-Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudiesInformation_Student" Association="FTMatricula.DBModel.Store.FK_StudiesInformation_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudiesInformation" EntitySet="StudiesInformation" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Classroom">
@@ -169,6 +211,18 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="InsertDate" Type="datetime" />
+          <Property Name="InsertUserID" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="ModifyUserID" Type="uniqueidentifier" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Course">
           <Key>
             <PropertyRef Name="CourseID" />
@@ -176,13 +230,13 @@
           <Property Name="CourseID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="120" />
           <Property Name="Description" Type="varchar" Nullable="false" MaxLength="300" />
+          <Property Name="IsActive" Type="bit" />
           <Property Name="RequirementID" Type="uniqueidentifier" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
-          <Property Name="IsActive" Type="bit" />
         </EntityType>
         <EntityType Name="Enrollment">
           <Key>
@@ -251,6 +305,21 @@
           </Key>
           <Property Name="PlanID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="CourseID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InsertDate" Type="datetime" />
+          <Property Name="InsertUserID" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="ModifyUserID" Type="uniqueidentifier" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="nvarchar" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
@@ -387,13 +456,44 @@
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="IdentificationTypeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdentificationTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Gender" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="CountryID" Type="uniqueidentifier" />
+          <Property Name="MaritalStatusTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Phone1" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Phone2" Type="varchar" MaxLength="80" />
+          <Property Name="Phone3" Type="varchar" MaxLength="80" />
+          <Property Name="IsAppUser" Type="bit" />
+        </EntityType>
+        <EntityType Name="StudentAdditionalData">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InsertDate" Type="datetime" />
+          <Property Name="InsertUserID" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="ModifyUserID" Type="uniqueidentifier" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+          <Property Name="PhysicalAddress" Type="varchar" Nullable="false" MaxLength="400" />
+          <Property Name="AdditionalAddress" Type="varchar" MaxLength="400" />
+          <Property Name="JobTitle" Type="varchar" MaxLength="200" />
+          <Property Name="WorkPlace" Type="varchar" MaxLength="400" />
+          <Property Name="Works" Type="bit" />
+          <Property Name="Studies" Type="bit" />
+          <Property Name="WhoPaysYourStudiesTypeID" Type="uniqueidentifier" />
+          <Property Name="HowYouKnowAboutUsTypeID" Type="uniqueidentifier" />
+          <Property Name="ReceiveOffers" Type="bit" />
+          <Property Name="ReceiveNews" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.Student-Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -411,6 +511,22 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="StudiesInformation">
+          <Key>
+            <PropertyRef Name="StudyID" />
+          </Key>
+          <Property Name="StudyID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InsertDate" Type="datetime" />
+          <Property Name="InsertUserID" Type="uniqueidentifier" />
+          <Property Name="ModifyDate" Type="datetime" />
+          <Property Name="ModifyUserID" Type="uniqueidentifier" />
+          <Property Name="IpAddress" Type="varchar" MaxLength="10" />
+          <Property Name="StudentID" Type="uniqueidentifier" />
+          <Property Name="SchoolName" Type="varchar" MaxLength="300" />
+          <Property Name="Degree" Type="varchar" MaxLength="300" />
+          <Property Name="Year" Type="int" />
+          <Property Name="SchoolPlace" Type="varchar" MaxLength="400" />
+        </EntityType>
         <EntityType Name="Type">
           <Key>
             <PropertyRef Name="TypeID" />
@@ -424,6 +540,36 @@
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'matriFunDB.dbo.ApplicationUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="ApplicationUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="CountryName" />
+            <PropertyRef Name="MaritalStatusTypeID" />
+            <PropertyRef Name="Phone1" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Gender" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="CountryID" Type="uniqueidentifier" />
+          <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="MaritalStatusTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Phone1" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Phone2" Type="varchar" MaxLength="80" />
+          <Property Name="Phone3" Type="varchar" MaxLength="80" />
         </EntityType>
         <Association Name="FK_Course_Requirement">
           <End Role="Requirement" Type="FTMatricula.DBModel.Store.Requirement" Multiplicity="0..1" />
@@ -593,15 +739,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Score_Student">
-          <End Role="Student" Type="FTMatricula.DBModel.Store.Student" Multiplicity="0..1" />
-          <End Role="Score" Type="FTMatricula.DBModel.Store.Score" Multiplicity="*" />
+        <Association Name="FK_Student_Country">
+          <End Role="Country" Type="FTMatricula.DBModel.Store.Country" Multiplicity="0..1" />
+          <End Role="Student" Type="FTMatricula.DBModel.Store.Student" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Student">
-              <PropertyRef Name="StudentID" />
+            <Principal Role="Country">
+              <PropertyRef Name="CountryID" />
             </Principal>
-            <Dependent Role="Score">
-              <PropertyRef Name="StudentID" />
+            <Dependent Role="Student">
+              <PropertyRef Name="CountryID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -614,6 +760,54 @@
             </Principal>
             <Dependent Role="Student">
               <PropertyRef Name="IdentificationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Type_MaritalStatus">
+          <End Role="Type" Type="FTMatricula.DBModel.Store.Type" Multiplicity="1" />
+          <End Role="Student" Type="FTMatricula.DBModel.Store.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="MaritalStatusTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAdditionalData_Student">
+          <End Role="Student" Type="FTMatricula.DBModel.Store.Student" Multiplicity="1" />
+          <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.Store.StudentAdditionalData" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentAdditionalData">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAdditionalData_Type_HowYouKnow">
+          <End Role="Type" Type="FTMatricula.DBModel.Store.Type" Multiplicity="0..1" />
+          <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.Store.StudentAdditionalData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="StudentAdditionalData">
+              <PropertyRef Name="HowYouKnowAboutUsTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentAdditionalData_Type_WhoPays">
+          <End Role="Type" Type="FTMatricula.DBModel.Store.Type" Multiplicity="0..1" />
+          <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.Store.StudentAdditionalData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="StudentAdditionalData">
+              <PropertyRef Name="WhoPaysYourStudiesTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -641,19 +835,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_StudiesInformation_Student">
+          <End Role="Student" Type="FTMatricula.DBModel.Store.Student" Multiplicity="0..1" />
+          <End Role="StudiesInformation" Type="FTMatricula.DBModel.Store.StudiesInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudiesInformation">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FTMatricula.DBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="matrifunDBEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Classrooms" EntityType="FTMatricula.DBModel.Classroom" />
+          <EntitySet Name="Countries" EntityType="FTMatricula.DBModel.Country" />
+          <EntitySet Name="Courses" EntityType="FTMatricula.DBModel.Course" />
           <EntitySet Name="Enrollments" EntityType="FTMatricula.DBModel.Enrollment" />
           <EntitySet Name="Locations" EntityType="FTMatricula.DBModel.Location" />
           <EntitySet Name="Places" EntityType="FTMatricula.DBModel.Place" />
           <EntitySet Name="Plans" EntityType="FTMatricula.DBModel.Plan" />
           <EntitySet Name="Plan_Course" EntityType="FTMatricula.DBModel.Plan_Course" />
+          <EntitySet Name="Profiles" EntityType="FTMatricula.DBModel.Profile" />
           <EntitySet Name="Records" EntityType="FTMatricula.DBModel.Record" />
           <EntitySet Name="Requirements" EntityType="FTMatricula.DBModel.Requirement" />
+          <EntitySet Name="Resources" EntityType="FTMatricula.DBModel.Resource" />
           <EntitySet Name="Schemes" EntityType="FTMatricula.DBModel.Scheme" />
           <EntitySet Name="Scheme_Plan" EntityType="FTMatricula.DBModel.Scheme_Plan" />
           <EntitySet Name="Scheme_Requirement" EntityType="FTMatricula.DBModel.Scheme_Requirement" />
@@ -661,8 +871,30 @@
           <EntitySet Name="School_Scheme" EntityType="FTMatricula.DBModel.School_Scheme" />
           <EntitySet Name="Scores" EntityType="FTMatricula.DBModel.Score" />
           <EntitySet Name="Students" EntityType="FTMatricula.DBModel.Student" />
+          <EntitySet Name="StudentAdditionalDatas" EntityType="FTMatricula.DBModel.StudentAdditionalData" />
           <EntitySet Name="Student_Course" EntityType="FTMatricula.DBModel.Student_Course" />
+          <EntitySet Name="StudiesInformations" EntityType="FTMatricula.DBModel.StudiesInformation" />
           <EntitySet Name="Types" EntityType="FTMatricula.DBModel.Type" />
+          <AssociationSet Name="FK_Student_Country" Association="FTMatricula.DBModel.FK_Student_Country">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Course_Requirement" Association="FTMatricula.DBModel.FK_Course_Requirement">
+            <End Role="Requirement" EntitySet="Requirements" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Plan_Course_Course" Association="FTMatricula.DBModel.FK_Plan_Course_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Plan_Course" EntitySet="Plan_Course" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Score_Course" Association="FTMatricula.DBModel.FK_Score_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Score" EntitySet="Scores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Course_Course" Association="FTMatricula.DBModel.FK_Student_Course_Course">
+            <End Role="Course" EntitySet="Courses" />
+            <End Role="Student_Course" EntitySet="Student_Course" />
+          </AssociationSet>
           <AssociationSet Name="FK_Enrollment_Plan" Association="FTMatricula.DBModel.FK_Enrollment_Plan">
             <End Role="Plan" EntitySet="Plans" />
             <End Role="Enrollment" EntitySet="Enrollments" />
@@ -707,36 +939,35 @@
             <End Role="School" EntitySet="Schools" />
             <End Role="School_Scheme" EntitySet="School_Scheme" />
           </AssociationSet>
-          <AssociationSet Name="FK_Score_Student" Association="FTMatricula.DBModel.FK_Score_Student">
-            <End Role="Student" EntitySet="Students" />
-            <End Role="Score" EntitySet="Scores" />
-          </AssociationSet>
           <AssociationSet Name="FK_Student_Type" Association="FTMatricula.DBModel.FK_Student_Type">
             <End Role="Type" EntitySet="Types" />
             <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Type_MaritalStatus" Association="FTMatricula.DBModel.FK_Student_Type_MaritalStatus">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentAdditionalData_Student" Association="FTMatricula.DBModel.FK_StudentAdditionalData_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
           <AssociationSet Name="FK_Student_Course_Student" Association="FTMatricula.DBModel.FK_Student_Course_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="Student_Course" EntitySet="Student_Course" />
           </AssociationSet>
-          <EntitySet Name="Resources" EntityType="FTMatricula.DBModel.Resource" />
-          <EntitySet Name="Courses" EntityType="FTMatricula.DBModel.Course" />
-          <AssociationSet Name="FK_Course_Requirement" Association="FTMatricula.DBModel.FK_Course_Requirement">
-            <End Role="Requirement" EntitySet="Requirements" />
-            <End Role="Course" EntitySet="Courses" />
+          <AssociationSet Name="FK_StudiesInformation_Student" Association="FTMatricula.DBModel.FK_StudiesInformation_Student">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudiesInformation" EntitySet="StudiesInformations" />
           </AssociationSet>
-          <AssociationSet Name="FK_Plan_Course_Course" Association="FTMatricula.DBModel.FK_Plan_Course_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Plan_Course" EntitySet="Plan_Course" />
+          <AssociationSet Name="FK_StudentAdditionalData_Type_HowYouKnow" Association="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Score_Course" Association="FTMatricula.DBModel.FK_Score_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Score" EntitySet="Scores" />
+          <AssociationSet Name="FK_StudentAdditionalData_Type_WhoPays" Association="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Student_Course_Course" Association="FTMatricula.DBModel.FK_Student_Course_Course">
-            <End Role="Course" EntitySet="Courses" />
-            <End Role="Student_Course" EntitySet="Student_Course" />
-          </AssociationSet>
+          <EntitySet Name="ApplicationUsers" EntityType="FTMatricula.DBModel.ApplicationUser" />
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -749,6 +980,37 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="CountryID" />
+          </Key>
+          <Property Name="CountryID" Type="Guid" Nullable="false" />
+          <Property Name="CountryName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="InsertUserID" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserID" Type="Guid" />
+          <Property Name="IpAddress" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Students" Relationship="FTMatricula.DBModel.FK_Student_Country" FromRole="Country" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseID" />
+          </Key>
+          <Property Name="CourseID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="InsertUserID" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserID" Type="Guid" />
+          <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Requirement" Relationship="FTMatricula.DBModel.FK_Course_Requirement" FromRole="Course" ToRole="Requirement" />
+          <NavigationProperty Name="Plan_Course" Relationship="FTMatricula.DBModel.FK_Plan_Course_Course" FromRole="Course" ToRole="Plan_Course" />
+          <NavigationProperty Name="Scores" Relationship="FTMatricula.DBModel.FK_Score_Course" FromRole="Course" ToRole="Score" />
+          <NavigationProperty Name="Student_Course" Relationship="FTMatricula.DBModel.FK_Student_Course_Course" FromRole="Course" ToRole="Student_Course" />
         </EntityType>
         <EntityType Name="Enrollment">
           <Key>
@@ -772,13 +1034,13 @@
           <Property Name="Line1" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
           <Property Name="Line2" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="Latitude" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Longitude" Type="Decimal" Precision="9" Scale="6" />
           <Property Name="InsertUserID" Type="Guid" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Plans" Relationship="FTMatricula.DBModel.FK_Plan_Location" FromRole="Location" ToRole="Plan" />
-          <Property Type="Decimal" Name="Latitude" Precision="9" Scale="6" />
-          <Property Type="Decimal" Name="Longitude" Precision="9" Scale="6" />
         </EntityType>
         <EntityType Name="Place">
           <Key>
@@ -820,8 +1082,23 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Plan" Relationship="FTMatricula.DBModel.FK_Plan_Course_Plan" FromRole="Plan_Course" ToRole="Plan" />
           <NavigationProperty Name="Course" Relationship="FTMatricula.DBModel.FK_Plan_Course_Course" FromRole="Plan_Course" ToRole="Course" />
+          <NavigationProperty Name="Plan" Relationship="FTMatricula.DBModel.FK_Plan_Course_Plan" FromRole="Plan_Course" ToRole="Plan" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="PropertyNames" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValueStrings" Type="String" Nullable="false" MaxLength="4000" Unicode="true" FixedLength="false" />
+          <Property Name="PropertyValueBinary" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="InsertUserID" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserID" Type="Guid" />
+          <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Record">
           <Key>
@@ -847,8 +1124,17 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Scheme_Requirement" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement" FromRole="Requirement" ToRole="Scheme_Requirement" />
           <NavigationProperty Name="Courses" Relationship="FTMatricula.DBModel.FK_Course_Requirement" FromRole="Requirement" ToRole="Course" />
+          <NavigationProperty Name="Scheme_Requirement" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement" FromRole="Requirement" ToRole="Scheme_Requirement" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ResourceID" />
+          </Key>
+          <Property Name="ResourceID" Type="Guid" Nullable="false" />
+          <Property Name="ResourceKey" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Culture" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="ResourceValue" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="Scheme">
           <Key>
@@ -933,30 +1219,63 @@
             <PropertyRef Name="ScoreID" />
           </Key>
           <Property Name="ScoreID" Type="Guid" Nullable="false" />
+          <Property Name="StudentID" Type="Guid" />
           <Property Name="Result" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
           <Property Name="InsertUserID" Type="Guid" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Records" Relationship="FTMatricula.DBModel.FK_Record_Score" FromRole="Score" ToRole="Record" />
-          <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_Score_Student" FromRole="Score" ToRole="Student" />
           <NavigationProperty Name="Course" Relationship="FTMatricula.DBModel.FK_Score_Course" FromRole="Score" ToRole="Course" />
+          <NavigationProperty Name="Records" Relationship="FTMatricula.DBModel.FK_Record_Score" FromRole="Score" ToRole="Record" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="StudentID" />
           </Key>
           <Property Name="StudentID" Type="Guid" Nullable="false" />
-          <Property Name="UserID" Type="Guid" Nullable="false" />
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
           <Property Name="InsertUserID" Type="Guid" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Scores" Relationship="FTMatricula.DBModel.FK_Score_Student" FromRole="Student" ToRole="Score" />
+          <Property Name="UserID" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Phone1" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Phone2" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Phone3" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="IsAppUser" Type="Boolean" />
+          <NavigationProperty Name="Country" Relationship="FTMatricula.DBModel.FK_Student_Country" FromRole="Student" ToRole="Country" />
           <NavigationProperty Name="Type" Relationship="FTMatricula.DBModel.FK_Student_Type" FromRole="Student" ToRole="Type" />
+          <NavigationProperty Name="Type1" Relationship="FTMatricula.DBModel.FK_Student_Type_MaritalStatus" FromRole="Student" ToRole="Type" />
+          <NavigationProperty Name="StudentAdditionalData" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Student" FromRole="Student" ToRole="StudentAdditionalData" />
           <NavigationProperty Name="Student_Course" Relationship="FTMatricula.DBModel.FK_Student_Course_Student" FromRole="Student" ToRole="Student_Course" />
+          <NavigationProperty Name="StudiesInformations" Relationship="FTMatricula.DBModel.FK_StudiesInformation_Student" FromRole="Student" ToRole="StudiesInformation" />
+        </EntityType>
+        <EntityType Name="StudentAdditionalData">
+          <Key>
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="StudentID" Type="Guid" Nullable="false" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="InsertUserID" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserID" Type="Guid" />
+          <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="PhysicalAddress" Type="String" Nullable="false" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="AdditionalAddress" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="JobTitle" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="WorkPlace" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="Works" Type="Boolean" />
+          <Property Name="Studies" Type="Boolean" />
+          <Property Name="ReceiveOffers" Type="Boolean" />
+          <Property Name="ReceiveNews" Type="Boolean" />
+          <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Student" FromRole="StudentAdditionalData" ToRole="Student" />
+          <NavigationProperty Name="Type" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" FromRole="StudentAdditionalData" ToRole="Type" />
+          <NavigationProperty Name="Type1" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" FromRole="StudentAdditionalData" ToRole="Type" />
         </EntityType>
         <EntityType Name="Student_Course">
           <Key>
@@ -970,8 +1289,24 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_Student_Course_Student" FromRole="Student_Course" ToRole="Student" />
           <NavigationProperty Name="Course" Relationship="FTMatricula.DBModel.FK_Student_Course_Course" FromRole="Student_Course" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_Student_Course_Student" FromRole="Student_Course" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="StudiesInformation">
+          <Key>
+            <PropertyRef Name="StudyID" />
+          </Key>
+          <Property Name="StudyID" Type="Guid" Nullable="false" />
+          <Property Name="InsertDate" Type="DateTime" Precision="3" />
+          <Property Name="InsertUserID" Type="Guid" />
+          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyUserID" Type="Guid" />
+          <Property Name="IpAddress" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="SchoolName" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Degree" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="SchoolPlace" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_StudiesInformation_Student" FromRole="StudiesInformation" ToRole="Student" />
         </EntityType>
         <EntityType Name="Type">
           <Key>
@@ -988,7 +1323,46 @@
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Schemes" Relationship="FTMatricula.DBModel.FK_Scheme_Type" FromRole="Type" ToRole="Scheme" />
           <NavigationProperty Name="Students" Relationship="FTMatricula.DBModel.FK_Student_Type" FromRole="Type" ToRole="Student" />
+          <NavigationProperty Name="Students1" Relationship="FTMatricula.DBModel.FK_Student_Type_MaritalStatus" FromRole="Type" ToRole="Student" />
+          <NavigationProperty Name="StudentAdditionalDatas" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" FromRole="Type" ToRole="StudentAdditionalData" />
+          <NavigationProperty Name="StudentAdditionalDatas1" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" FromRole="Type" ToRole="StudentAdditionalData" />
         </EntityType>
+        <Association Name="FK_Student_Country">
+          <End Role="Country" Type="FTMatricula.DBModel.Country" Multiplicity="0..1" />
+          <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Course_Requirement">
+          <End Role="Requirement" Type="FTMatricula.DBModel.Requirement" Multiplicity="0..1" />
+          <End Role="Course" Type="FTMatricula.DBModel.Course" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Plan_Course_Course">
+          <End Role="Course" Type="FTMatricula.DBModel.Course" Multiplicity="1" />
+          <End Role="Plan_Course" Type="FTMatricula.DBModel.Plan_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Plan_Course">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Score_Course">
+          <End Role="Course" Type="FTMatricula.DBModel.Course" Multiplicity="1" />
+          <End Role="Score" Type="FTMatricula.DBModel.Score" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Student_Course_Course">
+          <End Role="Course" Type="FTMatricula.DBModel.Course" Multiplicity="1" />
+          <End Role="Student_Course" Type="FTMatricula.DBModel.Student_Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseID" />
+            </Principal>
+            <Dependent Role="Student_Course">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Enrollment_Plan">
           <End Role="Plan" Type="FTMatricula.DBModel.Plan" Multiplicity="1" />
           <End Role="Enrollment" Type="FTMatricula.DBModel.Enrollment" Multiplicity="*" />
@@ -1089,13 +1463,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Score_Student">
-          <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="0..1" />
-          <End Role="Score" Type="FTMatricula.DBModel.Score" Multiplicity="*" />
-        </Association>
         <Association Name="FK_Student_Type">
           <End Role="Type" Type="FTMatricula.DBModel.Type" Multiplicity="1" />
           <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_Student_Type_MaritalStatus">
+          <End Role="Type" Type="FTMatricula.DBModel.Type" Multiplicity="1" />
+          <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_StudentAdditionalData_Student">
+          <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="1" />
+          <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.StudentAdditionalData" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentID" />
+            </Principal>
+            <Dependent Role="StudentAdditionalData">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
         <Association Name="FK_Student_Course_Student">
           <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="1" />
@@ -1109,65 +1495,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Resource">
+        <Association Name="FK_StudiesInformation_Student">
+          <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="0..1" />
+          <End Role="StudiesInformation" Type="FTMatricula.DBModel.StudiesInformation" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_StudentAdditionalData_Type_HowYouKnow">
+          <End Role="Type" Type="FTMatricula.DBModel.Type" Multiplicity="0..1" />
+          <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.StudentAdditionalData" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_StudentAdditionalData_Type_WhoPays">
+          <End Role="Type" Type="FTMatricula.DBModel.Type" Multiplicity="0..1" />
+          <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.StudentAdditionalData" Multiplicity="*" />
+        </Association>
+        <EntityType Name="ApplicationUser">
           <Key>
-            <PropertyRef Name="ResourceID" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="UserName" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Gender" />
+            <PropertyRef Name="CountryName" />
+            <PropertyRef Name="MaritalStatusTypeID" />
+            <PropertyRef Name="Phone1" />
           </Key>
-          <Property Type="Guid" Name="ResourceID" Nullable="false" />
-          <Property Type="String" Name="ResourceKey" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Culture" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="ResourceValue" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="Guid" Name="StudentID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="DateOfBirth" Precision="3" />
+          <Property Type="Guid" Name="CountryID" />
+          <Property Type="String" Name="CountryName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="MaritalStatusTypeID" Nullable="false" />
+          <Property Type="String" Name="Phone1" Nullable="false" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone2" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Phone3" MaxLength="80" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Course">
-          <Key>
-            <PropertyRef Name="CourseID" />
-          </Key>
-          <Property Type="Guid" Name="CourseID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Description" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="InsertDate" Precision="3" />
-          <Property Type="Guid" Name="InsertUserID" />
-          <Property Type="DateTime" Name="ModifyDate" Precision="3" />
-          <Property Type="Guid" Name="ModifyUserID" />
-          <Property Type="String" Name="IpAddress" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="IsActive" />
-          <NavigationProperty Name="Requirement" Relationship="FTMatricula.DBModel.FK_Course_Requirement" FromRole="Course" ToRole="Requirement" />
-          <NavigationProperty Name="Plan_Course" Relationship="FTMatricula.DBModel.FK_Plan_Course_Course" FromRole="Course" ToRole="Plan_Course" />
-          <NavigationProperty Name="Scores" Relationship="FTMatricula.DBModel.FK_Score_Course" FromRole="Course" ToRole="Score" />
-          <NavigationProperty Name="Student_Course" Relationship="FTMatricula.DBModel.FK_Student_Course_Course" FromRole="Course" ToRole="Student_Course" />
-        </EntityType>
-        <Association Name="FK_Course_Requirement">
-          <End Type="FTMatricula.DBModel.Requirement" Role="Requirement" Multiplicity="0..1" />
-          <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_Plan_Course_Course">
-          <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="1" />
-          <End Type="FTMatricula.DBModel.Plan_Course" Role="Plan_Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="CourseID" />
-            </Principal>
-            <Dependent Role="Plan_Course">
-              <PropertyRef Name="CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Score_Course">
-          <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="1" />
-          <End Type="FTMatricula.DBModel.Score" Role="Score" Multiplicity="*" />
-        </Association>
-        <Association Name="FK_Student_Course_Course">
-          <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="1" />
-          <End Type="FTMatricula.DBModel.Student_Course" Role="Student_Course" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Course">
-              <PropertyRef Name="CourseID" />
-            </Principal>
-            <Dependent Role="Student_Course">
-              <PropertyRef Name="CourseID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1179,6 +1545,34 @@
               <MappingFragment StoreEntitySet="Classroom">
                 <ScalarProperty Name="ClassroomID" ColumnName="ClassroomID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.Country">
+              <MappingFragment StoreEntitySet="Country">
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.Course">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
@@ -1203,13 +1597,13 @@
           <EntitySetMapping Name="Locations">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Location">
               <MappingFragment StoreEntitySet="Location">
-                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
-                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Line1" ColumnName="Line1" />
                 <ScalarProperty Name="Line2" ColumnName="Line2" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
                 <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
@@ -1256,6 +1650,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.Profile">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+                <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Records">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Record">
               <MappingFragment StoreEntitySet="Record">
@@ -1279,6 +1689,16 @@
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+                <ScalarProperty Name="ResourceKey" ColumnName="ResourceKey" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+                <ScalarProperty Name="ResourceValue" ColumnName="ResourceValue" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1355,6 +1775,7 @@
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Score">
               <MappingFragment StoreEntitySet="Score">
                 <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="Result" ColumnName="Result" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
@@ -1368,12 +1789,40 @@
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Student">
               <MappingFragment StoreEntitySet="Student">
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-                <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone3" ColumnName="Phone3" />
+                <ScalarProperty Name="IsAppUser" ColumnName="IsAppUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentAdditionalDatas">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.StudentAdditionalData">
+              <MappingFragment StoreEntitySet="StudentAdditionalData">
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="PhysicalAddress" ColumnName="PhysicalAddress" />
+                <ScalarProperty Name="AdditionalAddress" ColumnName="AdditionalAddress" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="WorkPlace" ColumnName="WorkPlace" />
+                <ScalarProperty Name="Works" ColumnName="Works" />
+                <ScalarProperty Name="Studies" ColumnName="Studies" />
+                <ScalarProperty Name="ReceiveOffers" ColumnName="ReceiveOffers" />
+                <ScalarProperty Name="ReceiveNews" ColumnName="ReceiveNews" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1387,6 +1836,22 @@
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudiesInformations">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.StudiesInformation">
+              <MappingFragment StoreEntitySet="StudiesInformation">
+                <ScalarProperty Name="StudyID" ColumnName="StudyID" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Degree" ColumnName="Degree" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="SchoolPlace" ColumnName="SchoolPlace" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1405,6 +1870,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Student_Country" TypeName="FTMatricula.DBModel.FK_Student_Country" StoreEntitySet="Student">
+            <EndProperty Name="Country">
+              <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+            <Condition ColumnName="CountryID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Course_Requirement" TypeName="FTMatricula.DBModel.FK_Course_Requirement" StoreEntitySet="Course">
+            <EndProperty Name="Requirement">
+              <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+            </EndProperty>
+            <EndProperty Name="Course">
+              <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+            </EndProperty>
+            <Condition ColumnName="RequirementID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Score_Course" TypeName="FTMatricula.DBModel.FK_Score_Course" StoreEntitySet="Score">
+            <EndProperty Name="Course">
+              <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+            </EndProperty>
+            <EndProperty Name="Score">
+              <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_Enrollment_Plan" TypeName="FTMatricula.DBModel.FK_Enrollment_Plan" StoreEntitySet="Enrollment">
             <EndProperty Name="Plan">
               <ScalarProperty Name="PlanID" ColumnName="PlanID" />
@@ -1437,15 +1928,6 @@
               <ScalarProperty Name="SchemeID" ColumnName="SchemeID" />
             </EndProperty>
           </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_Score_Student" TypeName="FTMatricula.DBModel.FK_Score_Student" StoreEntitySet="Score">
-            <EndProperty Name="Student">
-              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
-            </EndProperty>
-            <EndProperty Name="Score">
-              <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
-            </EndProperty>
-            <Condition ColumnName="StudentID" IsNull="false" />
-          </AssociationSetMapping>
           <AssociationSetMapping Name="FK_Student_Type" TypeName="FTMatricula.DBModel.FK_Student_Type" StoreEntitySet="Student">
             <EndProperty Name="Type">
               <ScalarProperty Name="TypeID" ColumnName="IdentificationTypeID" />
@@ -1454,48 +1936,61 @@
               <ScalarProperty Name="StudentID" ColumnName="StudentID" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Resources">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.Resource">
-              <MappingFragment StoreEntitySet="Resource">
-                <ScalarProperty Name="ResourceValue" ColumnName="ResourceValue" />
-                <ScalarProperty Name="Culture" ColumnName="Culture" />
-                <ScalarProperty Name="ResourceKey" ColumnName="ResourceKey" />
-                <ScalarProperty Name="ResourceID" ColumnName="ResourceID" />
+          <AssociationSetMapping Name="FK_Student_Type_MaritalStatus" TypeName="FTMatricula.DBModel.FK_Student_Type_MaritalStatus" StoreEntitySet="Student">
+            <EndProperty Name="Type">
+              <ScalarProperty Name="TypeID" ColumnName="MaritalStatusTypeID" />
+            </EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_StudiesInformation_Student" TypeName="FTMatricula.DBModel.FK_StudiesInformation_Student" StoreEntitySet="StudiesInformation">
+            <EndProperty Name="Student">
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+            <EndProperty Name="StudiesInformation">
+              <ScalarProperty Name="StudyID" ColumnName="StudyID" />
+            </EndProperty>
+            <Condition ColumnName="StudentID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_StudentAdditionalData_Type_HowYouKnow" TypeName="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" StoreEntitySet="StudentAdditionalData">
+            <EndProperty Name="Type">
+              <ScalarProperty Name="TypeID" ColumnName="HowYouKnowAboutUsTypeID" />
+            </EndProperty>
+            <EndProperty Name="StudentAdditionalData">
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+            <Condition ColumnName="HowYouKnowAboutUsTypeID" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_StudentAdditionalData_Type_WhoPays" TypeName="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" StoreEntitySet="StudentAdditionalData">
+            <EndProperty Name="Type">
+              <ScalarProperty Name="TypeID" ColumnName="WhoPaysYourStudiesTypeID" />
+            </EndProperty>
+            <EndProperty Name="StudentAdditionalData">
+              <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            </EndProperty>
+            <Condition ColumnName="WhoPaysYourStudiesTypeID" IsNull="false" />
+          </AssociationSetMapping>
+          <EntitySetMapping Name="ApplicationUsers">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.ApplicationUser">
+              <MappingFragment StoreEntitySet="ApplicationUser">
+                <ScalarProperty Name="Phone3" ColumnName="Phone3" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="MaritalStatusTypeID" ColumnName="MaritalStatusTypeID" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Courses">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.Course">
-              <MappingFragment StoreEntitySet="Course">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="FK_Course_Requirement" TypeName="FTMatricula.DBModel.FK_Course_Requirement" StoreEntitySet="Course">
-            <EndProperty Name="Course">
-              <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-            </EndProperty>
-            <EndProperty Name="Requirement">
-              <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-            </EndProperty>
-            <Condition ColumnName="RequirementID" IsNull="false" />
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="FK_Score_Course" TypeName="FTMatricula.DBModel.FK_Score_Course" StoreEntitySet="Score">
-            <EndProperty Name="Score">
-              <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
-            </EndProperty>
-            <EndProperty Name="Course">
-              <ScalarProperty Name="CourseID" ColumnName="CourseID" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
