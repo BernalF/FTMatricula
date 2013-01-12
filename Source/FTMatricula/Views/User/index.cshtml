@@ -31,12 +31,14 @@
                                           columns.Bound(m => m.LastName).Title("Apellido");
                                           columns.Command(command =>
                                           {
-                                             //command.Custom("Edit").Text("Edit").Action("Edit", "User");
+                                             command.Custom("Edit").Text("Edit").Action("Edit", "User");
+                                             //command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
                                              command
                                                  .Destroy()
                                                  .Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);                                                                                  
-                                      })                                     
+                                      })
+                                                                      
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
@@ -90,6 +92,7 @@
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
                                             .Read(read => read.Action("PagingUsers", "User"))
+                                            //.Update(update => update.Action("Edit", "User"))
                                             .Destroy(destroy => destroy.Action("DestroyUser", "User"))                                                                                        
                                             .Model(model => model.Id(m => m.StudentID))
                                       )
