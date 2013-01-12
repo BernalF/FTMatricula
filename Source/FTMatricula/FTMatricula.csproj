@@ -262,6 +262,7 @@
     <Compile Include="Models\Type.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ValidationRules.cs" />
     <Compile Include="Utilities\CacheStorageService .cs" />
     <Compile Include="Utilities\Helper.cs" />
     <Compile Include="Models\AccountModels.cs" />
