@@ -379,8 +379,9 @@
     <Content Include="Content\kendo\css\Default\sprite.png" />
     <Content Include="Content\kendo\css\kendo.common.min.css" />
     <Content Include="Content\kendo\css\kendo.default.min.css" />
-    <Content Include="Content\kendo\css\kendo.metro.min.css" />
     <Content Include="Content\kendo\css\kendo.rtl.min.css" />
+    <Content Include="Content\kendo\css\kendo.skin.bootstrap.css" />
+    <Content Include="Content\kendo\css\kendo.skin.metro.css" />
     <Content Include="Content\kendo\css\textures\brushed-metal.png" />
     <Content Include="Content\kendo\css\textures\dots1.png" />
     <Content Include="Content\kendo\css\textures\dots10.png" />

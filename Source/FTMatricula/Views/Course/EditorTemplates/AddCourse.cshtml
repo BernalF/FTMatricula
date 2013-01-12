@@ -3,7 +3,7 @@
 <div class="editor-label">
     @Html.LabelFor(model => model.Name, @Resources.GetValue("COURSE_NAME"))
 </div>
-<div class="editor-field">
+<div class="k-textbox">
     @Html.EditorFor(model => model.Name)
     @Html.ValidationMessageFor(model => model.Name)
 </div>
@@ -11,7 +11,7 @@
 <div class="editor-label">
     @Html.LabelFor(model => model.Description, @Resources.GetValue("DESCRIPTION"))
 </div>
-<div class="editor-field">
+<div class="k-textbox">
     @Html.EditorFor(model => model.Description)
     @Html.ValidationMessageFor(model => model.Description)
 </div>
