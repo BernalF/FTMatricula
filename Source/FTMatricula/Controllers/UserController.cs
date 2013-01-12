@@ -31,9 +31,9 @@ namespace FTMatricula.Controllers
             return Json(db.ApplicationUsers.ToList().Select(m => new { m.StudentID, m.UserName, m.FirstName, m.LastName }).ToDataSourceResult(request));
         }
 
-        public ActionResult Create([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
+        public ActionResult Create()
         {
-            return View(model);
+            return View(new ApplicationUser());
         }
 
         public ActionResult Edit([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
