@@ -675,7 +675,7 @@ h2.mainTitle{
     left: 0;
     right: 0;
     bottom: 25px;
-    background:rgba(0,0,0,.2);
+    border-right: white 1px solid;
 }
 #content_edit_right {
     width:75%;
@@ -684,7 +684,7 @@ h2.mainTitle{
     left: 25%;
     right: 0;
     bottom: 25px;
-    background:rgba(0,0,0,.4);
+    
 }
 
 
