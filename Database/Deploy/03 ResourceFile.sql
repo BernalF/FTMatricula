@@ -142,4 +142,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_MODALITY', 'es-CR', 'Agregar 
 --Course View
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_MANT', 'es-CR', 'Mantenimiento de Cursos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_NAME', 'es-CR', 'Nombre del Curso')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_CODE', 'es-CR', 'Codigo del Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_COURSE', 'es-CR', 'Agregar Curso')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_COST', 'es-CR', 'Costo del Curso')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'TEACHING_HOURS', 'es-CR', 'Horas Lectivas')

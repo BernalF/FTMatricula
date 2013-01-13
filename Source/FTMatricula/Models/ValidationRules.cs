@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FTMatricula.Utilities.Helper;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
 
@@ -52,7 +53,15 @@ namespace FTMatricula.Models
 
     public class Course_Validation
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        [StringLength(13, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "MAX_LENGTH")]
+        [Display(ResourceType = typeof(ModelResources), Name = "COURSE_CODE")]
+        public string Code { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        [StringLength(150, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "MAX_LENGTH")]
+        [Display(ResourceType = typeof(ModelResources), Name = "COURSE_NAME")]
         public string Name { get; set; }
+              
     }
 }

@@ -26,7 +26,10 @@
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));                                                                                   
+                                          columns.Bound(m => m.Code).Title(@Resources.GetValue("COURSE_CODE"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));
+                                          columns.Bound(m => m.TeachingHours).Title(@Resources.GetValue("TEACHING_HOURS"));
+                                          columns.Bound(m => m.Charge).Title(@Resources.GetValue("COURSE_COST"));
                                           columns.Command(command =>
                                           {
                                               command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));

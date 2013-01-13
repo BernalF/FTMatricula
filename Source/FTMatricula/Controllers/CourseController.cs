@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc; 
+using System.Web.Mvc;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using FTMatricula.Utilities.Helper;
@@ -33,7 +33,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingCourses([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Courses.ToList().Select(m => new { m.CourseID, m.Name }).ToDataSourceResult(request));
+            return Json(db.Courses.ToList().Select(m => new { m.CourseID, m.Code, m.Name, m.TeachingHours, m.Charge }).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -55,8 +55,14 @@ namespace FTMatricula.Controllers
                 db.Courses.Add(model);
                 db.SaveChanges();
             }
-
-            return Json(new[] { new { CourseID = model.CourseID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new 
+            { 
+                CourseID = model.CourseID, 
+                Code = model.Code, 
+                Name = model.Name, 
+                TeachingHours = model.TeachingHours, 
+                Charge = model.Charge
+            } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -74,7 +80,14 @@ namespace FTMatricula.Controllers
             model.IpAddress = Network.GetIpAddress(Request);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(new[] { new { CourseID = model.CourseID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new 
+            { 
+                CourseID = model.CourseID, 
+                Code = model.Code, 
+                Name = model.Name, 
+                TeachingHours = model.TeachingHours, 
+                Charge = model.Charge
+            } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>

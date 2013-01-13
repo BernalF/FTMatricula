@@ -1,9 +1,33 @@
 ﻿@model FTMatricula.Models.Course
  
 <div class="editor-label">
+    @Html.LabelFor(model => model.Code, @Resources.GetValue("COURSE_CODE"))
+</div>
+<div class="k-textbox">
+    @Html.EditorFor(model => model.Code)
+    @Html.ValidationMessageFor(model => model.Code)
+</div>
+
+<div class="editor-label">
     @Html.LabelFor(model => model.Name, @Resources.GetValue("COURSE_NAME"))
 </div>
 <div class="k-textbox">
     @Html.EditorFor(model => model.Name)
     @Html.ValidationMessageFor(model => model.Name)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.TeachingHours, @Resources.GetValue("TEACHING_HOURS"))
+</div>
+<div class="k-textbox">
+    @Html.EditorFor(model => model.TeachingHours)
+    @Html.ValidationMessageFor(model => model.TeachingHours)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Charge, @Resources.GetValue("COURSE_COST"))
+</div>
+<div class="k-textbox">
+    @Html.EditorFor(model => model.Charge)
+    @Html.ValidationMessageFor(model => model.Charge)
 </div>
