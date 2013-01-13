@@ -36,9 +36,10 @@ namespace FTMatricula.Controllers
             return View(new ApplicationUser());
         }
 
-        public ActionResult Edit([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
+        public ActionResult Edit(string id)
         {
-            return View(model);
+            Guid StudentID = new Guid(id);
+            return View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

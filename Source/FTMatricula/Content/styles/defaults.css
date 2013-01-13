@@ -613,7 +613,7 @@ h2.mainTitle{
 
 
 /*Begin BRL Custom Layout*/
-#header, #content, #footer, #login_content, #content_left, #content_right, #content_left2 {
+#header, #content, #footer, #login_content, #content_left, #content_right, #content_left2, #content_edit_left, #content_edit_right {
     position: absolute;
 }
 #header{
@@ -647,6 +647,7 @@ h2.mainTitle{
     background:rgba(0,0,0,.2);
 }
 
+
 #content_left2{
     width:50%;
     min-width:500px;
@@ -666,6 +667,26 @@ h2.mainTitle{
     bottom: 25px;
     background:rgba(0,0,0,.4);
 }
+
+#content_edit_left {
+    width:25%;
+    min-width:200px;
+    top: 61px;
+    left: 0;
+    right: 0;
+    bottom: 25px;
+    background:rgba(0,0,0,.2);
+}
+#content_edit_right {
+    width:75%;
+    min-width:600px;
+    top: 61px;
+    left: 25%;
+    right: 0;
+    bottom: 25px;
+    background:rgba(0,0,0,.4);
+}
+
 
 #content_right.icon_selected {
     background:rgba(0,0,0,.7);
@@ -1057,4 +1078,54 @@ color:#fff;
 }
 #error_content div p, #error_not_authorized div p {
 color:#fff;
+}
+
+
+.editBox {
+    width:90%;
+    margin:20px auto 20px auto;
+    background:rgba(0,0,0,.3);
+    padding:10px;
+}
+
+
+.editTitle {
+    font-size:18px;
+    color:#FF9900;
+    padding: 5px;
+    background:rgba(0,0,0,.6);
+}
+
+.editTitle span{
+    font-size:24px;
+    padding-right: 15px;
+}
+
+
+.editDetail li{
+    background:rgba(0,0,0,.4);
+    font-size:14px;
+    color: #fff;
+    padding:3px 2%;    
+    display:block;
+    float:left;
+    height:30px;
+}
+
+.editDetail li:nth-child(odd){
+    width:36%;
+}
+.editDetail li:nth-child(even){
+    width:56%;
+}
+
+.editDetail li label{    
+    font-size: 14px;
+    color: #fff;
+    padding: 0 0 0 27.77%;
+}
+
+.editDetail li div{    
+    padding: 0 17.86% 0 0;
+    
 }

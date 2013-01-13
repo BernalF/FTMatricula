@@ -31,14 +31,18 @@
                                           columns.Bound(m => m.LastName).Title("Apellido");
                                           columns.Command(command =>
                                           {
-                                             command.Custom("Edit").Text("Edit").Action("Edit", "User");
+                                             command.Custom("Edit").Text("Edit").Click("Edit_Row");
                                              //command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
                                              command
                                                  .Destroy()
                                                  .Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);                                                                                  
                                       })
-                                                                      
+                                      .Editable(editable =>
+                                              {
+                                                  editable.Mode(GridEditMode.PopUp);
+                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
+                                              })                              
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
@@ -110,5 +114,12 @@
 </div>
 
 @section Scripts {
-   
+   <script type="text/javascript">
+    function Edit_Row(arg) {
+        var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
+        //alert(JSON.stringify(dataItem));
+        var id = dataItem.StudentID;
+        window.location.href = "User/Edit/" + id;
+    };
+</script>
 }

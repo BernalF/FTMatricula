@@ -1,5 +1,144 @@
-﻿@{
-    ViewBag.Title = "Edit";
+﻿@model FTMatricula.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = "Mantenimiento Usuarios";
 }
 
-<h2>Edit</h2>
+@section styles {
+
+}
+
+<div id="content_edit_left">
+</div>
+
+<div id="content_edit_right">
+
+    <div class="editBox">
+
+        <ul>
+            <li class="editTitle">
+                <span>Edición de Usuarios  -</span>Datos Personales
+            </li>
+
+            <li class="editDetail">
+                <ul>
+                    <li style="height: 0px"></li>
+                    <li style="height: 0px"></li>
+
+                    <li>
+                        <label>Identificacion</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>First Name</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>Last Name</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>Gender</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.Gender, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>DateOfBirth</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>CountryID</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.CountryID, new { @class = "input" })
+                        </div>
+                    </li>
+
+
+                    <li>
+                        <label>MaritalStatusTypeID</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.MaritalStatusTypeID, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>Phone1</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.Phone1, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>Phone2</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.Phone2, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>Phone3</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.Phone3, new { @class = "input" })
+                        </div>
+                    </li>
+
+                    <li>
+                        <label>Email</label>
+                    </li>
+                    <li>
+                        <div>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "input" })
+                        </div>
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+        <div class="clear"></div>
+        <div style="width: 100px; margin: 20px auto;">
+            @Html.ActionLink("Home", "index", "Home", routeValues: null, htmlAttributes: new { @class = "button home" })
+        </div>
+        <div class="clear"></div>
+    </div>
+
+</div>
+
+@section Scripts {
+
+}
+
