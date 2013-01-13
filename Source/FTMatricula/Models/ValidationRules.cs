@@ -11,9 +11,9 @@ namespace FTMatricula.Models
 
     public class School_Validation
     {
-        [Required]
+       [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Name { get; set; }
-        [Required]
+       [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Description { get; set; }
     }
 
@@ -23,7 +23,7 @@ namespace FTMatricula.Models
 
     public class Classroom_Validation
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Code { get; set; }
     }
 
@@ -33,7 +33,7 @@ namespace FTMatricula.Models
 
     public class Location_Validation
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Name { get; set; }                
     }
 
@@ -43,7 +43,7 @@ namespace FTMatricula.Models
 
     public class Type_Validation
     {
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Name { get; set; }
     }
 

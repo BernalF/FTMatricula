@@ -1,18 +1,24 @@
 ﻿@model FTMatricula.Models.Type
-
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Name, @Resources.GetValue("MODALITY_NAME"))
-</div>
-<div class="k-textbox">
-    @Html.EditorFor(model => model.Name)
-    @Html.ValidationMessageFor(model => model.Name)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Description, @Resources.GetValue("PERIOD"))
-</div>
-<div class="k-textbox">
-    @Html.EditorFor(model => model.Description)
-    @Html.ValidationMessageFor(model => model.Description)
-</div>
+<ul>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.Name, @Resources.GetValue("MODALITY_NAME"))
+    </li>
+    <li class="k-textbox">
+        @Html.EditorFor(model => model.Name)
+    </li>
+    <li>
+        @Html.ValidationMessageFor(model => model.Name)
+    </li>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.Description, @Resources.GetValue("PERIOD"))
+    </li>
+    <li class="k-textbox">
+        @Html.EditorFor(model => model.Description)
+    </li>
+    <li>
+        @Html.ValidationMessageFor(model => model.Description)
+    </li>
+    <li>
+        @Html.ValidationSummary(true)
+    </li>
+</ul>

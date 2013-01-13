@@ -1,8 +1,15 @@
 ﻿@model FTMatricula.Models.Classroom
- 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Code, @Resources.GetValue("CLASSROOM_CODE"))
-</div>
-<div class="k-textbox">
-    @Html.EditorFor(model => model.Code)    
-</div>
+ <ul>
+     <li class="editor-label">
+         @Html.LabelFor(model => model.Code, @Resources.GetValue("CLASSROOM_CODE"))
+     </li>
+     <li class="k-textbox">
+         @Html.EditorFor(model => model.Code)
+     </li>
+     <li>
+         @Html.ValidationMessageFor(model => model.Code)
+     </li>
+     <li>
+         @Html.ValidationSummary(true)
+     </li>
+ </ul>
