@@ -22,8 +22,10 @@ namespace FTMatricula.Models
         }
     
         public System.Guid? CourseID { get; set; }
+        public string Code { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
+        public Nullable<int> TeachingHours { get; set; }
+        public Nullable<decimal> Charge { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }

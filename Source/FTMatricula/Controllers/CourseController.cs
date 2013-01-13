@@ -33,7 +33,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingCourses([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Courses.ToList().Select(m => new { m.CourseID, m.Name, m.Description }).ToDataSourceResult(request));
+            return Json(db.Courses.ToList().Select(m => new { m.CourseID, m.Name }).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace FTMatricula.Controllers
                 db.SaveChanges();
             }
 
-            return Json(new[] { new { CourseID = model.CourseID, Name = model.Name, Description = model.Description } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new { CourseID = model.CourseID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace FTMatricula.Controllers
             model.IpAddress = Network.GetIpAddress(Request);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(new[] { new { CourseID = model.CourseID, Name = model.Name, Description = model.Description } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new { CourseID = model.CourseID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
