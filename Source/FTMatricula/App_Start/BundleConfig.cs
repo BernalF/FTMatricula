@@ -64,7 +64,8 @@ namespace FTMatricula
                         "~/Content/kendo/js/kendo.web.min.js",
                         "~/Content/kendo/js/kendo.aspnetmvc.min.js",
                         "~/Content//kendo/js/console.min.js",
-                        "~/Content/kendo/js/prettify.min.js"));
+                        "~/Content/kendo/js/prettify.min.js",                        
+                        "~/Content/kendo/js/cultures/kendo.culture.es-CR.min.js"));
 
             bundles.Add(new StyleBundle("~/bundles/kendoCSS").Include(
                         "~/Content/kendo/css/kendo.common.min.css",

@@ -11,9 +11,12 @@ namespace FTMatricula.Models
 
     public class School_Validation
     {
-       [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Name { get; set; }
-       [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
     }
 
@@ -34,7 +37,13 @@ namespace FTMatricula.Models
     public class Location_Validation
     {
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
-        public string Name { get; set; }                
+        public string Name { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Line1 { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Line2 { get; set; }
     }
 
     //------ Type Section
@@ -45,6 +54,9 @@ namespace FTMatricula.Models
     {
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Name { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        public string Description { get; set; }
     }
 
     //------ Course Section
@@ -62,6 +74,9 @@ namespace FTMatricula.Models
         [StringLength(150, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "MAX_LENGTH")]
         [Display(ResourceType = typeof(ModelResources), Name = "COURSE_NAME")]
         public string Name { get; set; }
-              
+        
+        [DataType(DataType.Currency)]       
+        public string Charge { get; set; }
+
     }
 }
