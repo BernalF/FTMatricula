@@ -146,3 +146,4 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_CODE', 'es-CR', 'Codigo de
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_COURSE', 'es-CR', 'Agregar Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_COST', 'es-CR', 'Costo del Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TEACHING_HOURS', 'es-CR', 'Horas Lectivas')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MAX_LENGTH', 'es-CR', '{0} puede tener un maximo de {1} caracteres.')
