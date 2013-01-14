@@ -437,15 +437,14 @@ textarea.input{
 	padding:10px;
 	overflow:hidden;
 	position:relative;
-	background: #333;
+	background:rgba(0,0,0,.6);
 }
 
 .top h1{
-    padding:5px 0 0 223px;
+    padding:5px 0 0 50px;
 	font-size:20px;
 	line-height:30px;
-	float:left;
-	color:#bbb !important;
+	float:left;	
     height:35px;
     background:url(../images/defaults/logowhite.png) no-repeat center left;
     color:#fff;
@@ -675,7 +674,7 @@ h2.mainTitle{
     left: 0;
     right: 0;
     bottom: 25px;
-    border-right: white 1px solid;
+    border-right: #52958B 1px solid;
 }
 #content_edit_right {
     width:75%;
@@ -1102,30 +1101,85 @@ color:#fff;
 }
 
 
-.editDetail li{
+.editDetail{
     background:rgba(0,0,0,.4);
-    font-size:14px;
-    color: #fff;
-    padding:3px 2%;    
+}
+
+.editMenuSpace {
+    padding:20px 15px;
+}
+
+.editMenu {
+    background:rgba(0,0,0,.3);
+    padding:10px;
+}
+
+.editOptList{
+	
+	margin:0;
+    padding:1px 0px;
+    
+}
+
+
+.editOpt{
+	margin:0;
+    padding:10px;
+    overflow:hidden;
+    height:30px;
+    background:rgba(0,0,0,.4);
+}
+
+.editOpt:hover{
+	background:rgba(0,0,0,.6);
+    
+}
+
+.editOptSelected{
+	background:rgba(0,0,0,.6);
+}
+
+
+.editOpt a{
+    font-size:18px;
+    color:#FF9900;
+    font-family:'Segoe UI', 'Segoe condensed' sans-serif;
+}
+
+.detailBox {
     display:block;
     float:left;
-    height:30px;
+    width:50%;
+    font-size:14px;
+    color: #fff;
 }
 
-.editDetail li:nth-child(odd){
-    width:36%;
-}
-.editDetail li:nth-child(even){
-    width:56%;
+.detailBox ul{
+    margin:20px;
+    padding:10px;
+    border: 1px #327376 solid;
 }
 
-.editDetail li label{    
+.detailBox li{
+    display:block;
+    float:left;
+    width:50%;
+}
+
+/*.detailBox li:nth-child(odd){
+    width:40%;
+}
+.detailBox li:nth-child(even){
+    width:60%;
+}*/
+
+.detailBox li label{    
     font-size: 14px;
     color: #fff;
-    padding: 0 0 0 27.77%;
+    padding: 3px 0 3px 0;
 }
 
-.editDetail li div{    
-    padding: 0 17.86% 0 0;
+.detailBox li div{    
+    padding: 3px 0 3px 0;
     
 }
