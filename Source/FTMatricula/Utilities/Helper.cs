@@ -39,10 +39,10 @@ namespace FTMatricula.Utilities.Helper
             catch (Exception e)
             {
                 throw new ApplicationException("The key '" + key + "' was not found. " + e.Message);
-            }            
+            }
         }
 
-        private static Dictionary<string,string> GetResources()
+        private static Dictionary<string, string> GetResources()
         {
             string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.ToString();
             return new matrifunDBEntities().Resources.Where(p => p.Culture == culture).ToDictionary(k => k.ResourceKey, v => v.ResourceValue);
@@ -58,7 +58,11 @@ namespace FTMatricula.Utilities.Helper
             filterContext.HttpContext.Response.StatusCode = 200;
             filterContext.Result = new JsonResult
             {
-                Data = new { Data = new { }, Total = 0, Errors = new object[] 
+                Data = new
+                {
+                    Data = new { },
+                    Total = 0,
+                    Errors = new object[] 
                     { 
                         new { Exception = "Exception", errors = new[] { filterContext.Exception.Message.ToString() } },
                         new { Detail = "Detail", errors = new[] { 

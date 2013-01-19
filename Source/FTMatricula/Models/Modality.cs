@@ -12,9 +12,11 @@ namespace FTMatricula.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Place
+    public partial class Modality
     {
-        public System.Guid? PlaseID { get; set; }
+        public System.Guid? ModalityID { get; set; }
+        public string Name { get; set; }
+        public string Period { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

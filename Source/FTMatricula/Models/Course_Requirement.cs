@@ -12,24 +12,17 @@ namespace FTMatricula.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Requirement
+    public partial class Course_Requirement
     {
-        public Requirement()
-        {
-            this.Scheme_Requirement = new HashSet<Scheme_Requirement>();
-            this.Course_Requirement = new HashSet<Course_Requirement>();
-        }
-    
         public System.Guid? RequirementID { get; set; }
-        public string Name { get; set; }
-        public System.Guid? TypeID { get; set; }
+        public System.Guid? CourseID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual ICollection<Scheme_Requirement> Scheme_Requirement { get; set; }
-        public virtual ICollection<Course_Requirement> Course_Requirement { get; set; }
+        public virtual Course Course { get; set; }
+        public virtual Requirement Requirement { get; set; }
     }
 }

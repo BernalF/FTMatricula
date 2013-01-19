@@ -1,4 +1,4 @@
-﻿@model FTMatricula.Models.Type
+﻿@model FTMatricula.Models.Modality
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
     ViewBag.Title = @Resources.GetValue("MODALITY_MANT");
@@ -22,12 +22,12 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.Type>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.Modality>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
                                           columns.Bound(m => m.Name).Title(@Resources.GetValue("MODALITY_NAME"));
-                                          columns.Bound(m => m.Description).Title(@Resources.GetValue("PERIOD"));                                          
+                                          columns.Bound(m => m.Period).Title(@Resources.GetValue("PERIOD"));                                          
                                           columns.Command(command =>
                                           {
                                               command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
@@ -98,7 +98,7 @@
                                             .Create(create => create.Action("CreateModality", "Modality"))
                                             .Update(update => update.Action("UpdateModality", "Modality"))
                                             .Destroy(destroy => destroy.Action("DestroyModality", "Modality"))
-                                            .Model(model => model.Id(m => m.TypeID))                                                                                          
+                                            .Model(model => model.Id(m => m.ModalityID))                                                                                          
                                       )                                      
                                 )
                             </li>

@@ -46,17 +46,14 @@ namespace FTMatricula.Models
         public string Line2 { get; set; }
     }
 
-    //------ Type Section
-    [MetadataType(typeof(Type_Validation))]
-    public partial class Type { }
+    //------ Modality Section
+    [MetadataType(typeof(Modality_Validation))]
+    public partial class Modality { }
 
-    public class Type_Validation
+    public class Modality_Validation
     {
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string Name { get; set; }
-
-        [DataType(DataType.MultilineText)]
-        public string Description { get; set; }
     }
 
     //------ Course Section

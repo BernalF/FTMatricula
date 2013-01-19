@@ -187,6 +187,9 @@
     <Compile Include="Models\Course.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Course_Requirement.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Enrollment.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
@@ -208,7 +211,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>matrifunDB.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Place.cs">
+    <Compile Include="Models\Modality.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Plan.cs">

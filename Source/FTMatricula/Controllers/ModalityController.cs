@@ -24,13 +24,6 @@ namespace FTMatricula.Controllers
             return View();
         }
 
-        //
-        // GET: /Modality/
-        public ActionResult View1()
-        {
-            return View();
-        }
-
         /// <summary>
         /// Paging Modality
         /// </summary>
@@ -39,7 +32,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingModality([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Types.Where(type => type.Usage == "MOD").ToList().Select(m => new { m.TypeID, m.Name, m.Description }).ToDataSourceResult(request));
+            return Json(db.Modalities.ToList().Select(m => new { m.ModalityID, m.Name, m.Period }).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -49,28 +42,27 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CreateModality([DataSourceRequest] DataSourceRequest request, FTMatricula.Models.Type model)
+        public ActionResult CreateModality([DataSourceRequest] DataSourceRequest request, Modality model)
         {
             if (String.IsNullOrEmpty(model.Name))
             {
                 ModelState.AddModelError("Name", "Names is Required");
             }
-            if (String.IsNullOrEmpty(model.Description))
+            if (String.IsNullOrEmpty(model.Period))
             {
                 ModelState.AddModelError("Period", "Period is Required");
             }
 
             if (ModelState.IsValid)
             {
-                model.TypeID = Guid.NewGuid();
-                model.Usage = "MOD";
+                model.ModalityID = Guid.NewGuid();                
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 model.InsertDate = DateTime.Today;
                 model.IpAddress = Network.GetIpAddress(Request);
-                db.Types.Add(model);
+                db.Modalities.Add(model);
                 db.SaveChanges();               
-            }            
-            return Json(new[] { new { TypeID = model.TypeID, Name = model.Name, Description = model.Description } }.ToDataSourceResult(request, ModelState));
+            }
+            return Json(new[] { new { ModalityID = model.ModalityID, Name = model.Name, Period = model.Period } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -80,15 +72,14 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateModality([DataSourceRequest] DataSourceRequest request, FTMatricula.Models.Type model)
+        public ActionResult UpdateModality([DataSourceRequest] DataSourceRequest request, Modality model)
         {
             model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
             model.ModifyDate = DateTime.Today;
-            model.IpAddress = Network.GetIpAddress(Request);
-            model.Usage = "MOD";
+            model.IpAddress = Network.GetIpAddress(Request);            
             db.Entry(model).State = EntityState.Modified;
-            db.SaveChanges();            
-            return Json(new[] { new { TypeID = model.TypeID, Name = model.Name, Description = model.Description } }.ToDataSourceResult(request, ModelState));
+            db.SaveChanges();
+            return Json(new[] { new { ModalityID = model.ModalityID, Name = model.Name, Period = model.Period } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -98,10 +89,10 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult DestroyModality([DataSourceRequest] DataSourceRequest request, FTMatricula.Models.Type model)
+        public ActionResult DestroyModality([DataSourceRequest] DataSourceRequest request, Modality model)
         {
-            FTMatricula.Models.Type modality = db.Types.Find(model.TypeID);
-            db.Types.Remove(modality);           
+            Modality modality = db.Modalities.Find(model.ModalityID);
+            db.Modalities.Remove(modality);           
             db.SaveChanges();                        
             return Json(new[] { new  {} }.ToDataSourceResult(request, ModelState));
         }
