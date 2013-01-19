@@ -16,7 +16,6 @@ namespace FTMatricula.Models
     {
         public Type()
         {
-            this.Schemes = new HashSet<Scheme>();
             this.Students = new HashSet<Student>();
             this.Students1 = new HashSet<Student>();
             this.StudentAdditionalDatas = new HashSet<StudentAdditionalData>();
@@ -33,7 +32,6 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual ICollection<Scheme> Schemes { get; set; }
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<Student> Students1 { get; set; }
         public virtual ICollection<StudentAdditionalData> StudentAdditionalDatas { get; set; }

@@ -14,6 +14,11 @@ namespace FTMatricula.Models
     
     public partial class Modality
     {
+        public Modality()
+        {
+            this.Schemes = new HashSet<Scheme>();
+        }
+    
         public System.Guid? ModalityID { get; set; }
         public string Name { get; set; }
         public string Period { get; set; }
@@ -22,5 +27,7 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+    
+        public virtual ICollection<Scheme> Schemes { get; set; }
     }
 }

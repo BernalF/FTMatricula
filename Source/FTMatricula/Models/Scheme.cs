@@ -22,6 +22,7 @@ namespace FTMatricula.Models
         }
     
         public System.Guid? SchemeID { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public System.Guid? OwnerUserId { get; set; }
         public System.Guid? CoordinatorUserId { get; set; }
@@ -31,7 +32,7 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual Type Type { get; set; }
+        public virtual Modality Modality { get; set; }
         public virtual ICollection<Scheme_Plan> Scheme_Plan { get; set; }
         public virtual ICollection<Scheme_Requirement> Scheme_Requirement { get; set; }
         public virtual ICollection<School_Scheme> School_Scheme { get; set; }

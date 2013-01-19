@@ -35,7 +35,6 @@ namespace FTMatricula.Models
         public DbSet<Record> Records { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
         public DbSet<Resource> Resources { get; set; }
-        public DbSet<Scheme> Schemes { get; set; }
         public DbSet<Scheme_Plan> Scheme_Plan { get; set; }
         public DbSet<Scheme_Requirement> Scheme_Requirement { get; set; }
         public DbSet<School> Schools { get; set; }
@@ -50,5 +49,6 @@ namespace FTMatricula.Models
         public DbSet<Course> Courses { get; set; }
         public DbSet<Modality> Modalities { get; set; }
         public DbSet<Course_Requirement> Course_Requirement { get; set; }
+        public DbSet<Scheme> Schemes { get; set; }
     }
 }
