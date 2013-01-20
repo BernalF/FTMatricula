@@ -135,7 +135,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'AUDIT_DETAIL', 'es-CR', 'Esta opc
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SIGN', 'es-CR', 'B&B Development, Todos los derechos reservados')
 --Modality View
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_MANT', 'es-CR', 'Mantenimiento de Modalidades')
-INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY', 'es-CR', 'Tipos de Modalidad')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY', 'es-CR', 'Modalidades')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_NAME', 'es-CR', 'Modalidad')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERIOD', 'es-CR', 'Periodo')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_MODALITY', 'es-CR', 'Agregar Modalidad')
@@ -153,3 +153,4 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHEME_NAME', 'es-CR', 'Nombre de
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'OWNER', 'es-CR', 'Responsable')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COORDINATOR', 'es-CR', 'Coordinador')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'VIEW_DETAILS', 'es-CR', 'Ver Detalles')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_SCHEME', 'es-CR', 'Agregar Programa')

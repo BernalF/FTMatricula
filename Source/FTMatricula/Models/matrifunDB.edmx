@@ -104,7 +104,8 @@
       [ApplicationUser].[MaritalStatusTypeID] AS [MaritalStatusTypeID], 
       [ApplicationUser].[Phone1] AS [Phone1], 
       [ApplicationUser].[Phone2] AS [Phone2], 
-      [ApplicationUser].[Phone3] AS [Phone3]
+      [ApplicationUser].[Phone3] AS [Phone3], 
+      [ApplicationUser].[RoleName] AS [RoleName]
       FROM [dbo].[ApplicationUser] AS [ApplicationUser]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SchemeDetails" EntityType="FTMatricula.DBModel.Store.SchemeDetails" store:Type="Views" store:Schema="dbo" store:Name="SchemeDetails">
@@ -575,6 +576,7 @@
             <PropertyRef Name="CountryName" />
             <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="Phone1" />
+            <PropertyRef Name="RoleName" />
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
@@ -590,6 +592,7 @@
           <Property Name="Phone1" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="Phone2" Type="varchar" MaxLength="80" />
           <Property Name="Phone3" Type="varchar" MaxLength="80" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.SchemeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -1414,6 +1417,7 @@
             <PropertyRef Name="CountryName" />
             <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="Phone1" />
+            <PropertyRef Name="RoleName" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="StudentID" Type="Guid" Nullable="false" />
@@ -1429,6 +1433,7 @@
           <Property Name="Phone1" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Name="Phone2" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Name="Phone3" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="SchemeDetail">
           <Key>
@@ -2090,6 +2095,7 @@
           <EntitySetMapping Name="ApplicationUsers">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.ApplicationUser">
               <MappingFragment StoreEntitySet="ApplicationUser">
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

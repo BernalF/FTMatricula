@@ -12,6 +12,30 @@
     <li class="k-textbox">
         @Html.EditorFor(model => model.Description)
     </li>   
+    <li class="editor-label">
+        @Html.LabelFor(model => model.OwnerName, @Resources.GetValue("OWNER"))
+    </li>
+    <li class="k-item">
+        @Html.DropDownListFor(model => model.OwnerName, FTMatricula.Utilities.GeneralCollections.CoordinatorList)
+    </li>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.CoordinatorName, @Resources.GetValue("COORDINATOR"))
+    </li>
+    <li class="k-item">
+       @Html.DropDownListFor(model => model.CoordinatorName, FTMatricula.Utilities.GeneralCollections.CoordinatorList)
+    </li>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.ModalityName, @Resources.GetValue("MODALITY_NAME"))
+    </li>
+    <li >        
+        @(Html.Kendo().DropDownList()
+          .Name("Modality")
+          .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)              
+          .DataValueField("Value")                          
+          .DataTextField("Key")
+    )        
+    </li>
 </ul>
 
 
+@*   *@
