@@ -39,6 +39,7 @@ namespace FTMatricula.Controllers
         public ActionResult Edit(string id)
         {
             Guid StudentID = new Guid(id);
+
             return View();
         }
 

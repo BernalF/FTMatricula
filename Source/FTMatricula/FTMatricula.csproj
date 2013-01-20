@@ -267,6 +267,7 @@
     </Compile>
     <Compile Include="Models\ValidationRules.cs" />
     <Compile Include="Utilities\CacheStorageService .cs" />
+    <Compile Include="Utilities\GeneralCollections.cs" />
     <Compile Include="Utilities\Helper.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
