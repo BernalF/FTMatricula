@@ -38,8 +38,8 @@ namespace FTMatricula.Utilities
         public static SelectList ModalityList
         {
             get
-            {               
-                matrifunDBEntities db = new matrifunDBEntities();               
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
                 return new SelectList(db.Modalities
                                         .ToList()
                                         .Select(mod => new { mod.ModalityID, mod.Name }), "ModalityID", "Name");
