@@ -18,11 +18,28 @@ GO
 
 CREATE VIEW [dbo].[ApplicationUser]
 AS
-SELECT a.UserId, c.StudentID, a.UserName, b.Email, c.FirstName, c.LastName, c.Gender, c.DateOfBirth, c.CountryID, d.CountryName, c.MaritalStatusTypeID, c.Phone1, c.Phone2, c.Phone3
+SELECT 
+	  a.UserId
+	, c.StudentID
+	, a.UserName
+	, b.Email
+	, c.FirstName
+	, c.LastName
+	, c.Gender
+	, c.DateOfBirth
+	, c.CountryID
+	, d.CountryName
+	, c.MaritalStatusTypeID
+	, c.Phone1
+	, c.Phone2
+	, c.Phone3
+	, ISNULL(f.RoleName,'') AS RoleName  
 FROM  dbo.Users AS a INNER JOIN
                dbo.Memberships AS b ON a.UserId = b.UserId INNER JOIN
                dbo.Student AS c ON a.UserId = c.UserID INNER JOIN
                dbo.Country AS d ON c.CountryID = d.CountryID
+               LEFT JOIN dbo.UsersInRoles AS e ON e.UserId = a.UserId
+               LEFT JOIN dbo.Roles AS f ON f.RoleId = e.RoleId
 WHERE c.IsAppUser = 1
 
 GO
