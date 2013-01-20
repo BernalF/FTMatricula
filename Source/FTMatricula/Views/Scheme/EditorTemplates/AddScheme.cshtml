@@ -1,41 +1,46 @@
 ﻿@model FTMatricula.Models.SchemeDetail
+
 <ul>
     <li class="editor-label">
         @Html.LabelFor(model => model.SchemeName, @Resources.GetValue("SCHEME_NAME"))
     </li>
     <li class="k-textbox">
         @Html.EditorFor(model => model.SchemeName)
-    </li>   
+    </li>
     <li class="editor-label">
         @Html.LabelFor(model => model.Description, @Resources.GetValue("DESCRIPTION"))
     </li>
     <li class="k-textbox">
         @Html.EditorFor(model => model.Description)
-    </li>   
+    </li>
     <li class="editor-label">
         @Html.LabelFor(model => model.OwnerName, @Resources.GetValue("OWNER"))
     </li>
-    <li class="k-item">
-        @Html.DropDownListFor(model => model.OwnerName, FTMatricula.Utilities.GeneralCollections.CoordinatorList)
+    <li style="display:inline">
+        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
+        .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
+        .Name("ddlOwner")
+        .DataTextField("Text")
+        .DataValueField("Value"))
     </li>
     <li class="editor-label">
         @Html.LabelFor(model => model.CoordinatorName, @Resources.GetValue("COORDINATOR"))
     </li>
-    <li class="k-item">
-       @Html.DropDownListFor(model => model.CoordinatorName, FTMatricula.Utilities.GeneralCollections.CoordinatorList)
+    <li style="display:inline">
+        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
+        .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
+        .Name("ddlCoordinator")
+        .DataTextField("Text")
+        .DataValueField("Value"))
     </li>
     <li class="editor-label">
         @Html.LabelFor(model => model.ModalityName, @Resources.GetValue("MODALITY_NAME"))
     </li>
-    <li >        
-        @(Html.Kendo().DropDownList()
-          .Name("Modality")
-          .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)              
-          .DataValueField("Value")                          
-          .DataTextField("Key")
-    )        
+    <li style="display:inline">
+        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
+        .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
+        .Name("ddlModality")
+        .DataTextField("Text")
+        .DataValueField("Value"))
     </li>
 </ul>
-
-
-@*   *@

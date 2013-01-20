@@ -27,34 +27,22 @@ namespace FTMatricula.Utilities
         {
             get
             {
-                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
                 matrifunDBEntities db = new matrifunDBEntities();
-
-                foreach (var user in db.ApplicationUsers
+                return new SelectList(db.ApplicationUsers
                                         .Where(appUser => appUser.RoleName == "Coordinator")
                                         .ToList()
-                                        .Select(appUser => new { appUser.UserId, appUser.UserName }).ToArray())
-                {
-                    dictionary.Add(user.UserId, user.UserName);
-                }
-                return new SelectList(dictionary, "Key", "Value");
+                                        .Select(appUser => new { appUser.UserId, appUser.UserName }), "UserId", "UserName");
             }
         }
 
         public static SelectList ModalityList
         {
             get
-            {
-                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
-                matrifunDBEntities db = new matrifunDBEntities();
-
-                foreach (var modality in db.Modalities                                        
+            {               
+                matrifunDBEntities db = new matrifunDBEntities();               
+                return new SelectList(db.Modalities
                                         .ToList()
-                                        .Select(mod => new { mod.ModalityID, mod.Name }).ToArray())
-                {
-                    dictionary.Add(modality.ModalityID, modality.Name);
-                }
-                return new SelectList(dictionary, "Key", "Value");
+                                        .Select(mod => new { mod.ModalityID, mod.Name }), "ModalityID", "Name");
             }
         }
     }
