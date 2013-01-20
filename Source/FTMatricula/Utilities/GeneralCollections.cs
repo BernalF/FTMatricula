@@ -10,12 +10,12 @@ namespace FTMatricula.Utilities
 {
     public class GeneralCollections
     {
-        public static SelectList RolesList
+        public static SelectList UserRolesList
         {
             get
             {
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                foreach (string role in Roles.GetAllRoles())
+                foreach (string role in Roles.GetAllRoles().Where(x => x != "Student"))
                 {
                     dictionary.Add(role, role);
                 }
@@ -48,13 +48,59 @@ namespace FTMatricula.Utilities
                 Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
                 matrifunDBEntities db = new matrifunDBEntities();
 
-                foreach (var modality in db.Modalities                                        
+                foreach (var modality in db.Modalities
                                         .ToList()
                                         .Select(mod => new { mod.ModalityID, mod.Name }).ToArray())
                 {
                     dictionary.Add(modality.ModalityID, modality.Name);
                 }
                 return new SelectList(dictionary, "Key", "Value");
+            }
+        }
+
+        public static SelectList MaritalStatusList
+        {
+            get
+            {
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                matrifunDBEntities db = new matrifunDBEntities();
+
+                foreach (var t in db.Types
+                                        .Where(x => x.Usage == "MST")
+                                        .ToList()
+                                        .Select(x => new { x.TypeID, x.Name }).ToArray())
+                {
+                    dictionary.Add(t.TypeID, t.Name);
+                }
+                return new SelectList(dictionary, "Key", "Value");
+            }
+        }
+
+        public static SelectList CountriesList
+        {
+            get
+            {
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                matrifunDBEntities db = new matrifunDBEntities();
+
+                foreach (var c in db.Countries
+                                        .ToList()
+                                        .Select(x => new { x.CountryID, x.CountryName }).ToArray())
+                {
+                    dictionary.Add(c.CountryID, c.CountryName);
+                }
+                return new SelectList(dictionary, "Key", "Value");
+            }
+        }
+
+        public static System.Web.Mvc.SelectList GenderList
+        {
+            get
+            {
+                return new System.Web.Mvc.SelectList(new Dictionary<string, string> { 
+                    {"M","Male"},
+                    {"F","Female"}
+                }, "Key", "Value");
             }
         }
     }

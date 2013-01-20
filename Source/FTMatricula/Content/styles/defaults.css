@@ -156,7 +156,7 @@ a.alpha {
 	font-weight:bold;
 	text-align:center;
 	color:#fff;
-    background-color:#a1c512 !important;
+    background-color:#D16700 !important;    
     background-repeat: no-repeat;
     border:none;
     cursor:pointer;
@@ -1182,4 +1182,16 @@ color:#fff;
 .detailBox li div{    
     padding: 3px 0 3px 0;
     
+}
+
+.formBtnBar {
+    display:block;
+    overflow:hidden;    
+    width: 100%; 
+    margin: 20px auto 5px auto;    
+}
+
+.formBtnBar a{
+    float: right;
+    margin: 0px 0px 0px 15px;
 }

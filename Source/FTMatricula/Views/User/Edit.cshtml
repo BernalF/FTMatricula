@@ -64,25 +64,39 @@
                         <label>DateOfBirth</label>
                     </li>
                     <li>
-                        <div>@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input" })</div>
+                        <div>@*@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input" })*@
+                            @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input", style="width:100%;"})
+                        </div>
                     </li>
                     <li>
                         <label>Gender</label>
                     </li>
                     <li>
-                        <div>@Html.TextBoxFor(m => m.Gender, new { @class = "input" })</div>
+                        <div>
+                            <span class="selectHolder">
+                                @Html.DropDownListFor(m => m.Gender, FTMatricula.Utilities.GeneralCollections.GenderList, new { @class = "select" })
+                            </span>
+                        </div>
                     </li>
                     <li>
                         <label>MaritalStatusTypeID</label>
                     </li>
                     <li>
-                        <div>@Html.TextBoxFor(m => m.MaritalStatusTypeID, new { @class = "input" })</div>
+                        <div>
+                            <span class="selectHolder">
+                                @Html.DropDownListFor(m => m.MaritalStatusTypeID, FTMatricula.Utilities.GeneralCollections.MaritalStatusList, new { @class = "select" })
+                            </span>
+                        </div>
                     </li>
                     <li>
                         <label>CountryID</label>
                     </li>
                     <li>
-                        <div>@Html.TextBoxFor(m => m.CountryID, new { @class = "input" })</div>
+                        <div>
+                            <span class="selectHolder">
+                                @Html.DropDownListFor(m => m.CountryID, FTMatricula.Utilities.GeneralCollections.CountriesList, new { @class = "select" })
+                            </span>
+                        </div>
                     </li>
 
                 </ul>
@@ -125,7 +139,7 @@
                     <li>
                         <div>
                             <span class="selectHolder">
-                                @Html.DropDownListFor(m => m.Email, FTMatricula.Utilities.GeneralCollections.RolesList, new { @class = "select" })
+                                @Html.DropDownListFor(m => m.Email, FTMatricula.Utilities.GeneralCollections.UserRolesList, new { @class = "select" })
                             </span>
                         </div>
                     </li>
@@ -133,8 +147,9 @@
             </div>
         </div>
         <div class="clear"></div>
-        <div style="width: 100px; margin: 20px auto;">
-            @Html.ActionLink("Home", "index", "Home", routeValues: null, htmlAttributes: new { @class = "button home" })
+        <div class="formBtnBar">
+            @Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })        
+            @Html.ActionLink("Cancel", "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
         </div>
         <div class="clear"></div>
     </div>
