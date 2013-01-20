@@ -24,6 +24,7 @@ namespace FTMatricula.Models
         public System.Guid? PlanID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public System.Guid? LocationID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

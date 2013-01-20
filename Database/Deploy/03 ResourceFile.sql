@@ -81,8 +81,8 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOCATION', 'es-CR', 'Lugares Físi
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOCATION_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar un lugar físico o geográfico')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_TYPE', 'es-CR', 'Tipos de Modalidad')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_TYPE_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar los tipos de modalidades')
-INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUERIMENT', 'es-CR', 'Tipos de Requisitos')
-INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUERIMENT_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar los tipos de requisitos')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUERIMENT', 'es-CR', 'Requisitos')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUERIMENT_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar requisitos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USERS', 'es-CR', 'Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USERS_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar usuarios del sistema.')
 --Student Details
@@ -147,3 +147,9 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_COURSE', 'es-CR', 'Agregar Cu
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_COST', 'es-CR', 'Costo del Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TEACHING_HOURS', 'es-CR', 'Horas Lectivas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MAX_LENGTH', 'es-CR', '{0} puede tener un maximo de {1} caracteres.')
+--Scheme View
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHEME_MANT', 'es-CR', 'Mantenimiento de Programas')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHEME_NAME', 'es-CR', 'Nombre del Programa')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'OWNER', 'es-CR', 'Responsable')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'COORDINATOR', 'es-CR', 'Coordinador')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'VIEW_DETAILS', 'es-CR', 'Ver Detalles')

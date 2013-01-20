@@ -20,6 +20,7 @@ namespace FTMatricula.Models
         }
     
         public System.Guid? ScoreID { get; set; }
+        public System.Guid? CourseID { get; set; }
         public Nullable<System.Guid> StudentID { get; set; }
         public string Result { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
@@ -28,7 +29,7 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual ICollection<Record> Records { get; set; }
         public virtual Course Course { get; set; }
+        public virtual ICollection<Record> Records { get; set; }
     }
 }

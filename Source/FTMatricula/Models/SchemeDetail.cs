@@ -12,16 +12,16 @@ namespace FTMatricula.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Record
+    public partial class SchemeDetail
     {
-        public System.Guid? RecordID { get; set; }
-        public System.Guid? ScoreID { get; set; }
-        public Nullable<System.DateTime> InsertDate { get; set; }
-        public Nullable<System.Guid> InsertUserID { get; set; }
-        public Nullable<System.DateTime> ModifyDate { get; set; }
-        public Nullable<System.Guid> ModifyUserID { get; set; }
-        public string IpAddress { get; set; }
-    
-        public virtual Score Score { get; set; }
+        public System.Guid? SchemeID { get; set; }
+        public string SchemeName { get; set; }
+        public string Description { get; set; }
+        public System.Guid? OwnerUserId { get; set; }
+        public string OwnerName { get; set; }
+        public System.Guid? CoordinatorUserId { get; set; }
+        public string CoordinatorName { get; set; }
+        public Nullable<System.Guid> ModalityID { get; set; }
+        public string ModalityName { get; set; }
     }
 }

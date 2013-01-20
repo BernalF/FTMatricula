@@ -20,6 +20,7 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public Nullable<System.Guid> StudentID { get; set; }
         public string SchoolName { get; set; }
         public string Degree { get; set; }
         public Nullable<int> Year { get; set; }

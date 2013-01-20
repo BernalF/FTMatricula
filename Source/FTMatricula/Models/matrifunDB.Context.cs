@@ -27,14 +27,17 @@ namespace FTMatricula.Models
     
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Country> Countries { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Course_Requirement> Course_Requirement { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Modality> Modalities { get; set; }
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Plan_Course> Plan_Course { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
         public DbSet<Record> Records { get; set; }
         public DbSet<Requirement> Requirements { get; set; }
         public DbSet<Resource> Resources { get; set; }
+        public DbSet<Scheme> Schemes { get; set; }
         public DbSet<Scheme_Plan> Scheme_Plan { get; set; }
         public DbSet<Scheme_Requirement> Scheme_Requirement { get; set; }
         public DbSet<School> Schools { get; set; }
@@ -46,9 +49,6 @@ namespace FTMatricula.Models
         public DbSet<StudiesInformation> StudiesInformations { get; set; }
         public DbSet<Type> Types { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<Modality> Modalities { get; set; }
-        public DbSet<Course_Requirement> Course_Requirement { get; set; }
-        public DbSet<Scheme> Schemes { get; set; }
+        public DbSet<SchemeDetail> SchemeDetails { get; set; }
     }
 }

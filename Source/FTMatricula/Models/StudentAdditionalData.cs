@@ -26,6 +26,8 @@ namespace FTMatricula.Models
         public string WorkPlace { get; set; }
         public Nullable<bool> Works { get; set; }
         public Nullable<bool> Studies { get; set; }
+        public Nullable<System.Guid> WhoPaysYourStudiesTypeID { get; set; }
+        public Nullable<System.Guid> HowYouKnowAboutUsTypeID { get; set; }
         public Nullable<bool> ReceiveOffers { get; set; }
         public Nullable<bool> ReceiveNews { get; set; }
     

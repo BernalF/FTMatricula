@@ -16,10 +16,10 @@ namespace FTMatricula.Models
     {
         public Course()
         {
+            this.Course_Requirement = new HashSet<Course_Requirement>();
             this.Plan_Course = new HashSet<Plan_Course>();
             this.Scores = new HashSet<Score>();
             this.Student_Course = new HashSet<Student_Course>();
-            this.Course_Requirement = new HashSet<Course_Requirement>();
         }
     
         public System.Guid? CourseID { get; set; }
@@ -34,9 +34,9 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
+        public virtual ICollection<Course_Requirement> Course_Requirement { get; set; }
         public virtual ICollection<Plan_Course> Plan_Course { get; set; }
         public virtual ICollection<Score> Scores { get; set; }
         public virtual ICollection<Student_Course> Student_Course { get; set; }
-        public virtual ICollection<Course_Requirement> Course_Requirement { get; set; }
     }
 }
