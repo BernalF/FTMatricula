@@ -15,7 +15,7 @@
     <li class="editor-label">
         @Html.LabelFor(model => model.OwnerName, @Resources.GetValue("OWNER"))
     </li>
-    <li style="display:inline">
+    <li style="display: inline">
         @(Html.Kendo().DropDownListFor(model => model.OwnerUserId)
         .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
         .Name("OwnerUserId")
@@ -25,7 +25,7 @@
     <li class="editor-label">
         @Html.LabelFor(model => model.CoordinatorName, @Resources.GetValue("COORDINATOR"))
     </li>
-    <li style="display:inline">
+    <li style="display: inline">
         @(Html.Kendo().DropDownListFor(model => model.CoordinatorUserId)
         .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
         .Name("CoordinatorUserId")
@@ -35,11 +35,10 @@
     <li class="editor-label">
         @Html.LabelFor(model => model.ModalityName, @Resources.GetValue("MODALITY_NAME"))
     </li>
-    <li style="display:inline">
-        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
+    <li style="display: inline">
+        @(Html.Kendo().DropDownListFor(model => model.ModalityName)
         .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
-        .Name("ModalityID")
-        .Value(Model.ModalityID.ToString())      
+        .Name("ModalityName")
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>

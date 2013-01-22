@@ -21,7 +21,7 @@ namespace FTMatricula.Models
         public string OwnerName { get; set; }
         public System.Guid? CoordinatorUserId { get; set; }
         public string CoordinatorName { get; set; }
-        public Nullable<System.Guid> ModalityID { get; set; }
+        public System.Guid? ModalityID { get; set; }
         public string ModalityName { get; set; }
     }
 }
