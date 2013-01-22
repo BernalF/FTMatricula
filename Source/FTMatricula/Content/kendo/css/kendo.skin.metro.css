@@ -138,10 +138,7 @@ textarea.k-textbox:hover,
 }
 .k-link:link,
 .k-link:visited {
-  color: #000000;
-  font-weight:bold;
-  font-family:'Segoe UI', 'Segoe condensed' sans-serif;
-  font-size: 14px;
+  color:inherit;  
 }
 .k-header {
   color: #787878;

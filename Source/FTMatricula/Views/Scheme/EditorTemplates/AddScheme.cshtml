@@ -1,5 +1,4 @@
 ﻿@model FTMatricula.Models.SchemeDetail
-
 <ul>
     <li class="editor-label">
         @Html.LabelFor(model => model.SchemeName, @Resources.GetValue("SCHEME_NAME"))
@@ -17,9 +16,9 @@
         @Html.LabelFor(model => model.OwnerName, @Resources.GetValue("OWNER"))
     </li>
     <li style="display:inline">
-        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
+        @(Html.Kendo().DropDownListFor(model => model.OwnerUserId)
         .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
-        .Name("ddlOwner")
+        .Name("OwnerUserId")
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>
@@ -27,9 +26,9 @@
         @Html.LabelFor(model => model.CoordinatorName, @Resources.GetValue("COORDINATOR"))
     </li>
     <li style="display:inline">
-        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
+        @(Html.Kendo().DropDownListFor(model => model.CoordinatorUserId)
         .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
-        .Name("ddlCoordinator")
+        .Name("CoordinatorUserId")
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>
@@ -39,7 +38,8 @@
     <li style="display:inline">
         @(Html.Kendo().DropDownListFor(model => model.ModalityID)
         .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
-        .Name("ddlModality")
+        .Name("ModalityID")
+        .Value(Model.ModalityID.ToString())      
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>
