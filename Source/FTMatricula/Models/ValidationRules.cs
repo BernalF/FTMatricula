@@ -76,4 +76,14 @@ namespace FTMatricula.Models
         public string Charge { get; set; }
 
     }
+
+    //------ ApplicationUser Section
+    [MetadataType(typeof(ApplicationUser_Validation))]
+    public partial class ApplicationUser { }
+
+    public class ApplicationUser_Validation
+    {
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string UserName { get; set; }
+    }
 }

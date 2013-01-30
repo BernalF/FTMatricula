@@ -17,13 +17,12 @@ namespace FTMatricula.Controllers
     {
         private matrifunDBEntities db = new matrifunDBEntities();
 
-        //
-        // GET: /User/
-
+        
         public ActionResult index()
         {
             return View();
         }
+
 
         [HttpPost]
         public ActionResult PagingUsers([DataSourceRequest] DataSourceRequest request)
@@ -41,6 +40,16 @@ namespace FTMatricula.Controllers
             Guid StudentID = new Guid(id);
 
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Edit(ApplicationUser model)
+        {
+            if (ModelState.IsValid)
+            {
+                //model.UserName
+            }
+            return View(model);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

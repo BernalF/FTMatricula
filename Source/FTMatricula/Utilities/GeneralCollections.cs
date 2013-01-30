@@ -10,7 +10,7 @@ namespace FTMatricula.Utilities
 {
     public class GeneralCollections
     {
-        public static SelectList RolesList
+        public static SelectList UserRolesList
         {
             get
             {
