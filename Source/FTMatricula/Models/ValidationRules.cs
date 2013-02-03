@@ -97,4 +97,18 @@ namespace FTMatricula.Models
         public string DateOfBirth { get; set; }
 
     }
+
+    //------ SchemeDetail Section
+    [MetadataType(typeof(SchemeDetail_Validation))]
+    public partial class SchemeDetail
+    {
+        public string tmpOwnerUserId { get; set; }
+        public string tmpCoordinatorUserId { get; set; }
+        public string tmpModalityID { get; set; }
+    }
+
+    public class SchemeDetail_Validation
+    {
+
+    }
 }

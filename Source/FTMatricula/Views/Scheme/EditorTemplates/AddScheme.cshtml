@@ -1,45 +1,61 @@
 ﻿@model FTMatricula.Models.SchemeDetail
 <ul>
     <li class="editor-label">
-        @Html.LabelFor(model => model.SchemeName, @Resources.GetValue("SCHEME_NAME"))
+        @Html.Label(@Resources.GetValue("SCHEME_NAME"))
     </li>
     <li class="k-textbox">
         @Html.EditorFor(model => model.SchemeName)
     </li>
     <li class="editor-label">
-        @Html.LabelFor(model => model.Description, @Resources.GetValue("DESCRIPTION"))
+        @Html.Label(@Resources.GetValue("DESCRIPTION"))
     </li>
     <li class="k-textbox">
         @Html.EditorFor(model => model.Description)
     </li>
     <li class="editor-label">
-        @Html.LabelFor(model => model.OwnerName, @Resources.GetValue("OWNER"))
+        @Html.Label(@Resources.GetValue("OWNER"))
     </li>
     <li style="display: inline">
-        @(Html.Kendo().DropDownListFor(model => model.OwnerUserId)
+        @(Html.Kendo().DropDownListFor(model => model.tmpOwnerUserId)
         .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
-        .Name("OwnerUserId")
+        .Name("tmpOwnerUserId")
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>
     <li class="editor-label">
-        @Html.LabelFor(model => model.CoordinatorName, @Resources.GetValue("COORDINATOR"))
+        @Html.Label(@Resources.GetValue("COORDINATOR"))
     </li>
     <li style="display: inline">
-        @(Html.Kendo().DropDownListFor(model => model.CoordinatorUserId)
+        @(Html.Kendo().DropDownListFor(model => model.tmpCoordinatorUserId)
         .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
-        .Name("CoordinatorUserId")
+        .Name("tmpCoordinatorUserId")
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>
     <li class="editor-label">
-        @Html.LabelFor(model => model.ModalityName, @Resources.GetValue("MODALITY_NAME"))
+        @Html.Label(@Resources.GetValue("MODALITY_NAME"))
     </li>
     <li style="display: inline">
-        @(Html.Kendo().DropDownListFor(model => model.ModalityName)
+        @(Html.Kendo().DropDownListFor(model => model.tmpModalityID)
         .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
-        .Name("ModalityName")
+        .Name("tmpModalityID")
         .DataTextField("Text")
         .DataValueField("Value"))
+    </li>
+    <li style="padding: 20px 20px;">        
+ @*       @(Html.Kendo().Grid<FTMatricula.Models.Requirement>()
+                        .Name("Grid")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(m => m.Name).Title(@Resources.GetValue("REQ_NAME"));
+                        })
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Events(events => events.Error("error_handler"))
+                            .ServerOperation(false)
+                            .Read(read => read.Action("PagingRequirements", "Scheme"))
+                            .Model(model => model.Id(m => m.RequirementID))
+                        )
+                )*@        
     </li>
 </ul>

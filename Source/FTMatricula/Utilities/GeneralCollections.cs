@@ -36,10 +36,16 @@ namespace FTMatricula.Utilities
         {
             get
             {
+                Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 matrifunDBEntities db = new matrifunDBEntities();
-                return new SelectList(db.Modalities
+
+                foreach (var m in db.Modalities
                                         .ToList()
-                                        .Select(mod => new { mod.ModalityID, mod.Name }), "ModalityID", "Name");
+                                        .Select(mod => new { id = mod.ModalityID, name = mod.Name }).ToArray())
+                {
+                    dictionary.Add(m.id.ToString(), m.name);
+                }
+                return new SelectList(dictionary, "Key", "Value");                                                 
             }
         }
 
@@ -57,8 +63,7 @@ namespace FTMatricula.Utilities
                 {
                     dictionary.Add(t.TypeID, t.Name);
                 }
-                return new SelectList(dictionary, "Key", "Value");                
-
+                return new SelectList(dictionary, "Key", "Value");  
             }
         }
 
