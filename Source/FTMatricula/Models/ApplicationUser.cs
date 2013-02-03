@@ -14,8 +14,8 @@ namespace FTMatricula.Models
     
     public partial class ApplicationUser
     {
-        public System.Guid? UserId { get; set; }
-        public System.Guid? StudentID { get; set; }
+        public System.Guid UserId { get; set; }
+        public System.Guid StudentID { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
@@ -24,10 +24,11 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<System.Guid> CountryID { get; set; }
         public string CountryName { get; set; }
-        public System.Guid? MaritalStatusTypeID { get; set; }
+        public System.Guid MaritalStatusTypeID { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Phone3 { get; set; }
         public string RoleName { get; set; }
+        public System.Guid IdentificationTypeID { get; set; }
     }
 }

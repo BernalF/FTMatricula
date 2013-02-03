@@ -14,7 +14,7 @@ namespace FTMatricula.Models
     
     public partial class StudiesInformation
     {
-        public System.Guid? StudyID { get; set; }
+        public System.Guid StudyID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

@@ -20,20 +20,20 @@ namespace FTMatricula.Models
             this.StudiesInformations = new HashSet<StudiesInformation>();
         }
     
-        public System.Guid? StudentID { get; set; }
+        public System.Guid StudentID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
-        public System.Guid? UserID { get; set; }
-        public System.Guid? IdentificationTypeID { get; set; }
+        public System.Guid UserID { get; set; }
+        public System.Guid IdentificationTypeID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<System.Guid> CountryID { get; set; }
-        public System.Guid? MaritalStatusTypeID { get; set; }
+        public System.Guid MaritalStatusTypeID { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
         public string Phone3 { get; set; }

@@ -12,6 +12,9 @@ namespace FTMatricula.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Objects;
+    using System.Data.Objects.DataClasses;
+    using System.Linq;
     
     public partial class matrifunDBEntities : DbContext
     {
@@ -50,5 +53,18 @@ namespace FTMatricula.Models
         public DbSet<Type> Types { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<SchemeDetail> SchemeDetails { get; set; }
+    
+        public virtual int uspUserNameUpdate(string userNameOld, string userNameNew)
+        {
+            var userNameOldParameter = userNameOld != null ?
+                new ObjectParameter("UserNameOld", userNameOld) :
+                new ObjectParameter("UserNameOld", typeof(string));
+    
+            var userNameNewParameter = userNameNew != null ?
+                new ObjectParameter("UserNameNew", userNameNew) :
+                new ObjectParameter("UserNameNew", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUserNameUpdate", userNameOldParameter, userNameNewParameter);
+        }
     }
 }

@@ -105,7 +105,8 @@
       [ApplicationUser].[Phone1] AS [Phone1], 
       [ApplicationUser].[Phone2] AS [Phone2], 
       [ApplicationUser].[Phone3] AS [Phone3], 
-      [ApplicationUser].[RoleName] AS [RoleName]
+      [ApplicationUser].[RoleName] AS [RoleName], 
+      [ApplicationUser].[IdentificationTypeID] AS [IdentificationTypeID]
       FROM [dbo].[ApplicationUser] AS [ApplicationUser]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="SchemeDetails" EntityType="FTMatricula.DBModel.Store.SchemeDetails" store:Type="Views" store:Schema="dbo" store:Name="SchemeDetails">
@@ -577,6 +578,7 @@
             <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="Phone1" />
             <PropertyRef Name="RoleName" />
+            <PropertyRef Name="IdentificationTypeID" />
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
@@ -593,6 +595,7 @@
           <Property Name="Phone2" Type="varchar" MaxLength="80" />
           <Property Name="Phone3" Type="varchar" MaxLength="80" />
           <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="IdentificationTypeID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.SchemeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -905,6 +908,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="uspUserNameUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserNameOld" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserNameNew" Type="nvarchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1031,6 +1038,10 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
+          <FunctionImport Name="uspUserNameUpdate">
+            <Parameter Name="UserNameOld" Mode="In" Type="String" />
+            <Parameter Name="UserNameNew" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1418,6 +1429,7 @@
             <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="Phone1" />
             <PropertyRef Name="RoleName" />
+            <PropertyRef Name="IdentificationTypeID" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="StudentID" Type="Guid" Nullable="false" />
@@ -1434,6 +1446,7 @@
           <Property Name="Phone2" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Name="Phone3" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
           <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="IdentificationTypeID" Nullable="false" />
         </EntityType>
         <EntityType Name="SchemeDetail">
           <Key>
@@ -2095,6 +2108,7 @@
           <EntitySetMapping Name="ApplicationUsers">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.ApplicationUser">
               <MappingFragment StoreEntitySet="ApplicationUser">
+                <ScalarProperty Name="IdentificationTypeID" ColumnName="IdentificationTypeID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
@@ -2128,6 +2142,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

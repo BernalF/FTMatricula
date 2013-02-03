@@ -19,7 +19,7 @@ namespace FTMatricula.Models
             this.Students = new HashSet<Student>();
         }
     
-        public System.Guid? CountryID { get; set; }
+        public System.Guid CountryID { get; set; }
         public string CountryName { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
