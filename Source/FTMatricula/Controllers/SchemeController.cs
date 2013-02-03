@@ -57,9 +57,9 @@ namespace FTMatricula.Controllers
                 scheme.SchemeID = Guid.NewGuid();
                 scheme.Name = model.SchemeName;
                 scheme.Description = model.Description;
-                scheme.OwnerUserId = model.OwnerUserId;
-                scheme.CoordinatorUserId = model.CoordinatorUserId;
-                scheme.ModalityID = new Guid(model.ModalityName);
+                scheme.OwnerUserId = new Guid(model.tmpOwnerUserId);
+                scheme.CoordinatorUserId = new Guid(model.tmpCoordinatorUserId);
+                scheme.ModalityID = new Guid(model.tmpModalityID);
                 scheme.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 scheme.InsertDate = DateTime.Today;
                 scheme.IpAddress = Network.GetIpAddress(Request);
@@ -72,7 +72,7 @@ namespace FTMatricula.Controllers
                 SchemeName = model.SchemeName, 
                 Description = model.Description, 
                 OwnerName = model.OwnerName, 
-                CoordinatorName = model.CoordinatorName,
+                CoordinatorName = model.CoordinatorName,                
                 ModalityName = model.ModalityName
             } }.ToDataSourceResult(request, ModelState));
         }
@@ -91,7 +91,7 @@ namespace FTMatricula.Controllers
             scheme.Description = model.Description;
             scheme.OwnerUserId = model.OwnerUserId;
             scheme.CoordinatorUserId = model.CoordinatorUserId;
-            //scheme.ModalityID = model.ModalityID;
+            scheme.ModalityID = new Guid(model.tmpModalityID);
             scheme.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
             scheme.ModifyDate = DateTime.Today;
             scheme.IpAddress = Network.GetIpAddress(Request);
@@ -104,7 +104,7 @@ namespace FTMatricula.Controllers
                 Description = model.Description, 
                 OwnerName = model.OwnerName, 
                 CoordinatorName = model.CoordinatorName,
-                ModalityName = model.ModalityName
+                ModalityName = model.ModalityName                
             } }.ToDataSourceResult(request, ModelState));
         }
 

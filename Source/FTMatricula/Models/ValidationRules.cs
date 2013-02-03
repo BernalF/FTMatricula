@@ -86,4 +86,18 @@ namespace FTMatricula.Models
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string UserName { get; set; }
     }
+
+    //------ SchemeDetail Section
+    [MetadataType(typeof(SchemeDetail_Validation))]
+    public partial class SchemeDetail
+    {
+        public string tmpOwnerUserId { get; set; }
+        public string tmpCoordinatorUserId { get; set; }
+        public string tmpModalityID { get; set; }
+    }
+
+    public class SchemeDetail_Validation
+    {
+
+    }
 }
