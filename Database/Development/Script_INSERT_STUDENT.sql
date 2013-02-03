@@ -37,6 +37,12 @@ SELECT
 	,'Casado'
 	,'Tipo de Estado Marital - CRC Casado'
 	,'MST'
+UNION
+SELECT
+	 NEWID()
+	,'Soltero'
+	,'Tipo de Estado Marital - CRC Soltero'
+	,'MST'
 
 	
 

@@ -14,12 +14,9 @@ namespace FTMatricula.Utilities
         {
             get
             {
-                Dictionary<string, string> dictionary = new Dictionary<string, string>();
-                foreach (string role in Roles.GetAllRoles().Where(x => x != "Student"))
-                {
-                    dictionary.Add(role, role);
-                }
-                return new SelectList(dictionary, "Key", "Value");
+                return new SelectList(Roles.GetAllRoles().Where(x => x != "Student")
+                                                         .ToList()
+                                                         .Select(x => new { RoleId = x, RoleName = x }), "RoleId", "RoleName");
             }
         }
 
@@ -60,7 +57,8 @@ namespace FTMatricula.Utilities
                 {
                     dictionary.Add(t.TypeID, t.Name);
                 }
-                return new SelectList(dictionary, "Key", "Value");
+                return new SelectList(dictionary, "Key", "Value");                
+
             }
         }
 

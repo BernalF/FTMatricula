@@ -56,6 +56,10 @@ img{
     clear:both;
 }
 
+.width100 {
+    width:100%;
+}
+
 .blacked p, .blacked li, .blacked input, .blacked select, .blacked option, .blacked table{
     color:#000 !important;
 }

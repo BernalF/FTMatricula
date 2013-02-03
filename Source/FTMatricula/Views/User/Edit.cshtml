@@ -31,7 +31,7 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span>EDIT USERS  -</span>Personal DATA
+                <span>EDIT USERS -</span>Personal DATA
             </div>
 
             <div class="editDetail">
@@ -66,7 +66,7 @@
                         </li>
                         <li>
                             <div>@*@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input" })*@
-                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input", style = "width:100%;" })
+                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100"})
                             </div>
                         </li>
                         <li>
@@ -74,9 +74,16 @@
                         </li>
                         <li>
                             <div>
-                                <span class="selectHolder">
+                                @*<span class="selectHolder">
                                     @Html.DropDownListFor(m => m.Gender, FTMatricula.Utilities.GeneralCollections.GenderList, new { @class = "select" })
-                                </span>
+                                </span>*@
+
+                                @(Html.Kendo().DropDownListFor(m => m.Gender)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.GenderList)
+                                    .Name("Gender")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                         <li>
@@ -84,9 +91,16 @@
                         </li>
                         <li>
                             <div>
-                                <span class="selectHolder">
+                                @*<span class="selectHolder">
                                     @Html.DropDownListFor(m => m.MaritalStatusTypeID, FTMatricula.Utilities.GeneralCollections.MaritalStatusList, new { @class = "select" })
-                                </span>
+                                </span>*@
+
+                                @(Html.Kendo().DropDownListFor(m => m.MaritalStatusTypeID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.MaritalStatusList)
+                                    .Name("MaritalStatusTypeID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                         <li>
@@ -139,9 +153,15 @@
                         </li>
                         <li>
                             <div>
-                                <span class="selectHolder">
+                                @*<span class="selectHolder">
                                     @Html.DropDownListFor(m => m.Email, FTMatricula.Utilities.GeneralCollections.UserRolesList, new { @class = "select" })
-                                </span>
+                                </span>*@
+                                @(Html.Kendo().DropDownListFor(m => m.RoleName)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.UserRolesList)
+                                    .Name("RoleName")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                     </ul>
