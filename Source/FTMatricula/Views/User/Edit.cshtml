@@ -41,7 +41,12 @@
                             <label>Identificacion</label>
                         </li>
                         <li>
-                            <div>@Html.TextBoxFor(m => m.UserName, new { @class = "input" })</div>
+                            <div>
+                                @*@Html.TextBoxFor(m => m.UserName, new { @class = "input", @readOnly = "readOnly"})*@
+                                <span class="readOnly">
+                                    @Html.DisplayTextFor(m => m.UserName)
+                                </span>
+                            </div>
                         </li>
 
                         <li>
@@ -108,9 +113,15 @@
                         </li>
                         <li>
                             <div>
-                                <span class="selectHolder">
+                                @*<span class="selectHolder">
                                     @Html.DropDownListFor(m => m.CountryID, FTMatricula.Utilities.GeneralCollections.CountriesList, new { @class = "select" })
-                                </span>
+                                </span>*@
+                                @(Html.Kendo().DropDownListFor(m => m.CountryID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CountriesList)
+                                    .Name("CountryID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
 
@@ -172,6 +183,15 @@
                     <li>
                         @Html.ValidationMessageFor(m => m.UserName)
                     </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.DateOfBirth)
+                    </li>
                 </ul>
             </div>
             
@@ -182,6 +202,9 @@
                 @Html.ActionLink("Cancel", "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
+            @Html.HiddenFor(m => m.StudentID)
+            @Html.HiddenFor(m => m.UserId)
+            @Html.HiddenFor(m => m.UserName)
         }
     </div>
 

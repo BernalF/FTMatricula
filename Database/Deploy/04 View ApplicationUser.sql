@@ -34,6 +34,7 @@ SELECT
 	, c.Phone2
 	, c.Phone3
 	, ISNULL(f.RoleName,'') AS RoleName  
+	, c.IdentificationTypeID
 FROM  dbo.Users AS a INNER JOIN
                dbo.Memberships AS b ON a.UserId = b.UserId INNER JOIN
                dbo.Student AS c ON a.UserId = c.UserID INNER JOIN

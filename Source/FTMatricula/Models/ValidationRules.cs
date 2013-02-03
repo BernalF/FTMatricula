@@ -79,11 +79,22 @@ namespace FTMatricula.Models
 
     //------ ApplicationUser Section
     [MetadataType(typeof(ApplicationUser_Validation))]
-    public partial class ApplicationUser { }
+    public partial class ApplicationUser {
+    }
 
     public class ApplicationUser_Validation
     {
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string UserName { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string LastName { get; set; }
+        
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string DateOfBirth { get; set; }
+
     }
 }

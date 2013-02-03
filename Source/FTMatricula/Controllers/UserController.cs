@@ -9,6 +9,7 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using FTMatricula.Utilities.Helper;
 using FTMatricula.Models;
+using System.Web.Security;
 
 namespace FTMatricula.Controllers
 {
@@ -37,9 +38,18 @@ namespace FTMatricula.Controllers
 
         public ActionResult Edit(string id)
         {
-            Guid StudentID = new Guid(id);
-
-            return View();
+            try
+            {
+                ApplicationUser user = db.ApplicationUsers.Where(x => x.StudentID == new Guid(id))
+                                                      .ToList()
+                                                      .FirstOrDefault();
+                return View(user);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+            
         }
 
         [HttpPost]
@@ -47,7 +57,31 @@ namespace FTMatricula.Controllers
         {
             if (ModelState.IsValid)
             {
-                //model.UserName
+                if(Roles.GetRolesForUser(model.UserName).Length > 0)
+                    Roles.RemoveUserFromRoles(model.UserName, Roles.GetRolesForUser(model.UserName));
+                Roles.AddUserToRole(model.UserName,model.RoleName);
+
+                Student user = new Student {
+                    StudentID = model.StudentID,
+                    ModifyUserID = SessApp.GetUserID(User.Identity.Name),
+                    ModifyDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request),
+                    UserID = model.UserId,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Gender = model.Gender,
+                    DateOfBirth = model.DateOfBirth,
+                    CountryID = model.CountryID,
+                    MaritalStatusTypeID = model.MaritalStatusTypeID,
+                    Phone1 = model.Phone1,
+                    Phone2 = model.Phone2,
+                    Phone3 = model.Phone3
+                };
+
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("index");
             }
             return View(model);
         }
