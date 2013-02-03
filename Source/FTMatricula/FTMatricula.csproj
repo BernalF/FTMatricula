@@ -411,6 +411,7 @@
     <Content Include="Content\kendo\css\textures\stripe4.png" />
     <Content Include="Content\kendo\css\textures\stripe5.png" />
     <Content Include="Content\kendo\css\textures\stripe6.png" />
+    <Content Include="Content\kendo\js\kendo.web.js" />
     <Content Include="Content\kendo\lib\Kendo.Mvc.dll" />
     <Content Include="Content\styles\defaults.css" />
     <Content Include="Content\styles\internal.css" />
@@ -557,7 +558,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\kendo\js\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

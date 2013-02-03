@@ -154,3 +154,5 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'OWNER', 'es-CR', 'Responsable')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COORDINATOR', 'es-CR', 'Coordinador')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'VIEW_DETAILS', 'es-CR', 'Ver Detalles')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_SCHEME', 'es-CR', 'Agregar Programa')
+--Requirement View
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Requisitos')

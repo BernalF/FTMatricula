@@ -59,7 +59,7 @@ namespace FTMatricula.Controllers
                 scheme.Description = model.Description;
                 scheme.OwnerUserId = model.OwnerUserId;
                 scheme.CoordinatorUserId = model.CoordinatorUserId;
-                scheme.ModalityID = model.ModalityID;
+                scheme.ModalityID = new Guid(model.ModalityName);
                 scheme.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 scheme.InsertDate = DateTime.Today;
                 scheme.IpAddress = Network.GetIpAddress(Request);
@@ -91,7 +91,7 @@ namespace FTMatricula.Controllers
             scheme.Description = model.Description;
             scheme.OwnerUserId = model.OwnerUserId;
             scheme.CoordinatorUserId = model.CoordinatorUserId;
-            scheme.ModalityID = model.ModalityID;
+            //scheme.ModalityID = model.ModalityID;
             scheme.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
             scheme.ModifyDate = DateTime.Today;
             scheme.IpAddress = Network.GetIpAddress(Request);
@@ -127,6 +127,22 @@ namespace FTMatricula.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Paging Requirements
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingRequirements([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(db.Requirements.ToList().Select(m =>
+                new
+                {
+                    m.RequirementID,
+                    m.Name
+                }).ToDataSourceResult(request));
         }
     }
 }

@@ -36,10 +36,26 @@
         @Html.LabelFor(model => model.ModalityName, @Resources.GetValue("MODALITY_NAME"))
     </li>
     <li style="display: inline">
-        @(Html.Kendo().DropDownListFor(model => model.ModalityName)
+        @(Html.Kendo().DropDownListFor(model => model.ModalityID)
         .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
-        .Name("ModalityName")
+        .Name("ModalityID")
         .DataTextField("Text")
         .DataValueField("Value"))
+    </li>
+    <li style="padding: 20px 20px;">        
+ @*       @(Html.Kendo().Grid<FTMatricula.Models.Requirement>()
+                        .Name("Grid")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(m => m.Name).Title(@Resources.GetValue("REQ_NAME"));
+                        })
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Events(events => events.Error("error_handler"))
+                            .ServerOperation(false)
+                            .Read(read => read.Action("PagingRequirements", "Scheme"))
+                            .Model(model => model.Id(m => m.RequirementID))
+                        )
+                )*@        
     </li>
 </ul>
