@@ -23,7 +23,7 @@ namespace FTMatricula.Models
 
         [DataType(DataType.Password)]
         [Display( ResourceType = typeof(ModelResources), Name = "PASS_CONFIRM")]
-        [Compare("NewPassword", ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "PASS_CONFIRM_ERR")]
+        [System.Web.Mvc.Compare("NewPassword", ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "PASS_CONFIRM_ERR")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -61,7 +61,7 @@ namespace FTMatricula.Models
 
         [DataType(DataType.Password)]
         [Display(ResourceType = typeof(ModelResources), Name = "PASS_CONFIRM")]
-        [Compare("Password", ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "PASS_CONFIRM_ERR")]
+        [System.Web.Mvc.Compare("Password", ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "PASS_CONFIRM_ERR")]
         public string ConfirmPassword { get; set; }
     }
 

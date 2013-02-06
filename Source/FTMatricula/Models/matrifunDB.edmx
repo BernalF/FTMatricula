@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FTMatricula.DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FTMatricula.DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="FTMatriculaDBModelStoreContainer">
-          <EntitySet Name="Classroom" EntityType="FTMatricula.DBModel.Store.Classroom" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Country" EntityType="FTMatricula.DBModel.Store.Country" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Course" EntityType="FTMatricula.DBModel.Store.Course" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Course-Requirement" EntityType="FTMatricula.DBModel.Store.Course-Requirement" store:Type="Tables" store:Schema="dbo" store:Name="Course-Requirement">
+          <EntitySet Name="Classroom" EntityType="FTMatricula.DBModel.Store.Classroom" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Country" EntityType="FTMatricula.DBModel.Store.Country" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Course" EntityType="FTMatricula.DBModel.Store.Course" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Course-Requirement" EntityType="FTMatricula.DBModel.Store.Course-Requirement" store:Type="Tables" store:Schema="dbo" store:Name="Course-Requirement" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [Course-Requirement].[RequirementID] AS [RequirementID], 
       [Course-Requirement].[CourseID] AS [CourseID], 
@@ -20,11 +20,11 @@
       [Course-Requirement].[IpAddress] AS [IpAddress]
       FROM [dbo].[Course-Requirement] AS [Course-Requirement]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Enrollment" EntityType="FTMatricula.DBModel.Store.Enrollment" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Location" EntityType="FTMatricula.DBModel.Store.Location" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Modality" EntityType="FTMatricula.DBModel.Store.Modality" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Plan" EntityType="FTMatricula.DBModel.Store.Plan" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Plan-Course" EntityType="FTMatricula.DBModel.Store.Plan-Course" store:Type="Tables" store:Schema="dbo" store:Name="Plan-Course">
+          <EntitySet Name="Enrollment" EntityType="FTMatricula.DBModel.Store.Enrollment" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Location" EntityType="FTMatricula.DBModel.Store.Location" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Modality" EntityType="FTMatricula.DBModel.Store.Modality" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Plan" EntityType="FTMatricula.DBModel.Store.Plan" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Plan-Course" EntityType="FTMatricula.DBModel.Store.Plan-Course" store:Type="Tables" store:Schema="dbo" store:Name="Plan-Course" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [Plan-Course].[PlanID] AS [PlanID], 
       [Plan-Course].[CourseID] AS [CourseID], 
@@ -35,11 +35,11 @@
       [Plan-Course].[IpAddress] AS [IpAddress]
       FROM [dbo].[Plan-Course] AS [Plan-Course]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Record" EntityType="FTMatricula.DBModel.Store.Record" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Requirement" EntityType="FTMatricula.DBModel.Store.Requirement" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Resource" EntityType="FTMatricula.DBModel.Store.Resource" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Scheme" EntityType="FTMatricula.DBModel.Store.Scheme" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Plan">
+          <EntitySet Name="Record" EntityType="FTMatricula.DBModel.Store.Record" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Requirement" EntityType="FTMatricula.DBModel.Store.Requirement" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Resource" EntityType="FTMatricula.DBModel.Store.Resource" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Scheme" EntityType="FTMatricula.DBModel.Store.Scheme" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Plan" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [Scheme-Plan].[SchemeID] AS [SchemeID], 
       [Scheme-Plan].[PlanID] AS [PlanID], 
@@ -50,7 +50,7 @@
       [Scheme-Plan].[IpAddress] AS [IpAddress]
       FROM [dbo].[Scheme-Plan] AS [Scheme-Plan]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Requirement">
+          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Requirement" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [Scheme-Requirement].[SchemeID] AS [SchemeID], 
       [Scheme-Requirement].[RequirementID] AS [RequirementID], 
@@ -61,8 +61,8 @@
       [Scheme-Requirement].[IpAddress] AS [IpAddress]
       FROM [dbo].[Scheme-Requirement] AS [Scheme-Requirement]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" store:Schema="dbo" store:Name="School-Scheme">
+          <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" store:Schema="dbo" store:Name="School-Scheme" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [School-Scheme].[SchoolID] AS [SchoolID], 
       [School-Scheme].[SchemeID] AS [SchemeID], 
@@ -73,10 +73,10 @@
       [School-Scheme].[IpAddress] AS [IpAddress]
       FROM [dbo].[School-Scheme] AS [School-Scheme]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Score" EntityType="FTMatricula.DBModel.Store.Score" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Student" EntityType="FTMatricula.DBModel.Store.Student" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="StudentAdditionalData" EntityType="FTMatricula.DBModel.Store.StudentAdditionalData" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Student-Course" EntityType="FTMatricula.DBModel.Store.Student-Course" store:Type="Tables" store:Schema="dbo" store:Name="Student-Course">
+          <EntitySet Name="Score" EntityType="FTMatricula.DBModel.Store.Score" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Student" EntityType="FTMatricula.DBModel.Store.Student" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="StudentAdditionalData" EntityType="FTMatricula.DBModel.Store.StudentAdditionalData" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Student-Course" EntityType="FTMatricula.DBModel.Store.Student-Course" store:Type="Tables" store:Schema="dbo" store:Name="Student-Course" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [Student-Course].[StudentID] AS [StudentID], 
       [Student-Course].[CourseID] AS [CourseID], 
@@ -87,9 +87,9 @@
       [Student-Course].[IpAddress] AS [IpAddress]
       FROM [dbo].[Student-Course] AS [Student-Course]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="StudiesInformation" EntityType="FTMatricula.DBModel.Store.StudiesInformation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Type" EntityType="FTMatricula.DBModel.Store.Type" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="ApplicationUser" EntityType="FTMatricula.DBModel.Store.ApplicationUser" store:Type="Views" store:Schema="dbo" store:Name="ApplicationUser">
+          <EntitySet Name="StudiesInformation" EntityType="FTMatricula.DBModel.Store.StudiesInformation" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Type" EntityType="FTMatricula.DBModel.Store.Type" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ApplicationUser" EntityType="FTMatricula.DBModel.Store.ApplicationUser" store:Type="Views" store:Schema="dbo" store:Name="ApplicationUser" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [ApplicationUser].[UserId] AS [UserId], 
       [ApplicationUser].[StudentID] AS [StudentID], 
@@ -109,7 +109,7 @@
       [ApplicationUser].[IdentificationTypeID] AS [IdentificationTypeID]
       FROM [dbo].[ApplicationUser] AS [ApplicationUser]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="SchemeDetails" EntityType="FTMatricula.DBModel.Store.SchemeDetails" store:Type="Views" store:Schema="dbo" store:Name="SchemeDetails">
+          <EntitySet Name="SchemeDetails" EntityType="FTMatricula.DBModel.Store.SchemeDetails" store:Type="Views" store:Schema="dbo" store:Name="SchemeDetails" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator">
             <DefiningQuery>SELECT 
       [SchemeDetails].[SchemeID] AS [SchemeID], 
       [SchemeDetails].[SchemeName] AS [SchemeName], 
@@ -915,7 +915,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="FTMatricula.DBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="FTMatricula.DBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="matrifunDBEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Classrooms" EntityType="FTMatricula.DBModel.Classroom" />
           <EntitySet Name="Countries" EntityType="FTMatricula.DBModel.Country" />
@@ -1760,7 +1760,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="FTMatriculaDBModelStoreContainer" CdmEntityContainer="matrifunDBEntities">
           <EntitySetMapping Name="Classrooms">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Classroom">
@@ -2148,7 +2148,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -2163,6 +2163,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>
