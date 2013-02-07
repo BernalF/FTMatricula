@@ -14,8 +14,8 @@ namespace FTMatricula.Models
     
     public partial class Student_Course
     {
-        public System.Guid StudentID { get; set; }
-        public System.Guid CourseID { get; set; }
+        public System.Guid? StudentID { get; set; }
+        public System.Guid? CourseID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

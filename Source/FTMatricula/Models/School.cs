@@ -19,7 +19,7 @@ namespace FTMatricula.Models
             this.School_Scheme = new HashSet<School_Scheme>();
         }
     
-        public System.Guid SchoolID { get; set; }
+        public System.Guid? SchoolID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }

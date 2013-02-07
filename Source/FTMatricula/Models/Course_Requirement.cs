@@ -14,8 +14,8 @@ namespace FTMatricula.Models
     
     public partial class Course_Requirement
     {
-        public System.Guid RequirementID { get; set; }
-        public System.Guid CourseID { get; set; }
+        public System.Guid? RequirementID { get; set; }
+        public System.Guid? CourseID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }

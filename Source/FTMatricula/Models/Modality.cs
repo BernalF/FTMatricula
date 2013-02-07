@@ -19,7 +19,7 @@ namespace FTMatricula.Models
             this.Schemes = new HashSet<Scheme>();
         }
     
-        public System.Guid ModalityID { get; set; }
+        public System.Guid? ModalityID { get; set; }
         public string Name { get; set; }
         public string Period { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
