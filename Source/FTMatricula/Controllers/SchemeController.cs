@@ -86,7 +86,7 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateScheme([DataSourceRequest] DataSourceRequest request, SchemeDetail model)
         {
-            Scheme scheme = new Scheme();            
+            Scheme scheme = new Scheme();
             scheme.Name = model.SchemeName;
             scheme.Description = model.Description;
             scheme.OwnerUserId = model.OwnerUserId;
@@ -96,7 +96,7 @@ namespace FTMatricula.Controllers
             scheme.ModifyDate = DateTime.Today;
             scheme.IpAddress = Network.GetIpAddress(Request);
             db.Entry(scheme).State = EntityState.Modified;
-            db.SaveChanges();            
+            db.SaveChanges();
             return Json(new[] { new 
             { 
                 SchemeID = model.SchemeID, 
@@ -143,6 +143,31 @@ namespace FTMatricula.Controllers
                     m.RequirementID,
                     m.Name
                 }).ToDataSourceResult(request));
+        }
+
+        /// <summary>
+        /// Create Requirements
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult CreateRequirements([DataSourceRequest] DataSourceRequest request, Requirement model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.RequirementID = Guid.NewGuid();
+                model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+                model.InsertDate = DateTime.Today;
+                model.IpAddress = Network.GetIpAddress(Request);
+                db.Requirements.Add(model);
+                db.SaveChanges();
+            }
+            return Json(new[] { new { ModalityID = model.RequirementID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult Create()
+        {
+            return View();
         }
     }
 }
