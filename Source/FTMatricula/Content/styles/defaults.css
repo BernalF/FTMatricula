@@ -379,6 +379,17 @@ textarea.input {
 
 }
 
+.readOnly {
+    background-color:#808080;
+    width:100%;
+    display:block;
+    height:24px;
+    line-height:24px;
+    text-indent:5px;
+    font-size:12px;
+	font-family:Verdana, Geneva, sans-serif;
+}
+
 textarea.input{
     height:75px;
     max-width:100%;

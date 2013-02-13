@@ -29,5 +29,6 @@ namespace FTMatricula.Models
         public string Phone2 { get; set; }
         public string Phone3 { get; set; }
         public string RoleName { get; set; }
+        public System.Guid? IdentificationTypeID { get; set; }
     }
 }
