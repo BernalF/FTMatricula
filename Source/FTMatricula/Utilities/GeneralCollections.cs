@@ -67,6 +67,24 @@ namespace FTMatricula.Utilities
             }
         }
 
+        public static SelectList IdentificationList
+        {
+            get
+            {
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                matrifunDBEntities db = new matrifunDBEntities();
+
+                foreach (var t in db.Types
+                                        .Where(x => x.Usage == "IDS")
+                                        .ToList()
+                                        .Select(x => new { x.TypeID, x.Name }).ToArray())
+                {
+                    dictionary.Add(t.TypeID, t.Name);
+                }
+                return new SelectList(dictionary, "Key", "Value");
+            }
+        }
+
         public static SelectList CountriesList
         {
             get
