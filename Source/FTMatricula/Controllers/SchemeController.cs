@@ -53,17 +53,28 @@ namespace FTMatricula.Controllers
         {
             if (ModelState.IsValid)
             {
-                Scheme scheme = new Scheme();
-                scheme.SchemeID = Guid.NewGuid();
-                scheme.Name = model.SchemeName;
-                scheme.Description = model.Description;
-                scheme.OwnerUserId = new Guid(model.tmpOwnerUserId);
-                scheme.CoordinatorUserId = new Guid(model.tmpCoordinatorUserId);
-                scheme.ModalityID = new Guid(model.tmpModalityID);
-                scheme.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                scheme.InsertDate = DateTime.Today;
-                scheme.IpAddress = Network.GetIpAddress(Request);
+                Scheme scheme = new Scheme
+                {
+                    SchemeID = Guid.NewGuid(),
+                    Name = model.SchemeName,
+                    Description = model.Description,
+                    OwnerUserId = new Guid(model.tmpOwnerUserId),
+                    CoordinatorUserId = new Guid(model.tmpCoordinatorUserId),
+                    ModalityID = new Guid(model.tmpModalityID),
+                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                    InsertDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request),
+                };
+                Scheme_Requirement sReq = new Scheme_Requirement
+                {
+                    RequirementID = new Guid(model.tmpReqID),
+                    SchemeID = scheme.SchemeID,
+                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                    InsertDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request),
+                };
                 db.Schemes.Add(scheme);
+                db.Scheme_Requirement.Add(sReq);
                 db.SaveChanges();
             }
             return Json(new[] { new 
