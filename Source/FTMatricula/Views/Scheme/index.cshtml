@@ -43,6 +43,11 @@
                                       })
                                 .Editable(editable =>
                                               {
+                                                  editable.Mode(GridEditMode.PopUp)
+                                                  .Window(m =>
+                                                  {
+                                                      m.Title(@Resources.GetValue("EDIT")).Draggable();
+                                                  }).TemplateName("AddScheme");
                                                   editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
                                               })
                                       .Sortable(sor => sor.AllowUnsort(true))
@@ -69,7 +74,7 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .ToolBar(create => create.Custom().Url(Url.Action("Create", "Scheme"))
+                                      .ToolBar(create => create.Create()
                                           .Text(@Resources.GetValue("ADD_SCHEME"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager

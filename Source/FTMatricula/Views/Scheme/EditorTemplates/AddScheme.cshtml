@@ -1,5 +1,4 @@
-﻿   
-@model FTMatricula.Models.SchemeDetail
+﻿@model FTMatricula.Models.SchemeDetail
 <ul>
     <li class="editor-label">
         @Html.Label(@Resources.GetValue("SCHEME_NAME"))
@@ -43,23 +42,14 @@
         .DataTextField("Text")
         .DataValueField("Value"))
     </li>
-    <li style="padding: 20px 20px;">        
-        @(Html.Kendo().Grid<FTMatricula.Models.Requirement>()
-                        .Name("Grid")
-                        .Columns(columns =>
-                        {
-                            columns.Bound(m => m.Name).Title(@Resources.GetValue("REQ_NAME"));                            
-                        })
-                        .ToolBar(toolbar => toolbar.Create())
-                        .Editable(editable => editable.Mode(GridEditMode.InLine))
-                        .DataSource(dataSource => dataSource
-                            .Ajax()
-                            .Events(events => events.Error("error_handler"))
-                            .ServerOperation(false)
-                            .Read(read => read.Action("PagingRequirements", "Scheme"))
-                            .Create(update => update.Action("CreateRequirements", "Scheme"))
-                            .Model(model => model.Id(m => m.RequirementID))
-                        )
-                )        
+    <li class="editor-label">
+        @Html.Label(@Resources.GetValue("REQ_NAME"))
+    </li>
+    <li style="display: inline">
+        @(Html.Kendo().DropDownListFor(model => model.tmpReqID)
+        .BindTo(FTMatricula.Utilities.GeneralCollections.RequirementList)
+        .Name("tmpReqID")
+        .DataTextField("Text")
+        .DataValueField("Value"))
     </li>
 </ul>

@@ -1,3 +1,5 @@
+USE [matriFunDB]
+GO
 --------- REQUERIMENTS TYPES
 INSERT INTO [Type] (TypeID, Name, [Description], Usage, InsertDate) 
 	VALUES (NEWID(), 'Program', 'Program Requeriments', 'REQ', GETDATE())

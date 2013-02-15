@@ -94,5 +94,17 @@ namespace FTMatricula.Utilities
                 }, "Key", "Value");
             }
         }
+
+        public static SelectList RequirementList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Requirements
+                                        .Where(r => r.TypeID == new Guid("8FE61742-21F0-479A-8B13-5DC5CFD58118"))
+                                        .ToList()
+                                        .Select(r => new { r.RequirementID, r.Name }), "RequirementID", "Name");
+            }
+        }
     }
 }

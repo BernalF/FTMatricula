@@ -105,6 +105,7 @@ namespace FTMatricula.Models
         public string tmpOwnerUserId { get; set; }
         public string tmpCoordinatorUserId { get; set; }
         public string tmpModalityID { get; set; }
+        public string tmpReqID { get; set; }
     }
 
     public class SchemeDetail_Validation
