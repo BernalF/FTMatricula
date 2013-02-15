@@ -53,6 +53,7 @@ namespace FTMatricula.Models
         public DbSet<Type> Types { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<SchemeDetail> SchemeDetails { get; set; }
+        public DbSet<RequirementDetail> RequirementDetails { get; set; }
     
         public virtual int uspUserNameUpdate(string userNameOld, string userNameNew)
         {

@@ -156,3 +156,5 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'VIEW_DETAILS', 'es-CR', 'Ver Deta
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_SCHEME', 'es-CR', 'Agregar Programa')
 --Requirement View
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Requisitos')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'TYPE_NAME', 'es-CR', 'Tipo')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_REQ', 'es-CR', 'Agregar Requisito')
