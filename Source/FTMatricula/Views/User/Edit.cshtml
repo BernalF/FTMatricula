@@ -31,33 +31,34 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span>EDIT USERS -</span>Personal DATA
+                <span>Edición de Usuarios -</span>Información Personal
             </div>
 
             <div class="editDetail">
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>Identificacion</label>
+                            <label>Identificación</label>
                         </li>
                         <li>
                             <div>
-                                @*@Html.TextBoxFor(m => m.UserName, new { @class = "input", @readOnly = "readOnly"})*@
-                                <span class="readOnly">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "input"})
+
+                                @*<span class="readOnly">
                                     @Html.DisplayTextFor(m => m.UserName)
-                                </span>
+                                </span>*@
                             </div>
                         </li>
 
                         <li>
-                            <label>First Name</label>
+                            <label>Nombre</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.FirstName, new { @class = "input" })</div>
                         </li>
 
                         <li>
-                            <label>Last Name</label>
+                            <label>Apellidos</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.LastName, new { @class = "input" })</div>
@@ -67,7 +68,7 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>DateOfBirth</label>
+                            <label>Fecha Nac.</label>
                         </li>
                         <li>
                             <div>@*@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input" })*@
@@ -75,7 +76,7 @@
                             </div>
                         </li>
                         <li>
-                            <label>Gender</label>
+                            <label>Genero</label>
                         </li>
                         <li>
                             <div>
@@ -92,7 +93,7 @@
                             </div>
                         </li>
                         <li>
-                            <label>MaritalStatusTypeID</label>
+                            <label>Estado Civil</label>
                         </li>
                         <li>
                             <div>
@@ -109,7 +110,7 @@
                             </div>
                         </li>
                         <li>
-                            <label>CountryID</label>
+                            <label>País</label>
                         </li>
                         <li>
                             <div>
@@ -130,27 +131,27 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>Phone1</label>
+                            <label>Celular</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Phone1, new { @class = "input" })</div>
                         </li>
 
                         <li>
-                            <label>Phone2</label>
+                            <label>Tel Casa</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Phone2, new { @class = "input" })</div>
                         </li>
 
                         <li>
-                            <label>Phone3</label>
+                            <label>Tel Oficina</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Phone3, new { @class = "input" })</div>
                         </li>
                         <li>
-                            <label>Email</label>
+                            <label>E-mail</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Email, new { @class = "input" })</div>
@@ -198,13 +199,14 @@
             <div class="clear"></div>
             <div class="formBtnBar">
                 @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
-                <a href="#" class="button send" onclick="javascript: submit_form()">Save</a>
-                @Html.ActionLink("Cancel", "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
+                <a href="#" class="button send" onclick="javascript: submit_form()">Salvar</a>
+                @Html.ActionLink("Cancelar", "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
+            @Html.HiddenFor(m => m.tmpUserName)
             @Html.HiddenFor(m => m.StudentID)
             @Html.HiddenFor(m => m.UserId)
-            @Html.HiddenFor(m => m.UserName)
+            
             @Html.HiddenFor(m => m.IdentificationTypeID)
         }
     </div>

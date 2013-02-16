@@ -1,4 +1,5 @@
 ﻿using FTMatricula.Utilities.Helper;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
@@ -95,7 +96,7 @@ namespace FTMatricula.Models
         public string LastName { get; set; }
         
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
-        public string DateOfBirth { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
 
     }
 
