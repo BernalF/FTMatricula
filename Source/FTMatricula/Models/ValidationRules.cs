@@ -80,6 +80,7 @@ namespace FTMatricula.Models
     //------ ApplicationUser Section
     [MetadataType(typeof(ApplicationUser_Validation))]
     public partial class ApplicationUser {
+        public string tmpUserName { get; set; }
     }
 
     public class ApplicationUser_Validation
