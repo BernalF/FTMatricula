@@ -119,7 +119,7 @@ namespace FTMatricula.Models
     [MetadataType(typeof(SchemeDetail_Validation))]
     public partial class RequirementDetail
     {
-        public string tmpRequirementID { get; set; }        
+        public string tmpTypeID { get; set; }        
     }
 
     public class RequirementDetail_Validation

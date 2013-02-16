@@ -32,7 +32,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingRequirements([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Schools.ToList().Select(m => new { m.SchoolID, m.Name, m.Description, m.Code }).ToDataSourceResult(request));
+            return Json(db.RequirementDetails.ToList().Select(m => new { m.RequirementID, m.Name, m.TypeName}).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace FTMatricula.Controllers
                 {
                     RequirementID = Guid.NewGuid(),
                     Name = model.Name,
-                    TypeID = model.TypeID,
+                    TypeID = new Guid(model.tmpTypeID),
                     InsertUserID = SessApp.GetUserID(User.Identity.Name),
                     InsertDate = DateTime.Today,
                     IpAddress = Network.GetIpAddress(Request)
@@ -59,8 +59,7 @@ namespace FTMatricula.Controllers
                 db.Requirements.Add(req);
                 db.SaveChanges();
             }
-
-            return Json(new[] { new { RequirementID = model.RequirementID, Name = model.Name, TypeID = model.TypeID, TypeName = model.TypeName } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new { RequirementID = model.RequirementID, Name = model.Name, TypeName = model.TypeName } }.ToDataSourceResult(request, ModelState));            
         }
 
         /// <summary>
@@ -76,7 +75,7 @@ namespace FTMatricula.Controllers
             Requirement req = new Requirement
             {                
                 Name = model.Name,
-                TypeID = model.TypeID,
+                TypeID = new Guid(model.tmpTypeID),
                 ModifyUserID = SessApp.GetUserID(User.Identity.Name),
                 ModifyDate = DateTime.Today,
                 IpAddress = Network.GetIpAddress(Request)
@@ -84,7 +83,7 @@ namespace FTMatricula.Controllers
             
             db.Entry(req).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(new[] { new { RequirementID = model.RequirementID, Name = model.Name, TypeID = model.TypeID, TypeName = model.TypeName } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new { RequirementID = model.RequirementID, Name = model.Name, TypeName = model.TypeName } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
