@@ -45,7 +45,7 @@ namespace FTMatricula.Utilities
                 {
                     dictionary.Add(m.id.ToString(), m.name);
                 }
-                return new SelectList(dictionary, "Key", "Value");                                                 
+                return new SelectList(dictionary, "Key", "Value");
             }
         }
 
@@ -63,7 +63,7 @@ namespace FTMatricula.Utilities
                 {
                     dictionary.Add(t.TypeID, t.Name);
                 }
-                return new SelectList(dictionary, "Key", "Value");  
+                return new SelectList(dictionary, "Key", "Value");
             }
         }
 
@@ -118,8 +118,15 @@ namespace FTMatricula.Utilities
             get
             {
                 matrifunDBEntities db = new matrifunDBEntities();
+                var typeID = (from r in db.RequirementDetails
+                              join t in db.Types on r.TypeID equals t.TypeID
+                              where t.Name == "Program"
+                              select t.TypeID)
+                              .Distinct()
+                              .SingleOrDefault();
+
                 return new SelectList(db.Requirements
-                                        .Where(r => r.TypeID == new Guid("8FE61742-21F0-479A-8B13-5DC5CFD58118"))
+                                        .Where(r => r.TypeID == typeID)
                                         .ToList()
                                         .Select(r => new { r.RequirementID, r.Name }), "RequirementID", "Name");
             }
