@@ -10,6 +10,9 @@ namespace FTMatricula.Utilities
 {
     public class GeneralCollections
     {
+        /// <summary>
+        /// UserRoles List
+        /// </summary>
         public static SelectList UserRolesList
         {
             get
@@ -20,6 +23,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Coordinator List
+        /// </summary>
         public static SelectList CoordinatorList
         {
             get
@@ -32,6 +38,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Modality List
+        /// </summary>
         public static SelectList ModalityList
         {
             get
@@ -49,6 +58,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Marital Status List
+        /// </summary>
         public static SelectList MaritalStatusList
         {
             get
@@ -67,6 +79,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Identification List
+        /// </summary>
         public static SelectList IdentificationList
         {
             get
@@ -85,6 +100,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Countries List
+        /// </summary>
         public static SelectList CountriesList
         {
             get
@@ -102,6 +120,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Gender List
+        /// </summary>
         public static System.Web.Mvc.SelectList GenderList
         {
             get
@@ -113,6 +134,9 @@ namespace FTMatricula.Utilities
             }
         }
 
+        /// <summary>
+        /// Requirement List
+        /// </summary>
         public static SelectList RequirementList
         {
             get
@@ -129,6 +153,21 @@ namespace FTMatricula.Utilities
                                         .Where(r => r.TypeID == typeID)
                                         .ToList()
                                         .Select(r => new { r.RequirementID, r.Name }), "RequirementID", "Name");
+            }
+        }
+
+        /// <summary>
+        /// Requirement Types List
+        /// </summary>
+        public static SelectList ReqTypeList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Types
+                    .Where(t => t.Usage == "REQ")
+                    .ToList()
+                    .Select(t => new { t.TypeID, t.Name }), "TypeID", "Name");
             }
         }
     }

@@ -158,3 +158,4 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_SCHEME', 'es-CR', 'Agregar Pr
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Requisitos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TYPE_NAME', 'es-CR', 'Tipo')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_REQ', 'es-CR', 'Agregar Requisito')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Nombre Requisito')
