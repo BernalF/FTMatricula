@@ -159,3 +159,29 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Requisitos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TYPE_NAME', 'es-CR', 'Tipo')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_REQ', 'es-CR', 'Agregar Requisito')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Nombre Requisito')
+
+--ROLES
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_ADMINISTRATOR', 'es-CR', 'Administrador')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_COORDINATOR', 'es-CR', 'Coordinador')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_STUDENT', 'es-CR', 'Estudiante')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_AUDITOR', 'es-CR', 'Auditor')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_SCHOOL_ADMIN', 'es-CR', 'Admin. Escuela')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_TEACHER', 'es-CR', 'Profesor')
+
+
+--TYPES
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_SINGLE', 'es-CR', 'Soltero')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_DIVORCED', 'es-CR', 'Divorciado')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_MARRIED', 'es-CR', 'Casado')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_COHABIT', 'es-CR', 'Unión Libre')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_WIDOW', 'es-CR', 'Viudo(a)')
+
+
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'NATIONAL_ID', 'es-CR', 'Cédula Nacional')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PASSPORT_ID', 'es-CR', 'Pasaporte Extrangero')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'RESIDENT_ID', 'es-CR', 'Cédula Residente')
+
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_MALE', 'es-CR', 'Masculino')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_FEMALE', 'es-CR', 'Femenino')
+
+
