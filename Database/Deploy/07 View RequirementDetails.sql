@@ -21,5 +21,4 @@ SELECT	r.RequirementID,
 		t.Name TypeName
 FROM Requirement r
 INNER JOIN [Type] t ON r.TypeID= t.TypeID
-ORDER BY r.TypeID
 GO
