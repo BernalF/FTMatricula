@@ -54,6 +54,8 @@ namespace FTMatricula.Controllers
             if (ModelState.IsValid)
             {
                 Scheme scheme = new Scheme();
+                Scheme_Requirement sReq = new Scheme_Requirement();
+
                 scheme.SchemeID = Guid.NewGuid();
                 scheme.Name = model.SchemeName;
                 scheme.Description = model.Description;
@@ -63,7 +65,13 @@ namespace FTMatricula.Controllers
                 scheme.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 scheme.InsertDate = DateTime.Today;
                 scheme.IpAddress = Network.GetIpAddress(Request);
+                sReq.RequirementID = new Guid(model.tmpReqID);
+                sReq.SchemeID = scheme.SchemeID;
+                sReq.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+                sReq.InsertDate = DateTime.Today;
+                sReq.IpAddress = Network.GetIpAddress(Request);
                 db.Schemes.Add(scheme);
+                db.Scheme_Requirement.Add(sReq);
                 db.SaveChanges();
             }
             return Json(new[] { new 
