@@ -165,9 +165,9 @@ namespace FTMatricula.Utilities
             {
                 matrifunDBEntities db = new matrifunDBEntities();
                 return new SelectList(db.Types
-                    .Where(t => t.Usage == "REQ")
-                    .ToList()
-                    .Select(t => new { t.TypeID, t.Name }), "TypeID", "Name");
+                                        .Where(t => t.Usage == "REQ")
+                                        .ToList()
+                                        .Select(t => new { t.TypeID, t.Name }), "TypeID", "Name");
             }
         }
     }
