@@ -73,15 +73,16 @@ namespace FTMatricula.Models
         [StringLength(150, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "MAX_LENGTH")]
         [Display(ResourceType = typeof(ModelResources), Name = "COURSE_NAME")]
         public string Name { get; set; }
-        
-        [DataType(DataType.Currency)]       
+
+        [DataType(DataType.Currency)]
         public string Charge { get; set; }
 
     }
 
     //------ ApplicationUser Section
     [MetadataType(typeof(ApplicationUser_Validation))]
-    public partial class ApplicationUser {
+    public partial class ApplicationUser
+    {
         public string tmpUserName { get; set; }
     }
 
@@ -121,12 +122,12 @@ namespace FTMatricula.Models
         public PostedReq PostedReq { get; set; }
     }
 
-    public class PostedReq { public string[] ReqIDs { get; set; }  }
+    public class PostedReq { public string[] ReqIDs { get; set; } }
 
     public class ReqDetailDTO
     {
         public System.Guid? RequirementID { get; set; }
-        public string Name { get; set; }        
+        public string Name { get; set; }
     }
 
     public class SchemeDetail_Validation
@@ -139,11 +140,30 @@ namespace FTMatricula.Models
     [MetadataType(typeof(SchemeDetail_Validation))]
     public partial class RequirementDetail
     {
-        public string tmpTypeID { get; set; }        
+        public string tmpTypeID { get; set; }
     }
 
     public class RequirementDetail_Validation
     {
 
     }
+
+    [MetadataType(typeof(StudentAdditionalData_Validation))]
+    public partial class StudentAdditionalData
+    {
+
+    }
+
+    public class StudentAdditionalData_Validation
+    {
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_WORKS")]
+        public bool Works { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_STUDIES")]
+        public bool Studies { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_OFFERS")]
+        public bool ReceiveOffers { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_NEWS")]
+        public bool ReceiveNews { get; set; }
+    }
 }
+
