@@ -1,5 +1,6 @@
 ﻿using FTMatricula.Utilities.Helper;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
@@ -114,16 +115,25 @@ namespace FTMatricula.Models
     [MetadataType(typeof(SchemeDetail_Validation))]
     public partial class SchemeDetail
     {
-        public string tmpOwnerUserId { get; set; }
-        public string tmpCoordinatorUserId { get; set; }
-        public string tmpModalityID { get; set; }
         public string tmpReqID { get; set; }
+        public IEnumerable<ReqDetailDTO> requirements { get; set; }
+        public IEnumerable<ReqDetailDTO> SelectedReqs { get; set; }
+        public PostedReq PostedReq { get; set; }
+    }
+
+    public class PostedReq { public string[] ReqIDs { get; set; }  }
+
+    public class ReqDetailDTO
+    {
+        public System.Guid? RequirementID { get; set; }
+        public string Name { get; set; }        
     }
 
     public class SchemeDetail_Validation
     {
 
     }
+
 
     //------ RequerimentDetail Section
     [MetadataType(typeof(SchemeDetail_Validation))]
