@@ -37,7 +37,7 @@ namespace FTMatricula
                         "~/Content/scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/FTMatriculaJS").Include(
-                        "~/Content/scripts/checks.js",
+                        "~/Content/scripts/util.js",
                         "~/Content/scripts/layout.js"));
 
             bundles.Add(new StyleBundle("~/bundles/FTMatriculaCSS").Include(

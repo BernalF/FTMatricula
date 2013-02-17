@@ -33,7 +33,7 @@
                                           columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("MODALITY_NAME"));
                                           columns.Command(command =>
                                           {
-                                              command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("ShowDetails");
+                                              command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");
                                           }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
                                           columns.Command(command =>
                                           {
@@ -97,11 +97,29 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingSchemes", "Scheme"))                                                                                        
+                                            .Read(read => read.Action("PagingSchemes", "Scheme"))
                                             .Destroy(destroy => destroy.Action("DestroyScheme", "Scheme"))
                                             .Model(model => model.Id(m => m.SchemeID))
                                       )
                                 )
+                            </li>
+                            <li>
+                                @(Html.Kendo().Window().Name("Details")
+                                                    .Title("Requirement Details")
+                                                    .Visible(false)
+                                                    .Modal(true)
+                                                    .Draggable(true)
+                                                    .Width(500)
+                                )
+                                <script type="text/x-kendo-template" id="template">
+                                    <div id="details-container">
+                                    <ul>
+                                        # for (var i = 0; i < data.length; i++) { #
+                                            <li>#= data[i].Name #</li>
+                                        # } #
+                                    <ul>
+                                    </div>
+                                </script>
                             </li>
                         </ul>
                     </div>
@@ -113,14 +131,30 @@
 
 @section Scripts {
     <script>
-        function ShowDetails() {
-        }
         function Edit_Row(arg) {
-            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));            
+            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
             var id = dataItem.SchemeID;
             window.location.href = "Scheme/Edit/" + id;
         };
+
+        var detailsTemplate = kendo.template($("#template").html());
+
+        function showDetails(e) {
+            e.preventDefault();
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            var wnd = $("#Details").data("kendoWindow");
+            $.bAjax({
+                url: 'Scheme/PagingRequirements',
+                async: false,
+                data: {
+                    schemeID: dataItem.SchemeID,
+                },
+                ajaxSuccess: function (response) {
+                    wnd.content(detailsTemplate($.parseJSON(response)));
+                    wnd.center().open();
+                }
+            });
+
+        }
     </script>
-
-
 }

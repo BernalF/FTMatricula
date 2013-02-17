@@ -69,14 +69,13 @@ namespace FTMatricula.Controllers
         /// Paging Requirements
         /// </summary>
         [HttpPost]
-        public ActionResult PagingRequirements([DataSourceRequest] DataSourceRequest request)
+        public ActionResult PagingRequirements(string schemeID)
         {
             return Json(db.Requirements.ToList().Select(m =>
                 new
-                {
-                    m.RequirementID,
+                {                    
                     m.Name
-                }).ToDataSourceResult(request));
+                }));
         }
 
         /// <summary>

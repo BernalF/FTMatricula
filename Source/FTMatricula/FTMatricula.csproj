@@ -423,6 +423,7 @@
     <Content Include="Content\kendo\css\textures\stripe6.png" />
     <Content Include="Content\kendo\js\kendo.web.js" />
     <Content Include="Content\kendo\lib\Kendo.Mvc.dll" />
+    <Content Include="Content\scripts\util.js" />
     <Content Include="Content\styles\defaults.css" />
     <Content Include="Content\styles\internal.css" />
     <Content Include="Content\styles\login.css" />
