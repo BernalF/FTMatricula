@@ -396,8 +396,8 @@
           <Property Name="SchemeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="120" />
           <Property Name="Description" Type="varchar" Nullable="false" MaxLength="120" />
-          <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="CoordinatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerUserId" Type="uniqueidentifier" />
+          <Property Name="CoordinatorUserId" Type="uniqueidentifier" />
           <Property Name="ModalityID" Type="uniqueidentifier" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
@@ -577,31 +577,35 @@
         <EntityType Name="ApplicationUser">
           <Key>
             <PropertyRef Name="UserId" />
-            <PropertyRef Name="StudentID" />
             <PropertyRef Name="UserName" />
+            
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="LastName" />
             <PropertyRef Name="Gender" />
+            
             <PropertyRef Name="CountryName" />
-            <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="Phone1" />
+            
+            
             <PropertyRef Name="RoleName" />
+            <PropertyRef Name="StudentID" />
+            <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="IdentificationTypeID" />
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="Gender" Type="char" Nullable="false" MaxLength="1" />
-          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="CountryID" Type="uniqueidentifier" />
           <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="200" />
           <Property Name="MaritalStatusTypeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Phone1" Type="varchar" Nullable="false" MaxLength="80" />
-          <Property Name="Phone2" Type="varchar" MaxLength="80" />
-          <Property Name="Phone3" Type="varchar" MaxLength="80" />
+          <Property Name="Phone2" Type="varchar" Nullable="false" MaxLength="80" />
+          <Property Name="Phone3" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="IdentificationTypeID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
@@ -627,11 +631,11 @@
           <Key>
             <PropertyRef Name="SchemeID" />
             <PropertyRef Name="Description" />
-            <PropertyRef Name="OwnerUserId" />
             <PropertyRef Name="OwnerName" />
-            <PropertyRef Name="CoordinatorUserId" />
             <PropertyRef Name="CoordinatorName" />
             <PropertyRef Name="ModalityName" />
+            <PropertyRef Name="OwnerUserId" />
+            <PropertyRef Name="CoordinatorUserId" />
           </Key>
           <Property Name="SchemeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SchemeName" Type="varchar" MaxLength="120" />
@@ -931,6 +935,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="uspUserNameUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserNameOld" Type="nvarchar" Mode="In" />
+          <Parameter Name="UserNameNew" Type="nvarchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1245,8 +1253,8 @@
           <Property Name="SchemeID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
-          <Property Name="OwnerUserId" Type="Guid" Nullable="false" />
-          <Property Name="CoordinatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="OwnerUserId" Type="Guid" />
+          <Property Name="CoordinatorUserId" Type="Guid" />
           <Property Name="ModalityID" Type="Guid" />
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
           <Property Name="InsertUserID" Type="Guid" />
@@ -1454,17 +1462,17 @@
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="StudentID" Type="Guid" Nullable="false" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="CountryID" Type="Guid" />
           <Property Name="CountryName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="MaritalStatusTypeID" Type="Guid" Nullable="false" />
           <Property Name="Phone1" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
-          <Property Name="Phone2" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
-          <Property Name="Phone3" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Phone2" Type="String" MaxLength="80" Unicode="false" FixedLength="false" Nullable="false" />
+          <Property Name="Phone3" Type="String" MaxLength="80" Unicode="false" FixedLength="false" Nullable="false" />
           <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
           <Property Type="Guid" Name="IdentificationTypeID" Nullable="false" />
         </EntityType>
