@@ -164,8 +164,11 @@ namespace FTMatricula.Controllers
             try
             {
                 Student student = db.Students.Find(model.StudentID);
-                db.Students.Remove(student);
-                db.SaveChanges();
+                if (student != null)
+                {
+                    db.Students.Remove(student);
+                    db.SaveChanges();
+                }
 
                 if (Roles.GetRolesForUser(model.UserName).Length > 0)
                     Roles.RemoveUserFromRoles(model.UserName, Roles.GetRolesForUser(model.UserName));
