@@ -23,8 +23,8 @@
                         </li>
                         <li>
                             <div>
-                                <div class="k-textbox">
-                                    @Html.EditorFor(model => model.SchemeName)
+                                <div>
+                                    @Html.TextBoxFor(model => model.SchemeName, new { @class = "input width100" })
                                 </div>
                             </div>
                         </li>
@@ -33,8 +33,8 @@
                             @Html.Label(@Resources.GetValue("DESCRIPTION"))
                         </li>
                         <li>
-                            <div class="k-textbox">
-                                @Html.EditorFor(model => model.Description)
+                            <div>
+                                @Html.TextBoxFor(model => model.Description, new { @class = "input width100" })
                             </div>
                         </li>
                         <li>
@@ -46,7 +46,8 @@
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
                                                     .Name("OwnerUserId")
                                                     .DataTextField("Text")
-                                                    .DataValueField("Value"))
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                         <li>
@@ -58,7 +59,8 @@
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
                                                     .Name("CoordinatorUserId")
                                                     .DataTextField("Text")
-                                                    .DataValueField("Value"))
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                         <li>
@@ -70,7 +72,8 @@
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
                                                     .Name("ModalityID")
                                                     .DataTextField("Text")
-                                                    .DataValueField("Value"))
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                     </ul>
@@ -86,7 +89,8 @@
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.RequirementList)
                                                     .Name("tmpReqID")
                                                     .DataTextField("Text")
-                                                    .DataValueField("Value"))
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                     </ul>
