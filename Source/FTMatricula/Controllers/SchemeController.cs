@@ -79,31 +79,6 @@ namespace FTMatricula.Controllers
         }
 
         /// <summary>
-        /// Create Requirements
-        /// </summary>
-        [HttpPost]
-        public ActionResult CreateRequirements([DataSourceRequest] DataSourceRequest request, Requirement model)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    model.RequirementID = Guid.NewGuid();
-                    model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                    model.InsertDate = DateTime.Today;
-                    model.IpAddress = Network.GetIpAddress(Request);
-                    db.Requirements.Add(model);
-                    db.SaveChanges();
-                }
-                return Json(new[] { new { ModalityID = model.RequirementID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
-            }
-            catch (Exception e)
-            {
-                throw new ApplicationException(e.Message);
-            }
-        }
-
-        /// <summary>
         /// Create
         /// </summary>
         public ActionResult Create()
