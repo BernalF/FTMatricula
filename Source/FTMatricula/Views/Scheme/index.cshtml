@@ -37,14 +37,14 @@
                                           }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
                                           columns.Command(command =>
                                           {
-                                              command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
                                 .Editable(editable =>
-                                              {
-                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
-                                              })
+                                {
+                                    editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
+                                })
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
@@ -69,7 +69,8 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .ToolBar(create => create.Custom().Url(Url.Action("Create", "Scheme"))
+                                      .ToolBar(create => create.Custom()
+                                          .Action("Create", "Scheme", routeValues: null)
                                           .Text(@Resources.GetValue("ADD_SCHEME"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
@@ -96,9 +97,7 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingSchemes", "Scheme"))
-                                            .Create(create => create.Action("CreateScheme", "Scheme"))
-                                            .Update(update => update.Action("UpdateScheme", "Scheme"))
+                                            .Read(read => read.Action("PagingSchemes", "Scheme"))                                                                                        
                                             .Destroy(destroy => destroy.Action("DestroyScheme", "Scheme"))
                                             .Model(model => model.Id(m => m.SchemeID))
                                       )
@@ -116,6 +115,11 @@
     <script>
         function ShowDetails() {
         }
+        function Edit_Row(arg) {
+            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));            
+            var id = dataItem.SchemeID;
+            window.location.href = "Scheme/Edit/" + id;
+        };
     </script>
 
 

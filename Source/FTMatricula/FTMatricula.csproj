@@ -563,6 +563,7 @@
     <Content Include="Views\Requirement\index.cshtml" />
     <Content Include="Views\Requirement\EditorTemplates\AddRequirement.cshtml" />
     <Content Include="Views\Scheme\Create.cshtml" />
+    <Content Include="Views\Scheme\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

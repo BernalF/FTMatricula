@@ -1,15 +1,16 @@
+USE [matriFunDB]
+GO
 UPDATE [Type]
 SET [Name] = 'REQ_COURSE'
 WHERE Name = 'Course'
-
+GO
 UPDATE [Type]
 SET [Name] = 'REQ_PLAN'
 WHERE Name = 'Plan'
-
+GO
 UPDATE [Type]
 SET [Name] = 'REQ_PROGRAM'
 WHERE Name = 'Program'
-
 GO
 ALTER TABLE dbo.[Scheme-Requirement] ADD CONSTRAINT
 	[PK_Scheme-Requirement] PRIMARY KEY CLUSTERED 
