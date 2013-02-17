@@ -72,10 +72,17 @@ namespace FTMatricula.Controllers
         public ActionResult UpdateRequirement([DataSourceRequest] DataSourceRequest request, RequirementDetail model)
         {
 
+            var typeID = (from r in db.Types                          
+                          where r.Name == model.TypeName
+                          select r.TypeID)
+                              .Distinct()
+                              .SingleOrDefault();
+            
             Requirement req = new Requirement
             {                
+                RequirementID = model.RequirementID,
                 Name = model.Name,
-                TypeID = new Guid(model.tmpTypeID),
+                TypeID = typeID,
                 ModifyUserID = SessApp.GetUserID(User.Identity.Name),
                 ModifyDate = DateTime.Today,
                 IpAddress = Network.GetIpAddress(Request)
