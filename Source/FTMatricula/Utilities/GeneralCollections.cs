@@ -88,6 +88,48 @@ namespace FTMatricula.Utilities
         }
 
         /// <summary>
+        /// Who Pays List
+        /// </summary>
+        public static SelectList WhoPaysList
+        {
+            get
+            {
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                matrifunDBEntities db = new matrifunDBEntities();
+
+                foreach (var t in db.Types
+                                        .Where(x => x.Usage == "WPS")
+                                        .ToList()
+                                        .Select(x => new { x.TypeID, x.Name }).ToArray())
+                {
+                    dictionary.Add(t.TypeID, Resources.GetValue(t.Name));
+                }
+                return new SelectList(dictionary, "Key", "Value");
+            }
+        }
+
+        /// <summary>
+        /// Know About Us List
+        /// </summary>
+        public static SelectList KnowAboutUsList
+        {
+            get
+            {
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                matrifunDBEntities db = new matrifunDBEntities();
+
+                foreach (var t in db.Types
+                                        .Where(x => x.Usage == "KAU")
+                                        .ToList()
+                                        .Select(x => new { x.TypeID, x.Name }).ToArray())
+                {
+                    dictionary.Add(t.TypeID, Resources.GetValue(t.Name));
+                }
+                return new SelectList(dictionary, "Key", "Value");
+            }
+        }
+
+        /// <summary>
         /// Identification List
         /// </summary>
         public static SelectList IdentificationList

@@ -576,6 +576,7 @@
     <Content Include="Views\Scheme\Edit.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Views\Student\EditAD.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

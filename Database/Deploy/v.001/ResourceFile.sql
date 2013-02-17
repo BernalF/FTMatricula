@@ -207,3 +207,18 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADITIONAL_DATA', 'es-CR', 'Datos 
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_STUDENT', 'es-CR', 'Agregar Studiante')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_STUDENT_TITLE', 'es-CR', 'Agregar Estudiantes')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT_STUDENT_TITLE', 'es-CR', 'Edición de Estudiantes')
+
+
+---ADITIONAL DATA DROPDOWNLIST
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_DADS', 'es-CR', 'Padres de Familia')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_FAMILY', 'es-CR', 'Familiar')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_SCHOLARSHIP', 'es-CR', 'Beca')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_INSTITUTION', 'es-CR', 'Institución')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_OWN_INCOME', 'es-CR', 'Cuenta Propia')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_FUNDED', 'es-CR', 'Financiado')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_OTHER', 'es-CR', 'Otro')
+
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_TV', 'es-CR', 'Televisión')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_INTERNET', 'es-CR', 'Internet')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_NEWS', 'es-CR', 'Noticias')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_OTHER', 'es-CR', 'Otro')
