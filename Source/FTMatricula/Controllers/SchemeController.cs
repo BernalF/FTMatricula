@@ -71,11 +71,11 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingRequirements(string schemeID)
         {
-            return Json(db.Requirements.ToList().Select(m =>
-                new
-                {                    
-                    m.Name
-                }));
+            return Json(db.Scheme_Requirement
+                .Join(db.Requirements, sr => sr.RequirementID, r => r.RequirementID, (sr, r) => new { sr, r })
+                .Where(s => s.sr.SchemeID == new Guid(schemeID))
+                .ToList()
+                .Select(s => s.r.Name));
         }
 
         /// <summary>
