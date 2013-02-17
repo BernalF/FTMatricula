@@ -167,6 +167,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\RequirementController.cs" />
     <Compile Include="Controllers\SchemeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -270,6 +271,9 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Type.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValidationRules.cs" />
@@ -563,7 +567,9 @@
     <Content Include="Views\Requirement\index.cshtml" />
     <Content Include="Views\Requirement\EditorTemplates\AddRequirement.cshtml" />
     <Content Include="Views\Scheme\Create.cshtml" />
-    <Content Include="Views\Scheme\Edit.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\Edit.cshtml" />
+    <Content Include="Views\Student\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -45,5 +45,6 @@ namespace FTMatricula.Models
         public virtual StudentAdditionalData StudentAdditionalData { get; set; }
         public virtual ICollection<Student_Course> Student_Course { get; set; }
         public virtual ICollection<StudiesInformation> StudiesInformations { get; set; }
+        public virtual User User { get; set; }
     }
 }
