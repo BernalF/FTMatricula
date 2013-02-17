@@ -156,6 +156,9 @@ namespace FTMatricula.Models
 
     public class StudentAdditionalData_Validation
     {
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_PHYSICA_LADDRESS")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string PhysicalAddress { get; set; }
         [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_WORKS")]
         public bool Works { get; set; }
         [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_STUDIES")]

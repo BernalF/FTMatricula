@@ -1,0 +1,153 @@
+﻿@model FTMatricula.Models.Student
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
+}
+
+@section styles {
+
+}
+
+<div id="content_edit_left">
+    <div class="editMenuSpace">
+        <div class="editMenu">
+            <ul>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditPD", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("PERSONAL_DATA")
+                        </a>
+                    </div>
+                </li>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditAD", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("ADITIONAL_DATA")
+                        </a>
+                    </div>
+                </li>
+                <li class="editOptList editOptSelected">
+                    <div class="editOpt">
+                        <a href="#">@Resources.GetValue("ACADEMIC_INFORMATION")
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="content_edit_right">
+
+    <div class="editBox">
+        @using (Html.BeginForm())
+        { 
+            <div class="editTitle">
+                <span> @Resources.GetValue("EDIT_STUDENT_TITLE") -</span>@Resources.GetValue("ACADEMIC_INFORMATION")
+            </div>
+
+            <div class="editDetail">
+                <div class="detailBox100">
+                    @(Html.Kendo().Grid<FTMatricula.Models.ApplicationUser>()
+                                      .Name("Grid")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(m => m.UserName).Title(Resources.GetValue("IDENTIFICATION"));
+                                          columns.Bound(m => m.FirstName).Title(Resources.GetValue("FIRST_NAME"));
+                                          columns.Bound(m => m.LastName).Title(Resources.GetValue("LAST_NAME"));
+                                          columns.Command(command =>
+                                          {
+                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
+                                             //command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                             command
+                                                 .Destroy()
+                                                 .Text(@Resources.GetValue("DELETE"));
+                                          }).Width(180);                                                                                  
+                                      })
+                                      .Editable(editable =>
+                                              {
+                                                  editable.Mode(GridEditMode.PopUp);
+                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
+                                              })                              
+                                      .Sortable(sor => sor.AllowUnsort(true))
+                                      .Filterable(filter =>
+                                      {
+                                          filter.Enabled(true);
+                                          filter.Extra(false);
+                                          filter.Operators(oper =>
+                                          {
+                                              oper.ForString(ostr =>
+                                              {
+                                                  ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
+                                                  ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
+                                                  ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
+                                                  ostr.Contains(@Resources.GetValue("CONTAINS"));
+                                                  ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
+                                                  ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
+                                              });
+                                          });
+                                          filter.Messages(msj =>
+                                          {
+                                              msj.Filter(@Resources.GetValue("FIND"));
+                                              msj.Clear(@Resources.GetValue("CLEAN"));
+                                              msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
+                                          });
+                                      }) 
+                                      .ToolBar(create => create.Custom()
+                                          .Action("Create", "Student", routeValues: null)
+                                          .Text(Resources.GetValue("ADD_STUDENT"))
+                                          .HtmlAttributes(new { @class = "kendoAddbutton" }))                                 
+                                      .Pageable(pager => pager
+                                            .PageSizes(new int[] { 5, 10, 15 })                                            
+                                            .Input(true)                                            
+                                            .Numeric(true)
+                                            .Info(true)
+                                            .PreviousNext(true)
+                                            .Refresh(true)
+                                                    .Messages(messages =>
+                                                    {
+                                                        messages.Empty(@Resources.GetValue("NO_RECORDS"));
+                                                        messages.Display(@Resources.GetValue("DISPLAY_GRID"));
+                                                        messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
+                                                        messages.Page(@Resources.GetValue("PAGE"));
+                                                        messages.Of(@Resources.GetValue("OF_GRID"));
+                                                        messages.First(@Resources.GetValue("FIRST_PAGE"));
+                                                        messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
+                                                        messages.Next(@Resources.GetValue("NEXT_PAGE"));
+                                                        messages.Last(@Resources.GetValue("LAST_PAGE"));
+                                                        messages.Refresh(@Resources.GetValue("UPDATE"));
+                                                    }))
+                                      .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Events(events => events.Error("error_handler"))
+                                            .ServerOperation(false)
+                                            .Read(read => read.Action("PagingStudies", "Student"))
+                                            //.Update(update => update.Action("Edit", "User"))
+                                            .Destroy(destroy => destroy.Action("DestroyUser", "Student"))                                                                                        
+                                            .Model(model => model.Id(m => m.StudentID))
+                                      )
+                                )
+                </div>
+            </div>
+            
+            <div class="clear"></div>
+            <div class="formBtnBar">
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "Student", routeValues: null, htmlAttributes: new { @class = "button back" })
+            </div>
+            <div class="clear"></div>
+        }
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        function submit_form() {
+            //$('.modalBg').fadeIn();
+            //$('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+    </script>
+}

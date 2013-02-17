@@ -199,6 +199,62 @@ namespace FTMatricula.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult EditAD(StudentAdditionalData model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    StudentAdditionalData tmp = db.StudentAdditionalDatas.Find(model.StudentID);
+                    if (tmp != null)
+                    {
+                        tmp.PhysicalAddress = model.PhysicalAddress;
+                        tmp.AdditionalAddress = model.AdditionalAddress;
+                        tmp.Works = model.Works;
+                        tmp.Studies = model.Studies;
+                        tmp.WorkPlace = model.WorkPlace;
+                        tmp.JobTitle = model.JobTitle;
+                        tmp.WhoPaysYourStudiesTypeID = model.WhoPaysYourStudiesTypeID;
+                        tmp.HowYouKnowAboutUsTypeID = model.HowYouKnowAboutUsTypeID;
+                        tmp.ReceiveOffers = model.ReceiveOffers;
+                        tmp.ReceiveNews = model.ReceiveNews;
+                        db.Entry(tmp).State = EntityState.Modified;
+                        db.SaveChanges();
+                        model = tmp;
+                    }
+                    else {
+                        db.StudentAdditionalDatas.Add(model);
+                        db.SaveChanges();
+                    }
+                }
+                return View(model);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        public ActionResult EditStudies(string id)
+        {
+            return View(new Student { StudentID = new Guid(id) });
+        }
+
+
+        [HttpPost]
+        public ActionResult PagingStudies([DataSourceRequest] DataSourceRequest request)
+        {
+
+            return Json(db.Students
+                    .Join(db.Users, s => s.UserID, u => u.UserId, (s, u) => new { s, u })
+                    .Where(m => m.s.UserID == m.u.UserId && m.s.IsAppUser == false)
+                    .ToList().Select(m => new { m.u.UserId, m.s.StudentID, m.u.UserName, m.s.FirstName, m.s.LastName })
+                    .ToDataSourceResult(request));
+        }
+
+        
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
