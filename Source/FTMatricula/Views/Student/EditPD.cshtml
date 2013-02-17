@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
 }
 
 @section styles {
@@ -16,6 +16,12 @@
                 <li class="editOptList">
                     <div class="editOpt editOptSelected">
                         <a href="#">@Resources.GetValue("PERSONAL_DATA")
+                        </a>
+                    </div>
+                </li>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditAD", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("ADITIONAL_DATA")
                         </a>
                     </div>
                 </li>
@@ -172,26 +178,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="detailBox">
-                    <ul>
-                        <li>
-                            <label>@Resources.GetValue("ROLE")</label>
-                        </li>
-                        <li>
-                            <div>
-                                @*<span class="selectHolder">
-                                    @Html.DropDownListFor(m => m.Email, FTMatricula.Utilities.GeneralCollections.UserRolesList, new { @class = "select" })
-                                </span>*@
-                                @(Html.Kendo().DropDownListFor(m => m.RoleName)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.UserRolesList)
-                                    .Name("RoleName")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
             <div class="errorsSpace">
                 <ul>
