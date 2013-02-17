@@ -1,0 +1,24 @@
+UPDATE [Type]
+SET [Name] = 'REQ_COURSE'
+WHERE Name = 'Course'
+
+UPDATE [Type]
+SET [Name] = 'REQ_PLAN'
+WHERE Name = 'Plan'
+
+UPDATE [Type]
+SET [Name] = 'REQ_PROGRAM'
+WHERE Name = 'Program'
+
+GO
+ALTER TABLE dbo.[Scheme-Requirement] ADD CONSTRAINT
+	[PK_Scheme-Requirement] PRIMARY KEY CLUSTERED 
+	(
+	SchemeID,
+	RequirementID
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.[Scheme-Requirement] SET (LOCK_ESCALATION = TABLE)
+GO
+COMMIT
