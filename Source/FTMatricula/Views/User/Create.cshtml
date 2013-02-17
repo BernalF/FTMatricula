@@ -15,7 +15,7 @@
             <ul>
                 <li class="editOptList">
                     <div class="editOpt editOptSelected">
-                        <a href="@Url.Action("index", "School", routeValues: null)">PERSONAL DATA
+                        <a href="@Url.Action("index", "School", routeValues: null)">@Resources.GetValue("PERSONAL_DATA")
                         </a>
                     </div>
                 </li>
@@ -31,7 +31,7 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span>Agregar Usuarios -</span>Información Personal
+                <span> @Resources.GetValue("ADD_USERS_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")
             </div>
 
             <div class="editDetail">
