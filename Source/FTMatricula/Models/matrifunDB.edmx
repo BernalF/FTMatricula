@@ -1065,11 +1065,11 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
+          <EntitySet Name="RequirementDetails" EntityType="FTMatricula.DBModel.RequirementDetail" />
           <FunctionImport Name="uspUserNameUpdate">
             <Parameter Name="UserNameOld" Mode="In" Type="String" />
             <Parameter Name="UserNameNew" Mode="In" Type="String" />
           </FunctionImport>
-          <EntitySet Name="RequirementDetails" EntityType="FTMatricula.DBModel.RequirementDetail" />
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -2192,6 +2192,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
