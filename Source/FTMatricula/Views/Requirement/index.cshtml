@@ -10,7 +10,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("REQ_NAME")</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("REQ")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -25,7 +25,7 @@
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("REQ_NAME"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("REQ"));
                                           columns.Bound(m => m.TypeName).Title(@Resources.GetValue("TYPE_NAME"));
                                           columns.Command(command =>
                                           {

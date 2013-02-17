@@ -26,7 +26,7 @@ namespace FTMatricula.Utilities
                 {
                     dictionary.Add(t.RoleId, Resources.GetValue(t.RoleName));
                 }
-                
+
                 return new SelectList(dictionary, "Key", "Value");
             }
         }
@@ -152,7 +152,7 @@ namespace FTMatricula.Utilities
                 matrifunDBEntities db = new matrifunDBEntities();
                 var typeID = (from r in db.RequirementDetails
                               join t in db.Types on r.TypeID equals t.TypeID
-                              where t.Name == "Program"
+                              where t.Name == "REQ_PROGRAM"
                               select t.TypeID)
                               .Distinct()
                               .SingleOrDefault();
@@ -172,11 +172,17 @@ namespace FTMatricula.Utilities
             get
             {
                 matrifunDBEntities db = new matrifunDBEntities();
-                return new SelectList(db.Types
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                foreach (var t in db.Types
                                         .Where(t => t.Usage == "REQ")
                                         .ToList()
-                                        .Select(t => new { t.TypeID, t.Name }), "TypeID", "Name");
+                                        .Select(t => new { t.TypeID, t.Name }).ToArray())
+                {
+                    dictionary.Add(t.TypeID, Resources.GetValue(t.Name));
+                }
+                return new SelectList(dictionary, "Key", "Value");
             }
         }
     }
 }
+

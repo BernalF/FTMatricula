@@ -50,17 +50,7 @@
       [Scheme-Plan].[IpAddress] AS [IpAddress]
       FROM [dbo].[Scheme-Plan] AS [Scheme-Plan]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Requirement">
-            <DefiningQuery>SELECT 
-      [Scheme-Requirement].[SchemeID] AS [SchemeID], 
-      [Scheme-Requirement].[RequirementID] AS [RequirementID], 
-      [Scheme-Requirement].[InsertDate] AS [InsertDate], 
-      [Scheme-Requirement].[InsertUserID] AS [InsertUserID], 
-      [Scheme-Requirement].[ModifyDate] AS [ModifyDate], 
-      [Scheme-Requirement].[ModifyUserID] AS [ModifyUserID], 
-      [Scheme-Requirement].[IpAddress] AS [IpAddress]
-      FROM [dbo].[Scheme-Requirement] AS [Scheme-Requirement]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" store:Schema="dbo" store:Name="School-Scheme">
             <DefiningQuery>SELECT 
@@ -421,9 +411,6 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'matriFunDB.dbo.Scheme-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="Scheme-Requirement">
           <Key>
             <PropertyRef Name="SchemeID" />

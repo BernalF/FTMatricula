@@ -42,9 +42,9 @@
                         </li>
                         <li style="display: inline">
                             <div>
-                                @(Html.Kendo().DropDownListFor(model => model.tmpOwnerUserId)
+                                @(Html.Kendo().DropDownListFor(model => model.OwnerUserId)
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
-                                                    .Name("tmpOwnerUserId")
+                                                    .Name("OwnerUserId")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value"))
                             </div>
@@ -54,9 +54,9 @@
                         </li>
                         <li style="display: inline">
                             <div>
-                                @(Html.Kendo().DropDownListFor(model => model.tmpCoordinatorUserId)
+                                @(Html.Kendo().DropDownListFor(model => model.CoordinatorUserId)
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoordinatorList)
-                                                    .Name("tmpCoordinatorUserId")
+                                                    .Name("CoordinatorUserId")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value"))
                             </div>
@@ -66,9 +66,9 @@
                         </li>
                         <li style="display: inline">
                             <div>
-                                @(Html.Kendo().DropDownListFor(model => model.tmpModalityID)
+                                @(Html.Kendo().DropDownListFor(model => model.ModalityID)
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.ModalityList)
-                                                    .Name("tmpModalityID")
+                                                    .Name("ModalityID")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value"))
                             </div>

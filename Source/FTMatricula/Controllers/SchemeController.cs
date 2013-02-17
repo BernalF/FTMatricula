@@ -173,6 +173,45 @@ namespace FTMatricula.Controllers
             return Json(new[] { new { ModalityID = model.RequirementID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
         }
 
+        /// <summary>
+        /// Create Scheme
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(SchemeDetail model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                Scheme_Requirement sReq = new Scheme_Requirement
+                {
+                    RequirementID = new Guid(model.tmpReqID),
+                    SchemeID = Guid.NewGuid(),
+                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                    InsertDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request)
+                };
+                Scheme scheme = new Scheme
+                {
+                    SchemeID = sReq.SchemeID,
+                    Name = model.SchemeName,
+                    Description = model.Description,
+                    OwnerUserId = model.OwnerUserId,
+                    CoordinatorUserId = model.CoordinatorUserId,
+                    ModalityID = model.ModalityID,
+                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                    InsertDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request),
+                    Scheme_Requirement = new HashSet<Scheme_Requirement> { sReq }
+                };
+                db.Schemes.Add(scheme);
+                db.SaveChanges();                                                
+            }
+            return RedirectToAction("index");
+        }
+
         public ActionResult Create()
         {
             return View();

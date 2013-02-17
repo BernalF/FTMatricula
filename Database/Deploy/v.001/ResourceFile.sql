@@ -34,17 +34,17 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'FIRST_PAGE', 'es-CR', 'Primera Pá
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PREVIOUS_PAGE', 'es-CR', 'Página Anterior')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NEXT_PAGE', 'es-CR', 'Siguiente Página')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LAST_PAGE', 'es-CR', 'Ultima Página')
---Classroom View
+--CLASSROOM VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'CLASSROOM_MANT', 'es-CR', 'Mantenimiento Aulas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'CLASSROOM_CODE', 'es-CR', 'Código del Aula')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_CLASSROOM', 'es-CR', 'Agregar Aula')
---Location View
+--LOCATION VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOCATION_MANT', 'es-CR', 'Mantenimiento Lugares Físicos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOCATION_LINE1', 'es-CR', 'Dirección')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOCATION_LINE2', 'es-CR', 'Otras Señas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOCATION_NAME', 'es-CR', 'Nombre del Lugar')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_LOCATION', 'es-CR', 'Agregar Lugar Físico')
---Authentication View
+--AUTHENTICATION VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LOGIN_TITLE', 'es-CR', 'Inicio de sesión.')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUIRED', 'es-CR', '{0} es requerido')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'CURRENT_PASS', 'es-CR', 'Contraseña Actual')
@@ -63,7 +63,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'REGISTER', 'es-CR', 'Registrar')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NEW_USER', 'es-CR', 'Registrar un nuevo Usuario') 
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PASS_STRING_LENGTH1', 'es-CR', 'La Contraseña debe tener al menos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PASS_STRING_LENGTH2', 'es-CR', 'caracteres.')
--- HOME Menu
+-- HOME MENU
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'HOME', 'es-CR', 'Inicio')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT', 'es-CR', 'Estudiante')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MAINTENANCE', 'es-CR', 'Mantenimiento')
@@ -73,7 +73,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'NOTES_REGISTER', 'es-CR', 'Regist
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'RECORDS', 'es-CR', 'Registro de Actas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'CERTIFICATIONS', 'es-CR', 'Certificaciones')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'AUDIT', 'es-CR', 'Auditoría')
---Maintenance Details
+--MAINTENANCE DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHOOL', 'es-CR', 'Escuelas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHOOL_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar una escuela')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'CLASSROOM', 'es-CR', 'Aulas')
@@ -86,7 +86,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUERIMENT', 'es-CR', 'Requisito
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQUERIMENT_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar requisitos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USERS', 'es-CR', 'Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USERS_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar usuarios del sistema.')
---Student Details
+--STUDENT DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_CONSULT', 'es-CR', 'Consulta de Cursos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_CONSULT_DETAILS', 'es-CR', 'Se muestran los cursos que un estudiante esta llevando y la información asociada al curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ACADEMIC_HISTORY', 'es-CR', 'Historial Académico')
@@ -94,7 +94,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ACADEMIC_HISTORY_DETAILS', 'es-CR
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCORE_CONSULT', 'es-CR', 'Consulta de Notas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCORE_CONSULT_DETAILS', 'es-CR', 'Esta opción permite ver las notas de cada curso reportadas por el profesor')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_DETAILS', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar estudiantes.')
---Programs, Plans and Courses Details
+--PROGRAMS, PLANS AND COURSES DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PROGRAMS', 'es-CR', 'Programas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PROGRAMS_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar un programa')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PLAN', 'es-CR', 'Planes')
@@ -105,7 +105,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'LINK_PLAN_COURSE', 'es-CR', 'Vinc
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LINK_PLAN_COURSE_DETAILS', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar los cursos asociados a los planes')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PLAN_VERSION', 'es-CR', 'Versionamiento de Planes')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PLAN_VERSION_DETAILS', 'es-CR', 'Esta opción permite crear una versión de un plan de estudio vigente. El Sistema crea una versión copia del plan actual y en el nuevo se prodrá hacer los cambios respectivos, quedando el anterior como una versión histórica')
---Enrollment Details
+--ENROLLMENT DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENTS', 'es-CR', 'Matrículas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENTS_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar una instancia de matrícula')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_STUDENT', 'es-CR', 'Matrícula de Estudiantes')
@@ -114,33 +114,33 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'VAL_COURSE', 'es-CR', 'Convalidac
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'VAL_COURSE_DETAIL', 'es-CR', 'Esta opción permite realizar la convalidación de cursos por estudiante')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_ENROLLMENT_CONSULT', 'es-CR', 'Consulta de Matrículas por Estudiante')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_ENROLLMENT_CONSULT_DETAIL', 'es-CR', 'Esta opción permite verificar si un estudiante puede matricularse en un determinado plan')
---Records Details
+--RECORDS DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'RECORDS_COURSE', 'es-CR', 'Registro de Actas por curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'RECORDS_COURSE_DETAIL', 'es-CR', 'Esta opción permite hacer el registro definitivo de las notas de los estudiantes en un determinado curso')
---NOTES Details
+--NOTES DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NOTES_COURSE_REGISTER', 'es-CR', 'Registro de Notas por Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NOTES_COURSE_REGISTER_DETAIL', 'es-CR', 'Esta opción permite agregar y modificar las notas de los estudiantes matriculados en un determinado curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NOTES_IMPORT', 'es-CR', 'Importar Notas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NOTES_IMPORT_DETAIL', 'es-CR', 'Esta opción permite importar notas de estudiantes por curso desde un archivo en formato CSV')
---Certifications Details
+--CERTIFICATIONS DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TEMPLATES', 'es-CR', 'Plantillas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TEMPLATES_DETAIL', 'es-CR', 'Esta opción permite listar, agregar, modificar y eliminar plantillas de certificaciones')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PRINT_CERTIFICATION', 'es-CR', 'Imprimir Certificaciones')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PRINT_CERTIFICATION_DETAIL', 'es-CR', 'Esta opción permite realizar la impresión de las certificaciones de un plan')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LINK_PLAN_TEMPLATE', 'es-CR', 'Vincular Plantillas por Plan')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LINK_PLAN_TEMPLATE_DETAIL', 'es-CR', 'Esta opción permite vincular una platilla a un determiando plan de estudios')
---Auditing Details
+--AUDITING DETAILS
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'RECORDS1', 'es-CR', 'Notas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'AUDIT_DETAIL', 'es-CR', 'Esta opción permite listar o detallar lo referente al historial de este catálogo')
---Footer
+--FOOTER
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SIGN', 'es-CR', 'B&B Development, Todos los derechos reservados')
---Modality View
+--MODALITY VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_MANT', 'es-CR', 'Mantenimiento de Modalidades')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY', 'es-CR', 'Modalidades')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MODALITY_NAME', 'es-CR', 'Modalidad')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERIOD', 'es-CR', 'Periodo')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_MODALITY', 'es-CR', 'Agregar Modalidad')
---Course View
+--COURSE VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_MANT', 'es-CR', 'Mantenimiento de Cursos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_NAME', 'es-CR', 'Nombre del Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_CODE', 'es-CR', 'Codigo del Curso')
@@ -148,19 +148,18 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_COURSE', 'es-CR', 'Agregar Cu
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COURSE_COST', 'es-CR', 'Costo del Curso')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TEACHING_HOURS', 'es-CR', 'Horas Lectivas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MAX_LENGTH', 'es-CR', '{0} puede tener un maximo de {1} caracteres.')
---Scheme View
+--SCHEME VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHEME_MANT', 'es-CR', 'Mantenimiento de Programas')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'SCHEME_NAME', 'es-CR', 'Nombre del Programa')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'OWNER', 'es-CR', 'Responsable')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COORDINATOR', 'es-CR', 'Coordinador')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'VIEW_DETAILS', 'es-CR', 'Ver Detalles')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_SCHEME', 'es-CR', 'Agregar Programa')
---Requirement View
+--REQUIREMENT VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ', 'es-CR', 'Requisitos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'TYPE_NAME', 'es-CR', 'Tipo')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_REQ', 'es-CR', 'Agregar Requisito')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_NAME', 'es-CR', 'Nombre Requisito')
-
 --ROLES
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_ADMINISTRATOR', 'es-CR', 'Administrador')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_COORDINATOR', 'es-CR', 'Coordinador')
@@ -168,25 +167,17 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_STUDENT', 'es-CR', 'Estudian
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_AUDITOR', 'es-CR', 'Auditor')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_SCHOOL_ADMIN', 'es-CR', 'Admin. Escuela')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE_TEACHER', 'es-CR', 'Profesor')
-
-
 --TYPES
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_SINGLE', 'es-CR', 'Soltero')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_DIVORCED', 'es-CR', 'Divorciado')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_MARRIED', 'es-CR', 'Casado')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_COHABIT', 'es-CR', 'Unión Libre')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS_WIDOW', 'es-CR', 'Viudo(a)')
-
-
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'NATIONAL_ID', 'es-CR', 'Cédula Nacional')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PASSPORT_ID', 'es-CR', 'Pasaporte Extrangero')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'RESIDENT_ID', 'es-CR', 'Cédula Residente')
-
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_MALE', 'es-CR', 'Masculino')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_FEMALE', 'es-CR', 'Femenino')
-
-
-
 --USER MENU OPTIONS & VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USER_MAINTENANCE', 'es-CR', 'Mantenimiento Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERSONAL_DATA', 'es-CR', 'Informacion Personal')
@@ -205,4 +196,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'PHONE_HOME', 'es-CR', 'Tel. Casa'
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PHONE_OFFICE', 'es-CR', 'Tel. Oficina')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE', 'es-CR', 'Role')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_USER', 'es-CR', 'Agregar Usuario')
-
+--REQUIREMENTS TYPES
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_COURSE', 'es-CR', 'Cursos')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_PLAN', 'es-CR', 'Plan')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_PROGRAM', 'es-CR', 'Programa')

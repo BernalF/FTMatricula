@@ -67,18 +67,5 @@ namespace FTMatricula.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUserNameUpdate", userNameOldParameter, userNameNewParameter);
         }
-    
-        public virtual int uspUserNameUpdate1(string userNameOld, string userNameNew)
-        {
-            var userNameOldParameter = userNameOld != null ?
-                new ObjectParameter("UserNameOld", userNameOld) :
-                new ObjectParameter("UserNameOld", typeof(string));
-    
-            var userNameNewParameter = userNameNew != null ?
-                new ObjectParameter("UserNameNew", userNameNew) :
-                new ObjectParameter("UserNameNew", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUserNameUpdate1", userNameOldParameter, userNameNewParameter);
-        }
     }
 }
