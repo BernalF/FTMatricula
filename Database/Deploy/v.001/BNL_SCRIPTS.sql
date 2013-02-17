@@ -21,4 +21,4 @@ ALTER TABLE dbo.[Scheme-Requirement] ADD CONSTRAINT
 GO
 ALTER TABLE dbo.[Scheme-Requirement] SET (LOCK_ESCALATION = TABLE)
 GO
-COMMIT
+
