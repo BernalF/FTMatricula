@@ -37,7 +37,7 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span> @Resources.GetValue("EDIT_USERS_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")  
+                <span> @Resources.GetValue("EDIT_STUDENT_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")  
             </div>
 
             <div class="editDetail">
@@ -204,7 +204,7 @@
             <div class="formBtnBar">
                 @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
                 <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
-                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "Student", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
             

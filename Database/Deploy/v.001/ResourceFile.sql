@@ -180,7 +180,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_MALE', 'es-CR', 'Masculino
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_FEMALE', 'es-CR', 'Femenino')
 --USER MENU OPTIONS & VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USER_MAINTENANCE', 'es-CR', 'Mantenimiento Usuarios')
-INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERSONAL_DATA', 'es-CR', 'Información Personal')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERSONAL_DATA', 'es-CR', 'Informacin Personal')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_USERS_TITLE', 'es-CR', 'Agregar Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT_USERS_TITLE', 'es-CR', 'Edición de Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'IDENTIFICATION_TYPE', 'es-CR', 'Tipo Identificación')
@@ -203,5 +203,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_PROGRAM', 'es-CR', 'Programa'
 
 --USER MENU OPTIONS & VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_MAINTENANCE', 'es-CR', 'Mantenimiento Estudiantes')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADITIONAL_DATA', 'es-CR', 'Datos Adicionales')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_STUDENT', 'es-CR', 'Agregar Studiante')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_STUDENT_TITLE', 'es-CR', 'Agregar Estudiantes')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT_STUDENT_TITLE', 'es-CR', 'Edición de Estudiantes')
