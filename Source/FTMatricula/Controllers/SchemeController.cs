@@ -83,6 +83,15 @@ namespace FTMatricula.Controllers
         /// </summary>
         public ActionResult Create()
         {
+            //var requirementsList = (from sd in db.SchemeDetails
+            //                        join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
+            //                        join r in db.Requirements on sr.RequirementID equals r.RequirementID
+            //                        join t in db.Types on r.TypeID equals t.TypeID
+            //                        where t.Usage == "REQ"
+            //                        select new ReqDetailDTO { RequirementID = r.RequirementID, Name = r.Name }).AsEnumerable();
+
+            //SchemeDetail schemeDetail = new SchemeDetail { requirements = requirementsList };
+            //return View(schemeDetail);
             return View();
         }
 
@@ -96,7 +105,6 @@ namespace FTMatricula.Controllers
             {
                 if (ModelState.IsValid)
                 {
-
                     Scheme_Requirement sReq = new Scheme_Requirement
                     {
                         RequirementID = new Guid(model.tmpReqID),
