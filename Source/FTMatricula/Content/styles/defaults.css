@@ -1202,6 +1202,47 @@ color:#fff;
     
 }
 
+/*******/
+.detailBox100 {
+    display:block;
+    float:left;
+    width:100%;
+    font-size:14px;
+    color: #fff;
+}
+
+.detailBox100 ul{
+    margin:20px;
+    padding:10px;
+    border: 1px #327376 solid;
+    overflow:hidden;
+}
+
+.detailBox100 li{
+    display:block;
+    float:left;
+    /*width:50%;*/
+}
+
+.detailBox100 li:nth-child(odd){
+    width:40%;
+}
+.detailBox100 li:nth-child(even){
+    width:60%;
+}
+
+.detailBox100 li label{    
+    font-size: 14px;
+    color: #fff;
+    padding: 3px 0 3px 0;
+}
+
+.detailBox100 li div{    
+    padding: 3px 0 3px 0;
+    
+}
+/******/
+
 .formBtnBar {
     display:block;
     overflow:hidden;    

@@ -64,3 +64,32 @@ VALUES(NEWID(),'PASSPORT_ID','Passport ID','IDS')
 
 INSERT [Type]( TypeID,Name,[Description],Usage)
 VALUES(NEWID(),'RESIDENT_ID','Resident ID','IDS')
+
+
+
+---------------------------
+--Types for Aditional data
+---------------------------
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_DADS','Dads','WPS')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_FAMILY','Family','WPS')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_SCHOLARSHIP','Scholarship','WPS')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_INSTITUTION','Institution','WPS')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_OWN_INCOME','Own income','WPS')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_FUNDED','Funded','WPS')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'WPS_OTHER','Other','WPS')
+
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'KAU_TV','TV','KAU')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'KAU_INTERNET','INTERNET','KAU')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'KAU_NEWS','NEWS','KAU')
+INSERT [Type]( TypeID,Name,[Description],Usage)
+VALUES(NEWID(),'KAU_OTHER','Other','KAU')

@@ -182,6 +182,23 @@ namespace FTMatricula.Controllers
             }
         }
 
+        public ActionResult EditAD(string id)
+        {
+            try
+            {
+                StudentAdditionalData x = db.StudentAdditionalDatas.Find(new Guid(id));
+                if (x == null)
+                    return View(new StudentAdditionalData { StudentID = new Guid(id) });
+                else
+                    return View(x);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+        }
+
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
