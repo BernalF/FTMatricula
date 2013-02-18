@@ -86,17 +86,27 @@ namespace FTMatricula.Models
 
     public class ApplicationUser_Validation
     {
+        [Display(ResourceType = typeof(ModelResources), Name = "IDENTIFICATION")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        [StringLength(100, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "PASS_STRING_LENGTH", MinimumLength = 6)]
         public string UserName { get; set; }
 
+        [Display(ResourceType = typeof(ModelResources), Name = "FIRST_NAME")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string FirstName { get; set; }
 
+        [Display(ResourceType = typeof(ModelResources), Name = "LAST_NAME")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string LastName { get; set; }
-        
+
+        [Display(ResourceType = typeof(ModelResources), Name = "DATE_OF_BIRTH")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        [DataType(DataType.DateTime)]
         public Nullable<System.DateTime> DateOfBirth { get; set; }
+
+        [Display(ResourceType = typeof(ModelResources), Name = "PHONE_MOB")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string Phone1 { get; set; }
 
     }
 

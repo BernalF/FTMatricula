@@ -33,7 +33,7 @@ namespace FTMatricula.Controllers
 
         public ActionResult Create()
         {
-            return View(new ApplicationUser());
+            return View(new ApplicationUser { DateOfBirth=DateTime.Today});
         }
 
         [HttpPost]
@@ -89,6 +89,7 @@ namespace FTMatricula.Controllers
             {
                 throw new ApplicationException(e.Message);
             }
+            
         }
 
         public ActionResult Edit(string id)

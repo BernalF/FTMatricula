@@ -50,7 +50,17 @@
       [Scheme-Plan].[IpAddress] AS [IpAddress]
       FROM [dbo].[Scheme-Plan] AS [Scheme-Plan]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Requirement">
+            <DefiningQuery>SELECT 
+      [Scheme-Requirement].[SchemeID] AS [SchemeID], 
+      [Scheme-Requirement].[RequirementID] AS [RequirementID], 
+      [Scheme-Requirement].[InsertDate] AS [InsertDate], 
+      [Scheme-Requirement].[InsertUserID] AS [InsertUserID], 
+      [Scheme-Requirement].[ModifyDate] AS [ModifyDate], 
+      [Scheme-Requirement].[ModifyUserID] AS [ModifyUserID], 
+      [Scheme-Requirement].[IpAddress] AS [IpAddress]
+      FROM [dbo].[Scheme-Requirement] AS [Scheme-Requirement]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" store:Schema="dbo" store:Name="School-Scheme">
             <DefiningQuery>SELECT 
@@ -411,6 +421,9 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'matriFunDB.dbo.Scheme-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
         <EntityType Name="Scheme-Requirement">
           <Key>
             <PropertyRef Name="SchemeID" />
@@ -922,6 +935,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="uspRetrieveUserID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="uspUserNameUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserNameOld" Type="nvarchar" Mode="In" />
           <Parameter Name="UserNameNew" Type="nvarchar" Mode="In" />
@@ -1056,6 +1072,9 @@
           <FunctionImport Name="uspUserNameUpdate">
             <Parameter Name="UserNameOld" Mode="In" Type="String" />
             <Parameter Name="UserNameNew" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspRetrieveUserID" ReturnType="Collection(Guid)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Classroom">
@@ -2180,6 +2199,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
+          <FunctionImportMapping FunctionImportName="uspRetrieveUserID" FunctionName="FTMatricula.DBModel.Store.uspRetrieveUserID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
