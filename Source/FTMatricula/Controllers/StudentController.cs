@@ -245,7 +245,6 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingStudies([DataSourceRequest] DataSourceRequest request)
         {
-
             return Json(db.Students
                     .Join(db.Users, s => s.UserID, u => u.UserId, (s, u) => new { s, u })
                     .Where(m => m.s.UserID == m.u.UserId && m.s.IsAppUser == false)

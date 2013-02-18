@@ -575,6 +575,7 @@
     </Content>
     <Content Include="Views\Student\EditAD.cshtml" />
     <Content Include="Views\Student\EditStudies.cshtml" />
+    <Content Include="Views\Student\EditorTemplates\AddSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
