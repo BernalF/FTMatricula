@@ -25,6 +25,12 @@
                         </a>
                     </div>
                 </li>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditStudies", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("ACADEMIC_INFORMATION")
+                        </a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>

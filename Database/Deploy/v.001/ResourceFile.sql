@@ -180,7 +180,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_MALE', 'es-CR', 'Masculino
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_FEMALE', 'es-CR', 'Femenino')
 --USER MENU OPTIONS & VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'USER_MAINTENANCE', 'es-CR', 'Mantenimiento Usuarios')
-INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERSONAL_DATA', 'es-CR', 'Informacin Personal')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERSONAL_DATA', 'es-CR', 'Información Personal')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_USERS_TITLE', 'es-CR', 'Agregar Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT_USERS_TITLE', 'es-CR', 'Edición de Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'IDENTIFICATION_TYPE', 'es-CR', 'Tipo Identificación')
@@ -188,7 +188,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'IDENTIFICATION', 'es-CR', 'Identi
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'FIRST_NAME', 'es-CR', 'Nombre')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LAST_NAME', 'es-CR', 'Apellidos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'DATE_OF_BIRTH', 'es-CR', 'Fecha Nac.')
-INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER', 'es-CR', 'Genero')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER', 'es-CR', 'Género')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS', 'es-CR', 'Estado Civil')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'COUNTRY', 'es-CR', 'País')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PHONE_MOB', 'es-CR', 'Tel. Celular')
@@ -229,3 +229,5 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_TV', 'es-CR', 'Televisión')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_INTERNET', 'es-CR', 'Internet')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_NEWS', 'es-CR', 'Noticias')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_OTHER', 'es-CR', 'Otro')
+---ACADEMIC_INFORMATION VIEW
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ACADEMIC_INFORMATION', 'es-CR', 'Información Académica')
