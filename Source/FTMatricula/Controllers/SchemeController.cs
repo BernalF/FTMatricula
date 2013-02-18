@@ -15,8 +15,10 @@ namespace FTMatricula.Controllers
     public class SchemeController : Controller
     {
         private matrifunDBEntities db = new matrifunDBEntities();
-        //
-        // GET: /Scheme/
+
+        /// <summary>
+        /// index
+        /// </summary>
         public ActionResult index()
         {
             return View();
@@ -25,8 +27,6 @@ namespace FTMatricula.Controllers
         /// <summary>
         /// Paging Schemes
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPost]
         public ActionResult PagingSchemes([DataSourceRequest] DataSourceRequest request)
         {
@@ -43,105 +43,31 @@ namespace FTMatricula.Controllers
         }
 
         /// <summary>
-        /// Create Scheme
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CreateScheme([DataSourceRequest] DataSourceRequest request, SchemeDetail model)
-        {
-            if (ModelState.IsValid)
-            {
-                Scheme scheme = new Scheme();
-                Scheme_Requirement sReq = new Scheme_Requirement();
-
-                scheme.SchemeID = Guid.NewGuid();
-                scheme.Name = model.SchemeName;
-                scheme.Description = model.Description;
-                scheme.OwnerUserId = new Guid(model.tmpOwnerUserId);
-                scheme.CoordinatorUserId = new Guid(model.tmpCoordinatorUserId);
-                scheme.ModalityID = new Guid(model.tmpModalityID);
-                scheme.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                scheme.InsertDate = DateTime.Today;
-                scheme.IpAddress = Network.GetIpAddress(Request);
-                sReq.RequirementID = new Guid(model.tmpReqID);
-                sReq.SchemeID = scheme.SchemeID;
-                sReq.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                sReq.InsertDate = DateTime.Today;
-                sReq.IpAddress = Network.GetIpAddress(Request);
-                db.Schemes.Add(scheme);
-                db.Scheme_Requirement.Add(sReq);
-                db.SaveChanges();
-            }
-            return Json(new[] { new 
-            { 
-                SchemeID = model.SchemeID, 
-                SchemeName = model.SchemeName, 
-                Description = model.Description, 
-                OwnerName = model.OwnerName, 
-                CoordinatorName = model.CoordinatorName,                
-                ModalityName = model.ModalityName
-            } }.ToDataSourceResult(request, ModelState));
-        }
-
-        /// <summary>
-        /// Update Scheme
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult UpdateScheme([DataSourceRequest] DataSourceRequest request, SchemeDetail model)
-        {
-            Scheme scheme = new Scheme();
-            scheme.Name = model.SchemeName;
-            scheme.Description = model.Description;
-            scheme.OwnerUserId = model.OwnerUserId;
-            scheme.CoordinatorUserId = model.CoordinatorUserId;
-            scheme.ModalityID = new Guid(model.tmpModalityID);
-            scheme.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
-            scheme.ModifyDate = DateTime.Today;
-            scheme.IpAddress = Network.GetIpAddress(Request);
-            db.Entry(scheme).State = EntityState.Modified;
-            db.SaveChanges();
-            return Json(new[] { new 
-            { 
-                SchemeID = model.SchemeID, 
-                SchemeName = model.SchemeName, 
-                Description = model.Description, 
-                OwnerName = model.OwnerName, 
-                CoordinatorName = model.CoordinatorName,
-                ModalityName = model.ModalityName                
-            } }.ToDataSourceResult(request, ModelState));
-        }
-
-        /// <summary>
         /// Destroy Scheme
         /// </summary>
-        /// <param name="request"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyScheme([DataSourceRequest] DataSourceRequest request, SchemeDetail model)
         {
-            Scheme scheme = db.Schemes.Find(model.SchemeID);
-            db.Schemes.Remove(scheme);
-            db.SaveChanges();
-            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
-        }
+            try
+            {
+                db.Scheme_Requirement
+                  .ToList().RemoveAll(s => s.SchemeID == model.SchemeID);
+                db.SaveChanges();
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
+                Scheme scheme = db.Schemes.Find(model.SchemeID);
+                db.Schemes.Remove(scheme);
+                db.SaveChanges();
+                return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
 
         /// <summary>
         /// Paging Requirements
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPost]
         public ActionResult PagingRequirements([DataSourceRequest] DataSourceRequest request)
         {
@@ -156,46 +82,117 @@ namespace FTMatricula.Controllers
         /// <summary>
         /// Create Requirements
         /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
         [HttpPost]
         public ActionResult CreateRequirements([DataSourceRequest] DataSourceRequest request, Requirement model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                model.RequirementID = Guid.NewGuid();
-                model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                model.InsertDate = DateTime.Today;
-                model.IpAddress = Network.GetIpAddress(Request);
-                db.Requirements.Add(model);
-                db.SaveChanges();
+                if (ModelState.IsValid)
+                {
+                    model.RequirementID = Guid.NewGuid();
+                    model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+                    model.InsertDate = DateTime.Today;
+                    model.IpAddress = Network.GetIpAddress(Request);
+                    db.Requirements.Add(model);
+                    db.SaveChanges();
+                }
+                return Json(new[] { new { ModalityID = model.RequirementID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
             }
-            return Json(new[] { new { ModalityID = model.RequirementID, Name = model.Name } }.ToDataSourceResult(request, ModelState));
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Create
+        /// </summary>
+        public ActionResult Create()
+        {
+            return View();
         }
 
         /// <summary>
         /// Create Scheme
         /// </summary>
-        /// <param name="request"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Create(SchemeDetail model)
         {
-            if (ModelState.IsValid)
+            try
             {
-
-                Scheme_Requirement sReq = new Scheme_Requirement
+                if (ModelState.IsValid)
                 {
-                    RequirementID = new Guid(model.tmpReqID),
-                    SchemeID = Guid.NewGuid(),
-                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                    InsertDate = DateTime.Today,
-                    IpAddress = Network.GetIpAddress(Request)
-                };
+
+                    Scheme_Requirement sReq = new Scheme_Requirement
+                    {
+                        RequirementID = new Guid(model.tmpReqID),
+                        SchemeID = Guid.NewGuid(),
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request)
+                    };
+                    Scheme scheme = new Scheme
+                    {
+                        SchemeID = sReq.SchemeID,
+                        Name = model.SchemeName,
+                        Description = model.Description,
+                        OwnerUserId = model.OwnerUserId,
+                        CoordinatorUserId = model.CoordinatorUserId,
+                        ModalityID = model.ModalityID,
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request),
+                        Scheme_Requirement = new HashSet<Scheme_Requirement> { sReq }
+                    };
+                    db.Schemes.Add(scheme);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("index");
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Edit
+        /// </summary>
+        public ActionResult Edit(string id)
+        {
+            try
+            {
+                SchemeDetail scheme = db.SchemeDetails
+                                   .Where(s => s.SchemeID == new Guid(id))
+                                   .ToList()
+                                   .FirstOrDefault();
+                return View(scheme);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Edit Scheme
+        /// </summary>        
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Edit(SchemeDetail model)
+        {
+            try
+            {
+                Scheme_Requirement sReq = new Scheme_Requirement
+               {
+                   RequirementID = new Guid(model.tmpReqID),
+                   SchemeID = model.SchemeID,
+                   InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                   InsertDate = DateTime.Today,
+                   IpAddress = Network.GetIpAddress(Request)
+               };
                 Scheme scheme = new Scheme
                 {
-                    SchemeID = sReq.SchemeID,
+                    SchemeID = model.SchemeID,
                     Name = model.SchemeName,
                     Description = model.Description,
                     OwnerUserId = model.OwnerUserId,
@@ -206,15 +203,23 @@ namespace FTMatricula.Controllers
                     IpAddress = Network.GetIpAddress(Request),
                     Scheme_Requirement = new HashSet<Scheme_Requirement> { sReq }
                 };
-                db.Schemes.Add(scheme);
-                db.SaveChanges();                                                
+                db.Entry(scheme).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("index");
             }
-            return RedirectToAction("index");
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
 
-        public ActionResult Create()
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        protected override void Dispose(bool disposing)
         {
-            return View();
+            db.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
