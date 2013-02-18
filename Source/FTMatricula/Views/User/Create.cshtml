@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = "Mantenimiento Usuarios";
+    ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
 }
 
 @section styles {
@@ -15,7 +15,7 @@
             <ul>
                 <li class="editOptList">
                     <div class="editOpt editOptSelected">
-                        <a href="@Url.Action("index", "School", routeValues: null)">@Resources.GetValue("PERSONAL_DATA")
+                        <a href="#">@Resources.GetValue("PERSONAL_DATA")
                         </a>
                     </div>
                 </li>
@@ -31,7 +31,7 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span> @Resources.GetValue("ADD_USERS_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")
+                <span> @Resources.GetValue("ADD_USERS_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")  
             </div>
 
             <div class="editDetail">
@@ -56,7 +56,7 @@
                         </li>
                         <li>
                             <div>
-                                @Html.TextBoxFor(m => m.UserName, new { @class = "input"})
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
 
                                 @*<span class="readOnly">
                                     @Html.DisplayTextFor(m => m.UserName)
@@ -65,14 +65,14 @@
                         </li>
 
                         <li>
-                            <label>Nombre</label>
+                            <label>@Resources.GetValue("FIRST_NAME")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.FirstName, new { @class = "input" })</div>
                         </li>
 
                         <li>
-                            <label>Apellidos</label>
+                            <label>@Resources.GetValue("LAST_NAME")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.LastName, new { @class = "input" })</div>
@@ -82,15 +82,15 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>Fecha Nac.</label>
+                            <label>@Resources.GetValue("DATE_OF_BIRTH")</label>
                         </li>
                         <li>
                             <div>@*@Html.TextBoxFor(m => m.DateOfBirth, new { @class = "input" })*@
-                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100"})
+                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
                             </div>
                         </li>
                         <li>
-                            <label>Genero</label>
+                            <label>@Resources.GetValue("GENDER")</label>
                         </li>
                         <li>
                             <div>
@@ -107,7 +107,7 @@
                             </div>
                         </li>
                         <li>
-                            <label>Estado Civil</label>
+                            <label>@Resources.GetValue("MARITAL_STATUS")</label>
                         </li>
                         <li>
                             <div>
@@ -124,7 +124,7 @@
                             </div>
                         </li>
                         <li>
-                            <label>País</label>
+                            <label>@Resources.GetValue("COUNTRY")</label>
                         </li>
                         <li>
                             <div>
@@ -145,27 +145,27 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>Celular</label>
+                            <label>@Resources.GetValue("PHONE_MOB")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Phone1, new { @class = "input" })</div>
                         </li>
 
                         <li>
-                            <label>Tel Casa</label>
+                            <label>@Resources.GetValue("PHONE_HOME")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Phone2, new { @class = "input" })</div>
                         </li>
 
                         <li>
-                            <label>Tel Oficina</label>
+                            <label>@Resources.GetValue("PHONE_OFFICE")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Phone3, new { @class = "input" })</div>
                         </li>
                         <li>
-                            <label>E-mail</label>
+                            <label>@Resources.GetValue("EMAIL")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.Email, new { @class = "input" })</div>
@@ -175,7 +175,7 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>Role</label>
+                            <label>@Resources.GetValue("ROLE")</label>
                         </li>
                         <li>
                             <div>
@@ -213,8 +213,8 @@
             <div class="clear"></div>
             <div class="formBtnBar">
                 @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
-                <a href="#" class="button send" onclick="javascript: submit_form()">Salvar</a>
-                @Html.ActionLink("Cancelar", "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
+                <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
             

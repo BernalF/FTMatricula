@@ -14,6 +14,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'UPDATE', 'es-CR', 'Actualizar')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'CANCEL', 'es-CR', 'Cancelar')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'DELETE', 'es-CR', 'Eliminar')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT', 'es-CR', 'Editar')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'SAVE', 'es-CR', 'Salvar')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'DELETE_CONFIRMATION', 'es-CR', '¿Está seguro que desea eliminar el registro?')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'IS_EQUAL_TO', 'es-CR', 'Sean iguales a')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'IS_NOT_EQUAL_TO', 'es-CR', 'Sean diferentes de')
@@ -187,12 +188,21 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER_FEMALE', 'es-CR', 'Femenin
 
 
 --USER MENU OPTIONS & VIEW
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'USER_MAINTENANCE', 'es-CR', 'Mantenimiento Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PERSONAL_DATA', 'es-CR', 'Informacion Personal')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_USERS_TITLE', 'es-CR', 'Agregar Usuarios')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT_USERS_TITLE', 'es-CR', 'Edición de Usuarios')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'IDENTIFICATION_TYPE', 'es-CR', 'Tipo Identificación')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'IDENTIFICATION', 'es-CR', 'Identificación')
-
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'FIRST_NAME', 'es-CR', 'Nombre')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'LAST_NAME', 'es-CR', 'Apellidos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'DATE_OF_BIRTH', 'es-CR', 'Fecha Nac.')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'GENDER', 'es-CR', 'Genero')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'MARITAL_STATUS', 'es-CR', 'Estado Civil')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'COUNTRY', 'es-CR', 'País')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PHONE_MOB', 'es-CR', 'Tel. Celular')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PHONE_HOME', 'es-CR', 'Tel. Casa')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PHONE_OFFICE', 'es-CR', 'Tel. Oficina')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ROLE', 'es-CR', 'Role')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_USER', 'es-CR', 'Agregar Usuario')
 

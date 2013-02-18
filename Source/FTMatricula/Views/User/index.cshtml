@@ -1,7 +1,7 @@
 ﻿@model FTMatricula.Models.ApplicationUser
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = "Mantenimiento Usuarios";
+    ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
 }
 
 @section styles {
@@ -11,7 +11,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/Usuarios</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("USERS")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -26,12 +26,12 @@
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.UserName).Title("Identificacion");
-                                          columns.Bound(m => m.FirstName).Title("Nombre");
-                                          columns.Bound(m => m.LastName).Title("Apellido");
+                                          columns.Bound(m => m.UserName).Title(Resources.GetValue("IDENTIFICATION"));
+                                          columns.Bound(m => m.FirstName).Title(Resources.GetValue("FIRST_NAME"));
+                                          columns.Bound(m => m.LastName).Title(Resources.GetValue("LAST_NAME"));
                                           columns.Command(command =>
                                           {
-                                             command.Custom("Edit").Text("Edit").Click("Edit_Row");
+                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
                                              //command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
                                              command
                                                  .Destroy()
@@ -69,7 +69,7 @@
                                       }) 
                                       .ToolBar(create => create.Custom()
                                           .Action("Create", "User", routeValues: null)
-                                          .Text("Add User")
+                                          .Text(Resources.GetValue("ADD_USER"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))                                 
                                       .Pageable(pager => pager
                                             .PageSizes(new int[] { 5, 10, 15 })                                            
