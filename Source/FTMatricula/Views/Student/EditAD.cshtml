@@ -37,14 +37,14 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span> @Resources.GetValue("EDIT_STUDENT_TITLE") -</span>@Resources.GetValue("ADITIONAL_DATA")
+                <span>@Resources.GetValue("EDIT_STUDENT_TITLE") -</span>@Resources.GetValue("ADITIONAL_DATA")
             </div>
 
             <div class="editDetail">
                 <div class="detailBox100">
                     <ul>
                         <li>
-                            <label>@Resources.GetValue("IDENTIFICATION")</label>
+                            <label>@Resources.GetValue("STUDENT_PHYSICA_LADDRESS")</label>
                         </li>
                         <li>
                             <div>
@@ -53,46 +53,147 @@
                         </li>
 
                         <li>
-                            <label>@Resources.GetValue("FIRST_NAME")</label>
+                            <label>@Resources.GetValue("STUDENT_ADDITIONAL_ADDRESS")</label>
                         </li>
                         <li>
                             <div>@Html.TextBoxFor(m => m.AdditionalAddress, new { @class = "input" })</div>
                         </li>
 
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_OCUPATION")</label>
+                        </li>
+                        <li>
+                            <div>
+                                <table class="width100">
+                                    <tr>
+                                        <td>
+                                            @if (Model.Works)
+                                            {  
+                                                <label class="checkHolder hit">
+                                                    @Html.CheckBoxFor(m => m.Works)
+                                                    @Html.DisplayNameFor(m => m.Works)
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="checkHolder">
+                                                    @Html.CheckBoxFor(m => m.Works)
+                                                    @Html.DisplayNameFor(m => m.Works)
+                                                </label>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Model.Studies)
+                                            {  
+                                                <label class="checkHolder hit">
+                                                    @Html.CheckBoxFor(m => m.Studies)
+                                                    @Html.DisplayNameFor(m => m.Studies)
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="checkHolder">
+                                                    @Html.CheckBoxFor(m => m.Studies)
+                                                    @Html.DisplayNameFor(m => m.Studies)
+                                                </label>
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_WORK_PLACE")</label>
+                        </li>
+                        <li>
+                            <div>@Html.TextBoxFor(m => m.WorkPlace, new { @class = "input" })</div>
+                        </li>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_JOB_TITLE")</label>
+                        </li>
+                        <li>
+                            <div>@Html.TextBoxFor(m => m.JobTitle, new { @class = "input" })</div>
+                        </li>
                     </ul>
                 </div>
-                
-                <div class="detailBox">
+
+                <div class="detailBox100">
                     <ul>
                         <li>
-                            <label>@Resources.GetValue("PHONE_MOB")</label>
+                            <label>@Resources.GetValue("STUDENT_WHO_PAYS_YOUR_STUDIES")</label>
                         </li>
-                        @*<li>
-                            <div>@Html.TextBoxFor(m => m.Phone1, new { @class = "input" })</div>
+                        <li>
+                            <div>
+
+                                @(Html.Kendo().DropDownListFor(m => m.WhoPaysYourStudiesTypeID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.WhoPaysList)
+                                    .Name("WhoPaysYourStudiesTypeID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_HOW_YOU_KNOW_ABOUT_US")</label>
+                        </li>
+                        <li>
+                            <div>
+
+                                @(Html.Kendo().DropDownListFor(m => m.HowYouKnowAboutUsTypeID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.KnowAboutUsList)
+                                    .Name("HowYouKnowAboutUsTypeID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
                         </li>
 
                         <li>
-                            <label>@Resources.GetValue("PHONE_HOME")</label>
+                            <label>&nbsp;</label>
                         </li>
                         <li>
-                            <div>@Html.TextBoxFor(m => m.Phone2, new { @class = "input" })</div>
+                            <div>
+                                @if (Model.ReceiveOffers)
+                                {  
+                                    <label class="checkHolder hit">
+                                        @Html.CheckBoxFor(m => m.ReceiveOffers)
+                                        @Html.DisplayNameFor(m => m.ReceiveOffers)
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="checkHolder">
+                                        @Html.CheckBoxFor(m => m.ReceiveOffers)
+                                        @Html.DisplayNameFor(m => m.ReceiveOffers)
+                                    </label>
+                                }                                
+                            </div>
                         </li>
 
                         <li>
-                            <label>@Resources.GetValue("PHONE_OFFICE")</label>
+                            <label>&nbsp;</label>
                         </li>
                         <li>
-                            <div>@Html.TextBoxFor(m => m.Phone3, new { @class = "input" })</div>
+                            <div>
+                                @if (Model.ReceiveNews)
+                                {  
+                                    <label class="checkHolder hit">
+                                        @Html.CheckBoxFor(m => m.ReceiveNews)
+                                        @Html.DisplayNameFor(m => m.ReceiveNews)
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="checkHolder">
+                                        @Html.CheckBoxFor(m => m.ReceiveNews)
+                                        @Html.DisplayNameFor(m => m.ReceiveNews)
+                                    </label>
+                                }                                
+                            </div>
                         </li>
-                        <li>
-                            <label>@Resources.GetValue("EMAIL")</label>
-                        </li>
-                        <li>
-                            <div>@Html.TextBoxFor(m => m.Email, new { @class = "input" })</div>
-                        </li>*@
                     </ul>
                 </div>
-                
+
             </div>
             <div class="errorsSpace">
                 <ul>

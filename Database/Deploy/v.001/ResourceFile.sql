@@ -200,15 +200,23 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_USER', 'es-CR', 'Agregar Usua
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_COURSE', 'es-CR', 'Cursos')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_PLAN', 'es-CR', 'Plan')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'REQ_PROGRAM', 'es-CR', 'Programa')
-
---USER MENU OPTIONS & VIEW
+--STUDENT MENU OPTIONS & VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_MAINTENANCE', 'es-CR', 'Mantenimiento Estudiantes')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADITIONAL_DATA', 'es-CR', 'Datos Adicionales')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_STUDENT', 'es-CR', 'Agregar Studiante')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_STUDENT_TITLE', 'es-CR', 'Agregar Estudiantes')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'EDIT_STUDENT_TITLE', 'es-CR', 'Edición de Estudiantes')
-
-
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_PHYSICA_LADDRESS', 'es-CR', 'Dirección de Residencia')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_ADDITIONAL_ADDRESS', 'es-CR', 'Domicilio Durante Curso')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_OCUPATION', 'es-CR', 'Ocupación')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_WORKS', 'es-CR', 'Trabaja')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_STUDIES', 'es-CR', 'Estudia')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_RECEIVE_OFFERS', 'es-CR', 'Desea Recibir Ofertas?')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_RECEIVE_NEWS', 'es-CR', 'Desea Recibir Noticias sobre Matrícula del Programa?')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_WORK_PLACE', 'es-CR', 'Lugar de Trabajo')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_JOB_TITLE', 'es-CR', 'Puesto que Desempeña')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_WHO_PAYS_YOUR_STUDIES', 'es-CR', 'Quien Paga sus Estudios')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'STUDENT_HOW_YOU_KNOW_ABOUT_US', 'es-CR', 'Cómo Supo de Nosotros')
 ---ADITIONAL DATA DROPDOWNLIST
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_DADS', 'es-CR', 'Padres de Familia')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_FAMILY', 'es-CR', 'Familiar')
@@ -217,7 +225,6 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_INSTITUTION', 'es-CR', 'Insti
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_OWN_INCOME', 'es-CR', 'Cuenta Propia')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_FUNDED', 'es-CR', 'Financiado')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'WPS_OTHER', 'es-CR', 'Otro')
-
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_TV', 'es-CR', 'Televisión')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_INTERNET', 'es-CR', 'Internet')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'KAU_NEWS', 'es-CR', 'Noticias')

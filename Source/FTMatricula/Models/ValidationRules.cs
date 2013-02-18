@@ -136,4 +136,25 @@ namespace FTMatricula.Models
     {
 
     }
+
+
+    [MetadataType(typeof(StudentAdditionalData_Validation))]
+    public partial class StudentAdditionalData
+    {
+   
+    }
+
+    public class StudentAdditionalData_Validation
+    {
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_WORKS")]
+        public bool Works { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_STUDIES")]
+        public bool Studies { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_OFFERS")]
+        public bool ReceiveOffers { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_NEWS")]
+        public bool ReceiveNews { get; set; }
+    }
+
+    
 }

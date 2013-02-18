@@ -510,12 +510,12 @@
           <Property Name="AdditionalAddress" Type="varchar" MaxLength="400" />
           <Property Name="JobTitle" Type="varchar" MaxLength="200" />
           <Property Name="WorkPlace" Type="varchar" MaxLength="400" />
-          <Property Name="Works" Type="bit" />
-          <Property Name="Studies" Type="bit" />
+          <Property Name="Works" Type="bit" Nullable="false" />
+          <Property Name="Studies" Type="bit" Nullable="false" />
           <Property Name="WhoPaysYourStudiesTypeID" Type="uniqueidentifier" />
           <Property Name="HowYouKnowAboutUsTypeID" Type="uniqueidentifier" />
-          <Property Name="ReceiveOffers" Type="bit" />
-          <Property Name="ReceiveNews" Type="bit" />
+          <Property Name="ReceiveOffers" Type="bit" Nullable="false" />
+          <Property Name="ReceiveNews" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.Student-Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -1411,12 +1411,12 @@
           <Property Name="AdditionalAddress" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
           <Property Name="JobTitle" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="WorkPlace" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
-          <Property Name="Works" Type="Boolean" />
-          <Property Name="Studies" Type="Boolean" />
+          <Property Name="Works" Type="Boolean" Nullable="false" />
+          <Property Name="Studies" Type="Boolean" Nullable="false" />
           <Property Name="WhoPaysYourStudiesTypeID" Type="Guid" />
           <Property Name="HowYouKnowAboutUsTypeID" Type="Guid" />
-          <Property Name="ReceiveOffers" Type="Boolean" />
-          <Property Name="ReceiveNews" Type="Boolean" />
+          <Property Name="ReceiveOffers" Type="Boolean" Nullable="false" />
+          <Property Name="ReceiveNews" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Student" FromRole="StudentAdditionalData" ToRole="Student" />
           <NavigationProperty Name="Type" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" FromRole="StudentAdditionalData" ToRole="Type" />
           <NavigationProperty Name="Type1" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" FromRole="StudentAdditionalData" ToRole="Type" />

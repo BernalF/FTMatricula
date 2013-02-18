@@ -18,8 +18,11 @@ namespace FTMatricula.Utilities.Helper
         public static string ADD_REQ { get { return Resources.GetValue("ADD_REQ"); } }
         public static string ADD_SCHEME { get { return Resources.GetValue("ADD_SCHEME"); } }
         public static string ADD_SCHOOL { get { return Resources.GetValue("ADD_SCHOOL"); } }
+        public static string ADD_STUDENT { get { return Resources.GetValue("ADD_STUDENT"); } }
+        public static string ADD_STUDENT_TITLE { get { return Resources.GetValue("ADD_STUDENT_TITLE"); } }
         public static string ADD_USER { get { return Resources.GetValue("ADD_USER"); } }
         public static string ADD_USERS_TITLE { get { return Resources.GetValue("ADD_USERS_TITLE"); } }
+        public static string ADITIONAL_DATA { get { return Resources.GetValue("ADITIONAL_DATA"); } }
         public static string AUDIT { get { return Resources.GetValue("AUDIT"); } }
         public static string AUDIT_DETAIL { get { return Resources.GetValue("AUDIT_DETAIL"); } }
         public static string CANCEL { get { return Resources.GetValue("CANCEL"); } }
@@ -48,6 +51,7 @@ namespace FTMatricula.Utilities.Helper
         public static string DISPLAY_GRID { get { return Resources.GetValue("DISPLAY_GRID"); } }
         public static string DOES_NOT_CONTAIN { get { return Resources.GetValue("DOES_NOT_CONTAIN"); } }
         public static string EDIT { get { return Resources.GetValue("EDIT"); } }
+        public static string EDIT_STUDENT_TITLE { get { return Resources.GetValue("EDIT_STUDENT_TITLE"); } }
         public static string EDIT_USERS_TITLE { get { return Resources.GetValue("EDIT_USERS_TITLE"); } }
         public static string EMAIL { get { return Resources.GetValue("EMAIL"); } }
         public static string ENDS_WITH { get { return Resources.GetValue("ENDS_WITH"); } }
@@ -69,6 +73,10 @@ namespace FTMatricula.Utilities.Helper
         public static string IS_EQUAL_TO { get { return Resources.GetValue("IS_EQUAL_TO"); } }
         public static string IS_NOT_EQUAL_TO { get { return Resources.GetValue("IS_NOT_EQUAL_TO"); } }
         public static string ITEMS_PER_PAGE { get { return Resources.GetValue("ITEMS_PER_PAGE"); } }
+        public static string KAU_INTERNET { get { return Resources.GetValue("KAU_INTERNET"); } }
+        public static string KAU_NEWS { get { return Resources.GetValue("KAU_NEWS"); } }
+        public static string KAU_OTHER { get { return Resources.GetValue("KAU_OTHER"); } }
+        public static string KAU_TV { get { return Resources.GetValue("KAU_TV"); } }
         public static string LAST_NAME { get { return Resources.GetValue("LAST_NAME"); } }
         public static string LAST_PAGE { get { return Resources.GetValue("LAST_PAGE"); } }
         public static string LINK_PLAN_COURSE { get { return Resources.GetValue("LINK_PLAN_COURSE"); } }
@@ -138,7 +146,10 @@ namespace FTMatricula.Utilities.Helper
         public static string REGISTER { get { return Resources.GetValue("REGISTER"); } }
         public static string REMEMBER { get { return Resources.GetValue("REMEMBER"); } }
         public static string REQ { get { return Resources.GetValue("REQ"); } }
+        public static string REQ_COURSE { get { return Resources.GetValue("REQ_COURSE"); } }
         public static string REQ_NAME { get { return Resources.GetValue("REQ_NAME"); } }
+        public static string REQ_PLAN { get { return Resources.GetValue("REQ_PLAN"); } }
+        public static string REQ_PROGRAM { get { return Resources.GetValue("REQ_PROGRAM"); } }
         public static string REQUERIMENT { get { return Resources.GetValue("REQUERIMENT"); } }
         public static string REQUERIMENT_DETAIL { get { return Resources.GetValue("REQUERIMENT_DETAIL"); } }
         public static string REQUIRED { get { return Resources.GetValue("REQUIRED"); } }
@@ -164,9 +175,19 @@ namespace FTMatricula.Utilities.Helper
         public static string SIGNIN { get { return Resources.GetValue("SIGNIN"); } }
         public static string STARTS_WITH { get { return Resources.GetValue("STARTS_WITH"); } }
         public static string STUDENT { get { return Resources.GetValue("STUDENT"); } }
+        public static string STUDENT_ADDITIONAL_ADDRESS { get { return Resources.GetValue("STUDENT_ADDITIONAL_ADDRESS"); } }
         public static string STUDENT_DETAILS { get { return Resources.GetValue("STUDENT_DETAILS"); } }
         public static string STUDENT_ENROLLMENT_CONSULT { get { return Resources.GetValue("STUDENT_ENROLLMENT_CONSULT"); } }
         public static string STUDENT_ENROLLMENT_CONSULT_DETAIL { get { return Resources.GetValue("STUDENT_ENROLLMENT_CONSULT_DETAIL"); } }
+        public static string STUDENT_JOB_TITLE { get { return Resources.GetValue("STUDENT_JOB_TITLE"); } }
+        public static string STUDENT_MAINTENANCE { get { return Resources.GetValue("STUDENT_MAINTENANCE"); } }
+        public static string STUDENT_OCUPATION { get { return Resources.GetValue("STUDENT_OCUPATION"); } }
+        public static string STUDENT_PHYSICA_LADDRESS { get { return Resources.GetValue("STUDENT_PHYSICA_LADDRESS"); } }
+        public static string STUDENT_RECEIVE_NEWS { get { return Resources.GetValue("STUDENT_RECEIVE_NEWS"); } }
+        public static string STUDENT_RECEIVE_OFFERS { get { return Resources.GetValue("STUDENT_RECEIVE_OFFERS"); } }
+        public static string STUDENT_STUDIES { get { return Resources.GetValue("STUDENT_STUDIES"); } }
+        public static string STUDENT_WORK_PLACE { get { return Resources.GetValue("STUDENT_WORK_PLACE"); } }
+        public static string STUDENT_WORKS { get { return Resources.GetValue("STUDENT_WORKS"); } }
         public static string TEACHING_HOURS { get { return Resources.GetValue("TEACHING_HOURS"); } }
         public static string TEMPLATES { get { return Resources.GetValue("TEMPLATES"); } }
         public static string TEMPLATES_DETAIL { get { return Resources.GetValue("TEMPLATES_DETAIL"); } }
@@ -180,6 +201,13 @@ namespace FTMatricula.Utilities.Helper
         public static string VAL_COURSE { get { return Resources.GetValue("VAL_COURSE"); } }
         public static string VAL_COURSE_DETAIL { get { return Resources.GetValue("VAL_COURSE_DETAIL"); } }
         public static string VIEW_DETAILS { get { return Resources.GetValue("VIEW_DETAILS"); } }
+        public static string WPS_DADS { get { return Resources.GetValue("WPS_DADS"); } }
+        public static string WPS_FAMILY { get { return Resources.GetValue("WPS_FAMILY"); } }
+        public static string WPS_FUNDED { get { return Resources.GetValue("WPS_FUNDED"); } }
+        public static string WPS_INSTITUTION { get { return Resources.GetValue("WPS_INSTITUTION"); } }
+        public static string WPS_OTHER { get { return Resources.GetValue("WPS_OTHER"); } }
+        public static string WPS_OWN_INCOME { get { return Resources.GetValue("WPS_OWN_INCOME"); } }
+        public static string WPS_SCHOLARSHIP { get { return Resources.GetValue("WPS_SCHOLARSHIP"); } }
 
 
     }
