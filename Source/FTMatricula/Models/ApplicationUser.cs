@@ -21,7 +21,7 @@ namespace FTMatricula.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public System.DateTime DateOfBirth { get; set; }
         public Nullable<System.Guid> CountryID { get; set; }
         public string CountryName { get; set; }
         public System.Guid? MaritalStatusTypeID { get; set; }

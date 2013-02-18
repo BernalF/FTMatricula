@@ -2,7 +2,7 @@
 
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
 }
 
 @section styles {
@@ -19,6 +19,18 @@
                         </a>
                     </div>
                 </li>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditAD", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("ADITIONAL_DATA")
+                        </a>
+                    </div>
+                </li>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditStudies", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("ACADEMIC_INFORMATION")
+                        </a>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
@@ -31,7 +43,7 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span> @Resources.GetValue("EDIT_USERS_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")  
+                <span> @Resources.GetValue("EDIT_STUDENT_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")  
             </div>
 
             <div class="editDetail">
@@ -172,26 +184,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="detailBox">
-                    <ul>
-                        <li>
-                            <label>@Resources.GetValue("ROLE")</label>
-                        </li>
-                        <li>
-                            <div>
-                                @*<span class="selectHolder">
-                                    @Html.DropDownListFor(m => m.Email, FTMatricula.Utilities.GeneralCollections.UserRolesList, new { @class = "select" })
-                                </span>*@
-                                @(Html.Kendo().DropDownListFor(m => m.RoleName)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.UserRolesList)
-                                    .Name("RoleName")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                
             </div>
             <div class="errorsSpace">
                 <ul>
@@ -217,7 +210,7 @@
             <div class="formBtnBar">
                 @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
                 <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
-                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "User", routeValues: null, htmlAttributes: new { @class = "button back" })
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "Student", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
             

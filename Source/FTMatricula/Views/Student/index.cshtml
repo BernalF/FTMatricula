@@ -1,7 +1,7 @@
-﻿@model FTMatricula.Models.SchemeDetail
+﻿@model FTMatricula.Models.ApplicationUser
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("SCHEME_MANT");
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
 }
 
 @section styles {
@@ -11,7 +11,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("PROGRAMS")</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "student" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("STUDENT")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -22,29 +22,27 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.SchemeDetail>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.ApplicationUser>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.SchemeName).Title(@Resources.GetValue("SCHEME_NAME"));
-                                          columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
-                                          columns.Bound(m => m.OwnerName).Title(@Resources.GetValue("OWNER"));
-                                          columns.Bound(m => m.CoordinatorName).Title(@Resources.GetValue("COORDINATOR"));
-                                          columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("MODALITY_NAME"));
-                                          columns.Command(command =>
-                                          {
-                                              command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");
-                                          }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
+                                          columns.Bound(m => m.UserName).Title(Resources.GetValue("IDENTIFICATION"));
+                                          columns.Bound(m => m.FirstName).Title(Resources.GetValue("FIRST_NAME"));
+                                          columns.Bound(m => m.LastName).Title(Resources.GetValue("LAST_NAME"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
-                                              command.Destroy().Text(@Resources.GetValue("DELETE"));
-                                          }).Width(180);
+                                             //command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                             command
+                                                 .Destroy()
+                                                 .Text(@Resources.GetValue("DELETE"));
+                                          }).Width(180);                                                                                  
                                       })
-                                .Editable(editable =>
-                                {
-                                    editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
-                                })
+                                      .Editable(editable =>
+                                              {
+                                                  editable.Mode(GridEditMode.PopUp);
+                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
+                                              })                              
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
@@ -68,14 +66,14 @@
                                               msj.Clear(@Resources.GetValue("CLEAN"));
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
-                                      })
+                                      }) 
                                       .ToolBar(create => create.Custom()
-                                          .Action("Create", "Scheme", routeValues: null)
-                                          .Text(@Resources.GetValue("ADD_SCHEME"))
-                                          .HtmlAttributes(new { @class = "kendoAddbutton" }))
+                                          .Action("Create", "Student", routeValues: null)
+                                          .Text(Resources.GetValue("ADD_STUDENT"))
+                                          .HtmlAttributes(new { @class = "kendoAddbutton" }))                                 
                                       .Pageable(pager => pager
-                                            .PageSizes(new int[] { 5, 10, 15 })
-                                            .Input(true)
+                                            .PageSizes(new int[] { 5, 10, 15 })                                            
+                                            .Input(true)                                            
                                             .Numeric(true)
                                             .Info(true)
                                             .PreviousNext(true)
@@ -97,29 +95,12 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingSchemes", "Scheme"))
-                                            .Destroy(destroy => destroy.Action("DestroyScheme", "Scheme"))
-                                            .Model(model => model.Id(m => m.SchemeID))
+                                            .Read(read => read.Action("PagingUsers", "Student"))
+                                            //.Update(update => update.Action("Edit", "User"))
+                                            .Destroy(destroy => destroy.Action("DestroyUser", "Student"))                                                                                        
+                                            .Model(model => model.Id(m => m.StudentID))
                                       )
                                 )
-                            </li>
-                            <li>
-                                @(Html.Kendo().Window().Name("Details")
-                                                    .Title("Requirement Details")
-                                                    .Visible(false)
-                                                    .Modal(true)
-                                                    .Draggable(true)
-                                                    .Width(400)                                                    
-                                )
-                                <script type="text/x-kendo-template" id="template">
-                                    <div id="details-container">
-                                    <ul>
-                                        # for (var i = 0; i < data.length; i++) { #
-                                            <li>#= data[i] #</li>
-                                        # } #
-                                    <ul>
-                                    </div>
-                                </script>
                             </li>
                         </ul>
                     </div>
@@ -127,34 +108,18 @@
             </ul>
         </div>
     </div>
+
+
+
 </div>
 
 @section Scripts {
-    <script>
-        function Edit_Row(arg) {
-            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
-            var id = dataItem.SchemeID;
-            window.location.href = "Scheme/Edit/" + id;
-        };
-
-        var detailsTemplate = kendo.template($("#template").html());
-
-        function showDetails(e) {
-            e.preventDefault();
-            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-            var wnd = $("#Details").data("kendoWindow");
-            $.bAjax({
-                url: 'Scheme/PagingRequirements',
-                async: false,
-                data: {
-                    schemeID: dataItem.SchemeID,
-                },
-                ajaxSuccess: function (response) {
-                    wnd.content(detailsTemplate($.parseJSON(response)));
-                    wnd.center().open();
-                }
-            });
-
-        }
-    </script>
+   <script type="text/javascript">
+    function Edit_Row(arg) {
+        var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
+        //alert(JSON.stringify(dataItem));
+        var id = dataItem.StudentID;
+        window.location.href = "Student/EditPD/" + id;
+    };
+</script>
 }

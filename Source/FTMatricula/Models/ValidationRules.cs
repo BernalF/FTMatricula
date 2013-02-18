@@ -1,4 +1,6 @@
 ﻿using FTMatricula.Utilities.Helper;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using System.Web.Mvc;
@@ -71,30 +73,42 @@ namespace FTMatricula.Models
         [StringLength(150, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "MAX_LENGTH")]
         [Display(ResourceType = typeof(ModelResources), Name = "COURSE_NAME")]
         public string Name { get; set; }
-        
-        [DataType(DataType.Currency)]       
+
+        [DataType(DataType.Currency)]
         public string Charge { get; set; }
 
     }
 
     //------ ApplicationUser Section
     [MetadataType(typeof(ApplicationUser_Validation))]
-    public partial class ApplicationUser {
+    public partial class ApplicationUser
+    {
+        public string tmpUserName { get; set; }
     }
 
     public class ApplicationUser_Validation
     {
+        [Display(ResourceType = typeof(ModelResources), Name = "IDENTIFICATION")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        [StringLength(100, ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "PASS_STRING_LENGTH", MinimumLength = 6)]
         public string UserName { get; set; }
 
+        [Display(ResourceType = typeof(ModelResources), Name = "FIRST_NAME")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string FirstName { get; set; }
 
+        [Display(ResourceType = typeof(ModelResources), Name = "LAST_NAME")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
         public string LastName { get; set; }
-        
+
+        [Display(ResourceType = typeof(ModelResources), Name = "DATE_OF_BIRTH")]
         [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
-        public string DateOfBirth { get; set; }
+        [DataType(DataType.DateTime)]
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
+
+        [Display(ResourceType = typeof(ModelResources), Name = "PHONE_MOB")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string Phone1 { get; set; }
 
     }
 
@@ -102,13 +116,57 @@ namespace FTMatricula.Models
     [MetadataType(typeof(SchemeDetail_Validation))]
     public partial class SchemeDetail
     {
-        public string tmpOwnerUserId { get; set; }
-        public string tmpCoordinatorUserId { get; set; }
-        public string tmpModalityID { get; set; }
+        public string tmpReqID { get; set; }
+        public IEnumerable<ReqDetailDTO> requirements { get; set; }
+        public IEnumerable<ReqDetailDTO> SelectedReqs { get; set; }
+        public PostedReq PostedReq { get; set; }
+    }
+
+    public class PostedReq { public string[] ReqIDs { get; set; } }
+
+    public class ReqDetailDTO
+    {
+        public System.Guid? RequirementID { get; set; }
+        public string Name { get; set; }
     }
 
     public class SchemeDetail_Validation
     {
 
     }
+
+
+    //------ RequerimentDetail Section
+    [MetadataType(typeof(SchemeDetail_Validation))]
+    public partial class RequirementDetail
+    {
+        public string tmpTypeID { get; set; }
+    }
+
+    public class RequirementDetail_Validation
+    {
+
+    }
+
+    [MetadataType(typeof(StudentAdditionalData_Validation))]
+    public partial class StudentAdditionalData
+    {
+
+    }
+
+    public class StudentAdditionalData_Validation
+    {
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_PHYSICA_LADDRESS")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string PhysicalAddress { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_WORKS")]
+        public bool Works { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_STUDIES")]
+        public bool Studies { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_OFFERS")]
+        public bool ReceiveOffers { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_NEWS")]
+        public bool ReceiveNews { get; set; }
+    }
 }
+

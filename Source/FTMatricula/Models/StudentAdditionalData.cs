@@ -24,12 +24,12 @@ namespace FTMatricula.Models
         public string AdditionalAddress { get; set; }
         public string JobTitle { get; set; }
         public string WorkPlace { get; set; }
-        public Nullable<bool> Works { get; set; }
-        public Nullable<bool> Studies { get; set; }
+        public bool Works { get; set; }
+        public bool Studies { get; set; }
         public Nullable<System.Guid> WhoPaysYourStudiesTypeID { get; set; }
         public Nullable<System.Guid> HowYouKnowAboutUsTypeID { get; set; }
-        public Nullable<bool> ReceiveOffers { get; set; }
-        public Nullable<bool> ReceiveNews { get; set; }
+        public bool ReceiveOffers { get; set; }
+        public bool ReceiveNews { get; set; }
     
         public virtual Student Student { get; set; }
         public virtual Type Type { get; set; }

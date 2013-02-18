@@ -1,0 +1,236 @@
+﻿@model FTMatricula.Models.StudentAdditionalData
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
+}
+
+@section styles {
+
+}
+
+<div id="content_edit_left">
+    <div class="editMenuSpace">
+        <div class="editMenu">
+            <ul>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditPD", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("PERSONAL_DATA")
+                        </a>
+                    </div>
+                </li>
+                <li class="editOptList editOptSelected">
+                    <div class="editOpt">
+                        <a href="#">@Resources.GetValue("ADITIONAL_DATA")
+                        </a>
+                    </div>
+                </li>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("EditStudies", "Student", routeValues: new { id = Model.StudentID })">@Resources.GetValue("ACADEMIC_INFORMATION")
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="content_edit_right">
+
+    <div class="editBox">
+        @using (Html.BeginForm())
+        { 
+            <div class="editTitle">
+                <span>@Resources.GetValue("EDIT_STUDENT_TITLE") -</span>@Resources.GetValue("ADITIONAL_DATA")
+            </div>
+
+            <div class="editDetail">
+                <div class="detailBox100">
+                    <ul>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_PHYSICA_LADDRESS")</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(m => m.PhysicalAddress, new { @class = "input" })
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_ADDITIONAL_ADDRESS")</label>
+                        </li>
+                        <li>
+                            <div>@Html.TextBoxFor(m => m.AdditionalAddress, new { @class = "input" })</div>
+                        </li>
+
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_OCUPATION")</label>
+                        </li>
+                        <li>
+                            <div>
+                                <table class="width100">
+                                    <tr>
+                                        <td>
+                                            @if (Model.Works)
+                                            {  
+                                                <label class="checkHolder hit">
+                                                    @Html.CheckBoxFor(m => m.Works)
+                                                    @Html.DisplayNameFor(m => m.Works)
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="checkHolder">
+                                                    @Html.CheckBoxFor(m => m.Works)
+                                                    @Html.DisplayNameFor(m => m.Works)
+                                                </label>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (Model.Studies)
+                                            {  
+                                                <label class="checkHolder hit">
+                                                    @Html.CheckBoxFor(m => m.Studies)
+                                                    @Html.DisplayNameFor(m => m.Studies)
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="checkHolder">
+                                                    @Html.CheckBoxFor(m => m.Studies)
+                                                    @Html.DisplayNameFor(m => m.Studies)
+                                                </label>
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_WORK_PLACE")</label>
+                        </li>
+                        <li>
+                            <div>@Html.TextBoxFor(m => m.WorkPlace, new { @class = "input" })</div>
+                        </li>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_JOB_TITLE")</label>
+                        </li>
+                        <li>
+                            <div>@Html.TextBoxFor(m => m.JobTitle, new { @class = "input" })</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="detailBox100">
+                    <ul>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_WHO_PAYS_YOUR_STUDIES")</label>
+                        </li>
+                        <li>
+                            <div>
+
+                                @(Html.Kendo().DropDownListFor(m => m.WhoPaysYourStudiesTypeID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.WhoPaysList)
+                                    .Name("WhoPaysYourStudiesTypeID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                        <li>
+                            <label>@Resources.GetValue("STUDENT_HOW_YOU_KNOW_ABOUT_US")</label>
+                        </li>
+                        <li>
+                            <div>
+
+                                @(Html.Kendo().DropDownListFor(m => m.HowYouKnowAboutUsTypeID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.KnowAboutUsList)
+                                    .Name("HowYouKnowAboutUsTypeID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>&nbsp;</label>
+                        </li>
+                        <li>
+                            <div>
+                                @if (Model.ReceiveOffers)
+                                {  
+                                    <label class="checkHolder hit">
+                                        @Html.CheckBoxFor(m => m.ReceiveOffers)
+                                        @Html.DisplayNameFor(m => m.ReceiveOffers)
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="checkHolder">
+                                        @Html.CheckBoxFor(m => m.ReceiveOffers)
+                                        @Html.DisplayNameFor(m => m.ReceiveOffers)
+                                    </label>
+                                }                                
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>&nbsp;</label>
+                        </li>
+                        <li>
+                            <div>
+                                @if (Model.ReceiveNews)
+                                {  
+                                    <label class="checkHolder hit">
+                                        @Html.CheckBoxFor(m => m.ReceiveNews)
+                                        @Html.DisplayNameFor(m => m.ReceiveNews)
+                                    </label>
+                                }
+                                else
+                                {
+                                    <label class="checkHolder">
+                                        @Html.CheckBoxFor(m => m.ReceiveNews)
+                                        @Html.DisplayNameFor(m => m.ReceiveNews)
+                                    </label>
+                                }                                
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="errorsSpace">
+                <ul>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.PhysicalAddress)
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="clear"></div>
+            <div class="formBtnBar">
+                @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
+                <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "Student", routeValues: null, htmlAttributes: new { @class = "button back" })
+            </div>
+            <div class="clear"></div>
+            
+            @Html.HiddenFor(m => m.StudentID)
+        }
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        function submit_form() {
+            //$('.modalBg').fadeIn();
+            //$('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+    </script>
+}

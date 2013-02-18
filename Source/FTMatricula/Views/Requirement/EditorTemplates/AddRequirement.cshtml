@@ -1,0 +1,25 @@
+﻿@model FTMatricula.Models.RequirementDetail
+<ul>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.Name, @Resources.GetValue("REQ_NAME"))
+    </li>
+    <li class="k-textbox">
+        @Html.EditorFor(model => model.Name)
+    </li>
+    <li>
+        @Html.ValidationMessageFor(model => model.Name)
+    </li>
+    <li class="editor-label">
+        @Html.Label(@Resources.GetValue("TYPE_NAME"))
+    </li>  
+    <li style="display: inline">
+        @(Html.Kendo().ComboBoxFor(model => model.tmpTypeID)
+        .BindTo(FTMatricula.Utilities.GeneralCollections.ReqTypeList)
+        .Name("tmpTypeID")
+        .DataTextField("Text")
+        .DataValueField("Value"))
+    </li>  
+    <li>
+        @Html.ValidationSummary(true)
+    </li>
+</ul>

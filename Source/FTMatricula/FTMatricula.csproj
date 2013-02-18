@@ -13,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FTMatricula</RootNamespace>
     <AssemblyName>FTMatricula</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -68,6 +68,9 @@
       <HintPath>Content\kendo\lib\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList">
+      <HintPath>..\Packages\MvcCheckBoxList\MvcCheckBoxList.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -167,6 +170,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\StudentController.cs" />
+    <Compile Include="Controllers\RequirementController.cs" />
     <Compile Include="Controllers\SchemeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\CourseController.cs" />
@@ -229,6 +234,9 @@
     <Compile Include="Models\Requirement.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RequirementDetail.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Resource.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
@@ -266,6 +274,9 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Type.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ValidationRules.cs" />
@@ -415,6 +426,7 @@
     <Content Include="Content\kendo\css\textures\stripe6.png" />
     <Content Include="Content\kendo\js\kendo.web.js" />
     <Content Include="Content\kendo\lib\Kendo.Mvc.dll" />
+    <Content Include="Content\scripts\util.js" />
     <Content Include="Content\styles\defaults.css" />
     <Content Include="Content\styles\internal.css" />
     <Content Include="Content\styles\login.css" />
@@ -537,9 +549,7 @@
     <Content Include="Views\User\index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
-    <Content Include="Views\User\Destroy.cshtml" />
     <Content Include="Views\Scheme\index.cshtml" />
-    <Content Include="Views\Scheme\EditorTemplates\AddScheme.cshtml" />
     <EntityDeploy Include="Models\matrifunDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>matrifunDB.Designer.cs</LastGenOutput>
@@ -557,6 +567,18 @@
       <DependentUpon>matrifunDB.edmx</DependentUpon>
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Views\Requirement\index.cshtml" />
+    <Content Include="Views\Requirement\EditorTemplates\AddRequirement.cshtml" />
+    <Content Include="Views\Scheme\Create.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\EditPD.cshtml" />
+    <Content Include="Views\Student\index.cshtml" />
+    <Content Include="Views\Scheme\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Student\EditAD.cshtml" />
+    <Content Include="Views\Student\EditStudies.cshtml" />
+    <Content Include="Views\Student\EditorTemplates\AddSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

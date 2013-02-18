@@ -1,7 +1,6 @@
-﻿@model FTMatricula.Models.SchemeDetail
-@{
+﻿@{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("SCHEME_MANT");
+    ViewBag.Title = @Resources.GetValue("SCHOOL_MANT");
 }
 
 @section styles {
@@ -11,7 +10,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("PROGRAMS")</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("REQ")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -22,29 +21,27 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.SchemeDetail>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.RequirementDetail>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.SchemeName).Title(@Resources.GetValue("SCHEME_NAME"));
-                                          columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
-                                          columns.Bound(m => m.OwnerName).Title(@Resources.GetValue("OWNER"));
-                                          columns.Bound(m => m.CoordinatorName).Title(@Resources.GetValue("COORDINATOR"));
-                                          columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("MODALITY_NAME"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("REQ"));
+                                          columns.Bound(m => m.TypeName).Title(@Resources.GetValue("TYPE_NAME"));
                                           columns.Command(command =>
                                           {
-                                              command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");
-                                          }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
-                                          columns.Command(command =>
-                                          {
-                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
+                                              command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
-                                .Editable(editable =>
-                                {
-                                    editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
-                                })
+                                     .Editable(editable => 
+                                              {
+                                                  editable.Mode(GridEditMode.PopUp)
+                                                  .Window(m =>
+                                                  {
+                                                      m.Title(@Resources.GetValue("EDIT")).Draggable();
+                                                  }).TemplateName("AddRequirement");
+                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));                                                
+                                              })
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
@@ -69,13 +66,12 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .ToolBar(create => create.Custom()
-                                          .Action("Create", "Scheme", routeValues: null)
-                                          .Text(@Resources.GetValue("ADD_SCHEME"))
+                                      .ToolBar(create => create.Create()
+                                          .Text(@Resources.GetValue("ADD_REQ"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
-                                            .PageSizes(new int[] { 5, 10, 15 })
-                                            .Input(true)
+                                            .PageSizes(new int[] { 5, 10, 15 })                                            
+                                            .Input(true)                                            
                                             .Numeric(true)
                                             .Info(true)
                                             .PreviousNext(true)
@@ -97,29 +93,13 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingSchemes", "Scheme"))
-                                            .Destroy(destroy => destroy.Action("DestroyScheme", "Scheme"))
-                                            .Model(model => model.Id(m => m.SchemeID))
+                                            .Read(read => read.Action("PagingRequirements", "Requirement"))
+                                            .Create(create => create.Action("CreateRequirement", "Requirement"))
+                                            .Update(update => update.Action("UpdateRequirement", "Requirement"))  
+                                            .Destroy(destroy => destroy.Action("DestroyRequirement", "Requirement"))                                          
+                                            .Model(model => model.Id(m => m.RequirementID))
                                       )
                                 )
-                            </li>
-                            <li>
-                                @(Html.Kendo().Window().Name("Details")
-                                                    .Title("Requirement Details")
-                                                    .Visible(false)
-                                                    .Modal(true)
-                                                    .Draggable(true)
-                                                    .Width(400)                                                    
-                                )
-                                <script type="text/x-kendo-template" id="template">
-                                    <div id="details-container">
-                                    <ul>
-                                        # for (var i = 0; i < data.length; i++) { #
-                                            <li>#= data[i] #</li>
-                                        # } #
-                                    <ul>
-                                    </div>
-                                </script>
                             </li>
                         </ul>
                     </div>
@@ -127,34 +107,11 @@
             </ul>
         </div>
     </div>
+
+
+
 </div>
 
 @section Scripts {
-    <script>
-        function Edit_Row(arg) {
-            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
-            var id = dataItem.SchemeID;
-            window.location.href = "Scheme/Edit/" + id;
-        };
 
-        var detailsTemplate = kendo.template($("#template").html());
-
-        function showDetails(e) {
-            e.preventDefault();
-            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-            var wnd = $("#Details").data("kendoWindow");
-            $.bAjax({
-                url: 'Scheme/PagingRequirements',
-                async: false,
-                data: {
-                    schemeID: dataItem.SchemeID,
-                },
-                ajaxSuccess: function (response) {
-                    wnd.content(detailsTemplate($.parseJSON(response)));
-                    wnd.center().open();
-                }
-            });
-
-        }
-    </script>
 }
