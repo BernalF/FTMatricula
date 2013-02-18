@@ -1,7 +1,7 @@
 ﻿@model FTMatricula.Models.ApplicationUser
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
 }
 
 @section styles {
@@ -11,7 +11,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("USERS")</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "maintenance" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")/@Resources.GetValue("STUDENT")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -68,8 +68,8 @@
                                           });
                                       }) 
                                       .ToolBar(create => create.Custom()
-                                          .Action("Create", "User", routeValues: null)
-                                          .Text(Resources.GetValue("ADD_USER"))
+                                          .Action("Create", "Student", routeValues: null)
+                                          .Text(Resources.GetValue("ADD_STUDENT"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))                                 
                                       .Pageable(pager => pager
                                             .PageSizes(new int[] { 5, 10, 15 })                                            
@@ -95,9 +95,9 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingUsers", "User"))
+                                            .Read(read => read.Action("PagingUsers", "Student"))
                                             //.Update(update => update.Action("Edit", "User"))
-                                            .Destroy(destroy => destroy.Action("DestroyUser", "User"))                                                                                        
+                                            .Destroy(destroy => destroy.Action("DestroyUser", "Student"))                                                                                        
                                             .Model(model => model.Id(m => m.StudentID))
                                       )
                                 )
@@ -119,7 +119,7 @@
         var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
         //alert(JSON.stringify(dataItem));
         var id = dataItem.StudentID;
-        window.location.href = "User/Edit/" + id;
+        window.location.href = "Student/EditPD/" + id;
     };
 </script>
 }
