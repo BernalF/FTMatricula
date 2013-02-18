@@ -55,6 +55,8 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.RequirementDetail" Width="1.5" PointX="9.1613705107762335" PointY="13.393497532882494" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.User" Width="1.5" PointX="5.3691469791201634" PointY="5.579385372614202" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
