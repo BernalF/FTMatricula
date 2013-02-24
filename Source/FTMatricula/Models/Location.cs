@@ -14,11 +14,6 @@ namespace FTMatricula.Models
     
     public partial class Location
     {
-        public Location()
-        {
-            this.Plans = new HashSet<Plan>();
-        }
-    
         public System.Guid? LocationID { get; set; }
         public string Name { get; set; }
         public string Line1 { get; set; }
@@ -30,7 +25,5 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
-    
-        public virtual ICollection<Plan> Plans { get; set; }
     }
 }

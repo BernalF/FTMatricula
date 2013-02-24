@@ -42,9 +42,9 @@ namespace FTMatricula.Models
         public virtual Country Country { get; set; }
         public virtual Type Type { get; set; }
         public virtual Type Type1 { get; set; }
+        public virtual User User { get; set; }
         public virtual StudentAdditionalData StudentAdditionalData { get; set; }
         public virtual ICollection<Student_Course> Student_Course { get; set; }
         public virtual ICollection<StudiesInformation> StudiesInformations { get; set; }
-        public virtual User User { get; set; }
     }
 }

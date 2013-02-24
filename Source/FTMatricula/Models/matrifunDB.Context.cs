@@ -51,10 +51,19 @@ namespace FTMatricula.Models
         public DbSet<Student_Course> Student_Course { get; set; }
         public DbSet<StudiesInformation> StudiesInformations { get; set; }
         public DbSet<Type> Types { get; set; }
-        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<SchemeDetail> SchemeDetails { get; set; }
-        public DbSet<RequirementDetail> RequirementDetails { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<RequirementDetail> RequirementDetails { get; set; }
+        public DbSet<SchemeDetail> SchemeDetails { get; set; }
+    
+        public virtual ObjectResult<Nullable<System.Guid>> uspRetrieveUserID(string userName)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("UserName", userName) :
+                new ObjectParameter("UserName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("uspRetrieveUserID", userNameParameter);
+        }
     
         public virtual int uspUserNameUpdate(string userNameOld, string userNameNew)
         {
@@ -67,15 +76,6 @@ namespace FTMatricula.Models
                 new ObjectParameter("UserNameNew", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("uspUserNameUpdate", userNameOldParameter, userNameNewParameter);
-        }
-    
-        public virtual ObjectResult<Nullable<System.Guid>> uspRetrieveUserID(string userName)
-        {
-            var userNameParameter = userName != null ?
-                new ObjectParameter("UserName", userName) :
-                new ObjectParameter("UserName", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<System.Guid>>("uspRetrieveUserID", userNameParameter);
         }
     }
 }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="FTMatricula.DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="FTMatricula.DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="FTMatriculaDBModelStoreContainer">
           <EntitySet Name="Classroom" EntityType="FTMatricula.DBModel.Store.Classroom" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Country" EntityType="FTMatricula.DBModel.Store.Country" store:Type="Tables" Schema="dbo" />
@@ -132,10 +132,6 @@
           <AssociationSet Name="FK_Enrollment_Plan" Association="FTMatricula.DBModel.Store.FK_Enrollment_Plan">
             <End Role="Plan" EntitySet="Plan" />
             <End Role="Enrollment" EntitySet="Enrollment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plan_Location" Association="FTMatricula.DBModel.Store.FK_Plan_Location">
-            <End Role="Location" EntitySet="Location" />
-            <End Role="Plan" EntitySet="Plan" />
           </AssociationSet>
           <AssociationSet Name="FK_Plan-Course_Course" Association="FTMatricula.DBModel.Store.FK_Plan-Course_Course">
             <End Role="Course" EntitySet="Course" />
@@ -327,12 +323,12 @@
           <Property Name="PlanID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="120" />
           <Property Name="Description" Type="varchar" MaxLength="300" />
-          <Property Name="LocationID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+          <Property Name="Version" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.Plan-Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -580,22 +576,19 @@
           <Key>
             <PropertyRef Name="UserId" />
             <PropertyRef Name="UserName" />
-            
+            <PropertyRef Name="Email" />
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="LastName" />
             <PropertyRef Name="Gender" />
-            
+            <PropertyRef Name="DateOfBirth" />
             <PropertyRef Name="CountryName" />
             <PropertyRef Name="Phone1" />
-            
-            
+            <PropertyRef Name="Phone2" />
+            <PropertyRef Name="Phone3" />
             <PropertyRef Name="RoleName" />
-            <PropertyRef Name="StudentID" />
-            <PropertyRef Name="MaritalStatusTypeID" />
-            <PropertyRef Name="IdentificationTypeID" />
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="StudentID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StudentID" Type="uniqueidentifier" />
           <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="256" />
           <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="100" />
@@ -604,12 +597,12 @@
           <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
           <Property Name="CountryID" Type="uniqueidentifier" />
           <Property Name="CountryName" Type="varchar" Nullable="false" MaxLength="200" />
-          <Property Name="MaritalStatusTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MaritalStatusTypeID" Type="uniqueidentifier" />
           <Property Name="Phone1" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="Phone2" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="Phone3" Type="varchar" Nullable="false" MaxLength="80" />
           <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
-          <Property Name="IdentificationTypeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IdentificationTypeID" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -636,15 +629,13 @@
             <PropertyRef Name="OwnerName" />
             <PropertyRef Name="CoordinatorName" />
             <PropertyRef Name="ModalityName" />
-            <PropertyRef Name="OwnerUserId" />
-            <PropertyRef Name="CoordinatorUserId" />
           </Key>
           <Property Name="SchemeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SchemeName" Type="varchar" MaxLength="120" />
           <Property Name="Description" Type="varchar" Nullable="false" MaxLength="120" />
-          <Property Name="OwnerUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="OwnerUserId" Type="uniqueidentifier" />
           <Property Name="OwnerName" Type="nvarchar" Nullable="false" MaxLength="50" />
-          <Property Name="CoordinatorUserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CoordinatorUserId" Type="uniqueidentifier" />
           <Property Name="CoordinatorName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ModalityID" Type="uniqueidentifier" />
           <Property Name="ModalityName" Type="varchar" Nullable="false" MaxLength="120" />
@@ -682,18 +673,6 @@
             </Principal>
             <Dependent Role="Enrollment">
               <PropertyRef Name="PlanID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plan_Location">
-          <End Role="Location" Type="FTMatricula.DBModel.Store.Location" Multiplicity="1" />
-          <End Role="Plan" Type="FTMatricula.DBModel.Store.Plan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="Plan">
-              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -956,10 +935,11 @@
           <Parameter Name="UserNameOld" Type="nvarchar" Mode="In" />
           <Parameter Name="UserNameNew" Type="nvarchar" Mode="In" />
         </Function>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="FTMatricula.DBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+      <Schema Namespace="FTMatricula.DBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="matrifunDBEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Classrooms" EntityType="FTMatricula.DBModel.Classroom" />
           <EntitySet Name="Countries" EntityType="FTMatricula.DBModel.Country" />
@@ -984,7 +964,9 @@
           <EntitySet Name="Student_Course" EntityType="FTMatricula.DBModel.Student_Course" />
           <EntitySet Name="StudiesInformations" EntityType="FTMatricula.DBModel.StudiesInformation" />
           <EntitySet Name="Types" EntityType="FTMatricula.DBModel.Type" />
+          <EntitySet Name="Users" EntityType="FTMatricula.DBModel.User" />
           <EntitySet Name="ApplicationUsers" EntityType="FTMatricula.DBModel.ApplicationUser" />
+          <EntitySet Name="RequirementDetails" EntityType="FTMatricula.DBModel.RequirementDetail" />
           <EntitySet Name="SchemeDetails" EntityType="FTMatricula.DBModel.SchemeDetail" />
           <AssociationSet Name="FK_Student_Country" Association="FTMatricula.DBModel.FK_Student_Country">
             <End Role="Country" EntitySet="Countries" />
@@ -1013,10 +995,6 @@
           <AssociationSet Name="FK_Enrollment_Plan" Association="FTMatricula.DBModel.FK_Enrollment_Plan">
             <End Role="Plan" EntitySet="Plans" />
             <End Role="Enrollment" EntitySet="Enrollments" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Plan_Location" Association="FTMatricula.DBModel.FK_Plan_Location">
-            <End Role="Location" EntitySet="Locations" />
-            <End Role="Plan" EntitySet="Plans" />
           </AssociationSet>
           <AssociationSet Name="FK_Scheme_Modality" Association="FTMatricula.DBModel.FK_Scheme_Modality">
             <End Role="Modality" EntitySet="Modalities" />
@@ -1062,6 +1040,10 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
+          <AssociationSet Name="FK_Student_Users" Association="FTMatricula.DBModel.FK_Student_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Student" EntitySet="Students" />
+          </AssociationSet>
           <AssociationSet Name="FK_StudentAdditionalData_Student" Association="FTMatricula.DBModel.FK_StudentAdditionalData_Student">
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
@@ -1082,19 +1064,13 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
-          <EntitySet Name="RequirementDetails" EntityType="FTMatricula.DBModel.RequirementDetail" />
+          <FunctionImport Name="uspRetrieveUserID" ReturnType="Collection(Guid)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="uspUserNameUpdate">
             <Parameter Name="UserNameOld" Mode="In" Type="String" />
             <Parameter Name="UserNameNew" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="uspRetrieveUserID" ReturnType="Collection(Guid)">
-          <Parameter Name="UserName" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="Users" EntityType="FTMatricula.DBModel.User" />
-          <AssociationSet Name="FK_Student_Users" Association="FTMatricula.DBModel.FK_Student_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Student" EntitySet="Students" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1185,7 +1161,6 @@
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Plans" Relationship="FTMatricula.DBModel.FK_Plan_Location" FromRole="Location" ToRole="Plan" />
         </EntityType>
         <EntityType Name="Modality">
           <Key>
@@ -1208,14 +1183,13 @@
           <Property Name="PlanID" Type="Guid" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" MaxLength="300" Unicode="false" FixedLength="false" />
-          <Property Name="LocationID" Type="Guid" Nullable="false" />
           <Property Name="InsertDate" Type="DateTime" Precision="3" />
           <Property Name="InsertUserID" Type="Guid" />
           <Property Name="ModifyDate" Type="DateTime" Precision="3" />
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="Version" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Enrollments" Relationship="FTMatricula.DBModel.FK_Enrollment_Plan" FromRole="Plan" ToRole="Enrollment" />
-          <NavigationProperty Name="Location" Relationship="FTMatricula.DBModel.FK_Plan_Location" FromRole="Plan" ToRole="Location" />
           <NavigationProperty Name="Plan_Course" Relationship="FTMatricula.DBModel.FK_Plan_Course_Plan" FromRole="Plan" ToRole="Plan_Course" />
           <NavigationProperty Name="Scheme_Plan" Relationship="FTMatricula.DBModel.FK_Scheme_Plan_Plan" FromRole="Plan" ToRole="Scheme_Plan" />
         </EntityType>
@@ -1392,10 +1366,10 @@
           <NavigationProperty Name="Country" Relationship="FTMatricula.DBModel.FK_Student_Country" FromRole="Student" ToRole="Country" />
           <NavigationProperty Name="Type" Relationship="FTMatricula.DBModel.FK_Student_Type" FromRole="Student" ToRole="Type" />
           <NavigationProperty Name="Type1" Relationship="FTMatricula.DBModel.FK_Student_Type_MaritalStatus" FromRole="Student" ToRole="Type" />
+          <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_Student_Users" FromRole="Student" ToRole="Users" />
           <NavigationProperty Name="StudentAdditionalData" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Student" FromRole="Student" ToRole="StudentAdditionalData" />
           <NavigationProperty Name="Student_Course" Relationship="FTMatricula.DBModel.FK_Student_Course_Student" FromRole="Student" ToRole="Student_Course" />
           <NavigationProperty Name="StudiesInformations" Relationship="FTMatricula.DBModel.FK_StudiesInformation_Student" FromRole="Student" ToRole="StudiesInformation" />
-          <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_Student_Users" FromRole="Student" ToRole="User" />
         </EntityType>
         <EntityType Name="StudentAdditionalData">
           <Key>
@@ -1471,53 +1445,75 @@
           <NavigationProperty Name="StudentAdditionalDatas" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" FromRole="Type" ToRole="StudentAdditionalData" />
           <NavigationProperty Name="StudentAdditionalDatas1" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" FromRole="Type" ToRole="StudentAdditionalData" />
         </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Students" Relationship="FTMatricula.DBModel.FK_Student_Users" FromRole="Users" ToRole="Student" />
+        </EntityType>
         <EntityType Name="ApplicationUser">
           <Key>
             <PropertyRef Name="UserId" />
-            <PropertyRef Name="StudentID" />
             <PropertyRef Name="UserName" />
+            <PropertyRef Name="Email" />
             <PropertyRef Name="FirstName" />
             <PropertyRef Name="LastName" />
             <PropertyRef Name="Gender" />
+            <PropertyRef Name="DateOfBirth" />
             <PropertyRef Name="CountryName" />
-            <PropertyRef Name="MaritalStatusTypeID" />
             <PropertyRef Name="Phone1" />
+            <PropertyRef Name="Phone2" />
+            <PropertyRef Name="Phone3" />
             <PropertyRef Name="RoleName" />
-            <PropertyRef Name="IdentificationTypeID" />
           </Key>
           <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="StudentID" Type="Guid" Nullable="false" />
+          <Property Name="StudentID" Type="Guid" />
           <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Email" Type="String" MaxLength="256" Unicode="true" FixedLength="false" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
           <Property Name="Gender" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
-          <Property Name="DateOfBirth" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CountryID" Type="Guid" />
           <Property Name="CountryName" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="MaritalStatusTypeID" Type="Guid" Nullable="false" />
+          <Property Name="MaritalStatusTypeID" Type="Guid" />
           <Property Name="Phone1" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
-          <Property Name="Phone2" Type="String" MaxLength="80" Unicode="false" FixedLength="false" Nullable="false" />
-          <Property Name="Phone3" Type="String" MaxLength="80" Unicode="false" FixedLength="false" Nullable="false" />
-          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Type="Guid" Name="IdentificationTypeID" Nullable="false" />
+          <Property Name="Phone2" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Phone3" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" Unicode="true" FixedLength="false" />
+          <Property Name="IdentificationTypeID" Type="Guid" />
+        </EntityType>
+        <EntityType Name="RequirementDetail">
+          <Key>
+            <PropertyRef Name="RequirementID" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="TypeID" />
+            <PropertyRef Name="TypeName" />
+          </Key>
+          <Property Name="RequirementID" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
+          <Property Name="TypeID" Type="Guid" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
         </EntityType>
         <EntityType Name="SchemeDetail">
           <Key>
             <PropertyRef Name="SchemeID" />
             <PropertyRef Name="Description" />
-            <PropertyRef Name="OwnerUserId" />
             <PropertyRef Name="OwnerName" />
-            <PropertyRef Name="CoordinatorUserId" />
             <PropertyRef Name="CoordinatorName" />
             <PropertyRef Name="ModalityName" />
           </Key>
           <Property Name="SchemeID" Type="Guid" Nullable="false" />
           <Property Name="SchemeName" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
           <Property Name="Description" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
-          <Property Name="OwnerUserId" Type="Guid" Nullable="false" />
+          <Property Name="OwnerUserId" Type="Guid" />
           <Property Name="OwnerName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="CoordinatorUserId" Type="Guid" Nullable="false" />
+          <Property Name="CoordinatorUserId" Type="Guid" />
           <Property Name="CoordinatorName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="ModalityID" Type="Guid" />
           <Property Name="ModalityName" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
@@ -1603,18 +1599,6 @@
             </Principal>
             <Dependent Role="Enrollment">
               <PropertyRef Name="PlanID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Plan_Location">
-          <End Role="Location" Type="FTMatricula.DBModel.Location" Multiplicity="1" />
-          <End Role="Plan" Type="FTMatricula.DBModel.Plan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Location">
-              <PropertyRef Name="LocationID" />
-            </Principal>
-            <Dependent Role="Plan">
-              <PropertyRef Name="LocationID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1750,6 +1734,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Student_Users">
+          <End Role="Users" Type="FTMatricula.DBModel.User" Multiplicity="1" />
+          <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_StudentAdditionalData_Student">
           <End Role="Student" Type="FTMatricula.DBModel.Student" Multiplicity="1" />
           <End Role="StudentAdditionalData" Type="FTMatricula.DBModel.StudentAdditionalData" Multiplicity="0..1" />
@@ -1807,41 +1803,6 @@
             </Principal>
             <Dependent Role="StudentAdditionalData">
               <PropertyRef Name="WhoPaysYourStudiesTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="RequirementDetail">
-          <Key>
-            <PropertyRef Name="RequirementID" />
-            <PropertyRef Name="Name" />
-            <PropertyRef Name="TypeID" />
-            <PropertyRef Name="TypeName" />
-          </Key>
-          <Property Type="Guid" Name="RequirementID" Nullable="false" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
-          <Property Type="Guid" Name="TypeID" Nullable="false" />
-          <Property Type="String" Name="TypeName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
-          <Property Type="Guid" Name="UserId" Nullable="false" />
-          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
-          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Students" Relationship="FTMatricula.DBModel.FK_Student_Users" FromRole="User" ToRole="Student" />
-        </EntityType>
-        <Association Name="FK_Student_Users">
-          <End Type="FTMatricula.DBModel.User" Role="User" Multiplicity="1" />
-          <End Type="FTMatricula.DBModel.Student" Role="Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserId" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="UserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1958,12 +1919,12 @@
                 <ScalarProperty Name="PlanID" ColumnName="PlanID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2194,11 +2155,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ApplicationUsers">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.ApplicationUser">
               <MappingFragment StoreEntitySet="ApplicationUser">
-                <ScalarProperty Name="IdentificationTypeID" ColumnName="IdentificationTypeID" />
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -2213,6 +2183,18 @@
                 <ScalarProperty Name="Phone1" ColumnName="Phone1" />
                 <ScalarProperty Name="Phone2" ColumnName="Phone2" />
                 <ScalarProperty Name="Phone3" ColumnName="Phone3" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="IdentificationTypeID" ColumnName="IdentificationTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequirementDetails">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.RequirementDetail">
+              <MappingFragment StoreEntitySet="RequirementDetails">
+                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2231,29 +2213,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="RequirementDetails">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.RequirementDetail">
-              <MappingFragment StoreEntitySet="RequirementDetails">
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
           <FunctionImportMapping FunctionImportName="uspRetrieveUserID" FunctionName="FTMatricula.DBModel.Store.uspRetrieveUserID" />
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
-                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2274,6 +2235,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams />
+    <Diagrams></Diagrams>
   </Designer>
 </edmx:Edmx>

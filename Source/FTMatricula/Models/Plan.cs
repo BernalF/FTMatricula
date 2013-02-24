@@ -24,15 +24,14 @@ namespace FTMatricula.Models
         public System.Guid? PlanID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public System.Guid? LocationID { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public string Version { get; set; }
     
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-        public virtual Location Location { get; set; }
         public virtual ICollection<Plan_Course> Plan_Course { get; set; }
         public virtual ICollection<Scheme_Plan> Scheme_Plan { get; set; }
     }
