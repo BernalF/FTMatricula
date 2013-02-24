@@ -105,7 +105,7 @@
                             </li>
                             <li>
                                 @(Html.Kendo().Window().Name("Details")
-                                                    .Title("Requirement Details")
+                                                    .Title(@Resources.GetValue("REQ"))
                                                     .Visible(false)
                                                     .Modal(true)
                                                     .Draggable(true)

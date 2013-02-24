@@ -69,7 +69,7 @@ namespace FTMatricula.Controllers
             model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
             model.ModifyDate = DateTime.Today;
             model.IpAddress = Network.GetIpAddress(Request);
-            model.Version = Misc.GenerateVersion(model.PlanID);
+            //model.Version = Misc.GenerateVersion(model.PlanID);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
             return Json(new[] { new { PlanID = model.PlanID, Name = model.Name, Description = model.Description, model.Version } }.ToDataSourceResult(request, ModelState));
