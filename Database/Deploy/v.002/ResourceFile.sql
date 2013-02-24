@@ -234,3 +234,4 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ACADEMIC_INFORMATION', 'es-CR', '
 ---Plan VIEW
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'VERSION', 'es-CR', 'Version')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_PLAN', 'es-CR', 'Agregar Plan')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'PLAN_NAME', 'es-CR', 'Plan')
