@@ -25,7 +25,7 @@
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("PLAN"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("PLAN_NAME"));
                                           columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
                                           columns.Bound(m => m.Version).Title(@Resources.GetValue("VERSION"));
                                           columns.Command(command =>

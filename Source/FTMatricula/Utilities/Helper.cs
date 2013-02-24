@@ -25,7 +25,31 @@ namespace FTMatricula.Utilities.Helper
         }
     }
 
+    internal class Misc
+    {
+        public static string GenerateVersion(Guid? PlanId)
+        {
+            matrifunDBEntities db = new matrifunDBEntities();
+            int actYear = DateTime.Now.Year;
+            string newVersion = "";
+            
+            var version = db.Plans
+                            .Where(p => p.PlanID == PlanId)
+                            .ToList()
+                            .Select(p => p.Version)
+                            .FirstOrDefault();
 
+            if (version != null)
+            {
+                string[] oldVersion = version.Split(new string[] { "-" }, StringSplitOptions.None);                
+                newVersion = actYear + "-" + (Convert.ToInt32(oldVersion[1]) + 1);
+            }
+            else {
+                newVersion = actYear + "-" + 1;
+            }
+            return newVersion;
+        }
+    }
 
     public static class Resources
     {
@@ -38,7 +62,7 @@ namespace FTMatricula.Utilities.Helper
             }
             catch (Exception e)
             {
-                throw new ApplicationException("The key '" + key + "' was not found. " + e.Message);
+                throw new ApplicationException("The given key '" + key + "' was not found. " + e.Message);
             }
         }
 
