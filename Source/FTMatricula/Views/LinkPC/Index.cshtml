@@ -55,7 +55,7 @@
                 <div class="clear"></div>
                 <ul class="formBtnBar">
                     <li>                        
-                         <a href="#" class="button send">Save</a>
+                         <a href="#" class="button send" id="btnLinkPC">Save</a>
                     </li>
                     <li>
                         @Html.ActionLink("Cancel", "index", "Scheme", routeValues: null, htmlAttributes: new { @class = "button back" })
@@ -101,6 +101,14 @@
                 });
                 $('#sortable1').html(content.toString());
             }
+
+            // Save Action
+            $('#btnLinkPC').off('click.btnLinkPC').on('click.btnLinkPC', function () {
+
+
+                return false;
+            });
+
         });
     </script>
 }
