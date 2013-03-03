@@ -236,3 +236,6 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'VERSION', 'es-CR', 'Version')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADD_PLAN', 'es-CR', 'Agregar Plan')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'PLAN_NAME', 'es-CR', 'Plan')
 ---LINK PLAN - COURSE VIEW
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'TYPE_AUTO_FILTER', 'es-CR', 'Escriba un nombre de curso para filtrar')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'UNASSIGNED_COURSE', 'es-CR', 'Cursos sin asignar')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ADDED_COURSES', 'es-CR', 'Cursos Agregados al Plan')

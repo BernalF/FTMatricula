@@ -13,17 +13,20 @@ namespace FTMatricula.Controllers
     {
         private matrifunDBEntities db = new matrifunDBEntities();
 
-        //
-        // GET: /LinkPC/
-
-        public ActionResult Index()
+        /// <summary>
+        /// index
+        /// </summary>       
+        public ActionResult index()
         {            
             return View();
         }
 
+        /// <summary>
+        /// Get Courses List
+        /// </summary>
         [HttpPost]
         public JsonResult GetCourses() {
-            return Json(db.Courses.ToList().Select(c => new { c.CourseID, c.Code, c.Name}));
+            return Json(db.Courses.Where(c => c.IsActive == true).ToList().Select(c => new { c.CourseID, c.Code, c.Name}));
         }
 
         protected override void Dispose(bool disposing)

@@ -30,9 +30,9 @@
                     </li>
                 </ul>
                 <div class="leftSide">
-                    <h3 class="title2">Cursos sin asignar</h3>
+                    <h3 class="title2">@Resources.GetValue("UNASSIGNED_COURSE")</h3>
                     <div class="infoHolder">
-                        <p class="padLess lined30">Type the Course Name for auto filter</p>
+                        <p class="padLess lined30">@Resources.GetValue("TYPE_AUTO_FILTER")</p>
                         <input id="filter1" class="input" type="text" />
                         <div class="usersHolderBox panel">
                             <ul id="sortable1" class="connectedSortable">
@@ -42,9 +42,9 @@
                     </div>
                 </div>
                 <div class="rightSide">
-                    <h3 class="title2">Cursos Agregados al Plan</h3>
+                    <h3 class="title2">@Resources.GetValue("ADDED_COURSES")</h3>
                     <div class="infoHolder">
-                        <p class="padLess lined30">Type the Course Name for auto filter</p>
+                        <p class="padLess lined30">@Resources.GetValue("TYPE_AUTO_FILTER")</p>
                         <input id="filter2" class="input" type="text" />
                         <div class="usersHolderBox panel">
                             <ul id="sortable2" class="connectedSortable">
@@ -71,12 +71,14 @@
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
+            // Enable drag a drop to the items list
             $('#sortable1, #sortable2').sortable({
                 connectWith: '.connectedSortable'
             }).disableSelection();
             filteredList('filter1', 'sortable1');
             filteredList('filter2', 'sortable2');
 
+            // Get the list of the Avalaible Courses
             $.bAjax({
                 url: 'LinkPC/GetCourses',
                 async: false,
@@ -85,9 +87,9 @@
                 }
             });
 
+            // Inject the course to the DOM
             function buildCourseList(data) {
                 var content = new StringBuilder();
-
                 $.each(data, function (key, val) {
                     content.append('<li><span id="');
                     content.append(val.CourseID);
@@ -99,7 +101,6 @@
                 });
                 $('#sortable1').html(content.toString());
             }
-
         });
     </script>
 }
