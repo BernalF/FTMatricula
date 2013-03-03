@@ -15,52 +15,58 @@
 
         <div class="editDetail">
             <div id="LinkPC">
-                <ul>
-                    <li>
+                <ul class="linkPlan">
+                    <li class="cWhite">
                         @Html.Label(@Resources.GetValue("PLAN_NAME"))
                     </li>
                     <li>
+                         @(Html.Kendo().DropDownList()
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.PlanList)
+                                                    .Name("PlanID")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
 
                     </li>
                 </ul>
                 <div class="leftSide">
-                    <h3 class="title">Cursos sin asignar</h3>
+                    <h3 class="title2">Cursos sin asignar</h3>
                     <div class="infoHolder">
                         <p class="padLess lined30">Type the Course Name for auto filter</p>
                         <input id="filter1" class="input" type="text" />
                         <div class="usersHolderBox panel">
                             <ul id="sortable1" class="connectedSortable">
-                                <li >
+                                <li>
                                     <span>asdasd</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>asdaxdddddd dddddddddddddddddd ddddddxxxxxxxsd</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>bbbbb</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>ccccc</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>eeeeee</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>asdt dddddddd ddxxxxxxxasd</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>asdk</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>hjkuhik</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>uiyujg</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>fghfj ddddddddddddddd iopi</span>
                                 </li>
-                                <li >
+                                <li>
                                     <span>wergjk   hjk</span>
                                 </li>
                             </ul>
@@ -68,21 +74,23 @@
                     </div>
                 </div>
                 <div class="rightSide">
-                    <h3 class="title">Cursos Agregados al Plan</h3>
+                    <h3 class="title2">Cursos Agregados al Plan</h3>
                     <div class="infoHolder">
                         <p class="padLess lined30">Type the Course Name for auto filter</p>
                         <input id="filter2" class="input" type="text" />
                         <div class="usersHolderBox panel">
                             <ul id="sortable2" class="connectedSortable">
-                                
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="clear"></div>
-                <ul class="right-align buttonSave">
+                <ul class="formBtnBar">
+                    <li>                        
+                         <a href="#" class="button send">Save</a>
+                    </li>
                     <li>
-                        <a id="saveCP" class="saveButton" href="#">Save Changes</a>
+                        @Html.ActionLink("Cancel", "index", "Scheme", routeValues: null, htmlAttributes: new { @class = "button back" })
                     </li>
                 </ul>
             </div>
@@ -91,17 +99,13 @@
     </div>
 </div>
 
-@section Scripts {     
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-    
+@section Scripts {    
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
             $("#sortable1, #sortable2").sortable({
                 connectWith: ".connectedSortable"
             }).disableSelection();
-
-            filteredList();
             filteredList('filter1', 'sortable1');
             filteredList('filter2', 'sortable2');
         });

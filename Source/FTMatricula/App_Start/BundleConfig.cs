@@ -61,7 +61,7 @@ namespace FTMatricula
             //Kendo Bundles
             bundles.Add(new ScriptBundle("~/bundles/KendoJS").Include(
                         "~/Content/kendo/js/jquery.min.js",
-                        "~/Content/kendo/js/kendo.web.js",
+                        "~/Content/kendo/js/kendo.all.min.js",
                         "~/Content/kendo/js/kendo.aspnetmvc.min.js",
                         "~/Content//kendo/js/console.min.js",
                         "~/Content/kendo/js/prettify.min.js",                        
