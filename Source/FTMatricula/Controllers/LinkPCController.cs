@@ -21,7 +21,10 @@ namespace FTMatricula.Controllers
             return View();
         }
 
-        
+        [HttpPost]
+        public JsonResult GetCourses() {
+            return Json(db.Courses.ToList().Select(c => new { c.CourseID, c.Code, c.Name}));
+        }
 
         protected override void Dispose(bool disposing)
         {

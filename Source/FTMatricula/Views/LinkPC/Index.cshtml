@@ -36,39 +36,7 @@
                         <input id="filter1" class="input" type="text" />
                         <div class="usersHolderBox panel">
                             <ul id="sortable1" class="connectedSortable">
-                                <li>
-                                    <span>asdasd</span>
-                                </li>
-                                <li>
-                                    <span>asdaxdddddd dddddddddddddddddd ddddddxxxxxxxsd</span>
-                                </li>
-                                <li>
-                                    <span>bbbbb</span>
-                                </li>
-                                <li>
-                                    <span>ccccc</span>
-                                </li>
-                                <li>
-                                    <span>eeeeee</span>
-                                </li>
-                                <li>
-                                    <span>asdt dddddddd ddxxxxxxxasd</span>
-                                </li>
-                                <li>
-                                    <span>asdk</span>
-                                </li>
-                                <li>
-                                    <span>hjkuhik</span>
-                                </li>
-                                <li>
-                                    <span>uiyujg</span>
-                                </li>
-                                <li>
-                                    <span>fghfj ddddddddddddddd iopi</span>
-                                </li>
-                                <li>
-                                    <span>wergjk   hjk</span>
-                                </li>
+                               
                             </ul>
                         </div>
                     </div>
@@ -103,11 +71,35 @@
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
-            $("#sortable1, #sortable2").sortable({
-                connectWith: ".connectedSortable"
+            $('#sortable1, #sortable2').sortable({
+                connectWith: '.connectedSortable'
             }).disableSelection();
             filteredList('filter1', 'sortable1');
             filteredList('filter2', 'sortable2');
+
+            $.bAjax({
+                url: 'LinkPC/GetCourses',
+                async: false,
+                ajaxSuccess: function (response) {
+                    buildCourseList($.parseJSON(response));
+                }
+            });
+
+            function buildCourseList(data) {
+                var content = new StringBuilder();
+
+                $.each(data, function (key, val) {
+                    content.append('<li><span id="');
+                    content.append(val.CourseID);
+                    content.append('">');
+                    content.append(val.Code);
+                    content.append(' : ');
+                    content.append(val.Name);
+                    content.append('</span></li>');
+                });
+                $('#sortable1').html(content.toString());
+            }
+
         });
     </script>
 }

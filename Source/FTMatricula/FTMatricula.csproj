@@ -596,6 +596,7 @@
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
     <Content Include="Views\LinkPC\index.cshtml" />
+    <Content Include="Views\Enrollment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
