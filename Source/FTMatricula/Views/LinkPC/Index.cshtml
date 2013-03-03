@@ -1,1 +1,109 @@
-﻿
+﻿@model FTMatricula.Models.Scheme
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = @Resources.GetValue("SCHEME_MANT");
+}
+
+@section styles {
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+}
+<div id="content">
+
+    <div class="mainBox">
+
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("PROGRAM_PLAN_COURSE")/@Resources.GetValue("LINK_PLAN_COURSE")</a></h2>
+
+        <div class="editDetail">
+            <div id="LinkPC">
+                <ul>
+                    <li>
+                        @Html.Label(@Resources.GetValue("PLAN_NAME"))
+                    </li>
+                    <li>
+
+                    </li>
+                </ul>
+                <div class="leftSide">
+                    <h3 class="title">Cursos sin asignar</h3>
+                    <div class="infoHolder">
+                        <p class="padLess lined30">Type the Course Name for auto filter</p>
+                        <input id="filter1" class="input" type="text" />
+                        <div class="usersHolderBox panel">
+                            <ul id="sortable1" class="connectedSortable">
+                                <li >
+                                    <span>asdasd</span>
+                                </li>
+                                <li >
+                                    <span>asdaxdddddd dddddddddddddddddd ddddddxxxxxxxsd</span>
+                                </li>
+                                <li >
+                                    <span>bbbbb</span>
+                                </li>
+                                <li >
+                                    <span>ccccc</span>
+                                </li>
+                                <li >
+                                    <span>eeeeee</span>
+                                </li>
+                                <li >
+                                    <span>asdt dddddddd ddxxxxxxxasd</span>
+                                </li>
+                                <li >
+                                    <span>asdk</span>
+                                </li>
+                                <li >
+                                    <span>hjkuhik</span>
+                                </li>
+                                <li >
+                                    <span>uiyujg</span>
+                                </li>
+                                <li >
+                                    <span>fghfj ddddddddddddddd iopi</span>
+                                </li>
+                                <li >
+                                    <span>wergjk   hjk</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightSide">
+                    <h3 class="title">Cursos Agregados al Plan</h3>
+                    <div class="infoHolder">
+                        <p class="padLess lined30">Type the Course Name for auto filter</p>
+                        <input id="filter2" class="input" type="text" />
+                        <div class="usersHolderBox panel">
+                            <ul id="sortable2" class="connectedSortable">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <ul class="right-align buttonSave">
+                    <li>
+                        <a id="saveCP" class="saveButton" href="#">Save Changes</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {     
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+    
+    <script type="text/javascript">
+        $(function () {
+            $("#sortable1, #sortable2").sortable({
+                connectWith: ".connectedSortable"
+            }).disableSelection();
+
+            filteredList();
+            filteredList('filter1', 'sortable1');
+            filteredList('filter2', 'sortable2');
+        });
+    </script>
+}

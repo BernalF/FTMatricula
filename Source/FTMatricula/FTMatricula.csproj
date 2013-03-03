@@ -583,7 +583,7 @@
       <DependentUpon>matrifunDB.edmx</DependentUpon>
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\LinkPC\Index.cshtml" />
+    <Content Include="Views\LinkPC\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
