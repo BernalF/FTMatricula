@@ -12,25 +12,19 @@ namespace FTMatricula.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Location
+    public partial class EnrollmentGroupSchedule
     {
-        public Location()
-        {
-            this.Enrollments = new HashSet<Enrollment>();
-        }
-    
-        public System.Guid? LocationID { get; set; }
-        public string Name { get; set; }
-        public string Line1 { get; set; }
-        public string Line2 { get; set; }
+        public System.Guid? EnrollmentGroupScheduleID { get; set; }
+        public System.Guid? EnrollmentGroupID { get; set; }
+        public string Day { get; set; }
+        public System.DateTime StartTime { get; set; }
+        public System.DateTime EndTime { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
-        public Nullable<decimal> Latitude { get; set; }
-        public Nullable<decimal> Longitude { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual EnrollmentGroup EnrollmentGroup { get; set; }
     }
 }

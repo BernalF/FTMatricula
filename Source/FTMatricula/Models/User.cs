@@ -17,6 +17,7 @@ namespace FTMatricula.Models
         public User()
         {
             this.Students = new HashSet<Student>();
+            this.EnrollmentGroups = new HashSet<EnrollmentGroup>();
         }
     
         public System.Guid? ApplicationId { get; set; }
@@ -26,5 +27,6 @@ namespace FTMatricula.Models
         public System.DateTime LastActivityDate { get; set; }
     
         public virtual ICollection<Student> Students { get; set; }
+        public virtual ICollection<EnrollmentGroup> EnrollmentGroups { get; set; }
     }
 }

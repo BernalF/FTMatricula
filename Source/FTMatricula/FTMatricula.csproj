@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\LinkPCController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
@@ -201,6 +202,15 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enrollment.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentCourse.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentGroup.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentGroupSchedule.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
@@ -267,6 +277,9 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentAdditionalData.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudentPlan.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student_Course.cs">
@@ -563,7 +576,6 @@
     </Content>
     <Content Include="Views\Student\EditAD.cshtml" />
     <Content Include="Views\Student\EditStudies.cshtml" />
-    <Content Include="Views\Student\EditorTemplates\AddSchool.cshtml" />
     <Content Include="Views\Plan\index.cshtml" />
     <Content Include="Views\Plan\EditorTemplates\AddPlan.cshtml" />
     <EntityDeploy Include="Models\matrifunDB.edmx">
