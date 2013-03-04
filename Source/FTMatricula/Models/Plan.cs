@@ -19,6 +19,7 @@ namespace FTMatricula.Models
             this.Enrollments = new HashSet<Enrollment>();
             this.Plan_Course = new HashSet<Plan_Course>();
             this.Scheme_Plan = new HashSet<Scheme_Plan>();
+            this.StudentPlans = new HashSet<StudentPlan>();
         }
     
         public System.Guid? PlanID { get; set; }
@@ -34,5 +35,6 @@ namespace FTMatricula.Models
         public virtual ICollection<Enrollment> Enrollments { get; set; }
         public virtual ICollection<Plan_Course> Plan_Course { get; set; }
         public virtual ICollection<Scheme_Plan> Scheme_Plan { get; set; }
+        public virtual ICollection<StudentPlan> StudentPlans { get; set; }
     }
 }
