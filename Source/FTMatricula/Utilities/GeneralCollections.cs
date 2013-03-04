@@ -225,6 +225,20 @@ namespace FTMatricula.Utilities
                 return new SelectList(dictionary, "Key", "Value");
             }
         }
+
+        /// <summary>
+        /// Coordinator List
+        /// </summary>
+        public static SelectList PlanList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Plans
+                                        .ToList()
+                                        .Select(p => new { p.PlanID, p.Name }), "PlanID", "Name");
+            }
+        }
     }
 }
 

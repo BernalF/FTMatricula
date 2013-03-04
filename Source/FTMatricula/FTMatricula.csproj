@@ -170,6 +170,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClassroomController.cs" />
+    <Compile Include="Controllers\EnrollmentController.cs" />
+    <Compile Include="Controllers\LinkPCController.cs" />
+    <Compile Include="Controllers\PlanController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\RequirementController.cs" />
     <Compile Include="Controllers\SchemeController.cs" />
@@ -199,6 +202,15 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Enrollment.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentCourse.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentGroup.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentGroupSchedule.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Location.cs">
@@ -265,6 +277,9 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\StudentAdditionalData.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StudentPlan.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student_Course.cs">
@@ -550,6 +565,19 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Scheme\index.cshtml" />
+    <Content Include="Views\Requirement\index.cshtml" />
+    <Content Include="Views\Requirement\EditorTemplates\AddRequirement.cshtml" />
+    <Content Include="Views\Scheme\Create.cshtml" />
+    <Content Include="Views\Student\Create.cshtml" />
+    <Content Include="Views\Student\EditPD.cshtml" />
+    <Content Include="Views\Student\index.cshtml" />
+    <Content Include="Views\Scheme\Edit.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Student\EditAD.cshtml" />
+    <Content Include="Views\Student\EditStudies.cshtml" />
+    <Content Include="Views\Plan\index.cshtml" />
+    <Content Include="Views\Plan\EditorTemplates\AddPlan.cshtml" />
     <EntityDeploy Include="Models\matrifunDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>matrifunDB.Designer.cs</LastGenOutput>
@@ -567,18 +595,8 @@
       <DependentUpon>matrifunDB.edmx</DependentUpon>
       <LastGenOutput>matrifunDB.cs</LastGenOutput>
     </Content>
-    <Content Include="Views\Requirement\index.cshtml" />
-    <Content Include="Views\Requirement\EditorTemplates\AddRequirement.cshtml" />
-    <Content Include="Views\Scheme\Create.cshtml" />
-    <Content Include="Views\Student\Create.cshtml" />
-    <Content Include="Views\Student\EditPD.cshtml" />
-    <Content Include="Views\Student\index.cshtml" />
-    <Content Include="Views\Scheme\Edit.cshtml">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="Views\Student\EditAD.cshtml" />
-    <Content Include="Views\Student\EditStudies.cshtml" />
-    <Content Include="Views\Student\EditorTemplates\AddSchool.cshtml" />
+    <Content Include="Views\LinkPC\index.cshtml" />
+    <Content Include="Views\Enrollment\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

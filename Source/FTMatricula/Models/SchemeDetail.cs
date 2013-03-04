@@ -17,9 +17,9 @@ namespace FTMatricula.Models
         public System.Guid? SchemeID { get; set; }
         public string SchemeName { get; set; }
         public string Description { get; set; }
-        public System.Guid? OwnerUserId { get; set; }
+        public Nullable<System.Guid> OwnerUserId { get; set; }
         public string OwnerName { get; set; }
-        public System.Guid? CoordinatorUserId { get; set; }
+        public Nullable<System.Guid> CoordinatorUserId { get; set; }
         public string CoordinatorName { get; set; }
         public Nullable<System.Guid> ModalityID { get; set; }
         public string ModalityName { get; set; }

@@ -14,6 +14,11 @@ namespace FTMatricula.Models
     
     public partial class Classroom
     {
+        public Classroom()
+        {
+            this.EnrollmentGroups = new HashSet<EnrollmentGroup>();
+        }
+    
         public System.Guid? ClassroomID { get; set; }
         public string Code { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
@@ -21,5 +26,7 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+    
+        public virtual ICollection<EnrollmentGroup> EnrollmentGroups { get; set; }
     }
 }

@@ -107,6 +107,9 @@ namespace FTMatricula.Controllers
                     .ToList().Select(m => new { m.u.UserId, m.s.StudentID, m.u.UserName, m.s.FirstName, m.s.LastName, m.s.DateOfBirth, m.s.Gender, m.s.MaritalStatusTypeID, m.s.CountryID, m.s.Phone1, m.s.Phone2, m.s.Phone3, tmpUserName = m.u.UserName })
                     .FirstOrDefault();
 
+                MembershipUser aux = Membership.GetUser(x.UserName);
+                
+
                 return View(new ApplicationUser
                                 {
                                     UserId = x.UserId,
@@ -121,7 +124,8 @@ namespace FTMatricula.Controllers
                                     Phone1 = x.Phone1,
                                     Phone2 = x.Phone2,
                                     Phone3 = x.Phone3,
-                                    tmpUserName = x.tmpUserName
+                                    tmpUserName = x.tmpUserName,
+                                    Email = aux.Email
                                 });
             }
             catch (Exception e)
@@ -148,6 +152,10 @@ namespace FTMatricula.Controllers
                     }
 
                     Roles.AddUserToRole(model.UserName, "ROLE_STUDENT");
+
+                    MembershipUser aux = Membership.GetUser(model.UserName);
+                    aux.Email = model.Email;
+                    Membership.UpdateUser(aux);
 
                     Student user = new Student
                     {

@@ -1,0 +1,24 @@
+﻿@model FTMatricula.Models.Plan
+<ul>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.Name, @Resources.GetValue("PLAN_NAME"))
+    </li>
+    <li class="k-textbox">
+        @Html.EditorFor(model => model.Name)
+    </li>
+    <li>
+        @Html.ValidationMessageFor(model => model.Name)
+    </li>
+    <li class="editor-label">
+        @Html.LabelFor(model => model.Description, @Resources.GetValue("DESCRIPTION"))
+    </li>
+    <li class="k-textbox">
+        @Html.EditorFor(model => model.Description)
+    </li>
+    <li>
+        @Html.ValidationMessageFor(model => model.Description)
+    </li>
+    <li>
+        @Html.ValidationSummary(true)
+    </li>
+</ul>

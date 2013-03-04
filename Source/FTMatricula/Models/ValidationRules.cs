@@ -137,7 +137,7 @@ namespace FTMatricula.Models
 
 
     //------ RequerimentDetail Section
-    [MetadataType(typeof(SchemeDetail_Validation))]
+    [MetadataType(typeof(RequirementDetail_Validation))]
     public partial class RequirementDetail
     {
         public string tmpTypeID { get; set; }
@@ -148,12 +148,13 @@ namespace FTMatricula.Models
 
     }
 
+    //------ StudentAdditionalData Section
     [MetadataType(typeof(StudentAdditionalData_Validation))]
     public partial class StudentAdditionalData
     {
 
-    }
-
+    }   
+    
     public class StudentAdditionalData_Validation
     {
         [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_PHYSICA_LADDRESS")]

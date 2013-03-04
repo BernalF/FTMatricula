@@ -1,7 +1,6 @@
-﻿@model FTMatricula.Models.Course
-@{
+﻿@{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("COURSE_MANT");
+    ViewBag.Title = @Resources.GetValue("PLAN");
 }
 
 @section styles {
@@ -11,7 +10,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("PROGRAM_PLAN_COURSE")/@Resources.GetValue("COURSES")</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("PROGRAM_PLAN_COURSE")/@Resources.GetValue("PLAN")</a></h2>
 
         <div>
             <ul id="formHolder data2" class="blacked">
@@ -22,14 +21,13 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.Course>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.Plan>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.Code).Title(@Resources.GetValue("COURSE_CODE"));
-                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));
-                                          columns.Bound(m => m.TeachingHours).Title(@Resources.GetValue("TEACHING_HOURS"));
-                                          columns.Bound(m => m.Charge).Title(@Resources.GetValue("COURSE_COST"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("PLAN_NAME"));
+                                          columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
+                                          columns.Bound(m => m.Version).Title(@Resources.GetValue("VERSION"));
                                           columns.Command(command =>
                                           {
                                               command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
@@ -42,7 +40,7 @@
                                                   .Window(m =>
                                                   {
                                                       m.Title(@Resources.GetValue("EDIT")).Draggable();
-                                                  }).TemplateName("AddCourse");
+                                                  }).TemplateName("AddPlan");
                                                   editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
                                               })
                                       .Sortable(sor => sor.AllowUnsort(true))
@@ -70,7 +68,7 @@
                                           });
                                       })
                                       .ToolBar(create => create.Create()
-                                          .Text(@Resources.GetValue("ADD_COURSE"))
+                                          .Text(@Resources.GetValue("ADD_PLAN"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
                                             .PageSizes(new int[] { 5, 10, 15 })                                            
@@ -96,11 +94,11 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingCourses", "Course"))
-                                            .Create(create => create.Action("CreateCourse", "Course"))
-                                            .Update(update => update.Action("UpdateCourse", "Course"))
-                                            .Destroy(destroy => destroy.Action("DestroyCourse", "Course"))
-                                            .Model(model => model.Id(m => m.CourseID))
+                                            .Read(read => read.Action("PagingPlan", "Plan"))
+                                            .Create(create => create.Action("CreatePlan", "Plan"))
+                                            .Update(update => update.Action("UpdatePlan", "Plan"))
+                                            .Destroy(destroy => destroy.Action("DestroyPlan", "Plan"))
+                                            .Model(model => model.Id(m => m.PlanID))
                                       )
                                 )
                             </li>
