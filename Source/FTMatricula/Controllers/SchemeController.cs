@@ -105,17 +105,11 @@ namespace FTMatricula.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Scheme_Requirement sReq = new Scheme_Requirement
-                    {
-                        RequirementID = new Guid(model.tmpReqID),
-                        SchemeID = Guid.NewGuid(),
-                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                        InsertDate = DateTime.Today,
-                        IpAddress = Network.GetIpAddress(Request)
-                    };
+                    Guid schemeID = Guid.NewGuid();
+                    // Insert in scheme
                     Scheme scheme = new Scheme
                     {
-                        SchemeID = sReq.SchemeID,
+                        SchemeID = schemeID,
                         Name = model.SchemeName,
                         Description = model.Description,
                         OwnerUserId = model.OwnerUserId,
@@ -124,10 +118,23 @@ namespace FTMatricula.Controllers
                         InsertUserID = SessApp.GetUserID(User.Identity.Name),
                         InsertDate = DateTime.Today,
                         IpAddress = Network.GetIpAddress(Request),
-                        Scheme_Requirement = new HashSet<Scheme_Requirement> { sReq }
                     };
                     db.Schemes.Add(scheme);
                     db.SaveChanges();
+                    // Insert in scheme-requirement
+                    foreach (var item in model.PostedReq.ReqIDs)
+                    {
+                        Scheme_Requirement sR = new Scheme_Requirement
+                        {
+                            RequirementID = new Guid(item),
+                            SchemeID = schemeID,
+                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                            InsertDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)
+                        };
+                        db.Scheme_Requirement.Add(sR);
+                        db.SaveChanges();                        
+                    }                     
                 }
                 return RedirectToAction("index");
             }
@@ -164,14 +171,7 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                Scheme_Requirement sReq = new Scheme_Requirement
-               {
-                   RequirementID = new Guid(model.tmpReqID),
-                   SchemeID = model.SchemeID,
-                   InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                   InsertDate = DateTime.Today,
-                   IpAddress = Network.GetIpAddress(Request)
-               };
+                // Insert in scheme
                 Scheme scheme = new Scheme
                 {
                     SchemeID = model.SchemeID,
@@ -183,10 +183,23 @@ namespace FTMatricula.Controllers
                     InsertUserID = SessApp.GetUserID(User.Identity.Name),
                     InsertDate = DateTime.Today,
                     IpAddress = Network.GetIpAddress(Request),
-                    Scheme_Requirement = new HashSet<Scheme_Requirement> { sReq }
                 };
-                db.Entry(scheme).State = EntityState.Modified;
+                db.Schemes.Add(scheme);
                 db.SaveChanges();
+                // Insert in scheme-requirement
+                foreach (var item in model.PostedReq.ReqIDs)
+                {
+                    Scheme_Requirement sR = new Scheme_Requirement
+                    {
+                        RequirementID = new Guid(item),
+                        SchemeID = model.SchemeID,
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request)
+                    };
+                    db.Scheme_Requirement.Add(sR);
+                    db.SaveChanges();
+                }                
                 return RedirectToAction("index");
             }
             catch (Exception e)
