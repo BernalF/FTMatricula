@@ -227,7 +227,7 @@ namespace FTMatricula.Utilities
         }
 
         /// <summary>
-        /// Coordinator List
+        /// Plan List
         /// </summary>
         public static SelectList PlanList
         {
@@ -237,6 +237,20 @@ namespace FTMatricula.Utilities
                 return new SelectList(db.Plans
                                         .ToList()
                                         .Select(p => new { p.PlanID, p.Name }), "PlanID", "Name");
+            }
+        }
+
+        /// <summary>
+        /// Scheme List
+        /// </summary>
+        public static SelectList SchemeList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Schemes
+                                        .ToList()
+                                        .Select(p => new { p.SchemeID, p.Name }), "SchemeID", "Name");
             }
         }
     }

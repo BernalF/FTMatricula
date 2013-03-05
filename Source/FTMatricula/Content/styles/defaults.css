@@ -1112,6 +1112,11 @@ ul li.item .menuImage {
     font-family: 'Segoe UI', 'Segoe condensed' sans-serif;
 }
 
+.centererDetailBox {
+    float: none !important; 
+    margin: 0 auto;
+}
+
 .detailBox {
     display: block;
     float: left;

@@ -31,7 +31,13 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingPlan([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Plans.ToList().Select(m => new { m.PlanID, m.Name, m.Description, m.Version }).ToDataSourceResult(request));
+            return Json(db.PlanDetails.ToList().Select(m => new {   m.SchemeID, 
+                                                                    m.SchemeName, 
+                                                                    m.PlanID,
+                                                                    m.PlanName,
+                                                                    m.Description,
+                                                                    m.Version })
+                                                    .ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -84,16 +90,131 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyPlan([DataSourceRequest] DataSourceRequest request, Plan model)
         {
-            Plan plan = db.Plans.Find(model.PlanID);
-            db.Plans.Remove(plan);
-            db.SaveChanges();
-            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            try
+            {
+                db.Scheme_Plan
+                  .ToList().RemoveAll(s => s.PlanID== model.PlanID);
+                db.SaveChanges();
+
+                Plan plan = db.Plans.Find(model.PlanID);
+                db.Plans.Remove(plan);
+                db.SaveChanges();
+                return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
 
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        /// <summary>
+        /// Create
+        /// </summary>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Create Plan
+        /// </summary>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Create(PlanDetail model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Scheme_Plan sPlan = new Scheme_Plan
+                    {
+                        SchemeID = model.SchemeID,
+                        PlanID = Guid.NewGuid(),
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request)
+                    };
+                    Plan plan = new Plan
+                    {
+                        PlanID = sPlan.PlanID,
+                        Name = model.PlanName,
+                        Description = model.Description,
+                        Version = Misc.GenerateVersion(sPlan.PlanID),
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request),
+                        Scheme_Plan = new HashSet<Scheme_Plan> { sPlan }
+                    };
+                    db.Plans.Add(plan);
+                    db.SaveChanges();
+                }
+                return RedirectToAction("index");
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Edit
+        /// </summary>
+        public ActionResult Edit(string id)
+        {
+            try
+            {
+                PlanDetail pDetail = db.PlanDetails
+                                   .Where(s => s.PlanID == new Guid(id))
+                                   .ToList()
+                                   .FirstOrDefault();
+                return View(pDetail);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Edit Scheme
+        /// </summary>        
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Edit(PlanDetail model)
+        {
+            try
+            {
+                Scheme_Plan sPlan = new Scheme_Plan
+                {
+                    SchemeID = model.SchemeID,
+                    PlanID = model.PlanID,
+                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                    InsertDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request)
+                };
+                Plan plan = new Plan
+                {
+                    PlanID = model.PlanID,
+                    Name = model.PlanName,
+                    Description = model.Description,
+                    Version = Misc.GenerateVersion(sPlan.PlanID),
+                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                    InsertDate = DateTime.Today,
+                    IpAddress = Network.GetIpAddress(Request),
+                    Scheme_Plan = new HashSet<Scheme_Plan> { sPlan }
+                };                
+                db.Entry(plan).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("index");
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
     }
 }

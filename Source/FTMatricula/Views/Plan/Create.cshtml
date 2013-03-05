@@ -1,0 +1,93 @@
+﻿@model FTMatricula.Models.PlanDetail
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml"; ;
+    ViewBag.Title = @Resources.GetValue("ADD_PLAN");
+}
+@section styles {
+
+}
+
+<div id="content">
+    <div class="editBox">
+        @using (Html.BeginForm())
+        { 
+            <div class="editTitle">
+                @Resources.GetValue("ADD_PLAN")
+            </div>
+
+            <div class="editDetail">
+                <div class="detailBox centererDetailBox">
+                    <ul>
+                        <li>
+                            @Html.Label(@Resources.GetValue("SCHEME_NAME"))
+                        </li>
+                        <li style="display: inline">
+                            <div>
+                                @(Html.Kendo().DropDownListFor(model => model.SchemeID)
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchemeList)
+                                                    .Name("SchemeID")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                        <li>
+                            @Html.Label(@Resources.GetValue("PLAN_NAME"))
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(model => model.PlanName, new { @class = "input width100" })
+                            </div>
+                        </li>
+                        <li>
+                            @Html.Label(@Resources.GetValue("DESCRIPTION"))
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(model => model.Description, new { @class = "input width100" })
+                            </div>
+                        </li>
+                    </ul>
+                </div>                
+            </div>
+            <div class="errorsSpace">
+                <ul>
+                    <li>
+                        @*  @Html.ValidationMessageFor(m => m.UserName)*@
+                    </li>
+                </ul>
+            </div>            
+            <div class="clear"></div>
+            <div class="formBtnBar">
+                <a href="#" class="button send" onclick="javascript: submit_form()">Save</a>
+                @Html.ActionLink("Cancel", "index", "Plan", routeValues: null, htmlAttributes: new { @class = "button back" })
+            </div>
+            <div class="clear"></div>
+        }
+    </div>
+</div>
+@section Scripts {
+
+    <script type="text/javascript">
+
+        function keypressHandler(event) {
+            var key = event.which || event.keyCode;
+
+            switch (key) {
+                default:
+                    return true;
+                case 13:
+                    submit_form();
+                    return false;
+            }
+        }
+
+        function submit_form() {
+            $('.modalBg').fadeIn();
+            $('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+
+    </script>
+}

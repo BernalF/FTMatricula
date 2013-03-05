@@ -19,5 +19,6 @@ namespace FTMatricula.Models
         public System.Guid? PlanID { get; set; }
         public string PlanName { get; set; }
         public string Version { get; set; }
+        public string Description { get; set; }
     }
 }

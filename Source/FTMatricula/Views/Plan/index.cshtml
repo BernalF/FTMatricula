@@ -14,33 +14,27 @@
 
         <div>
             <ul id="formHolder data2" class="blacked">
-
                 <li>
-
                     <div>
                         <ul>
-
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.Plan>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.PlanDetail>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("PLAN_NAME"));
+                                          columns.Bound(m => m.SchemeID).Visible(false);
+                                          columns.Bound(m => m.SchemeName).Title(@Resources.GetValue("SCHEME_NAME"));
+                                          columns.Bound(m => m.PlanName).Title(@Resources.GetValue("PLAN_NAME"));
                                           columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
                                           columns.Bound(m => m.Version).Title(@Resources.GetValue("VERSION"));
                                           columns.Command(command =>
                                           {
-                                              command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
                                      .Editable(editable =>
-                                              {
-                                                  editable.Mode(GridEditMode.PopUp)
-                                                  .Window(m =>
-                                                  {
-                                                      m.Title(@Resources.GetValue("EDIT")).Draggable();
-                                                  }).TemplateName("AddPlan");
+                                              {   
                                                   editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
                                               })
                                       .Sortable(sor => sor.AllowUnsort(true))
@@ -67,7 +61,8 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .ToolBar(create => create.Create()
+                                      .ToolBar(create => create.Custom()
+                                          .Action("Create", "Plan", routeValues: null)
                                           .Text(@Resources.GetValue("ADD_PLAN"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
@@ -95,8 +90,6 @@
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
                                             .Read(read => read.Action("PagingPlan", "Plan"))
-                                            .Create(create => create.Action("CreatePlan", "Plan"))
-                                            .Update(update => update.Action("UpdatePlan", "Plan"))
                                             .Destroy(destroy => destroy.Action("DestroyPlan", "Plan"))
                                             .Model(model => model.Id(m => m.PlanID))
                                       )
@@ -108,11 +101,13 @@
             </ul>
         </div>
     </div>
-
-
-
 </div>
-
 @section Scripts {
-
+    <script type="text/javascript">
+        function Edit_Row(arg) {
+            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
+            var id = dataItem.PlanID;
+            window.location.href = "Plan/Edit/" + id;
+        };
+    </script>
 }

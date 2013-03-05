@@ -32,17 +32,7 @@
           <EntitySet Name="Requirement" EntityType="FTMatricula.DBModel.Store.Requirement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Resource" EntityType="FTMatricula.DBModel.Store.Resource" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scheme" EntityType="FTMatricula.DBModel.Store.Scheme" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" store:Schema="dbo" store:Name="Scheme-Plan">
-            <DefiningQuery>SELECT 
-      [Scheme-Plan].[SchemeID] AS [SchemeID], 
-      [Scheme-Plan].[PlanID] AS [PlanID], 
-      [Scheme-Plan].[InsertDate] AS [InsertDate], 
-      [Scheme-Plan].[InsertUserID] AS [InsertUserID], 
-      [Scheme-Plan].[ModifyDate] AS [ModifyDate], 
-      [Scheme-Plan].[ModifyUserID] AS [ModifyUserID], 
-      [Scheme-Plan].[IpAddress] AS [IpAddress]
-      FROM [dbo].[Scheme-Plan] AS [Scheme-Plan]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" store:Schema="dbo" store:Name="School-Scheme">
@@ -100,6 +90,7 @@
       [PlanDetails].[SchemeName] AS [SchemeName], 
       [PlanDetails].[PlanID] AS [PlanID], 
       [PlanDetails].[PlanName] AS [PlanName], 
+      [PlanDetails].[Description] AS [Description], 
       [PlanDetails].[Version] AS [Version]
       FROM [dbo].[PlanDetails] AS [PlanDetails]</DefiningQuery>
           </EntitySet>
@@ -483,9 +474,6 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'matriFunDB.dbo.Scheme-Plan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="Scheme-Plan">
           <Key>
             <PropertyRef Name="SchemeID" />
@@ -717,6 +705,7 @@
           <Property Name="SchemeName" Type="varchar" MaxLength="120" />
           <Property Name="PlanID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PlanName" Type="varchar" Nullable="false" MaxLength="120" />
+          <Property Name="Description" Type="varchar" MaxLength="300" />
           <Property Name="Version" Type="varchar" MaxLength="100" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -2270,6 +2259,7 @@
           <Property Type="Guid" Name="PlanID" Nullable="false" />
           <Property Type="String" Name="PlanName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Version" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Description" MaxLength="300" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2750,6 +2740,7 @@
           <EntitySetMapping Name="PlanDetails">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.PlanDetail">
               <MappingFragment StoreEntitySet="PlanDetails">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="PlanName" ColumnName="PlanName" />
                 <ScalarProperty Name="PlanID" ColumnName="PlanID" />
