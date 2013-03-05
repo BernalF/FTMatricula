@@ -94,6 +94,15 @@
       [ApplicationUser].[IdentificationTypeID] AS [IdentificationTypeID]
       FROM [dbo].[ApplicationUser] AS [ApplicationUser]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="PlanDetails" EntityType="FTMatricula.DBModel.Store.PlanDetails" store:Type="Views" store:Schema="dbo" store:Name="PlanDetails">
+            <DefiningQuery>SELECT 
+      [PlanDetails].[SchemeID] AS [SchemeID], 
+      [PlanDetails].[SchemeName] AS [SchemeName], 
+      [PlanDetails].[PlanID] AS [PlanID], 
+      [PlanDetails].[PlanName] AS [PlanName], 
+      [PlanDetails].[Version] AS [Version]
+      FROM [dbo].[PlanDetails] AS [PlanDetails]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="RequirementDetails" EntityType="FTMatricula.DBModel.Store.RequirementDetails" store:Type="Views" store:Schema="dbo" store:Name="RequirementDetails">
             <DefiningQuery>SELECT 
       [RequirementDetails].[RequirementID] AS [RequirementID], 
@@ -696,6 +705,21 @@
           <Property Name="IdentificationTypeID" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
+      warning 6002: The table/view 'matriFunDB.dbo.PlanDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="PlanDetails">
+          <Key>
+            <PropertyRef Name="SchemeID" />
+            <PropertyRef Name="PlanID" />
+            <PropertyRef Name="PlanName" />
+          </Key>
+          <Property Name="SchemeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="SchemeName" Type="varchar" MaxLength="120" />
+          <Property Name="PlanID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PlanName" Type="varchar" Nullable="false" MaxLength="120" />
+          <Property Name="Version" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
       warning 6002: The table/view 'matriFunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="RequirementDetails">
@@ -1134,12 +1158,6 @@
           <Parameter Name="UserNameOld" Type="nvarchar" Mode="In" />
           <Parameter Name="UserNameNew" Type="nvarchar" Mode="In" />
         </Function>
-        <!--Errors Found During Generation:
-      warning 6013: The table/view 'matriFunDB.dbo.EnrollmentSchedule' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-      
-      <EntityType Name="EnrollmentSchedule">
-        <Property Name="ss" Type="nchar" MaxLength="10" />
-      </EntityType>-->
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1315,6 +1333,7 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="StudentPlan" EntitySet="StudentPlans" />
           </AssociationSet>
+          <EntitySet Name="PlanDetails" EntityType="FTMatricula.DBModel.PlanDetail" />
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -2240,6 +2259,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PlanDetail">
+          <Key>
+            <PropertyRef Name="SchemeID" />
+            <PropertyRef Name="PlanID" />
+            <PropertyRef Name="PlanName" />
+          </Key>
+          <Property Type="Guid" Name="SchemeID" Nullable="false" />
+          <Property Type="String" Name="SchemeName" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="PlanID" Nullable="false" />
+          <Property Type="String" Name="PlanName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Version" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2713,6 +2744,17 @@
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="PlanID" ColumnName="PlanID" />
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanDetails">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.PlanDetail">
+              <MappingFragment StoreEntitySet="PlanDetails">
+                <ScalarProperty Name="Version" ColumnName="Version" />
+                <ScalarProperty Name="PlanName" ColumnName="PlanName" />
+                <ScalarProperty Name="PlanID" ColumnName="PlanID" />
+                <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
+                <ScalarProperty Name="SchemeID" ColumnName="SchemeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

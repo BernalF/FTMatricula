@@ -69,6 +69,7 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentPlan_Plan" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentPlan_Student" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.PlanDetail" Width="1.5" PointX="10.232038271721471" PointY="31.258171930563716" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
