@@ -32,7 +32,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingRequirements([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.RequirementDetails.ToList().Select(m => new { m.RequirementID, m.Name, TypeName =  Resources.GetValue(m.TypeName) }).ToDataSourceResult(request));
+            return Json(db.RequirementDetails.ToList().Select(m => new { m.RequirementID, m.Name, m.TypeName }).ToDataSourceResult(request));
         }
 
         /// <summary>
