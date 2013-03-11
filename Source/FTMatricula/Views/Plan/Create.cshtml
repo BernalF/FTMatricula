@@ -60,7 +60,7 @@
             <div class="clear"></div>
             <div class="formBtnBar">
                 <a href="#" class="button send" onclick="javascript: submit_form()">Save</a>
-                @Html.ActionLink("Cancel", "index", "Plan", routeValues: null, htmlAttributes: new { @class = "button back" })
+                @Html.ActionLink("Cancel", "index", "Plan", routeValues: new { opt = "programs" }, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
         }

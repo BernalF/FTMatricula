@@ -29,18 +29,13 @@
                                           columns.Bound(m => m.TypeName).Title(@Resources.GetValue("TYPE_NAME"));
                                           columns.Command(command =>
                                           {
-                                              command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
+                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
-                                     .Editable(editable => 
-                                              {
-                                                  editable.Mode(GridEditMode.PopUp)
-                                                  .Window(m =>
-                                                  {
-                                                      m.Title(@Resources.GetValue("EDIT")).Draggable();
-                                                  }).TemplateName("AddRequirement");
-                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));                                                
+                                     .Editable(editable =>
+                                              {   
+                                                  editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
                                               })
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
@@ -66,7 +61,8 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .ToolBar(create => create.Create()
+                                      .ToolBar(create => create.Custom()
+                                          .Action("Create", "Requirement")
                                           .Text(@Resources.GetValue("ADD_REQ"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))
                                       .Pageable(pager => pager
@@ -93,9 +89,7 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingRequirements", "Requirement"))
-                                            .Create(create => create.Action("CreateRequirement", "Requirement"))
-                                            .Update(update => update.Action("UpdateRequirement", "Requirement"))  
+                                            .Read(read => read.Action("PagingRequirements", "Requirement"))                                            
                                             .Destroy(destroy => destroy.Action("DestroyRequirement", "Requirement"))                                          
                                             .Model(model => model.Id(m => m.RequirementID))
                                       )
@@ -107,11 +101,14 @@
             </ul>
         </div>
     </div>
-
-
-
 </div>
 
 @section Scripts {
-
+    <script type="text/javascript">
+        function Edit_Row(arg) {
+            var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
+            var id = dataItem.PlanID;
+            window.location.href = "Requirement/Edit/" + id;
+        };
+    </script>
 }

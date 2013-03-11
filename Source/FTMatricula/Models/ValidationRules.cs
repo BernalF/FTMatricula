@@ -135,19 +135,6 @@ namespace FTMatricula.Models
 
     }
 
-
-    //------ RequerimentDetail Section
-    [MetadataType(typeof(RequirementDetail_Validation))]
-    public partial class RequirementDetail
-    {
-        public string tmpTypeID { get; set; }
-    }
-
-    public class RequirementDetail_Validation
-    {
-
-    }
-
     //------ StudentAdditionalData Section
     [MetadataType(typeof(StudentAdditionalData_Validation))]
     public partial class StudentAdditionalData

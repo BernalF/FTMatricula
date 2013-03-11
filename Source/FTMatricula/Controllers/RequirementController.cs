@@ -36,6 +36,14 @@ namespace FTMatricula.Controllers
         }
 
         /// <summary>
+        /// Create
+        /// </summary>
+        public ActionResult Create()
+        {
+            return View();
+        }
+        
+        /// <summary>
         /// Update Users
         /// </summary>
         /// <param name="request"></param>
@@ -50,7 +58,7 @@ namespace FTMatricula.Controllers
                 {
                     RequirementID = Guid.NewGuid(),
                     Name = model.Name,
-                    TypeID = new Guid(model.tmpTypeID),
+                    TypeID = model.TypeID,
                     InsertUserID = SessApp.GetUserID(User.Identity.Name),
                     InsertDate = DateTime.Today,
                     IpAddress = Network.GetIpAddress(Request)
@@ -59,9 +67,28 @@ namespace FTMatricula.Controllers
                 db.Requirements.Add(req);
                 db.SaveChanges();
             }
-            return Json(new[] { new { RequirementID = model.RequirementID, Name = model.Name, TypeName = model.TypeName } }.ToDataSourceResult(request, ModelState));            
+            return RedirectToAction("index", "Requirement");
         }
 
+        /// <summary>
+        /// Edit
+        /// </summary>
+        public ActionResult Edit(string id)
+        {
+            try
+            {
+                RequirementDetail pReq = db.RequirementDetails
+                                   .Where(r => r.RequirementID == new Guid(id))
+                                   .ToList()
+                                   .FirstOrDefault();
+                return View(pReq);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+        
         /// <summary>
         /// Update Users
         /// </summary>
@@ -90,7 +117,7 @@ namespace FTMatricula.Controllers
             
             db.Entry(req).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(new[] { new { RequirementID = model.RequirementID, Name = model.Name, TypeName = model.TypeName } }.ToDataSourceResult(request, ModelState));
+            return RedirectToAction("index", "Requirement");
         }
 
         /// <summary>

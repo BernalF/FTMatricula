@@ -569,7 +569,6 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Scheme\index.cshtml" />
     <Content Include="Views\Requirement\index.cshtml" />
-    <Content Include="Views\Requirement\EditorTemplates\AddRequirement.cshtml" />
     <Content Include="Views\Scheme\Create.cshtml" />
     <Content Include="Views\Student\Create.cshtml" />
     <Content Include="Views\Student\EditPD.cshtml" />
@@ -602,6 +601,8 @@
     <Content Include="Views\Enrollment\Index.cshtml" />
     <Content Include="Views\Plan\Create.cshtml" />
     <Content Include="Views\Plan\Edit.cshtml" />
+    <Content Include="Views\Requirement\Create.cshtml" />
+    <Content Include="Views\Requirement\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

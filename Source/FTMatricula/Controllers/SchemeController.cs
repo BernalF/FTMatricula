@@ -87,12 +87,21 @@ namespace FTMatricula.Controllers
                                     join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
                                     join r in db.Requirements on sr.RequirementID equals r.RequirementID
                                     join t in db.Types on r.TypeID equals t.TypeID
-                                    where t.Usage == "REQ"
-                                    select new ReqDetailDTO { RequirementID = r.RequirementID, Name = r.Name }).AsEnumerable();
+                                    where t.Usage == "REQ"                                    
+                                    select new ReqDetailDTO
+                                    {
+                                        RequirementID = r.RequirementID,
+                                        Name = r.Name
+                                    })
+                                    .Distinct()
+                                    .Select(x => new ReqDetailDTO 
+                                    { 
+                                        RequirementID = x.RequirementID, 
+                                        Name = x.Name 
+                                    });
 
             SchemeDetail schemeDetail = new SchemeDetail { requirements = requirementsList };
             return View(schemeDetail);
-            //return View();
         }
 
         /// <summary>
@@ -133,8 +142,8 @@ namespace FTMatricula.Controllers
                             IpAddress = Network.GetIpAddress(Request)
                         };
                         db.Scheme_Requirement.Add(sR);
-                        db.SaveChanges();                        
-                    }                     
+                        db.SaveChanges();
+                    }
                 }
                 return RedirectToAction("index");
             }
@@ -199,7 +208,7 @@ namespace FTMatricula.Controllers
                     };
                     db.Scheme_Requirement.Add(sR);
                     db.SaveChanges();
-                }                
+                }
                 return RedirectToAction("index");
             }
             catch (Exception e)
