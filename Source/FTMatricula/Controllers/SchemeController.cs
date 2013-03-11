@@ -158,28 +158,46 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                //var requirementsList = (from sd in db.SchemeDetails
-                //                        join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
-                //                        join r in db.Requirements on sr.RequirementID equals r.RequirementID
-                //                        join t in db.Types on r.TypeID equals t.TypeID
-                //                        where t.Usage == "REQ"                                    
-                //                        select new ReqDetailDTO
-                //                        {
-                //                            RequirementID = r.RequirementID,
-                //                            Name = r.Name
-                //                        })
-                //                        .Distinct()
-                //                        .Select(x => new ReqDetailDTO 
-                //                        { 
-                //                            RequirementID = x.RequirementID, 
-                //                            Name = x.Name 
-                //                        });
+                var requirementsList = (from r in db.Requirements
+                                        join t in db.Types on r.TypeID equals t.TypeID
+                                        where t.Name == "REQ_PROGRAM"
+                                        select new ReqDetailDTO
+                                        {
+                                            RequirementID = r.RequirementID,
+                                            Name = r.Name
+                                        })
+                        .Distinct()
+                        .Select(x => new ReqDetailDTO
+                        {
+                            RequirementID = x.RequirementID,
+                            Name = x.Name
+                        });
+
+                var selectedReq = (from sd in db.SchemeDetails
+                                        join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
+                                        join r in db.Requirements on sr.RequirementID equals r.RequirementID
+                                        join t in db.Types on r.TypeID equals t.TypeID
+                                        where t.Usage == "REQ"
+                                        select new ReqDetailDTO
+                                        {
+                                            RequirementID = r.RequirementID,
+                                            Name = r.Name
+                                        })
+                                        .Distinct()
+                                        .Select(x => new ReqDetailDTO
+                                        {
+                                            RequirementID = x.RequirementID,
+                                            Name = x.Name
+                                        });
                 
                 
                 SchemeDetail scheme = db.SchemeDetails
                                    .Where(s => s.SchemeID == new Guid(id))
                                    .ToList()
                                    .FirstOrDefault();
+
+                scheme.requirements = requirementsList;
+
                 return View(scheme);
             }
             catch (Exception e)
@@ -196,6 +214,7 @@ namespace FTMatricula.Controllers
         {
             try
             {
+                db.Configuration.ValidateOnSaveEnabled = false;
                 // Insert in scheme
                 Scheme scheme = new Scheme
                 {
@@ -205,12 +224,12 @@ namespace FTMatricula.Controllers
                     OwnerUserId = model.OwnerUserId,
                     CoordinatorUserId = model.CoordinatorUserId,
                     ModalityID = model.ModalityID,
-                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                    InsertDate = DateTime.Today,
+                    ModifyUserID = SessApp.GetUserID(User.Identity.Name),
+                    ModifyDate = DateTime.Today,
                     IpAddress = Network.GetIpAddress(Request),
                 };
-                db.Schemes.Add(scheme);
-                db.SaveChanges();
+                db.Entry(scheme).State = EntityState.Modified;
+                db.SaveChanges();                
                 // Insert in scheme-requirement
                 foreach (var item in model.PostedReq.ReqIDs)
                 {
@@ -218,11 +237,12 @@ namespace FTMatricula.Controllers
                     {
                         RequirementID = new Guid(item),
                         SchemeID = model.SchemeID,
-                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                        InsertDate = DateTime.Today,
+                        ModifyUserID = SessApp.GetUserID(User.Identity.Name),
+                        ModifyDate = DateTime.Today,
                         IpAddress = Network.GetIpAddress(Request)
                     };
-                    db.Scheme_Requirement.Add(sR);
+                    db.Entry(sR).State = EntityState.Modified;
+                    db.Configuration.ValidateOnSaveEnabled = false;
                     db.SaveChanges();
                 }
                 return RedirectToAction("index");

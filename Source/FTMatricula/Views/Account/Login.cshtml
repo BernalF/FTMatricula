@@ -1,6 +1,8 @@
-﻿@model FTMatricula.Models.LoginModel
+﻿@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@model FTMatricula.Models.LoginModel
 @section styles {
-    <link rel="stylesheet" href="~/Content/styles/login.css">
 }
 
 @if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
@@ -26,7 +28,7 @@
                                 <li>
                                     <ul class="login">
                                         <li class="logUser">
-                                            
+
                                             <ul class="logForm">
                                                 <li>
                                                     @Html.LabelFor(m => m.UserName)
@@ -72,7 +74,7 @@
                                 </li>
                             </ul>
                         </li>
-                    </ul>                    
+                    </ul>
                     <div class="clear"></div>
                 </div>            
 @*<ul>
@@ -86,15 +88,14 @@
 </div>
 
 <div id="footer_support">
-        <footer>
-            <ul>
-                 <li class="browsers">We Support</li>
-            </ul>
-        </footer>
-    </div>
+    <footer>
+        <ul>
+            <li class="browsers">We Support</li>
+        </ul>
+    </footer>
+</div>
 @section scripts {
     <script type="text/javascript">
-
         function keypressHandler(event) {
             var key = event.which || event.keyCode;
             switch (key) {
