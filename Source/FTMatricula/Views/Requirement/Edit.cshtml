@@ -27,12 +27,14 @@
                                 @Html.Label(@Resources.GetValue("TYPE_NAME"))
                             </li>
                             <li style="display: inline">
-                                @(Html.Kendo().DropDownListFor(model => model.TypeID)
+                                <div>
+                                    @(Html.Kendo().DropDownListFor(model => model.TypeID)
                                         .BindTo(FTMatricula.Utilities.GeneralCollections.ReqTypeList)
                                         .Name("TypeID")
                                         .DataTextField("Text")
                                         .DataValueField("Value")
                                         .HtmlAttributes(new { @class = "width100" }))
+                                </div>
                             </li>
                             <li>
                                 @Html.ValidationSummary(true)
@@ -44,7 +46,7 @@
             <div class="errorsSpace">
                 <ul>
                     <li>
-                       @Html.ValidationMessageFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.Name)
                     </li>
                 </ul>
             </div>            

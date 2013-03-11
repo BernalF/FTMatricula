@@ -84,14 +84,7 @@
                             @Html.Label(@Resources.GetValue("REQ_NAME"))
                         </li>
                         <li style="display: inline">
-                            <div>
-                             @*   @(Html.Kendo().DropDownListFor(model => model.tmpReqID)
-                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.RequirementList)
-                                                    .Name("tmpReqID")
-                                                    .DataTextField("Text")
-                                                    .DataValueField("Value")
-                                                    .HtmlAttributes(new { @class = "width100" }))*@
-                                
+                            <div>                                
                                  @Html.CheckBoxListFor(x => x.PostedReq.ReqIDs,
 														  x => x.requirements,
 														  x => x.RequirementID,

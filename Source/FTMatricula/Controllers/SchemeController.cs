@@ -83,21 +83,19 @@ namespace FTMatricula.Controllers
         /// </summary>
         public ActionResult Create()
         {
-            var requirementsList = (from sd in db.SchemeDetails
-                                    join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
-                                    join r in db.Requirements on sr.RequirementID equals r.RequirementID
+            var requirementsList = (from r in db.Requirements
                                     join t in db.Types on r.TypeID equals t.TypeID
-                                    where t.Usage == "REQ"                                    
+                                    where t.Name == "REQ_PROGRAM"
                                     select new ReqDetailDTO
                                     {
                                         RequirementID = r.RequirementID,
                                         Name = r.Name
                                     })
                                     .Distinct()
-                                    .Select(x => new ReqDetailDTO 
-                                    { 
-                                        RequirementID = x.RequirementID, 
-                                        Name = x.Name 
+                                    .Select(x => new ReqDetailDTO
+                                    {
+                                        RequirementID = x.RequirementID,
+                                        Name = x.Name
                                     });
 
             SchemeDetail schemeDetail = new SchemeDetail { requirements = requirementsList };
@@ -160,6 +158,24 @@ namespace FTMatricula.Controllers
         {
             try
             {
+                //var requirementsList = (from sd in db.SchemeDetails
+                //                        join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
+                //                        join r in db.Requirements on sr.RequirementID equals r.RequirementID
+                //                        join t in db.Types on r.TypeID equals t.TypeID
+                //                        where t.Usage == "REQ"                                    
+                //                        select new ReqDetailDTO
+                //                        {
+                //                            RequirementID = r.RequirementID,
+                //                            Name = r.Name
+                //                        })
+                //                        .Distinct()
+                //                        .Select(x => new ReqDetailDTO 
+                //                        { 
+                //                            RequirementID = x.RequirementID, 
+                //                            Name = x.Name 
+                //                        });
+                
+                
                 SchemeDetail scheme = db.SchemeDetails
                                    .Where(s => s.SchemeID == new Guid(id))
                                    .ToList()

@@ -18,7 +18,6 @@ namespace FTMatricula.Controllers
 
         //
         // GET: /Requirement/
-
         public ActionResult index()
         {
             return View();
@@ -97,19 +96,12 @@ namespace FTMatricula.Controllers
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateRequirement([DataSourceRequest] DataSourceRequest request, RequirementDetail model)
-        {
-
-            var typeID = (from r in db.Types                          
-                          where r.Name == model.TypeName
-                          select r.TypeID)
-                              .Distinct()
-                              .SingleOrDefault();
-            
+        {           
             Requirement req = new Requirement
             {                
                 RequirementID = model.RequirementID,
                 Name = model.Name,
-                TypeID = typeID,
+                TypeID = model.TypeID,
                 ModifyUserID = SessApp.GetUserID(User.Identity.Name),
                 ModifyDate = DateTime.Today,
                 IpAddress = Network.GetIpAddress(Request)

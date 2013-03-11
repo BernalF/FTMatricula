@@ -105,9 +105,9 @@
 
 @section Scripts {
     <script type="text/javascript">
-        function Edit_Row(arg) {
+        function Edit_Row(arg) {     
             var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
-            var id = dataItem.PlanID;
+            var id = dataItem.RequirementID;
             window.location.href = "Requirement/Edit/" + id;
         };
     </script>
