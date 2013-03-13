@@ -25,7 +25,8 @@
                                                     .Name("PlanID")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value")
-                                                    .HtmlAttributes(new { @class = "width100" }))
+                                                    .HtmlAttributes(new { @class = "width100" })
+                                                    .OptionLabel("Select a Plan"))
 
                     </li>
                 </ul>
@@ -83,12 +84,33 @@
                 url: 'LinkPC/GetCourses',
                 async: false,
                 ajaxSuccess: function (response) {
-                    buildCourseList($.parseJSON(response));
+                    buildCourseList($.parseJSON(response), "#sortable1");
                 }
             });
 
+            // Change event to load 
+            $("#PlanID").off('change.PlanID').on('change.PlanID', function () {
+                // Get the list of the Avalaible Courses
+                $.bAjax({
+                    url: 'LinkPC/GetCourses',
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        buildCourseList($.parseJSON(response), "#sortable1");
+                    }
+                });
+
+                $.bAjax({
+                    url: 'LinkPC/GetCoursesbyPlan',
+                    data: { planID: $(this).val() },
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        buildCourseList($.parseJSON(response), "#sortable2");
+                    }
+                });
+            });
+
             // Inject the course to the DOM
-            function buildCourseList(data) {
+            function buildCourseList(data, obj) {
                 var content = new StringBuilder();
                 $.each(data, function (key, val) {
                     content.append('<li><span id="');
@@ -99,16 +121,30 @@
                     content.append(val.Name);
                     content.append('</span></li>');
                 });
-                $('#sortable1').html(content.toString());
+                $(obj).html(content.toString());
             }
 
             // Save Action
             $('#btnLinkPC').off('click.btnLinkPC').on('click.btnLinkPC', function () {
-
-
+                $.ajaxSettings.traditional = true;
+                var lcourses = [];
+                $('#sortable2 li').each(function () {
+                    lcourses.push($(this).children('span').attr('id'));
+                });
+                $.bAjax({
+                    url: 'LinkPC/InsertPlanCourse',
+                    data: { planID: $("#PlanID").val(), courses: lcourses },
+                    datatype: "json",
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        if (response != "true")
+                            alert("Please Select a Plan");
+                        else 
+                            window.location.replace('@Url.Action("index")');
+                    }
+                });
                 return false;
             });
-
         });
     </script>
 }

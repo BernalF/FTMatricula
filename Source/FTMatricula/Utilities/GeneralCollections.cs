@@ -236,7 +236,7 @@ namespace FTMatricula.Utilities
                 matrifunDBEntities db = new matrifunDBEntities();
                 return new SelectList(db.Plans
                                         .ToList()
-                                        .Select(p => new { p.PlanID, p.Name }), "PlanID", "Name");
+                                        .Select(p => new { p.PlanID, Name = p.Name + " - " + p.Description }), "PlanID", "Name");
             }
         }
 
