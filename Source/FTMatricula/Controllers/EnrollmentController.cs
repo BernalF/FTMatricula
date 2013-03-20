@@ -8,10 +8,17 @@ namespace FTMatricula.Controllers
 {
     public class EnrollmentController : Controller
     {
-        //
-        // GET: /Enrollment/
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
+        {
+            return View();
+        }
+
+
+        public ActionResult Create()
         {
             return View();
         }

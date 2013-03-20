@@ -8,7 +8,7 @@
 
 body, html {
     background-image: url(../images/defaults/bg_image.png);
-    background-color: #666;
+    background-color: #666;detailBox
     background-position: center center;
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -1187,6 +1187,36 @@ ul li.item .menuImage {
     padding: 3px 0 3px 0;
 }
 /******/
+
+/*****/
+.detailBoxTitle {
+    display: block;
+    float: left;
+    width: 50%;
+    font-size: 14px;
+    color: #fff;
+}
+
+.detailBoxTitle ul {
+    margin: 20px 20px 0 20px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.detailBoxTitle li {
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.detailBoxTitle li label {
+    font-size: 14px;
+    color: #fff;
+    padding: 3px 0 3px 0;
+}
+
+/*****/
+
 .formBtnBar {
     display: block;
     overflow: hidden;

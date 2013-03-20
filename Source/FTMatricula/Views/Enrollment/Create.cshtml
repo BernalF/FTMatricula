@@ -1,0 +1,194 @@
+﻿@model FTMatricula.Models.ApplicationUser
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
+}
+
+@section styles {
+
+}
+
+<div id="content_edit_left">
+    <div class="editMenuSpace">
+        <div class="editMenu">
+            <ul>
+                <li class="editOptList">
+                    <div class="editOpt editOptSelected">
+                        <a href="#">INFORMACION GENERAL
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<div id="content_edit_right">
+
+    <div class="editBox">
+        @using (Html.BeginForm())
+        { 
+            <div class="editTitle">
+                <span>@Resources.GetValue("ADD_STUDENT_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")
+            </div>
+
+            <div class="editDetail">
+                <div class="detailBox100">
+                    <ul>
+                        <li>
+                            <label>DESCRIPCCION</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>PLAN</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>LOCALIZACION</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                            </div>
+                        </li>
+
+                        <li>
+                            <label>&nbsp;</label>
+                        </li>
+                        <li>
+                            <div>
+                                <table class="width100">
+                                    <tr>
+                                        <td>
+                                            @if (true)
+                                            {  
+                                                <label class="checkHolder hit">
+                                                    @Html.CheckBox("X")
+                                                    @Html.DisplayName("VALIDAR FECHAS")
+                                                </label>
+                                            }
+                                            else
+                                            {
+                                                <label class="checkHolder">
+                                                    @Html.CheckBox("x")
+                                                    @Html.DisplayNameFor(m => m.FirstName)
+                                                </label>
+                                            }
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="detailBoxTitle">
+                    <ul>
+                        <li>
+                            <label>PERIODO DE MATRICULA</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="detailBoxTitle">
+                    <ul>
+                        <li>
+                            <label>PERIODO EXTRAORDINARIO</label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="detailBox">
+                    <ul>
+                        <li>
+                            <label>FECHA INICIO</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                            </div>
+                        </li>
+                        <li>
+                            <label>FECHA FIN</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="detailBox">
+                    <ul>
+                        <li>
+                            <label>FECHA INICIO</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                            </div>
+                        </li>
+                        <li>
+                            <label>FECHA FIN</label>
+                        </li>
+                        <li>
+                            <div>
+                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>            
+            <div class="errorsSpace">
+                <ul>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.FirstName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.LastName)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.DateOfBirth)
+                    </li>
+                    <li>
+                        @Html.ValidationMessageFor(m => m.Phone1)
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="clear"></div>
+            <div class="formBtnBar">
+                @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
+                <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "Student", routeValues: null, htmlAttributes: new { @class = "button back" })
+            </div>
+            <div class="clear"></div>
+            
+        }
+    </div>
+
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        function submit_form() {
+            //$('.modalBg').fadeIn();
+            //$('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+    </script>
+}
