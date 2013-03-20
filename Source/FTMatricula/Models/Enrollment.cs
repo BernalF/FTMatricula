@@ -32,6 +32,7 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ExtraStartDate { get; set; }
         public Nullable<System.DateTime> ExtraEndDate { get; set; }
         public System.Guid? LocationID { get; set; }
+        public bool VerifyDates { get; set; }
     
         public virtual Plan Plan { get; set; }
         public virtual Location Location { get; set; }

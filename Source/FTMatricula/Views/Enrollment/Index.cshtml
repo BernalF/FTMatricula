@@ -1,7 +1,7 @@
-﻿@model FTMatricula.Models.School
+﻿@model FTMatricula.Models.Enrollment
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("SCHOOL_MANT");
+    ViewBag.Title = @Resources.GetValue("ENROLLMENT_MANT");
 }
 
 @section styles {
@@ -22,13 +22,15 @@
                         <ul>
 
                             <li>
-                                @(Html.Kendo().Grid<FTMatricula.Models.ApplicationUser>()
+                                @(Html.Kendo().Grid<FTMatricula.Models.Enrollment>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.UserName).Title(Resources.GetValue("IDENTIFICATION"));
-                                          columns.Bound(m => m.FirstName).Title(Resources.GetValue("FIRST_NAME"));
-                                          columns.Bound(m => m.LastName).Title(Resources.GetValue("LAST_NAME"));
+                                          columns.Bound(m => m.Description).Title(Resources.GetValue("ENROLLMENT_DESCRIPTION"));
+                                          columns.Bound(m => m.Plan.Description).Title(Resources.GetValue("ENROLLMENT_PLAN"));
+                                          columns.Bound(m => m.StartDate).Title(Resources.GetValue("ENROLLMENT_FECHA_BEGIN"));
+                                          columns.Bound(m => m.EndDate).Title(Resources.GetValue("ENROLLMENT_FECHA_END"));
+                                          columns.Bound(m => m.Location.Line1).Title(Resources.GetValue("ENROLLMENT_LOCATION"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
@@ -69,7 +71,7 @@
                                       }) 
                                       .ToolBar(create => create.Custom()
                                           .Action("Create", "Enrollment", routeValues: null)
-                                          .Text(Resources.GetValue("ADD_STUDENT"))
+                                          .Text(Resources.GetValue("ENROLLMENT_ADD"))
                                           .HtmlAttributes(new { @class = "kendoAddbutton" }))                                 
                                       .Pageable(pager => pager
                                             .PageSizes(new int[] { 5, 10, 15 })                                            
@@ -98,7 +100,7 @@
                                             .Read(read => read.Action("PagingUsers", "Student"))
                                             //.Update(update => update.Action("Edit", "User"))
                                             .Destroy(destroy => destroy.Action("DestroyUser", "Student"))                                                                                        
-                                            .Model(model => model.Id(m => m.StudentID))
+                                            .Model(model => model.Id(m => m.EnrollmentID))
                                       )
                                 )
                             </li>

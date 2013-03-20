@@ -320,6 +320,7 @@
           <Property Name="EndDate" Type="datetime" />
           <Property Name="ExtraStartDate" Type="datetime" />
           <Property Name="ExtraEndDate" Type="datetime" />
+          <Property Name="VerifyDates" Type="bit" Nullable="false" />
           <Property Name="LocationID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="EnrollmentCourse">
@@ -1275,13 +1276,6 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="StudentAdditionalData" EntitySet="StudentAdditionalDatas" />
           </AssociationSet>
-          <FunctionImport Name="uspRetrieveUserID" ReturnType="Collection(Guid)">
-          <Parameter Name="UserName" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="uspUserNameUpdate">
-            <Parameter Name="UserNameOld" Mode="In" Type="String" />
-            <Parameter Name="UserNameNew" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="EnrollmentCourses" EntityType="FTMatricula.DBModel.EnrollmentCourse" />
           <EntitySet Name="EnrollmentGroups" EntityType="FTMatricula.DBModel.EnrollmentGroup" />
           <EntitySet Name="EnrollmentGroupSchedules" EntityType="FTMatricula.DBModel.EnrollmentGroupSchedule" />
@@ -1323,6 +1317,13 @@
             <End Role="StudentPlan" EntitySet="StudentPlans" />
           </AssociationSet>
           <EntitySet Name="PlanDetails" EntityType="FTMatricula.DBModel.PlanDetail" />
+          <FunctionImport Name="uspRetrieveUserID" ReturnType="Collection(Guid)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUserNameUpdate">
+            <Parameter Name="UserNameOld" Mode="In" Type="String" />
+            <Parameter Name="UserNameNew" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1406,6 +1407,7 @@
           <Property Type="Guid" Name="LocationID" Nullable="false" />
           <NavigationProperty Name="Location" Relationship="FTMatricula.DBModel.FK_Enrollment_Location" FromRole="Enrollment" ToRole="Location" />
           <NavigationProperty Name="EnrollmentCourses" Relationship="FTMatricula.DBModel.FK_EnrollmentCourse_Enrollment" FromRole="Enrollment" ToRole="EnrollmentCourse" />
+          <Property Type="Boolean" Name="VerifyDates" Nullable="false" />
         </EntityType>
         <EntityType Name="Location">
           <Key>
@@ -2326,6 +2328,7 @@
           <EntitySetMapping Name="Enrollments">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Enrollment">
               <MappingFragment StoreEntitySet="Enrollment">
+                <ScalarProperty Name="VerifyDates" ColumnName="VerifyDates" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="ExtraEndDate" ColumnName="ExtraEndDate" />
                 <ScalarProperty Name="ExtraStartDate" ColumnName="ExtraStartDate" />
@@ -2673,8 +2676,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspRetrieveUserID" FunctionName="FTMatricula.DBModel.Store.uspRetrieveUserID" />
-          <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
           <EntitySetMapping Name="EnrollmentCourses">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.EnrollmentCourse">
               <MappingFragment StoreEntitySet="EnrollmentCourse">
@@ -2749,6 +2750,8 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspRetrieveUserID" FunctionName="FTMatricula.DBModel.Store.uspRetrieveUserID" />
+          <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

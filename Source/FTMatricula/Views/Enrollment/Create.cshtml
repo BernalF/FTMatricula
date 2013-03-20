@@ -1,8 +1,8 @@
-﻿@model FTMatricula.Models.ApplicationUser
+﻿@model FTMatricula.Models.Enrollment
 
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = Resources.GetValue("STUDENT_MAINTENANCE");
+    ViewBag.Title = Resources.GetValue("ENROLLMENT_MANT");
 }
 
 @section styles {
@@ -15,8 +15,7 @@
             <ul>
                 <li class="editOptList">
                     <div class="editOpt editOptSelected">
-                        <a href="#">INFORMACION GENERAL
-                        </a>
+                        <a href="#">@Resources.GetValue("ENROLLMENT_GENERAL_INFO")</a>
                     </div>
                 </li>
             </ul>
@@ -31,36 +30,41 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span>@Resources.GetValue("ADD_STUDENT_TITLE") -</span>@Resources.GetValue("PERSONAL_DATA")
+                <span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")
             </div>
 
             <div class="editDetail">
                 <div class="detailBox100">
                     <ul>
                         <li>
-                            <label>DESCRIPCCION</label>
+                            <label>@Resources.GetValue("ENROLLMENT_DESCRIPTION")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                                @Html.TextBoxFor(m => m.Description, new { @class = "input width100" })
                             </div>
                         </li>
 
                         <li>
-                            <label>PLAN</label>
+                            <label>@Resources.GetValue("ENROLLMENT_PLAN")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                                @(Html.Kendo().DropDownListFor(m => m.PlanID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.PlanList)
+                                    .Name("PlanID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
 
                         <li>
-                            <label>LOCALIZACION</label>
+                            <label>@Resources.GetValue("ENROLLMENT_LOCATION")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                                @Html.TextBoxFor(m => m.LocationID, new { @class = "input width100" })
                             </div>
                         </li>
 
@@ -72,18 +76,18 @@
                                 <table class="width100">
                                     <tr>
                                         <td>
-                                            @if (true)
+                                            @if(Model.VerifyDates)
                                             {  
                                                 <label class="checkHolder hit">
-                                                    @Html.CheckBox("X")
-                                                    @Html.DisplayName("VALIDAR FECHAS")
+                                                    @Html.CheckBoxFor(m=>m.VerifyDates)
+                                                    @Html.DisplayNameFor(m=>m.VerifyDates)
                                                 </label>
                                             }
                                             else
                                             {
                                                 <label class="checkHolder">
-                                                    @Html.CheckBox("x")
-                                                    @Html.DisplayNameFor(m => m.FirstName)
+                                                    @Html.CheckBoxFor(m=>m.VerifyDates)
+                                                    @Html.DisplayNameFor(m=>m.VerifyDates)
                                                 </label>
                                             }
                                         </td>
@@ -96,33 +100,33 @@
                 <div class="detailBoxTitle">
                     <ul>
                         <li>
-                            <label>PERIODO DE MATRICULA</label>
+                            <label>@Resources.GetValue("ENROLLMENT_DATES")</label>
                         </li>
                     </ul>
                 </div>
                 <div class="detailBoxTitle">
                     <ul>
                         <li>
-                            <label>PERIODO EXTRAORDINARIO</label>
+                            <label>@Resources.GetValue("ENROLLMENT_EXRTRA_DATES")</label>
                         </li>
                     </ul>
                 </div>
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>FECHA INICIO</label>
+                            <label>@Resources.GetValue("ENROLLMENT_FECHA_BEGIN")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                                @Html.Kendo().DatePickerFor(m => m.StartDate).HtmlAttributes(new { @class = "input width100" })
                             </div>
                         </li>
                         <li>
-                            <label>FECHA FIN</label>
+                            <label>@Resources.GetValue("ENROLLMENT_FECHA_END")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                                @Html.Kendo().DatePickerFor(m => m.EndDate).HtmlAttributes(new { @class = "input width100" })
                             </div>
                         </li>
                     </ul>
@@ -130,26 +134,26 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>FECHA INICIO</label>
+                            <label>@Resources.GetValue("ENROLLMENT_FECHA_BEGIN")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                                @Html.Kendo().DatePickerFor(m => m.ExtraStartDate).HtmlAttributes(new { @class = "input width100" })
                             </div>
                         </li>
                         <li>
-                            <label>FECHA FIN</label>
+                            <label>@Resources.GetValue("ENROLLMENT_FECHA_END")</label>
                         </li>
                         <li>
                             <div>
-                                @Html.Kendo().DatePickerFor(m => m.DateOfBirth).HtmlAttributes(new { @class = "input width100" })
+                                @Html.Kendo().DatePickerFor(m => m.ExtraEndDate).HtmlAttributes(new { @class = "input width100" })
                             </div>
                         </li>
                     </ul>
                 </div>
             </div>            
             <div class="errorsSpace">
-                <ul>
+                @*<ul>
                     <li>
                         @Html.ValidationMessageFor(m => m.UserName)
                     </li>
@@ -165,7 +169,7 @@
                     <li>
                         @Html.ValidationMessageFor(m => m.Phone1)
                     </li>
-                </ul>
+                </ul>*@
             </div>
             
             <div class="clear"></div>

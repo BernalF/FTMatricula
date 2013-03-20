@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FTMatricula.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,7 +21,8 @@ namespace FTMatricula.Controllers
 
         public ActionResult Create()
         {
-            return View();
+
+            return View(new Enrollment());
         }
 
     }
