@@ -1,117 +1,166 @@
 ﻿@{
-    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    Layout = null;
 }
 @model FTMatricula.Models.LoginModel
-@section styles {
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
 
-@if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
-{
-    Response.Redirect("~/Account/NotAuthorized");
-}
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="iSales App HTML5">
+    <link href="../favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="../bookmark-icon1.png" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
 
-<div id="login_content">
-    <ul id="SectionHolder">
-        <li style="padding-bottom: 100px;"></li>
-        <li>
+    <link rel="stylesheet" href="../Content/styles/defaults.css">
+    <link rel="stylesheet" href="../Content/styles/login.css">
+    <link rel="stylesheet" href="../Content/styles/internal.css">
+
+    <script src="../Content/scripts/modernizr-2.5.3.js"></script>    
+</head>
+<body>
+
+    <div id="header">
+        <header class="top">
+            <a  href="@Url.Action("Index", "Home", routeValues: null)">
+                <h1>FundaTEC Matrícula</h1>
+            </a>
+            <nav>
+                <ul>
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- SECTION CONTENT STARTS -->
+
+    @if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
+    {
+        Response.Redirect("~/Account/NotAuthorized");
+    }
+
+    <div id="login_content">
+        <ul id="SectionHolder">
+            <li style="padding-bottom: 100px;"></li>
+            <li>
 
 
-            @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
-            {
+                @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+                {
             
-                <div class="mainBox" style="padding: 0px 10px 10px 10px; width: 400px;">
-                    <h2 class="title">@Resources.GetValue("LOGIN_TITLE")</h2>
+                    <div class="mainBox" style="padding: 0px 10px 10px 10px; width: 400px;">
+                        <h2 class="title">@Resources.GetValue("LOGIN_TITLE")</h2>
 
-                    <ul style="margin: 0 auto; padding: 0;">
-                        <li>
-                            <ul style="color: #000;">
-                                <li>
-                                    <ul class="login">
-                                        <li class="logUser">
+                        <ul style="margin: 0 auto; padding: 0;">
+                            <li>
+                                <ul style="color: #000;">
+                                    <li>
+                                        <ul class="login">
+                                            <li class="logUser">
 
-                                            <ul class="logForm">
-                                                <li>
-                                                    @Html.LabelFor(m => m.UserName)
-                                                </li>
-                                                <li>
-                                                    @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
-                                                </li>
-                                                <li>
-                                                    @Html.LabelFor(m => m.Password)
-                                                </li>
-                                                <li>
-                                                    @Html.PasswordFor(m => m.Password, new { @class = "input", @id = "txtPassword", @onkeypress = "javascript: return keypressHandler(event);" })
-                                                </li>
+                                                <ul class="logForm">
+                                                    <li>
+                                                        @Html.LabelFor(m => m.UserName)
+                                                    </li>
+                                                    <li>
+                                                        @Html.TextBoxFor(m => m.UserName, new { @class = "input" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.LabelFor(m => m.Password)
+                                                    </li>
+                                                    <li>
+                                                        @Html.PasswordFor(m => m.Password, new { @class = "input", @id = "txtPassword", @onkeypress = "javascript: return keypressHandler(event);" })
+                                                    </li>
 
 
-                                                <li></li>
-                                                <li>
-                                                    @if (Model.RememberMe)
-                                                    { 
-                                                        <label class="checkHolder hit">
-                                                            @Html.CheckBoxFor(m => m.RememberMe)
-                                                            @Html.DisplayNameFor(m => m.RememberMe)
-                                                        </label>
-                                                    }
-                                                    else
-                                                    {
-                                                        <label class="checkHolder">
-                                                            @Html.CheckBoxFor(m => m.RememberMe)
-                                                            @Html.DisplayNameFor(m => m.RememberMe)
-                                                        </label>
-                                                    }
-                                                </li>
-                                                <li></li>
-                                                <li class="subBtn">
-                                                    <span class="block right"><a href="#" onclick="javascript: submit_form()">@Resources.GetValue("SIGNIN")</a></span>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    @Html.ValidationSummary()
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <div class="clear"></div>
-                </div>            
+                                                    <li></li>
+                                                    <li>
+                                                        @if (Model.RememberMe)
+                                                        { 
+                                                            <label class="checkHolder hit">
+                                                                @Html.CheckBoxFor(m => m.RememberMe)
+                                                                @Html.DisplayNameFor(m => m.RememberMe)
+                                                            </label>
+                                                        }
+                                                        else
+                                                        {
+                                                            <label class="checkHolder">
+                                                                @Html.CheckBoxFor(m => m.RememberMe)
+                                                                @Html.DisplayNameFor(m => m.RememberMe)
+                                                            </label>
+                                                        }
+                                                    </li>
+                                                    <li></li>
+                                                    <li class="subBtn">
+                                                        <span class="block right"><a href="#" onclick="javascript: submit_form()">@Resources.GetValue("SIGNIN")</a></span>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        @Html.ValidationSummary()
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="clear"></div>
+                    </div>            
 @*<ul>
                 <li class="textCenter invert">
                     @Html.ActionLink("Register", "Register") if you don't have an account.                
                 </li>
             </ul>*@
-            }
-        </li>
-    </ul>
-</div>
-
-<div id="footer_support">
-    <footer>
-        <ul>
-            <li class="browsers">We Support</li>
+                }
+            </li>
         </ul>
-    </footer>
-</div>
-@section scripts {
-    <script type="text/javascript">
-        function keypressHandler(event) {
-            var key = event.which || event.keyCode;
-            switch (key) {
-                default:
-                    return true;
-                case 13:
-                    submit_form();
-                    return false;
-            }
-        }
+    </div>
 
-        function submit_form() {
-            //$('.modalBg').fadeIn();
-            //$('.loading').fadeIn();
-            document.forms[0].submit();
-            return true;
+    <div id="footer_support">
+        <footer>
+            <ul>
+                <li class="browsers">We Support</li>
+            </ul>
+        </footer>
+    </div>
+    <!-- SECTION CONTENT ENDS -->
+    <div id="footer">
+        <footer>
+            <ul>
+                <li class="lined">@Resources.GetValue("SIGN")</li>
+            </ul>
+        </footer>
+
+    </div>
+    ​
+    <div class="modalBg">
+        modal
+    </div>
+    <div class="loading">
+        <img src="../Content/images/defaults/loader.gif" alt="loading" />
+        <p>Please wait!</p>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    function keypressHandler(event) {
+        var key = event.which || event.keyCode;
+        switch (key) {
+            default:
+                return true;
+            case 13:
+                submit_form();
+                return false;
         }
-    </script>
-}
+    }
+
+    function submit_form() {
+        //$('.modalBg').fadeIn();
+        //$('.loading').fadeIn();
+        document.forms[0].submit();
+        return true;
+    }
+</script>
+
