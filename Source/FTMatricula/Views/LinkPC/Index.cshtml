@@ -20,7 +20,7 @@
                         @Html.Label(@Resources.GetValue("PLAN_NAME"))
                     </li>
                     <li>
-                         @(Html.Kendo().DropDownList()
+                        @(Html.Kendo().DropDownList()
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.PlanList)
                                                     .Name("PlanID")
                                                     .DataTextField("Text")
@@ -37,7 +37,6 @@
                         <input id="filter1" class="input" type="text" />
                         <div class="usersHolderBox panel">
                             <ul id="sortable1" class="connectedSortable">
-                               
                             </ul>
                         </div>
                     </div>
@@ -55,8 +54,8 @@
                 </div>
                 <div class="clear"></div>
                 <ul class="formBtnBar">
-                    <li>                        
-                         <a href="#" class="button send" id="btnLinkPC">Save</a>
+                    <li>
+                        <a href="#" class="button send" id="btnLinkPC">Save</a>
                     </li>
                     <li>
                         @Html.ActionLink("Cancel", "index", "Home", routeValues: new { opt = "programs" }, htmlAttributes: new { @class = "button back" })
@@ -68,7 +67,7 @@
     </div>
 </div>
 
-@section Scripts {    
+@section Scripts {
     <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -90,38 +89,55 @@
 
             // Change event to load 
             $("#PlanID").off('change.PlanID').on('change.PlanID', function () {
-                // Get the list of the Avalaible Courses
-                $.bAjax({
-                    url: 'LinkPC/GetCourses',
-                    async: false,
-                    ajaxSuccess: function (response) {
-                        buildCourseList($.parseJSON(response), "#sortable1");
-                    }
-                });
-
-                $.bAjax({
-                    url: 'LinkPC/GetCoursesbyPlan',
-                    data: { planID: $(this).val() },
-                    async: false,
-                    ajaxSuccess: function (response) {
-                        buildCourseList($.parseJSON(response), "#sortable2");
-                    }
-                });
+                if ($(this).val() != "") {
+                    // Get the list of the Courses by Plan
+                    $.bAjax({
+                        url: 'LinkPC/GetCoursesbyPlan',
+                        ajaxBeforeSend: function () {
+                            $('.modalBg').fadeIn();
+                            $('.loading').fadeIn();
+                        },
+                        data: { planID: $(this).val() },
+                        async: false,
+                        ajaxSuccess: function (response) {
+                            buildCourseList($.parseJSON(response).cUassigned, "#sortable1");
+                            buildCourseList($.parseJSON(response).cAssigned, "#sortable2");
+                            $('.modalBg').fadeOut();
+                            $('.loading').fadeOut();
+                        }
+                    });
+                }
+                else {
+                    // Get the list of the Avalaible Courses
+                    $.bAjax({
+                        url: 'LinkPC/GetCourses',
+                        async: false,
+                        ajaxSuccess: function (response) {
+                            buildCourseList($.parseJSON(response), "#sortable1");
+                            buildCourseList("", "#sortable2");
+                        }
+                    });
+                }
             });
 
             // Inject the course to the DOM
             function buildCourseList(data, obj) {
-                var content = new StringBuilder();
-                $.each(data, function (key, val) {
-                    content.append('<li><span id="');
-                    content.append(val.CourseID);
-                    content.append('">');
-                    content.append(val.Code);
-                    content.append(' : ');
-                    content.append(val.Name);
-                    content.append('</span></li>');
-                });
-                $(obj).html(content.toString());
+                if (data != "") {
+                    var content = new StringBuilder();
+                    $.each(data, function (key, val) {
+                        content.append('<li><span id="');
+                        content.append(val.CourseID);
+                        content.append('">');
+                        content.append(val.Code);
+                        content.append(' : ');
+                        content.append(val.Name);
+                        content.append('</span></li>');
+                    });
+                    $(obj).html(content.toString());
+                }
+                else {
+                    $(obj).html("");
+                }                
             }
 
             // Save Action
@@ -133,14 +149,18 @@
                 });
                 $.bAjax({
                     url: 'LinkPC/InsertPlanCourse',
+                    ajaxBeforeSend: function () {
+                        $('.modalBg').fadeIn();
+                        $('.loading').fadeIn();
+                    },
                     data: { planID: $("#PlanID").val(), courses: lcourses },
                     datatype: "json",
                     async: false,
                     ajaxSuccess: function (response) {
+                        $('.modalBg').fadeOut();
+                        $('.loading').fadeOut();
                         if (response != "true")
                             alert("Please Select a Plan");
-                        else 
-                            window.location.replace('@Url.Action("index")');
                     }
                 });
                 return false;
