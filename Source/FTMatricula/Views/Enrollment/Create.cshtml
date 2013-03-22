@@ -64,7 +64,12 @@
                         </li>
                         <li>
                             <div>
-                                @Html.TextBoxFor(m => m.LocationID, new { @class = "input width100" })
+                                @(Html.Kendo().DropDownListFor(m => m.LocationID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.LocationsList)
+                                    .Name("LocationID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
 
@@ -153,30 +158,24 @@
                 </div>
             </div>            
             <div class="errorsSpace">
-                @*<ul>
+                <ul>
                     <li>
-                        @Html.ValidationMessageFor(m => m.UserName)
+                        @Html.ValidationMessageFor(m => m.Description)
                     </li>
                     <li>
-                        @Html.ValidationMessageFor(m => m.FirstName)
+                        @Html.ValidationMessageFor(m => m.StartDate)
                     </li>
                     <li>
-                        @Html.ValidationMessageFor(m => m.LastName)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.DateOfBirth)
-                    </li>
-                    <li>
-                        @Html.ValidationMessageFor(m => m.Phone1)
-                    </li>
-                </ul>*@
+                        @Html.ValidationMessageFor(m => m.EndDate)
+                    </li>                   
+                </ul>
             </div>
             
             <div class="clear"></div>
             <div class="formBtnBar">
                 @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
                 <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
-                @Html.ActionLink(Resources.GetValue("CANCEL"), "index", "Student", routeValues: null, htmlAttributes: new { @class = "button back" })
+                @Html.ActionLink(Resources.GetValue("CANCEL"), "Index", "Enrollment", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
             

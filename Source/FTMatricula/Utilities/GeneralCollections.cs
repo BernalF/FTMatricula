@@ -253,6 +253,20 @@ namespace FTMatricula.Utilities
                                         .Select(p => new { p.SchemeID, p.Name }), "SchemeID", "Name");
             }
         }
+
+        /// <summary>
+        /// Locations List
+        /// </summary>
+        public static SelectList LocationsList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Locations
+                                        .ToList()
+                                        .Select(l => new { l.LocationID, Name = l.Name + " - " + l.Line1 }), "LocationID", "Name");
+            }
+        }
     }
 }
 
