@@ -156,5 +156,32 @@ namespace FTMatricula.Models
         [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_RECEIVE_NEWS")]
         public bool ReceiveNews { get; set; }
     }
+
+    //------ StudentAdditionalData Section
+    [MetadataType(typeof(Enrollment_Validation))]
+    public partial class Enrollment
+    {
+
+    }
+
+    public class Enrollment_Validation
+    {
+        [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_DESCRIPTION")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public string Description { get; set; }
+
+        [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_FECHA_BEGIN")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public Nullable<System.DateTime> StartDate { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_FECHA_END")]
+        [Required(ErrorMessageResourceType = typeof(ModelResources), ErrorMessageResourceName = "REQUIRED")]
+        public Nullable<System.DateTime> EndDate { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_FECHA_BEGIN")]
+        public Nullable<System.DateTime> ExtraStartDate { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_FECHA_END")]
+        public Nullable<System.DateTime> ExtraEndDate { get; set; }
+        [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_VERIFY_DATES")]
+        public bool VerifyDates { get; set; }
+    }
 }
 

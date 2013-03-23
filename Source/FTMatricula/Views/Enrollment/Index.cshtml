@@ -27,10 +27,10 @@
                                       .Columns(columns =>
                                       {
                                           columns.Bound(m => m.Description).Title(Resources.GetValue("ENROLLMENT_DESCRIPTION"));
-                                          columns.Bound(m => m.Plan.Description).Title(Resources.GetValue("ENROLLMENT_PLAN"));
+                                          //columns.Bound(m => m.Plan.Description).Title(Resources.GetValue("ENROLLMENT_PLAN"));
                                           columns.Bound(m => m.StartDate).Title(Resources.GetValue("ENROLLMENT_FECHA_BEGIN"));
                                           columns.Bound(m => m.EndDate).Title(Resources.GetValue("ENROLLMENT_FECHA_END"));
-                                          columns.Bound(m => m.Location.Line1).Title(Resources.GetValue("ENROLLMENT_LOCATION"));
+                                          //columns.Bound(m => m.Location.Name).Title(Resources.GetValue("ENROLLMENT_LOCATION"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
@@ -97,9 +97,9 @@
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
                                             .ServerOperation(false)
-                                            .Read(read => read.Action("PagingUsers", "Student"))
+                                            .Read(read => read.Action("PagingEnrollments", "Enrollment"))
                                             //.Update(update => update.Action("Edit", "User"))
-                                            .Destroy(destroy => destroy.Action("DestroyUser", "Student"))                                                                                        
+                                            .Destroy(destroy => destroy.Action("DestroyUser", "Enrollment"))                                                                                        
                                             .Model(model => model.Id(m => m.EnrollmentID))
                                       )
                                 )
@@ -114,7 +114,13 @@
 
 
 </div>
-
 @section Scripts {
-
+   <script type="text/javascript">
+    function Edit_Row(arg) {
+        var dataItem = this.dataItem($(arg.currentTarget).closest("tr"));
+        //alert(JSON.stringify(dataItem));
+        var id = dataItem.EnrollmentID;
+        window.location.href = "Enrollment/Edit/" + id;
+    };
+</script>
 }
