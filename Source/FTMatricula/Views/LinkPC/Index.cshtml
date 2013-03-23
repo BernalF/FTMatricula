@@ -57,8 +57,8 @@
                     <li>
                         <a href="#" class="button send" id="btnLinkPC">Save</a>
                     </li>
-                    <li>
-                        @Html.ActionLink("Cancel", "index", "Home", routeValues: new { opt = "programs" }, htmlAttributes: new { @class = "button back" })
+                    <li>                        
+                        <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancel</a>
                     </li>
                 </ul>
             </div>
