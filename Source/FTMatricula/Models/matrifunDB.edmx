@@ -348,6 +348,7 @@
           <Property Name="ClassroomID" Type="uniqueidentifier" />
           <Property Name="ProfessorID" Type="uniqueidentifier" />
           <Property Name="Quota" Type="int" Nullable="false" />
+          <Property Name="ExtraQuota" Type="int" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
@@ -1318,7 +1319,7 @@
           </AssociationSet>
           <EntitySet Name="PlanDetails" EntityType="FTMatricula.DBModel.PlanDetail" />
           <FunctionImport Name="uspRetrieveUserID" ReturnType="Collection(Guid)">
-            <Parameter Name="UserName" Mode="In" Type="String" />
+          <Parameter Name="UserName" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="uspUserNameUpdate">
             <Parameter Name="UserNameOld" Mode="In" Type="String" />
@@ -2110,6 +2111,7 @@
           <NavigationProperty Name="EnrollmentCourse" Relationship="FTMatricula.DBModel.FK_EnrollmentGroups_EnrollmentCourse" FromRole="EnrollmentGroup" ToRole="EnrollmentCourse" />
           <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_EnrollmentGroups_Users" FromRole="EnrollmentGroup" ToRole="User" />
           <NavigationProperty Name="EnrollmentGroupSchedules" Relationship="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" FromRole="EnrollmentGroup" ToRole="EnrollmentGroupSchedule" />
+          <Property Type="Int32" Name="ExtraQuota" />
         </EntityType>
         <EntityType Name="EnrollmentGroupSchedule">
           <Key>
@@ -2695,6 +2697,7 @@
           <EntitySetMapping Name="EnrollmentGroups">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.EnrollmentGroup">
               <MappingFragment StoreEntitySet="EnrollmentGroups">
+                <ScalarProperty Name="ExtraQuota" ColumnName="ExtraQuota" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
                 <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />

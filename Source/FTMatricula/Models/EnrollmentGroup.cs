@@ -30,6 +30,7 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public Nullable<int> ExtraQuota { get; set; }
     
         public virtual Classroom Classroom { get; set; }
         public virtual EnrollmentCourse EnrollmentCourse { get; set; }

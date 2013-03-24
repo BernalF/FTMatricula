@@ -161,7 +161,9 @@ namespace FTMatricula.Models
     [MetadataType(typeof(Enrollment_Validation))]
     public partial class Enrollment
     {
-
+        public string PlanDescription { get; set; }
+        public string LocationName { get; set; }
+        
     }
 
     public class Enrollment_Validation

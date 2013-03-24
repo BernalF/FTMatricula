@@ -604,6 +604,9 @@
     <Content Include="Views\Requirement\Edit.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Enrollment\Create.cshtml" />
+    <Content Include="Views\Enrollment\Edit.cshtml" />
+    <Content Include="Views\Enrollment\Courses.cshtml" />
+    <Content Include="Views\Enrollment\Groups.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

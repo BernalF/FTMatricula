@@ -256,5 +256,7 @@ INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_GENERAL_INFO', 'es-CR'
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_ADD_TITLE', 'es-CR', 'Agregar Matrícula')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_DATES', 'es-CR', 'Período de Matrícula')
 INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_EXRTRA_DATES', 'es-CR', 'Período Extra-Ordinario')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_COURSES_DETAILS', 'es-CR', 'Detalle de Cursos')
+INSERT INTO [dbo].[Resource] VALUES (newid(), 'ENROLLMENT_GROUPS_DETAILS', 'es-CR', 'Detalle de Grupos')
 
 

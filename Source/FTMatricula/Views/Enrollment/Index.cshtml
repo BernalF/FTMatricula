@@ -27,10 +27,10 @@
                                       .Columns(columns =>
                                       {
                                           columns.Bound(m => m.Description).Title(Resources.GetValue("ENROLLMENT_DESCRIPTION"));
-                                          //columns.Bound(m => m.Plan.Description).Title(Resources.GetValue("ENROLLMENT_PLAN"));
-                                          columns.Bound(m => m.StartDate).Title(Resources.GetValue("ENROLLMENT_FECHA_BEGIN"));
-                                          columns.Bound(m => m.EndDate).Title(Resources.GetValue("ENROLLMENT_FECHA_END"));
-                                          //columns.Bound(m => m.Location.Name).Title(Resources.GetValue("ENROLLMENT_LOCATION"));
+                                          columns.Bound(m => m.PlanDescription).Title(Resources.GetValue("ENROLLMENT_PLAN"));
+                                          columns.Bound(m => m.StartDate).Title(Resources.GetValue("ENROLLMENT_FECHA_BEGIN")).Format("{0:dd/MM/yyyy}");
+                                          columns.Bound(m => m.EndDate).Title(Resources.GetValue("ENROLLMENT_FECHA_END")).Format("{0:dd/MM/yyyy}");
+                                          columns.Bound(m => m.LocationName).Title(Resources.GetValue("ENROLLMENT_LOCATION"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
