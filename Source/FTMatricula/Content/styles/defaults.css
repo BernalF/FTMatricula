@@ -56,6 +56,26 @@ img {
     width: 100%;
 }
 
+.width50 {
+    width: 50%;
+}
+
+.width40 {
+    width: 40%;
+}
+
+.width60 {
+    width: 60%;
+}
+
+.width25 {
+    width: 25%;
+}
+
+.width75 {
+    width: 75%;
+}
+
 .blacked p, .blacked li, .blacked input, .blacked select, .blacked option, .blacked table {
     color: #000 !important;
 }
@@ -254,6 +274,8 @@ a.alpha {
 
 
 /* CHECKS INPUTS STARTS */
+
+.checkSpace,
 .checkHolder,
 .radioHolder {
     background-repeat: no-repeat;
@@ -266,7 +288,7 @@ a.alpha {
     margin: 0 0 0 0;
 }
 
-.checkHolder {
+.checkHolder, .checkSpace {
     background-image: url(../images/defaults/checks.png);
 }
 
@@ -275,14 +297,21 @@ a.alpha {
 }
 
 .checkHolder input,
+.checkSpace input,
 .radioHolder input {
     visibility: hidden;
     margin: 0 10px 0 0;
 }
 
+
 label.hit,
 span.hit {
     background-position: 0 -3px;
+}
+
+label.bgrYellow,
+span.bgrYellow{
+    background-color:rgba(240, 150, 9,.8);
 }
 
 /* CHECKS INPUTS ENDS */
@@ -1187,6 +1216,50 @@ ul li.item .menuImage {
     padding: 3px 0 3px 0;
 }
 /******/
+.detailBlock {
+    display: block;
+    float: left;
+    width: 50%;
+    font-size: 14px;
+    color: #fff;
+}
+
+.detailBlock ul {
+    margin: 20px;
+    padding: 10px;
+    border: 1px #327376 solid;
+    overflow: hidden;
+}
+
+.detailBlock li {
+    display: block;
+    float: left;
+}
+
+.detailBlock li label {
+    font-size: 14px;
+    color: #fff;
+    padding: 3px 0 3px 0;
+}
+
+.detailBlock li div {
+    padding: 3px 0 3px 0;
+}
+
+.whiteContentBox {
+    width: 100%;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0,.8);
+    max-height: 210px;
+    overflow-x:auto;
+}
+
+.whiteContentBox div{
+    padding: 2px 10px !important;
+}
+
+
+/*******/
 
 /*****/
 .detailBoxTitle {

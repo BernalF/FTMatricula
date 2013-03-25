@@ -40,129 +40,70 @@
         @using (Html.BeginForm())
         { 
             <div class="editTitle">
-                <span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")
+                <span>@*@Resources.GetValue("ENROLLMENT_ADD_TITLE")*@Edición de Matrícula -</span>@Resources.GetValue("ENROLLMENT_COURSES_DETAILS")
             </div>
 
             <div class="editDetail">
-                <div class="detailBox100">
+                <div class="detailBlock">
                     <ul>
-                        <li>
-                            <label>@Resources.GetValue("ENROLLMENT_DESCRIPTION")</label>
+                        <li class="width100">
+                            <label>Seleccione los cursos que se incluiran en la matricula</label>
                         </li>
-                        <li>
-                            <div>
-                                @Html.TextBoxFor(m => m.Description, new { @class = "input width100" })
-                            </div>
-                        </li>
+                        <li class="width100">
+                            <div class="whiteContentBox">
 
-                        <li>
-                            <label>@Resources.GetValue("ENROLLMENT_PLAN")</label>
-                        </li>
-                        <li>
-                            <div>
-                                @(Html.Kendo().DropDownListFor(m => m.PlanID)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.PlanList)
-                                    .Name("PlanID")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                            </div>
-                        </li>
-
-                        <li>
-                            <label>@Resources.GetValue("ENROLLMENT_LOCATION")</label>
-                        </li>
-                        <li>
-                            <div>
-                                @(Html.Kendo().DropDownListFor(m => m.LocationID)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.LocationsList)
-                                    .Name("LocationID")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                            </div>
-                        </li>
-
-                        <li>
-                            <label>&nbsp;</label>
-                        </li>
-                        <li>
-                            <div>
-                                <table class="width100">
-                                    <tr>
-                                        <td>
-                                            @if(Model.VerifyDates)
-                                            {  
-                                                <label class="checkHolder hit">
-                                                    @Html.CheckBoxFor(m=>m.VerifyDates)
-                                                    @Html.DisplayNameFor(m=>m.VerifyDates)
-                                                </label>
-                                            }
-                                            else
-                                            {
-                                                <label class="checkHolder">
-                                                    @Html.CheckBoxFor(m=>m.VerifyDates)
-                                                    @Html.DisplayNameFor(m=>m.VerifyDates)
-                                                </label>
-                                            }
-                                        </td>
-                                    </tr>
-                                </table>
+                                @foreach (var item in Model.EnrollmentCourses)
+                                {
+                                    <div>
+                                        @if (item.IsChecked)
+                                        {
+                                            <label class="checkSpace hit">
+                                                <input type="checkbox" id="@item.EnrollmentCourseID" name="EnrollmentCourse" value="@item.IsChecked.ToString().ToLower()" checked="checked"/>
+                                                @item.Course.Code &nbsp;-&nbsp; @item.Course.Name
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="checkSpace">
+                                                <input type="checkbox" id="@item.EnrollmentCourseID" name="EnrollmentCourse" value="@item.IsChecked.ToString().ToLower()"/>
+                                                @item.Course.Code &nbsp;-&nbsp; @item.Course.Name
+                                            </label>
+                                        }
+                                    </div>
+                                }
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="detailBoxTitle">
-                    <ul>
-                        <li>
-                            <label>@Resources.GetValue("ENROLLMENT_DATES")</label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="detailBoxTitle">
-                    <ul>
-                        <li>
-                            <label>@Resources.GetValue("ENROLLMENT_EXRTRA_DATES")</label>
-                        </li>
-                    </ul>
-                </div>
+
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>@Resources.GetValue("ENROLLMENT_FECHA_BEGIN")</label>
+                            <label>Información de nuevo Grupo</label>
                         </li>
                         <li>
-                            <div>
-                                @Html.Kendo().DatePickerFor(m => m.StartDate).HtmlAttributes(new { @class = "input width100" })
-                            </div>
+                            <label>&nbsp;</label></li>
+                        <li>
+                            <label>&nbsp;</label></li>
+                        <li>
+                            <label>&nbsp;</label></li>
+                        <li>
+                            <label>Curso</label>
                         </li>
                         <li>
-                            <label>@Resources.GetValue("ENROLLMENT_FECHA_END")</label>
+                            @Html.TextBoxFor(m => m.Description, new { @class = "input width100" })
                         </li>
                         <li>
-                            <div>
-                                @Html.Kendo().DatePickerFor(m => m.EndDate).HtmlAttributes(new { @class = "input width100" })
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="detailBox">
-                    <ul>
-                        <li>
-                            <label>@Resources.GetValue("ENROLLMENT_FECHA_BEGIN")</label>
+                            <label>Nombre del Grupo</label>
                         </li>
                         <li>
-                            <div>
-                                @Html.Kendo().DatePickerFor(m => m.ExtraStartDate).HtmlAttributes(new { @class = "input width100" })
-                            </div>
+                            @Html.TextBoxFor(m => m.Description, new { @class = "input width100" })
                         </li>
                         <li>
-                            <label>@Resources.GetValue("ENROLLMENT_FECHA_END")</label>
+                            <label>Cupo</label>
                         </li>
                         <li>
-                            <div>
-                                @Html.Kendo().DatePickerFor(m => m.ExtraEndDate).HtmlAttributes(new { @class = "input width100" })
-                            </div>
+                            
                         </li>
                     </ul>
                 </div>
@@ -177,12 +118,12 @@
                     </li>
                     <li>
                         @Html.ValidationMessageFor(m => m.EndDate)
-                    </li>                   
+                    </li>
                 </ul>
             </div>
-            @Html.HiddenFor(m=>m.EnrollmentID)
-            @Html.HiddenFor(m=>m.InsertUserID)
-            @Html.HiddenFor(m=>m.InsertDate)
+            @Html.HiddenFor(m => m.EnrollmentID)
+            @Html.HiddenFor(m => m.InsertUserID)
+            @Html.HiddenFor(m => m.InsertDate)
             <div class="clear"></div>
             <div class="formBtnBar">
                 @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@

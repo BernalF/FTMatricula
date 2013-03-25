@@ -15,6 +15,34 @@ $(document).ready(function(){
 			}
 		});
 	});
+
+    // INPUT CHECK
+	$('.checkSpace').each(function () {
+	    $(this).click(function (e) {
+
+	        $('.whiteContentBox label').removeClass('bgrYellow');
+
+	        $(this).addClass('bgrYellow');
+
+	        var click = e.clientX - $(this).offset().left;
+	        if ((click >= 0) && (click <= 20)) {
+
+	            if ($(this).children('input').is(':checked')) {
+	                $(this).addClass('hit');
+	            } else {
+	                $(this).removeClass('hit');
+	            }
+	        } else {	            
+	            if ($(this).hasClass('hit')) {
+	                $(this).children('input').prop('checked', true);
+	            } else {
+	                $(this).children('input').prop('checked', false);
+	            }
+	        }
+	        
+
+	    });
+	});
 	
 	// INPUT RADIO
 	$('.radioHolder').each(function (){
