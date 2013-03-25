@@ -52,10 +52,14 @@ img {
     clear: both;
 }
 
+
 .width100 {
     width: 100%;
 }
 
+li.width100 {
+    width: 100% !important;
+}
 .width50 {
     width: 50%;
 }

@@ -83,27 +83,69 @@
                         </li>
                         <li>
                             <label>&nbsp;</label></li>
-                        <li>
-                            <label>&nbsp;</label></li>
-                        <li>
-                            <label>&nbsp;</label></li>
+                        <li class="width100">
+                            <label>&nbsp;</label>
+                        </li>
                         <li>
                             <label>Curso</label>
                         </li>
                         <li>
-                            @Html.TextBoxFor(m => m.Description, new { @class = "input width100" })
+                            <div>
+                                <input id="Course_Name" name="Course_Name" type="text" value="" class="input width100" />
+                            </div>
                         </li>
                         <li>
                             <label>Nombre del Grupo</label>
                         </li>
                         <li>
-                            @Html.TextBoxFor(m => m.Description, new { @class = "input width100" })
+                            <div>
+                                <input id="Group_Name" name="Group_Name" type="text" value="" class="input width100" />
+                            </div>
                         </li>
                         <li>
                             <label>Cupo</label>
                         </li>
                         <li>
-                            
+                            @(Html.Kendo().NumericTextBox<int>()
+                                .Name("currency")
+                                .Format("n")
+                                .Min(0)
+                                .Max(100)
+                                .Value(30)
+                                .HtmlAttributes(new { @class = "width100" })
+                          )
+                        </li>
+                        <li class="width100">
+                            <label>&nbsp;</label>
+                        </li>
+                        <li class="width100">
+                            <table class="width100" border="1" style="border: 1px solid #327376">
+                                <tr>
+                                    <td style="width: 40%; padding: 5px 5px; background-color: rgba(0,0,0,.5);">
+                                        <label>Aula</label>
+                                    </td>
+                                    <td style="width: 60%; padding: 5px 5px; background-color: rgba(0,0,0,.5);">
+                                        <label>Hora</label></td>
+                                    <td style="padding: 5px 8px; background-color: #D16700; cursor: pointer;">
+                                        <label>+</label></td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="detailBox100">
+                    <ul>
+                        <li class="width100">
+                            <label>Detalle de Grupos Creados para el Curso seleccionado</label>
+                        </li>
+                        <li class="width100">
+                            <label>&nbsp;</label>
+                        </li>
+                        <li class="width100">
+                            <div id="groups_grid">
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -143,8 +185,39 @@
         function submit_form() {
             //$('.modalBg').fadeIn();
             //$('.loading').fadeIn();
-            document.forms[0].submit();
+            //document.forms[0].submit();
             return true;
         }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#groups_grid").kendoGrid({
+                dataSource: {
+                    data: null,
+                    pageSize: 10
+                },
+                sortable: true,
+                
+                columns: [{
+                    field: "Curso",
+                    width: 150,
+                    title: "Curso"
+                }, {
+                    field: "Grupo",
+                    width: 100,
+                    title: "Grupo"
+                }, {
+                    width: 200,
+                    field: "Hora"
+                }, {
+                    field: "Aula",
+                    width: 100,
+                    title: "Aula"
+
+                }
+                ]
+            });
+        });
     </script>
 }
