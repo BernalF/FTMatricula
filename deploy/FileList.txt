@@ -1,3 +1,0 @@
-Source\FTMatricula\Views\Account\Login.cshtml
-Source\FTMatricula\Controllers\LinkPCController.cs
-Source\FTMatricula\Views\LinkPC\Index.cshtml
