@@ -275,24 +275,26 @@ namespace FTMatricula.Utilities
         /// <summary>
         /// List of Courses by Professor
         /// </summary>
-        public static SelectList CoursesByProf
-        {
-            get
-            {
+        public static SelectList CoursesByProf(string userName)
+        {            
                 matrifunDBEntities db = new matrifunDBEntities();
+                
                 //Get StudentID by LoggedUserID
-                var userID = SessApp.GetUserID("206430861");
+                //var uID = SessApp.GetUserID(userName);
+                Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
+                var userID = db.Students
+                    .Where(s => s.UserID == uID)
+                    .Select(s => s.StudentID).FirstOrDefault();
                 
                 return new SelectList(db.Student_Course 
                     .Join(db.Courses, sc => sc.CourseID, c => c.CourseID, (sc, c) => new {sc, c})
-                    .Where(s => s.sc.StudentID == new Guid("00A77FFD-73D0-4D19-A23D-5EDA45448523"))
+                    .Where(s => s.sc.StudentID == userID)
                     .ToList()
                     .Select(s => new
                                         {
                                             CourseID = s.sc.CourseID,
                                             Name = s.c.Name + " - " + s.c.Code
-                                        }), "CourseID", "Name");
-            }
+                                        }), "CourseID", "Name");            
         }
 
     }

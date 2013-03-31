@@ -16,7 +16,7 @@
                     </li>
                     <li>
                         @(Html.Kendo().DropDownList()
-                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf)
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
                                                     .Name("CourseID")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value")
