@@ -173,7 +173,7 @@ namespace FTMatricula.Utilities
         /// <summary>
         /// Gender List
         /// </summary>
-        public static System.Web.Mvc.SelectList GenderList
+        public static SelectList GenderList
         {
             get
             {
@@ -271,6 +271,30 @@ namespace FTMatricula.Utilities
                                         .Select(l => new { l.LocationID, Name = l.Name + " - " + l.Line1 }), "LocationID", "Name");
             }
         }
+
+        /// <summary>
+        /// List of Courses by Professor
+        /// </summary>
+        public static SelectList CoursesByProf
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                //Get StudentID by LoggedUserID
+                var userID = SessApp.GetUserID("206430861");
+                
+                return new SelectList(db.Student_Course 
+                    .Join(db.Courses, sc => sc.CourseID, c => c.CourseID, (sc, c) => new {sc, c})
+                    .Where(s => s.sc.StudentID == new Guid("00A77FFD-73D0-4D19-A23D-5EDA45448523"))
+                    .ToList()
+                    .Select(s => new
+                                        {
+                                            CourseID = s.sc.CourseID,
+                                            Name = s.c.Name + " - " + s.c.Code
+                                        }), "CourseID", "Name");
+            }
+        }
+
     }
 }
 

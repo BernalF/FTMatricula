@@ -1,0 +1,46 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = @Resources.GetValue("NOTES_REGISTER");
+}
+<div id="content">
+
+    <div class="mainBox">
+
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "notes" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("NOTES_REGISTER")/@Resources.GetValue("NOTES_COURSE_REGISTER")</a></h2>
+
+        <div class="editDetail">
+            <div id="LinkPC">
+                <ul class="linkPlan">
+                    <li class="cWhite">
+                        @Html.Label(@Resources.GetValue("COURSES"))
+                    </li>
+                    <li>
+                        @(Html.Kendo().DropDownList()
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf)
+                                                    .Name("CourseID")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" })
+                                                    .OptionLabel("Select a Course"))
+
+                    </li>
+                </ul>
+                      
+                <div class="clear"></div>
+                <ul class="formBtnBar">
+                    <li>
+                        <a href="#" class="button send" id="btnLinkPC">Save</a>
+                    </li>
+                    <li>                        
+                        <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    
+}
