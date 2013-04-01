@@ -79,7 +79,7 @@
                 <div class="detailBox">
                     <ul>
                         <li>
-                            <label>Información de nuevo Grupo</label>
+                            <label class="bold">Información de nuevo Grupo</label>
                         </li>
                         <li>
                             <label>&nbsp;</label></li>
@@ -100,6 +100,19 @@
                         <li>
                             <div>
                                 <input id="Group_Name" name="Group_Name" type="text" value="" class="input width100" />
+                            </div>
+                        </li>
+                        <li>
+                            <label>Profesor</label>
+                        </li>
+                        <li>
+                            <div>
+                                @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.ProfessorList)
+                                    .Name("ProfessorID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
                         <li>

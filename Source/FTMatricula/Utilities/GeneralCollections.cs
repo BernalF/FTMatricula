@@ -297,6 +297,21 @@ namespace FTMatricula.Utilities
                                         }), "CourseID", "Name");            
         }
 
+
+        /// <summary>
+        /// Professor List
+        /// </summary>
+        public static SelectList ProfessorList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.ApplicationUsers
+                    .Where(p => p.RoleName == "ROLE_TEACHER")
+                                        .ToList()
+                                        .Select(p => new { ProfessorID = p.UserId, ProfessorName = p.FirstName + " " + p.LastName }), "ProfessorID", "ProfessorName");
+            }
+        }
     }
 }
 
