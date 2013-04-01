@@ -235,6 +235,11 @@ a.alpha {
     background-image: url(../images/defaults/register.png);
     background-position: right center;
 }
+
+.down {
+    background-image: url(../images/defaults/down.png);
+    background-position: right center;
+}
 /* buttons icons ends */
 
 #dd_saveButton {

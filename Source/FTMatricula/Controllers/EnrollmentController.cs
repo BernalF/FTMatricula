@@ -28,16 +28,19 @@ namespace FTMatricula.Controllers
         public ActionResult PagingEnrollments([DataSourceRequest] DataSourceRequest request)
         {
             var x = db.Enrollments
-                    .ToList().Select(m => new { m.EnrollmentID, 
-                                                m.Description, 
-                                                PlanDescription = m.Plan.Description, 
-                                                m.PlanID, 
-                                                LocationName = m.Location.Name +" "+ m.Location.Line1, 
-                                                m.LocationID, 
-                                                m.StartDate, 
-                                                m.EndDate, 
-                                                m.ExtraStartDate, 
-                                                m.ExtraEndDate })
+                    .ToList().Select(m => new
+                    {
+                        m.EnrollmentID,
+                        m.Description,
+                        PlanDescription = m.Plan.Description,
+                        m.PlanID,
+                        LocationName = m.Location.Name + " " + m.Location.Line1,
+                        m.LocationID,
+                        m.StartDate,
+                        m.EndDate,
+                        m.ExtraStartDate,
+                        m.ExtraEndDate
+                    })
                     ;
             return Json(x.ToDataSourceResult(request));
         }
@@ -78,14 +81,17 @@ namespace FTMatricula.Controllers
 
                     foreach (var plan_course in plan_courses)
                     {
-                        var course = new EnrollmentCourse { EnrollmentCourseID = Guid.NewGuid(),
-                                                            EnrollmentID = model.EnrollmentID,
-                                                            CourseID = plan_course.CourseID,
-                                                            IsChecked = false,
-                                                            HasGroups = false,
-                                                            InsertUserID = model.InsertUserID,
-                                                            InsertDate = model.InsertDate,
-                                                            IpAddress = model.IpAddress};
+                        var course = new EnrollmentCourse
+                        {
+                            EnrollmentCourseID = Guid.NewGuid(),
+                            EnrollmentID = model.EnrollmentID,
+                            CourseID = plan_course.CourseID,
+                            IsChecked = false,
+                            HasGroups = false,
+                            InsertUserID = model.InsertUserID,
+                            InsertDate = model.InsertDate,
+                            IpAddress = model.IpAddress
+                        };
                         db.EnrollmentCourses.Add(course);
                         db.SaveChanges();
                     }
@@ -100,7 +106,42 @@ namespace FTMatricula.Controllers
             }
 
         }
-        
+
+        /// <summary>
+        /// Save Selected Courses
+        /// </summary>
+        /// <param name="EnrollmentID"></param>
+        /// <param name="EnrollmentCourses">[{EnrollmentCourseID,True/False}]</param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult SaveSelectedCourses(string EnrollmentID, string[] EnrollmentCourses)
+        {
+            try
+            {
+                var model = db.Enrollments.Where(x => x.EnrollmentID == new Guid(EnrollmentID))
+                                                      .ToList()
+                                                      .FirstOrDefault();
+
+                foreach (var item in model.EnrollmentCourses)
+                    item.IsChecked = false;
+                if (EnrollmentCourses != null)
+                    foreach (string EnrollmentCourseID in EnrollmentCourses)
+                        model.EnrollmentCourses.Where(x => x.EnrollmentCourseID == new Guid(EnrollmentCourseID))
+                                                .ToList()
+                                                .FirstOrDefault().IsChecked = true;
+
+                db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json("OK");
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+        }
+
 
         /// <summary>
         /// 
@@ -119,7 +160,7 @@ namespace FTMatricula.Controllers
                     model.IpAddress = Network.GetIpAddress(Request);
                     db.Entry(model).State = EntityState.Modified;
                     db.SaveChanges();
-                    
+
                     return RedirectToAction("Index");
                 }
                 return View(model);

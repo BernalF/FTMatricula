@@ -73,12 +73,18 @@
                                 }
                             </div>
                         </li>
+
+                        <li class="width100">
+                            <div class="formBtnBar">
+                                <a id="btnSaveSelectedCourses" href="#" class="button send">@Resources.GetValue("SAVE")</a>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <div class="detailBox">
                     <ul>
-                        <li>
+                        <li class="width100">
                             <label class="bold">Información de nuevo Grupo</label>
                         </li>
                         <li>
@@ -144,6 +150,12 @@
                                 </tr>
                             </table>
                         </li>
+
+                        <li class="width100">
+                            <div class="formBtnBar">
+                                <a href="#" class="button down" onclick="">Agregar Grupo</a>
+                            </div>
+                        </li>
                     </ul>
 
                 </div>
@@ -181,8 +193,8 @@
             @Html.HiddenFor(m => m.InsertDate)
             <div class="clear"></div>
             <div class="formBtnBar">
-                @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
-                <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
+                @*<a href="#" class="button send" onclick="javascript: submitX()">TEST</a>*@
+                @*<a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>*@
                 @Html.ActionLink(Resources.GetValue("CANCEL"), "Index", "Enrollment", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
@@ -192,8 +204,16 @@
 
 </div>
 
+<div id="add_group" class="modalBg">
+</div>
+
 @section Scripts {
     <script type="text/javascript">
+
+        function submitX() {
+            $('#add_group').fadeIn();
+            return true;
+        }
 
         function submit_form() {
             //$('.modalBg').fadeIn();
@@ -211,7 +231,7 @@
                     pageSize: 10
                 },
                 sortable: true,
-                
+
                 columns: [{
                     field: "Curso",
                     width: 150,
@@ -231,6 +251,42 @@
                 }
                 ]
             });
-        });
+
+            $('#btnSaveSelectedCourses').off('click.btnSaveSelectedCourses').on('click.btnSaveSelectedCourses', function () {
+                $.ajaxSettings.traditional = true; 
+                var enrollmentCourses = [];
+                $('input[name="EnrollmentCourse"]').each(function () {
+                    if ($(this).is(':checked')) {
+                        enrollmentCourses.push($(this).attr('id'));
+                    }
+                });
+                var params = {
+                    EnrollmentID: $('#EnrollmentID').val(),
+                    EnrollmentCourses: enrollmentCourses
+                };
+                $.bAjax({
+                    url: '\\FTMatricula/Enrollment/SaveSelectedCourses',
+                    ajaxBeforeSend: function () {
+                        $('.modalBg').fadeIn();
+                        $('.loading').fadeIn();
+                    },
+                    data: params,
+                    datatype: "json",
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        $('.modalBg').fadeOut();
+                        $('.loading').fadeOut();
+
+                        //Do Somenthing 
+
+                    }
+                });
+
+                return false;
+            });
+
+
+
+            });
     </script>
 }

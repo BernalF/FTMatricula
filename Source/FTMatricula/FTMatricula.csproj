@@ -335,6 +335,7 @@
     <Content Include="Content\images\defaults\dd_signature_pad\pencil_option_1.png" />
     <Content Include="Content\images\defaults\dd_signature_pad\pencil_option_2.png" />
     <Content Include="Content\images\defaults\dd_signature_pad\pencil_option_3.png" />
+    <Content Include="Content\images\defaults\down.png" />
     <Content Include="Content\images\defaults\enter.png" />
     <Content Include="Content\images\defaults\file_icon.png" />
     <Content Include="Content\images\defaults\gear.png" />
