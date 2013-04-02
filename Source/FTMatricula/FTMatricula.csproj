@@ -343,6 +343,7 @@
     <Content Include="Content\images\defaults\greensales.png" />
     <Content Include="Content\images\defaults\home.png" />
     <Content Include="Content\images\defaults\icon.png" />
+    <Content Include="Content\images\defaults\icons.png" />
     <Content Include="Content\images\defaults\lateral_nav_bg.jpg" />
     <Content Include="Content\images\defaults\loader.gif" />
     <Content Include="Content\images\defaults\location.png" />
@@ -451,6 +452,7 @@
     <Content Include="Content\styles\defaults.css" />
     <Content Include="Content\styles\internal.css" />
     <Content Include="Content\styles\login.css" />
+    <Content Include="Content\styles\popup_window.css" />
     <Content Include="Content\styles\reset.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />

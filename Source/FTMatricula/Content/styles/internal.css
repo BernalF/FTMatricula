@@ -605,7 +605,42 @@ ul.alpha li.cover{
     display:none;
 }
 
+/* FORM LIST 1 STARTS */
+.formList > li{
+    font-size:20px;
+    line-height:30px;
+    padding-bottom:20px;
+}
 
+.formList > li label{
+    font-size:16px;
+    color:#333;
+}
+
+.formList > li:nth-last-child(1){
+    display:block;
+    float:none;
+    width:100%;
+    clear:both;
+    text-align:right;
+    padding-bottom:0;
+}
+
+.popupWindow .formList > li{
+    padding-bottom:0px;
+    margin-bottom:0;
+}
+
+.popupWindow .formList > li:nth-last-child(1){
+    padding-bottom:0;
+    padding-top:10px;
+}
+
+
+.popupWindow > li label{
+    color:#000;
+}
+/* FORM LIST 1 ENDS */
 
 
 
