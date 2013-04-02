@@ -448,6 +448,7 @@
     <Content Include="Content\kendo\js\kendo.web.js" />
     <Content Include="Content\kendo\lib\Kendo.Mvc.dll" />
     <Content Include="Content\scripts\jquery-1.8.1.min.js" />
+    <Content Include="Content\scripts\popup.js" />
     <Content Include="Content\scripts\util.js" />
     <Content Include="Content\styles\defaults.css" />
     <Content Include="Content\styles\internal.css" />

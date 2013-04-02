@@ -38,6 +38,7 @@ namespace FTMatricula
 
             bundles.Add(new ScriptBundle("~/bundles/FTMatriculaJS").Include(
                         "~/Content/scripts/util.js",
+                        "~/Content/scripts/popup.js",
                         "~/Content/scripts/layout.js"));
 
             bundles.Add(new StyleBundle("~/bundles/FTMatriculaCSS").Include(

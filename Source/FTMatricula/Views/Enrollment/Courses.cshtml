@@ -153,7 +153,7 @@
 
                         <li class="width100">
                             <div class="formBtnBar">
-                                <a href="#" class="button down" onclick="javascript: submitX()">Agregar Grupo</a>
+                                <a href="#addGroupWindow" class="popUp button down">Agregar Grupo</a>
                             </div>
                         </li>
                     </ul>
@@ -204,48 +204,39 @@
 
 </div>
 
-<div id="addGroupContainer" class="popupBg">
-    <div class="popupWindow" id="addGroupWindow">
-        <h2>Contact Information</h2>
-        <ul class="formList">
-            <li class="textRight">
-                <a href="#" class="closeButton"></a>
-            </li>
-            <li>
-                <label>First Name</label>
-                <input class="input" type="text" />
-            </li>
-            <li>
-                <label>Last Name</label>
-                <input class="input" type="text" />
-            </li>
-            <li>
-                <label>Owner Phone</label>
-                <input class="input" type="text" />
-            </li>
-            <li>
-                <label>E-mail</label>
-                <input class="input" type="text" />
-            </li>
-            <li>
-                <label>Best time to contact you</label>
-                <textarea></textarea>
-            </li>
-            <li class="textRight">
-                <a href="#" class="button">Send Info</a>
-            </li>
-        </ul>
-    </div>
+
+<div class="popupWindow" id="addGroupWindow">
+    <h2>Información de Horario</h2>
+    <ul class="formList">
+        <li>
+            <label>First Name</label>
+            <input class="input" type="text" />
+        </li>
+        <li>
+            <label>Last Name</label>
+            <input class="input" type="text" />
+        </li>
+        <li>
+            <label>Owner Phone</label>
+            <input class="input" type="text" />
+        </li>
+        <li>
+            <label>E-mail</label>
+            <input class="input" type="text" />
+        </li>
+        <li>
+            <label>Best time to contact you</label>
+            <textarea></textarea>
+        </li>
+        <li class="textRight">
+            <a href="#" class="button">Send Info</a>
+        </li>
+    </ul>
 </div>
 
 @section Scripts {
     <script type="text/javascript">
 
-        function submitX() {
-            $('#addGroupContainer').fadeIn();
-            $('#addGroupWindow').fadeIn();
-            return true;
-        }
 
         function submit_form() {
             //$('.modalBg').fadeIn();
