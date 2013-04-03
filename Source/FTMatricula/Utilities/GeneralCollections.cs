@@ -236,6 +236,7 @@ namespace FTMatricula.Utilities
                 matrifunDBEntities db = new matrifunDBEntities();
                 return new SelectList(db.Plans
                                         .ToList()
+                                        .Where(p => p.isActive == true)
                                         .Select(p => new
                                         {
                                             p.PlanID,
@@ -276,25 +277,25 @@ namespace FTMatricula.Utilities
         /// List of Courses by Professor
         /// </summary>
         public static SelectList CoursesByProf(string userName)
-        {            
-                matrifunDBEntities db = new matrifunDBEntities();
-                
-                //Get StudentID by LoggedUserID
-                //var uID = SessApp.GetUserID(userName);
-                Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
-                var userID = db.Students
-                    .Where(s => s.UserID == uID)
-                    .Select(s => s.StudentID).FirstOrDefault();
-                
-                return new SelectList(db.Student_Course 
-                    .Join(db.Courses, sc => sc.CourseID, c => c.CourseID, (sc, c) => new {sc, c})
-                    .Where(s => s.sc.StudentID == userID)
-                    .ToList()
-                    .Select(s => new
-                                        {
-                                            CourseID = s.sc.CourseID,
-                                            Name = s.c.Name + " - " + s.c.Code
-                                        }), "CourseID", "Name");            
+        {
+            matrifunDBEntities db = new matrifunDBEntities();
+
+            //Get StudentID by LoggedUserID
+            //var uID = SessApp.GetUserID(userName);
+            Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
+            var userID = db.Students
+                .Where(s => s.UserID == uID)
+                .Select(s => s.StudentID).FirstOrDefault();
+
+            return new SelectList(db.Student_Course
+                .Join(db.Courses, sc => sc.CourseID, c => c.CourseID, (sc, c) => new { sc, c })
+                .Where(s => s.sc.StudentID == userID)
+                .ToList()
+                .Select(s => new
+                                    {
+                                        CourseID = s.sc.CourseID,
+                                        Name = s.c.Name + " - " + s.c.Code
+                                    }), "CourseID", "Name");
         }
 
 

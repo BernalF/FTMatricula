@@ -51,13 +51,19 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>                
                 <div class="clear"></div>
+                <div class="errorsSpace">
+                    <ul>
+                        <li>
+                        </li>
+                    </ul>
+                </div>
                 <ul class="formBtnBar">
                     <li>
                         <a href="#" class="button send" id="btnLinkPC">Save</a>
                     </li>
-                    <li>                        
+                    <li>
                         <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancel</a>
                     </li>
                 </ul>
@@ -83,7 +89,9 @@
                 url: 'LinkPC/GetCourses',
                 async: false,
                 ajaxSuccess: function (response) {
-                    buildCourseList($.parseJSON(response), "#sortable1");
+                    buildCourseList($.parseJSON(response).Courses, "#sortable1");
+                    buildCourseList("", "#sortable2");
+                    $('#sortable1, #sortable2').sortable("disable");
                 }
             });
 
@@ -100,8 +108,17 @@
                         data: { planID: $(this).val() },
                         async: false,
                         ajaxSuccess: function (response) {
-                            buildCourseList($.parseJSON(response).cUassigned, "#sortable1");
-                            buildCourseList($.parseJSON(response).cAssigned, "#sortable2");
+                            var result = $.parseJSON(response);
+                            if (result.hEnrollment != true) {
+                                buildCourseList(result.cUassigned, "#sortable1");
+                                buildCourseList(result.cAssigned, "#sortable2");
+                                $('#sortable1, #sortable2').sortable("enable");
+                                $('.errorsSpace ul li').html('');
+                            }
+                            else {
+                                $('#sortable1, #sortable2').sortable("disable");
+                                $('.errorsSpace ul li').html('@Resources.GetValue("PELPC_WARNING")');
+                            }
                             $('.popupBg').fadeOut();
                             $('.loading').fadeOut();
                         }
@@ -113,8 +130,11 @@
                         url: 'LinkPC/GetCourses',
                         async: false,
                         ajaxSuccess: function (response) {
-                            buildCourseList($.parseJSON(response), "#sortable1");
+                            var result = $.parseJSON(response);
+                            buildCourseList(result.Courses, "#sortable1");
                             buildCourseList("", "#sortable2");
+                            $('#sortable1, #sortable2').sortable("disable");
+                            $('.errorsSpace ul li').html('');
                         }
                     });
                 }
@@ -137,7 +157,7 @@
                 }
                 else {
                     $(obj).html("");
-                }                
+                }
             }
 
             // Save Action

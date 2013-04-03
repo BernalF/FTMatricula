@@ -31,13 +31,17 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingPlan([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.PlanDetails.ToList().Select(m => new {   m.SchemeID, 
-                                                                    m.SchemeName, 
-                                                                    m.PlanID,
-                                                                    m.PlanName,
-                                                                    m.Description,
-                                                                    m.Version })
-                                                    .ToDataSourceResult(request));
+            return Json(db.PlanDetails.ToList()
+                .Where(m => m.isActive == true)
+                .Select(m => new
+                {
+                    m.SchemeID,
+                    m.SchemeName,
+                    m.PlanID,
+                    m.PlanName,
+                    m.Description,
+                    m.Version
+                }).ToDataSourceResult(request));
         }
 
         /// <summary>
@@ -95,7 +99,7 @@ namespace FTMatricula.Controllers
             try
             {
                 db.Scheme_Plan
-                  .ToList().RemoveAll(s => s.PlanID== model.PlanID);
+                  .ToList().RemoveAll(s => s.PlanID == model.PlanID);
                 db.SaveChanges();
 
                 Plan plan = db.Plans.Find(model.PlanID);
@@ -208,7 +212,7 @@ namespace FTMatricula.Controllers
                     InsertDate = DateTime.Today,
                     IpAddress = Network.GetIpAddress(Request),
                     Scheme_Plan = new HashSet<Scheme_Plan> { sPlan }
-                };                
+                };
                 db.Entry(plan).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("index");

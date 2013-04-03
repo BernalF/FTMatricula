@@ -1,3 +1,5 @@
+-- DELETE TEst Plan
+DELETE FROM [Plan] WHERE PlanID = '54445E55-C2F2-49E2-973C-9B68DE2E7D8A'
 -- Add ParentID, isActive, hasEnrollment columns to Plan Table
 ALTER TABLE [Plan] ADD ParentID UNIQUEIDENTIFIER NULL
 ALTER TABLE [Plan] ADD isActive BIT NULL
@@ -19,3 +21,5 @@ SELECT sp.SchemeID,
 FROM [Plan] p  
 INNER JOIN [Scheme-Plan] sp ON p.PlanID = sp.PlanID  
 INNER JOIN Scheme s ON s.SchemeID = sp.SchemeID  
+WHERE isActive = 1
+

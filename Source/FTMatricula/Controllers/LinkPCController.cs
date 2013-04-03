@@ -26,9 +26,21 @@ namespace FTMatricula.Controllers
         /// Get Courses List
         /// </summary>
         [HttpPost]
-        public JsonResult GetCourses()
+        public JsonResult GetCourses(string planID)
         {
-            return Json(db.Courses.Where(c => c.IsActive == true).ToList().Select(c => new { c.CourseID, c.Code, c.Name }));
+            bool? hasEnrollment = false;
+            if (planID != null)
+                hasEnrollment = db.Plans.Where(p => p.PlanID == new Guid(planID)).Select(p => p.hasEnrollment).FirstOrDefault();
+            else
+                hasEnrollment = false;
+            return Json(new
+            {
+                Courses = db.Courses
+                            .Where(c => c.IsActive == true)
+                            .ToList()
+                            .Select(c => new { c.CourseID, c.Code, c.Name }),
+                hEnrollment = hasEnrollment
+            });
         }
 
         /// <summary>
@@ -37,6 +49,11 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public JsonResult GetCoursesbyPlan(string planID)
         {
+            bool? hasEnrollment = false;
+            if (planID != null)
+                hasEnrollment = db.Plans.Where(p => p.PlanID == new Guid(planID)).Select(p => p.hasEnrollment).FirstOrDefault();
+            else
+                hasEnrollment = false;
             //List of Courses ID by Plan
             IQueryable<Guid?> lCourseID = from pc in db.Plan_Course
                                           join c in db.Courses on pc.CourseID equals c.CourseID
@@ -51,7 +68,7 @@ namespace FTMatricula.Controllers
                     join c in db.Courses on pc.CourseID equals c.CourseID
                     where pc.PlanID == new Guid(planID)
                     select new { c.CourseID, c.Code, c.Name, pc.PlanID };
-            return Json(new { cUassigned = x, cAssigned = y });
+            return Json(new { cUassigned = x, cAssigned = y, hEnrollment = hasEnrollment });
         }
 
         /// <summary>
@@ -62,7 +79,7 @@ namespace FTMatricula.Controllers
         {
             if (planID != "")
             {
-               // Delete all that exists
+                // Delete all that exists
                 var rows = from x in db.Plan_Course
                            where x.PlanID == new Guid(planID)
                            select x;
@@ -71,7 +88,7 @@ namespace FTMatricula.Controllers
                     db.Plan_Course.Remove(row);
                 }
                 db.SaveChanges();
-                
+
                 //Insert again
                 if (courses != null)
                 {
