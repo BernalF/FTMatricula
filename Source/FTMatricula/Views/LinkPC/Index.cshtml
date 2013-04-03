@@ -94,7 +94,7 @@
                     $.bAjax({
                         url: 'LinkPC/GetCoursesbyPlan',
                         ajaxBeforeSend: function () {
-                            $('.modalBg').fadeIn();
+                            $('.popupBg').fadeIn();
                             $('.loading').fadeIn();
                         },
                         data: { planID: $(this).val() },
@@ -102,7 +102,7 @@
                         ajaxSuccess: function (response) {
                             buildCourseList($.parseJSON(response).cUassigned, "#sortable1");
                             buildCourseList($.parseJSON(response).cAssigned, "#sortable2");
-                            $('.modalBg').fadeOut();
+                            $('.popupBg').fadeOut();
                             $('.loading').fadeOut();
                         }
                     });
@@ -150,14 +150,14 @@
                 $.bAjax({
                     url: 'LinkPC/InsertPlanCourse',
                     ajaxBeforeSend: function () {
-                        $('.modalBg').fadeIn();
+                        $('.popupBg').fadeIn();
                         $('.loading').fadeIn();
                     },
                     data: { planID: $("#PlanID").val(), courses: lcourses },
                     datatype: "json",
                     async: false,
                     ajaxSuccess: function (response) {
-                        $('.modalBg').fadeOut();
+                        $('.popupBg').fadeOut();
                         $('.loading').fadeOut();
                         if (response != "true")
                             alert("Please Select a Plan");
