@@ -91,7 +91,8 @@
       [PlanDetails].[PlanID] AS [PlanID], 
       [PlanDetails].[PlanName] AS [PlanName], 
       [PlanDetails].[Description] AS [Description], 
-      [PlanDetails].[Version] AS [Version]
+      [PlanDetails].[Version] AS [Version], 
+      [PlanDetails].[isActive] AS [isActive]
       FROM [dbo].[PlanDetails] AS [PlanDetails]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="RequirementDetails" EntityType="FTMatricula.DBModel.Store.RequirementDetails" store:Type="Views" store:Schema="dbo" store:Name="RequirementDetails">
@@ -712,6 +713,7 @@
           <Property Name="PlanName" Type="varchar" Nullable="false" MaxLength="120" />
           <Property Name="Description" Type="varchar" MaxLength="300" />
           <Property Name="Version" Type="varchar" MaxLength="100" />
+          <Property Name="isActive" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matrifunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -2270,6 +2272,7 @@
           <Property Type="String" Name="PlanName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Version" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Description" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="isActive" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -2753,6 +2756,7 @@
           <EntitySetMapping Name="PlanDetails">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.PlanDetail">
               <MappingFragment StoreEntitySet="PlanDetails">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Version" ColumnName="Version" />
                 <ScalarProperty Name="PlanName" ColumnName="PlanName" />

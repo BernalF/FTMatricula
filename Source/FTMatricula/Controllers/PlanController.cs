@@ -52,6 +52,8 @@ namespace FTMatricula.Controllers
             if (ModelState.IsValid)
             {
                 model.PlanID = Guid.NewGuid();
+                model.isActive = true;
+                model.hasEnrollment = false;
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                 model.InsertDate = DateTime.Today;
                 model.IpAddress = Network.GetIpAddress(Request);
