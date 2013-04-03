@@ -63,12 +63,14 @@ namespace FTMatricula.Utilities.Helper
         public static string ENROLLMENT { get { return Resources.GetValue("ENROLLMENT"); } }
         public static string ENROLLMENT_ADD { get { return Resources.GetValue("ENROLLMENT_ADD"); } }
         public static string ENROLLMENT_ADD_TITLE { get { return Resources.GetValue("ENROLLMENT_ADD_TITLE"); } }
+        public static string ENROLLMENT_COURSES_DETAILS { get { return Resources.GetValue("ENROLLMENT_COURSES_DETAILS"); } }
         public static string ENROLLMENT_DATES { get { return Resources.GetValue("ENROLLMENT_DATES"); } }
         public static string ENROLLMENT_DESCRIPTION { get { return Resources.GetValue("ENROLLMENT_DESCRIPTION"); } }
         public static string ENROLLMENT_EXRTRA_DATES { get { return Resources.GetValue("ENROLLMENT_EXRTRA_DATES"); } }
         public static string ENROLLMENT_FECHA_BEGIN { get { return Resources.GetValue("ENROLLMENT_FECHA_BEGIN"); } }
         public static string ENROLLMENT_FECHA_END { get { return Resources.GetValue("ENROLLMENT_FECHA_END"); } }
         public static string ENROLLMENT_GENERAL_INFO { get { return Resources.GetValue("ENROLLMENT_GENERAL_INFO"); } }
+        public static string ENROLLMENT_GROUPS_DETAILS { get { return Resources.GetValue("ENROLLMENT_GROUPS_DETAILS"); } }
         public static string ENROLLMENT_LOCATION { get { return Resources.GetValue("ENROLLMENT_LOCATION"); } }
         public static string ENROLLMENT_MANT { get { return Resources.GetValue("ENROLLMENT_MANT"); } }
         public static string ENROLLMENT_PLAN { get { return Resources.GetValue("ENROLLMENT_PLAN"); } }

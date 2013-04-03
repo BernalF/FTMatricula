@@ -28,7 +28,7 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingUsers([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.ApplicationUsers.ToList().Select(m => new { m.StudentID, m.UserName, m.FirstName, m.LastName }).ToDataSourceResult(request));
+            return Json(db.ApplicationUsers.ToList().Select(m => new { m.StudentID, m.UserName, m.FirstName, m.LastName, RoleName = Resources.GetValue(m.RoleName), m.Email }).ToDataSourceResult(request));
         }
 
         public ActionResult Create()

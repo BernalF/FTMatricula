@@ -1,7 +1,3 @@
--- Update Types for Users functionality
-UPDATE [Type] SET Name = 'MARITAL_STATUS_SINGLE' WHERE Name = 'Soltero'
-UPDATE [Type] SET Name = 'MARITAL_STATUS_MARRIED' WHERE Name = 'Casado'
-UPDATE [Type] SET Name = 'NATIONAL_ID' WHERE Name = 'Cedula'
 
 --- Insert Data Dummy on Student-Course
 INSERT INTO [Student-Course] (StudentID,CourseID,InsertDate) 
@@ -10,3 +6,4 @@ INSERT INTO [Student-Course] (StudentID,CourseID,InsertDate)
 VALUES ('00A77FFD-73D0-4D19-A23D-5EDA45448523', '8A68E359-974D-4215-BADB-59DA7B8633C3', GETDATE())
 INSERT INTO [Student-Course] (StudentID,CourseID,InsertDate) 
 VALUES ('00A77FFD-73D0-4D19-A23D-5EDA45448523', '57DC3CD5-993F-4B88-A120-8DF33362A385', GETDATE())
+
