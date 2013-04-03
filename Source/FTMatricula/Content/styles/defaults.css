@@ -179,6 +179,11 @@ a.alpha {
     border-bottom: 1px solid #bebebe;
 }
 
+.subTitle {
+    color: rgba(240, 150, 9,.8) !important;
+    font-weight:bold;
+}
+
 .button2,
 .button {
     display: block;
@@ -1155,6 +1160,7 @@ ul li.item .menuImage {
     margin: 0 auto;
 }
 
+/*****/
 .detailBox {
     display: block;
     float: left;
@@ -1163,14 +1169,14 @@ ul li.item .menuImage {
     color: #fff;
 }
 
-.detailBox ul {
+.detailBox > ul {
     margin: 20px;
     padding: 10px;
     border: 1px #327376 solid;
     overflow: hidden;
 }
 
-.detailBox li {
+.detailBox ul li {
     display: block;
     float: left;
     width: 50%;
@@ -1185,6 +1191,86 @@ ul li.item .menuImage {
 .detailBox li div {
     padding: 3px 0 3px 0;
 }
+
+
+/****/
+
+.scheduleGrid {
+    display: block;
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    color: #fff;
+}
+
+.scheduleGrid ul {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    border: 1px #327376 solid;
+}
+
+.scheduleGrid ul li {
+    display: block;
+    float: left;
+}
+
+.scheduleGrid li:nth-child(3n+1) {
+    width: 35%;
+}
+
+.scheduleGrid li:nth-child(3n+2) {
+    width: 55%;
+}
+
+.scheduleGrid li:nth-child(3n+0) {
+    width: 10%;
+}
+
+.scheduleGrid .header{
+    padding:3px;
+    font-size: 16px;
+    font-weight:bold;
+    color: rgba(240, 150, 9,.8);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-bottom-width:0px;
+}
+
+.scheduleGrid ul li p{
+    border: 1px #327376 solid;
+    padding:3px;
+    font-size: 14px;
+    color: #fff;
+    line-height:20px;
+}
+
+.scheduleGrid a.addButton{
+    	
+	display:block;
+	width:20px;
+	height:20px;
+	background-image:url(../images/defaults/add.png);
+	background-repeat:no-repeat;
+    background-color:#D16700;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#scheduleGrid {
+    border-top-width: 0px;
+}
+
+#scheduleGrid a{
+    	
+	display:block;
+	width:20px;
+	height:20px;
+	background-image:url(../images/defaults/delete.png);
+	background-repeat:no-repeat;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 /*******/
 .detailBox100 {
     display: block;
@@ -1258,7 +1344,7 @@ ul li.item .menuImage {
 .whiteContentBox {
     width: 100%;
     margin-top: 10px;
-    background-color: rgba(0, 0, 0,.8);
+    background-color: rgba(0, 0, 0,.4);
     max-height: 210px;
     overflow-x:auto;
 }

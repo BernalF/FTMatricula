@@ -47,7 +47,7 @@
                 <div class="detailBlock">
                     <ul>
                         <li class="width100">
-                            <label>Seleccione los cursos que se incluiran en la matricula</label>
+                            <label class="subTitle">Seleccione los cursos para la matrícula</label>
                         </li>
                         <li class="width100">
                             <div class="whiteContentBox">
@@ -85,7 +85,7 @@
                 <div class="detailBox">
                     <ul>
                         <li class="width100">
-                            <label class="bold">Información de nuevo Grupo</label>
+                            <label class="subTitle">Información de nuevo Grupo</label>
                         </li>
                         <li>
                             <label>&nbsp;</label></li>
@@ -138,22 +138,61 @@
                             <label>&nbsp;</label>
                         </li>
                         <li class="width100">
-                            <table class="width100" border="1" style="border: 1px solid #327376">
-                                <tr>
-                                    <td style="width: 40%; padding: 5px 5px; background-color: rgba(0,0,0,.5);">
-                                        <label>Aula</label>
-                                    </td>
-                                    <td style="width: 60%; padding: 5px 5px; background-color: rgba(0,0,0,.5);">
-                                        <label>Hora</label></td>
-                                    <td style="padding: 5px 8px; background-color: #D16700; cursor: pointer;">
-                                        <label>+</label></td>
-                                </tr>
-                            </table>
+                            <label class="subTitle">Horario</label>
+                        </li>
+                        <li class="width100">
+                            <label>&nbsp;</label>
+                        </li>
+                        <li class="width100">
+                            <div class="scheduleGrid">
+                                <ul>
+                                    <li>
+                                        <p class="header">Aula</p>
+                                    </li>
+                                    <li>
+                                        <p class="header">Horario</p>
+                                    </li>
+                                    <li>
+                                        <p class="header"><a href="#addGroupWindow" class="popUp addButton"></a></p>
+                                    </li>
+                                </ul>
+                                <ul id="scheduleGrid">
+                                    <li>
+                                        <p>A004</p>
+                                    </li>
+                                    <li>
+                                        <p>Lun 15:30 - 18:00</p>
+                                    </li>
+                                    <li>
+                                        <p><a href="#"></a></p>
+                                    </li>
+
+                                    <li>
+                                        <p>xx</p>
+                                    </li>
+                                    <li>
+                                        <p>yy</p>
+                                    </li>
+                                    <li>
+                                        <p>zz</p>
+                                    </li>
+
+                                    <li>
+                                        <p>xx</p>
+                                    </li>
+                                    <li>
+                                        <p>yy</p>
+                                    </li>
+                                    <li>
+                                        <p>zz</p>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
 
                         <li class="width100">
                             <div class="formBtnBar">
-                                <a href="#addGroupWindow" class="popUp button down">Agregar Grupo</a>
+                                <a href="#" class="button down">Agregar Grupo</a>
                             </div>
                         </li>
                     </ul>
@@ -163,7 +202,7 @@
                 <div class="detailBox100">
                     <ul>
                         <li class="width100">
-                            <label>Detalle de Grupos Creados para el Curso seleccionado</label>
+                            <label class="subTitle">Detalle de Grupos Creados para el Curso seleccionado</label>
                         </li>
                         <li class="width100">
                             <label>&nbsp;</label>
@@ -209,25 +248,22 @@
     <h2>Información de Horario</h2>
     <ul class="formList">
         <li>
-            <label>First Name</label>
+            <label>Aula</label>
+
+            @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.ProfessorList)
+                                    .Name("ProfessorIDc")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+
+        </li>
+        
+        <li>
+            <label>Día</label>
             <input class="input" type="text" />
         </li>
-        <li>
-            <label>Last Name</label>
-            <input class="input" type="text" />
-        </li>
-        <li>
-            <label>Owner Phone</label>
-            <input class="input" type="text" />
-        </li>
-        <li>
-            <label>E-mail</label>
-            <input class="input" type="text" />
-        </li>
-        <li>
-            <label>Best time to contact you</label>
-            <textarea></textarea>
-        </li>
+        
         <li class="textRight formBtnBar">
             <a href="#" class="button">Send Info</a>
         </li>
@@ -237,13 +273,8 @@
 @section Scripts {
     <script type="text/javascript">
 
+        var schedule_list = [];
 
-        function submit_form() {
-            //$('.modalBg').fadeIn();
-            //$('.loading').fadeIn();
-            //document.forms[0].submit();
-            return true;
-        }
     </script>
 
     <script>
@@ -288,16 +319,16 @@
                     EnrollmentCourses: enrollmentCourses
                 };
                 $.bAjax({
-                    url: '\\FTMatricula/Enrollment/SaveSelectedCourses',
+                    url: '\\Enrollment/SaveSelectedCourses',
                     ajaxBeforeSend: function () {
-                        $('.modalBg').fadeIn();
+                        $('.popupBg').fadeIn();
                         $('.loading').fadeIn();
                     },
                     data: params,
                     datatype: "json",
                     async: false,
                     ajaxSuccess: function (response) {
-                        $('.modalBg').fadeOut();
+                        $('.popupBg').fadeOut();
                         $('.loading').fadeOut();
 
                         //Do Somenthing 
