@@ -1,0 +1,27 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = Resources.GetValue("EQUIVALENCES");
+}
+
+@section styles {
+
+}
+
+<div id="content_edit_left">
+    <div class="editMenuSpace">
+        <div class="editMenu">
+            <ul>
+                <li class="editOptList">
+                    <div class="editOpt">
+                        <a href="@Url.Action("Versioning", "PlanVersioning")">@Resources.GetValue("PLAN_VERSION")</a>
+                    </div>
+                </li>
+                <li class="editOptList">
+                    <div class="editOpt editOptSelected">
+                        <a href="#">@Resources.GetValue("EQUIVALENCES")</a>
+                    </div>
+                </li>                
+            </ul>
+        </div>
+    </div>
+</div>

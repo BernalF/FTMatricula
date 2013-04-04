@@ -173,6 +173,7 @@
     <Compile Include="Controllers\EnrollmentController.cs" />
     <Compile Include="Controllers\LinkPCController.cs" />
     <Compile Include="Controllers\PlanController.cs" />
+    <Compile Include="Controllers\PlanVersioningController.cs" />
     <Compile Include="Controllers\ScoreRegisterController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Controllers\RequirementController.cs" />
@@ -613,6 +614,8 @@
     <Content Include="Views\Enrollment\Courses.cshtml" />
     <Content Include="Views\Enrollment\Groups.cshtml" />
     <Content Include="Views\ScoreRegister\index.cshtml" />
+    <Content Include="Views\PlanVersioning\Versioning.cshtml" />
+    <Content Include="Views\PlanVersioning\Equivalences.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
