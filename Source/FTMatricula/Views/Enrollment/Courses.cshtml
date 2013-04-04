@@ -157,35 +157,7 @@
                                     </li>
                                 </ul>
                                 <ul id="scheduleGrid">
-                                    <li>
-                                        <p>A004</p>
-                                    </li>
-                                    <li>
-                                        <p>Lun 15:30 - 18:00</p>
-                                    </li>
-                                    <li>
-                                        <p><a href="#"></a></p>
-                                    </li>
-
-                                    <li>
-                                        <p>xx</p>
-                                    </li>
-                                    <li>
-                                        <p>yy</p>
-                                    </li>
-                                    <li>
-                                        <p>zz</p>
-                                    </li>
-
-                                    <li>
-                                        <p>xx</p>
-                                    </li>
-                                    <li>
-                                        <p>yy</p>
-                                    </li>
-                                    <li>
-                                        <p>zz</p>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </li>
@@ -248,24 +220,109 @@
     <h2>Información de Horario</h2>
     <ul class="formList">
         <li>
-            <label>Aula</label>
-
-            @(Html.Kendo().DropDownList()
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.ProfessorList)
-                                    .Name("ProfessorIDc")
+            <table class = "width100">
+                <tr>
+                    <td class = "width25"><label>Aula</label></td>
+                    <td class = "width75">
+                        @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.ClassroomsList)
+                                    .Name("ClassroomID")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
                                     .HtmlAttributes(new { @class = "width100" }))
-
+                    </td>
+                </tr>
+            </table>
+        </li>
+        <li>
+            <table class = "width100">
+                <tr>
+                    <td class = "width25"><label>Día</label></td>
+                    <td class = "width75">
+                        @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.DaysList)
+                                    .Name("Day")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                    </td>
+                </tr>
+            </table>
         </li>
         
         <li>
-            <label>Día</label>
-            <input class="input" type="text" />
+            <table class = "width100">
+                <tr>
+                    <td class = "width25"></td>
+                    <td class = "width75">
+                        <table class = "width100">
+                            <tr>
+                                <td class = "width40"><label>Hora Inicio</label></td>
+                                <td class = "width30">
+                                    @(Html.Kendo().NumericTextBox<int>()
+                                        .Name("StartTimeH")
+                                        .Format("00")
+                                        .Min(0)
+                                        .Max(23)
+                                        .Value(8)
+                                        .HtmlAttributes(new { @class = "width80px" })
+                                    )
+                                </td>
+                                <td class = "width30">
+                                    @(Html.Kendo().NumericTextBox<int>()
+                                        .Name("StartTimeM")
+                                        .Format("00")
+                                        .Min(0)
+                                        .Max(59)
+                                        .Value(0)
+                                        .HtmlAttributes(new { @class = "width80px" })
+                                    )
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
         </li>
         
+        <li>
+            <table class = "width100">
+                <tr>
+                    <td class = "width25"></td>
+                    <td class = "width75">
+                        <table class = "width100">
+                            <tr>
+                                <td class = "width40"><label>Hora Fin</label></td>
+                                <td class = "width30">
+                                    @(Html.Kendo().NumericTextBox<int>()
+                                        .Name("EndTimeH")
+                                        .Format("00")
+                                        .Min(0)
+                                        .Max(23)
+                                        .Value(8)
+                                        .HtmlAttributes(new { @class = "width80px" })
+                                    )
+                                </td>
+                                <td class = "width30">
+                                    @(Html.Kendo().NumericTextBox<int>()
+                                        .Name("EndTimeM")
+                                        .Format("00")
+                                        .Min(0)
+                                        .Max(59)
+                                        .Value(0)
+                                        .HtmlAttributes(new { @class = "width80px" })
+                                    )
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </li>   
+
+
         <li class="textRight formBtnBar">
-            <a href="#" class="button">Send Info</a>
+            <a href="#" onclick="javascript: add_group();" class="button send">Agregar Horario</a>
         </li>
     </ul>
 </div>
@@ -274,6 +331,45 @@
     <script type="text/javascript">
 
         var schedule_list = [];
+
+        function add_group() {
+
+            var group = {
+                ClassroomID: $('#ClassroomID').val(),
+                ClassroomCode: $('#ClassroomID').data("kendoDropDownList").text(),
+                Day: $('#Day').val(),
+                StartTime: $('#StartTimeH').parent().find('.k-formatted-value').val() + ":" + $('#StartTimeM').parent().find('.k-formatted-value').val(),
+                EndTime: $('#EndTimeH').parent().find('.k-formatted-value').val() + ":" + $('#EndTimeM').parent().find('.k-formatted-value').val(),
+            };
+
+            schedule_list.push(group);
+
+            $("#scheduleGrid").html("");
+            for (var i = 0; i < schedule_list.length; i++) {
+                group = schedule_list[i];
+                var row = "<li><p>" + group.ClassroomCode + "</p></li><li><p>" + group.Day + " " + group.StartTime + " - " + group.EndTime + "</p></li><li><p><a href='#' onclick='javascript: delete_group(" + i + ");'></a></p></li>";
+                $("#scheduleGrid").append(row);
+            }
+
+            $(".popupBg").delay(300).fadeOut(300);
+            $('#addGroupWindow').fadeOut(300);                        
+
+            return;
+        }
+
+        function delete_group(index) {
+
+            schedule_list.splice(index, 1);
+
+            $("#scheduleGrid").html("");
+            for (var i = 0; i < schedule_list.length; i++) {
+                group = schedule_list[i];
+                var row = "<li><p>" + group.ClassroomCode + "</p></li><li><p>" + group.Day + " " + group.StartTime + " - " + group.EndTime + "</p></li><li><p><a href='#' onclick='javascript: delete_group(" + i + ");'></a></p></li>";
+                $("#scheduleGrid").append(row);
+            }
+
+            return;
+        }
 
     </script>
 
@@ -319,7 +415,7 @@
                     EnrollmentCourses: enrollmentCourses
                 };
                 $.bAjax({
-                    url: '\\Enrollment/SaveSelectedCourses',
+                    url: '@Url.Action("SaveSelectedCourses", "Enrollment")',
                     ajaxBeforeSend: function () {
                         $('.popupBg').fadeIn();
                         $('.loading').fadeIn();

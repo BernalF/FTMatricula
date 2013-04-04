@@ -615,12 +615,12 @@ ul.alpha li.cover{
 }
 
 .formList > li span{
-    font-size:12px;
+    font-size:15px;
     color:#333;
 }
 
 .formList > li label{
-    font-size:16px;
+    font-size:18px;
     color:#333;
     padding: 3px 0px;
 }
@@ -635,7 +635,7 @@ ul.alpha li.cover{
 }
 
 .popupWindow .formList > li{
-    padding-bottom:0px;
+    padding-bottom:10px;
     margin-bottom:0;
 }
 

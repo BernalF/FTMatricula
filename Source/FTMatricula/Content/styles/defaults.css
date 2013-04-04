@@ -53,6 +53,10 @@ img {
 }
 
 
+.width80px {
+    width: 80px;
+}
+
 .width100 {
     width: 100%;
 }
@@ -66,6 +70,10 @@ li.width100 {
 
 .width40 {
     width: 40%;
+}
+
+.width30 {
+    width: 30%;
 }
 
 .width60 {
@@ -1216,11 +1224,11 @@ ul li.item .menuImage {
 }
 
 .scheduleGrid li:nth-child(3n+1) {
-    width: 35%;
+    width: 55%;
 }
 
 .scheduleGrid li:nth-child(3n+2) {
-    width: 55%;
+    width: 35%;
 }
 
 .scheduleGrid li:nth-child(3n+0) {

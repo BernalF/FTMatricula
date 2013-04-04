@@ -313,6 +313,40 @@ namespace FTMatricula.Utilities
                                         .Select(p => new { ProfessorID = p.UserId, ProfessorName = p.FirstName + " " + p.LastName }), "ProfessorID", "ProfessorName");
             }
         }
+
+        /// <summary>
+        /// Classrooms List
+        /// </summary>
+        public static SelectList ClassroomsList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Classrooms
+                                    .ToList()
+                                    .OrderByDescending(c => c.Code)
+                                    .Select(c => new { c.ClassroomID, c.Code }), "ClassroomID", "Code");
+            }
+        }
+
+        /// <summary>
+        /// Days List
+        /// </summary>
+        public static SelectList DaysList
+        {
+            get
+            {
+                return new System.Web.Mvc.SelectList(new Dictionary<string, string> { 
+                    {"L","Lunes"},
+                    {"K","Martes"},
+                    {"M","Miercoles"},
+                    {"J","Jueves"},
+                    {"V","Viernes"},
+                    {"S","Sabado"},
+                    {"D","Domingo"}
+                }, "Key", "Value");
+            }
+        }
     }
 }
 
