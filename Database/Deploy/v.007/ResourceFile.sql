@@ -241,7 +241,7 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'PLAN_NAME', 'es-CR', 'Plan')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'TYPE_AUTO_FILTER', 'es-CR', 'Escriba un nombre de curso para filtrar')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'UNASSIGNED_COURSE', 'es-CR', 'Cursos sin asignar')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ADDED_COURSES', 'es-CR', 'Cursos Agregados al Plan')
-INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'PELPC_WARNING', 'es-CR', 'El Plan ya tiene una Matricula Asignada.')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'PELPC_WARNING', 'es-CR', 'El Plan ya tiene una Matricula Asignada. (Solo Lectura)')
 ---ENROLLMENT - VIEW
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_MANT', 'es-CR', 'Mantenimiento Matrícula')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_DESCRIPTION', 'es-CR', 'Descripción')
