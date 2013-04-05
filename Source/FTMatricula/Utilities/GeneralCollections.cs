@@ -347,6 +347,36 @@ namespace FTMatricula.Utilities
                 }, "Key", "Value");
             }
         }
+
+        /// <summary>
+        /// Enrollments List
+        /// </summary>
+        public static SelectList EnrollmentsList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Enrollments
+                                    .ToList()
+                                    //.OrderByDescending(c => c.Code)
+                                    .Select(e => new { e.EnrollmentID, e.Description }), "EnrollmentID", "Description");
+            }
+        }
+
+        /// <summary>
+        /// Students List
+        /// </summary>
+        public static SelectList StudentsList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Students
+                                    .ToList()
+                                    .OrderBy(s => s.FirstName)
+                                    .Select(s => new { s.StudentID, Name = s.User.UserName + " -- " + s.FirstName + " " + s.LastName }), "StudentID", "Name");
+            }
+        }
     }
 }
 

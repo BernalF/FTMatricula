@@ -321,7 +321,8 @@ namespace FTMatricula.Controllers
         /// <returns></returns>
         public ActionResult Enrollment()
         {
-            return View();
+            var model = db.Enrollments.ToList().FirstOrDefault();
+            return View(model);
         }
         
 

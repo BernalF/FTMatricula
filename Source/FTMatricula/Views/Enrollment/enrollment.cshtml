@@ -1,4 +1,6 @@
-﻿@{
+﻿@model FTMatricula.Models.Enrollment
+
+@{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
     ViewBag.Title = @Resources.GetValue("ENROLLMENT_STUDENT");
 }
@@ -7,48 +9,161 @@
         <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")/@Resources.GetValue("ENROLLMENT_STUDENT")</a></h2>
 
         <div class="editBox">
-            
-                <div class="editTitle">
-                    <span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")
+
+            <div class="editTitle">
+                @*<span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")*@
+                <span>Matrícula -</span>Módulo Principal
+            </div>
+
+            <div class="editDetail">
+                <div class="detailBox100">
+                    <ul>
+                        <li style="text-align:right;">
+                            <label>Seleccione la Matrícula&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </li>
+                        <li>
+                            <div>
+                                @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsList)
+                                    .Name("EnrollmentID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                        <li style="text-align:right;">
+                            <label>Plan de Estudios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </li>
+                        <li>
+                            <label class="subTitle">Técnico Asesor de Seguros del INS</label>
+                        </li>
+                        
+                        <li style="text-align:right;">
+                            <label>Estudiante&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        </li>
+                        <li>
+                            <div>
+                                @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.StudentsList)
+                                    .Name("StudentID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                    </ul>
                 </div>
 
-                <div class="editDetail">
-                    <div class="detailBox100">
-                        <ul>
-                            <li>
-                                <label>xx</label>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                    
-                    <div class="detailBox">
-                        <ul>
-                            <li>
-                                <label>yy</label>
-                            </li>
-                            
-                        </ul>
-                    </div>
+                <div class="detailBox">
+                    <ul>
+                        <li class="width100">
+                            <label class="subTitle">Lista de cursos</label>
+                        </li>
+                        <li class="width100">
+                            <div class="whiteContentBox">
 
-                    <div class="detailBox">
-                        <ul>
-                            <li>
-                                <label>zz</label>
-                            </li>
-                            
-                        </ul>
-                    </div>
+                                @foreach (var item in Model.EnrollmentCourses.Where(x => x.IsChecked == true))
+                                {
+                                    <div>
+                                        @if (item.IsChecked)
+                                        {
+                                            <label class="checkSpace hit">
+                                                <input type="checkbox" id="@item.EnrollmentCourseID" name="EnrollmentCourse" value="@item.IsChecked.ToString().ToLower()" checked="checked"/>
+                                                @item.Course.Code &nbsp;-&nbsp; @item.Course.Name
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label class="checkSpace">
+                                                <input type="checkbox" id="@item.EnrollmentCourseID" name="EnrollmentCourse" value="@item.IsChecked.ToString().ToLower()"/>
+                                                @item.Course.Code &nbsp;-&nbsp; @item.Course.Name
+                                            </label>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-                    <div class="detailBox">
-                        <ul>
-                            <li>
-                                <label>GRID</label>
-                            </li>                            
-                        </ul>
-                    </div>
-                </div>            
-                <div class="errorsSpace">
+                <div class="detailBox">
+                    <ul style="border: none">
+                        <li class="width100"></li>
+                        <li class="width100">
+                            <table class="width100" border="1" style="border-color: #327376; color: white;">
+
+                                <tbody style="font-weight: bold">
+                                    <tr>
+                                        <td style="background-color: rgba(240, 150, 9,.8);"></td>
+                                        <td style="background-color: rgba(240, 150, 9,.8);">Dia
+                                        </td>
+                                        <td style="background-color: rgba(240, 150, 9,.8);">Hora
+                                        </td>
+                                        <td style="background-color: rgba(240, 150, 9,.8);">Aula
+                                        </td>
+                                        <td style="background-color: rgba(240, 150, 9,.8);">Grupo
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" /></td>
+                                    <td>L</td>
+                                    <td>13:00 - 15:00
+                <br />
+                                        13:00 - 15:00
+                                    </td>
+                                    <td>A3
+                                    </td>
+                                    <td>1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" /></td>
+                                    <td>K</td>
+                                    <td>13:00 - 15:00
+                <br />
+                                        13:00 - 15:00
+                                    </td>
+                                    <td>A3
+                                    </td>
+                                    <td>1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" /></td>
+                                    <td>V</td>
+                                    <td>13:00 - 15:00
+                <br />
+                                        13:00 - 15:00
+                                    </td>
+                                    <td>A3
+                                    </td>
+                                    <td>1
+                                    </td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li class="width100">
+                            <div class="formBtnBar">
+                                <a href="#" class="button register">Agregar Cusro</a>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="detailBox100">
+                    <ul>
+                        <li>
+                            <label class="subTitle">Detalle de Cursos Matrículados</label>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            @*<div class="errorsSpace">
                     <ul>
                         <li>
                             @Html.ValidationMessageFor(m => m.Description)
@@ -60,17 +175,17 @@
                             @Html.ValidationMessageFor(m => m.EndDate)
                         </li>
                     </ul>
-                </div>
-            
-                <div class="clear"></div>
-                <div class="formBtnBar">
-                    @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
-                    <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
-                    @Html.ActionLink(Resources.GetValue("CANCEL"), "Index", "Enrollment", routeValues: null, htmlAttributes: new { @class = "button back" })
-                </div>
-                <div class="clear"></div>
-            
-           
+                </div>*@
+
+            <div class="clear"></div>
+            <div class="formBtnBar">
+                @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
+                <a href="#" class="button send" onclick="javascript: submit_form()">Matricular Estudiante</a>
+                
+            </div>
+            <div class="clear"></div>
+
+
         </div>
 
     </div>
