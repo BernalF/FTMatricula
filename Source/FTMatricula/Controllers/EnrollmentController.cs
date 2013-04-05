@@ -227,6 +227,8 @@ namespace FTMatricula.Controllers
             try
             {
                 EnrollmentGroup group = db.EnrollmentGroups.Find(new Guid(EnrollmentGroupID));
+                group.EnrollmentGroupSchedules.ToList().RemoveAll(x => x.EnrollmentGroupID == new Guid(EnrollmentGroupID));
+                //db.SaveChanges();
                 db.EnrollmentGroups.Remove(group);
                 db.SaveChanges();
 
@@ -308,7 +310,23 @@ namespace FTMatricula.Controllers
             return View(model);
         }
 
+        
+        /// <summary>
+        /// Enrollment
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Enrollment()
+        {
+            return View();
+        }
+        
 
+        /// <summary>
+        /// Get Groups List
+        /// </summary>
+        /// <param name="EnrollmentID"></param>
+        /// <param name="EnrollmentCourseID"></param>
+        /// <returns></returns>
         private IList<EnrollGroupDetail> getGroupsList(string EnrollmentID, string EnrollmentCourseID)
         {
             try
