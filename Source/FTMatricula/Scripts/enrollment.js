@@ -21,34 +21,75 @@ var enrollment = new Class({
             case 'GROUPS':
                 break;
             case 'COURSES':
-                this.fillGroupGrid();
+                //this.fillGroupGrid();
                 this.btnSaveSelectedCourses();
                 this.addSchedule();
-                this.enrollmentSelectCourse();
+                this.enrollmentSelectCourse();                
                 break;
         }
     },
-    //fill the Grid Group 
-    fillGroupGrid: function () {
+    //fill the Grid Details Group 
+    fillGroupGrid: function (data) {
+        var self = this;
         $("#groups_grid").kendoGrid({
-            dataSource: {
-                data: null,
-                pageSize: 10
-            },
-            sortable: true,
+            dataSource: { 
+                data: data,
+                group: { field: 'GroupName' }
+            },            
             columns: [{
-                field: "Grupo",
-                width: 100,
+                field: "EnrollmentGroupID",
+                hidden: true
+            }, {
+                field: "CourseCode",
+                title: "Codigo"
+            }, {
+                field: "GroupName",
                 title: "Grupo"
             }, {
-                width: 200,
-                field: "Hora"
-            }, {
-                field: "Aula",
-                width: 100,
+                field: "ClassroomCode",
                 title: "Aula"
+            }, {
+                field: "Schedule",
+                title: "Horario"
+            }, {
+                field: "ProfessorName",
+                title: "Profesor",
+                width: 250
+            }, {                
+                command: [{
+                    name: "delete",
+                    buttonType: "ImageAndText",                    
+                    text: "Eliminar",
+                    click: self.delGroup
+                }]
+            }],
+            groupable: false            
+        });
+    },
+    delGroup: function (e) {
+        var self = this;
+        // e.target is the DOM element representing the button
+        var tr = $(e.target).closest("tr"); // get the current table row (tr)
+        // get the data bound to the current table row
+        var data1 = this.dataItem(tr);       
+
+        $.bAjax({
+            url: self.options.urlDelete,
+            ajaxBeforeSend: function () {
+                $('.popupBg').fadeIn();
+                $('.loading').fadeIn();
+            },
+            data: {
+                EnrollmentGroupID: data1.EnrollmentGroupID,
+                EnrollmentID: $('#EnrollmentID').val(),
+                EnrollmentCourseID: $('.bgrYellow').children('input').attr('id')
+            },
+            async: false,
+            ajaxSuccess: function (response) {
+                $('.popupBg').fadeOut();
+                $('.loading').fadeOut();
+                self.fillGroupGrid($.parseJSON(response));
             }
-            ]
         });
     },
     //Save Selected Courses Handle
@@ -156,6 +197,7 @@ var enrollment = new Class({
         $('.checkSpace').off('click.checkSpace').on('click.checkSpace', function () {
             if ($(this).hasClass('bgrYellow')) {
                 $('.detailBox ul').fadeIn();
+                $('.detailBox100 ul').fadeIn();
                 $('#Group_Name').val('');
                 $('#Quota').parent().find('.k-formatted-value').val(30);
                 //clean schedule List
@@ -169,9 +211,10 @@ var enrollment = new Class({
         });
     },
     retrieveGroups: function () {
+        var self = this;
         var params = {
             EnrollmentID: $('#EnrollmentID').val(),
-            EnrollmentCourseID: $(this).children('input').attr('id')
+            EnrollmentCourseID: $('.bgrYellow').children('input').attr('id')
         };
         $.ajaxSettings.traditional = true;
         $.bAjax({
@@ -187,7 +230,7 @@ var enrollment = new Class({
             ajaxSuccess: function (response) {
                 $('.popupBg').fadeOut();
                 $('.loading').fadeOut();
-                //Do Somenthing 
+                self.fillGroupGrid($.parseJSON(response));                
             }
         });
     },
@@ -204,19 +247,13 @@ var enrollment = new Class({
             //Add new Groups
             $.ajaxSettings.traditional = true;
             $.bAjax({
-                url: self.options.urlAddGroups,
-                ajaxBeforeSend: function () {
-                    $('.popupBg').fadeIn();
-                    $('.loading').fadeIn();
-                },
+                url: self.options.urlAddGroups,  
                 data: JSON.stringify(EnrollGroup),
                 datatype: "json",
                 contentType: 'application/json; charset=utf-8',
                 async: false,
                 ajaxSuccess: function (response) {
-                    $('.popupBg').fadeOut();
-                    $('.loading').fadeOut();
-                    //Do Somenthing 
+                    self.retrieveGroups();
                 }
             });
             return false;

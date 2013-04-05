@@ -163,7 +163,7 @@
                
 
                 <div class="detailBox100">
-                    <ul>
+                    <ul class="hide">
                         <li class="width100">
                             <label class="subTitle">Detalle de Grupos Creados para el Curso seleccionado</label>
                         </li>
@@ -171,28 +171,7 @@
                             <label>&nbsp;</label>
                         </li>
                         <li class="width100">
-                           @(Html.Kendo().Grid<FTMatricula.Models.EnrollmentGridDetail>()
-                                            .Name("Grid")
-                                            .Columns(columns =>
-                                            {
-                                                columns.Bound(e => e.EnrollmentGroupID).Groupable(false);
-                                                columns.Bound(e => e.CourseCode);
-                                                columns.Bound(e => e.GroupName);
-                                                columns.Bound(e => e.ClassroomCode);
-                                                columns.Bound(e => e.Schedule);
-                                                columns.Bound(e => e.ProfessorName);
-                                            })
-                                            .Groupable()
-                                            .Pageable()
-                                            .Sortable()
-                                            .Scrollable()
-                                            .Filterable()
-                                            .DataSource(dataSource => dataSource
-                                                .Ajax()
-                                                .Read(read => read.Action("RetrieveGroups", "Enrollment")
-                                                .Data("GetIds"))
-                                            )
-                                        )
+                          <div id="groups_grid" ></div>
                         </li>
                     </ul>
                 </div>
@@ -338,21 +317,14 @@
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
-        var EnrollSchedule = [];
-
-        function GetIds() {
-            return {
-                EnrollmentID: $('#EnrollmentID').val(),
-                EnrollmentCourseID: $('.bgrYellow').children('input').attr('id')
-            };
-        }
-
+        var EnrollSchedule = [];      
         $(function () {
             var matri = new enrollment({
                 view: 'COURSES',
                 urlSaveCourses: '@Url.Action("SaveSelectedCourses", "Enrollment")',
                 urlAddGroups: '@Url.Action("SaveGroup", "Enrollment")',
-                urlGetGroups: '@Url.Action("GetGroups", "Enrollment")'
+                urlGetGroups: '@Url.Action("RetrieveGroups", "Enrollment")',
+                urlDelete: '@Url.Action("DeleteGroup", "Enrollment")',
             });
         });
     </script>
