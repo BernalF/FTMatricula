@@ -22,17 +22,15 @@ namespace FTMatricula.Models
         public System.Guid? EnrollmentGroupID { get; set; }
         public System.Guid? EnrollmentCourseID { get; set; }
         public string GroupName { get; set; }
-        public Nullable<System.Guid> ClassroomID { get; set; }
         public Nullable<System.Guid> ProfessorID { get; set; }
         public int Quota { get; set; }
+        public Nullable<int> ExtraQuota { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
-        public Nullable<int> ExtraQuota { get; set; }
     
-        public virtual Classroom Classroom { get; set; }
         public virtual EnrollmentCourse EnrollmentCourse { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<EnrollmentGroupSchedule> EnrollmentGroupSchedules { get; set; }

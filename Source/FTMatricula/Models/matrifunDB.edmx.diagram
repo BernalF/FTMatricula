@@ -57,19 +57,19 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" ManuallyRouted="false" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentCourse" Width="1.5" PointX="9.9919840740002623" PointY="26.354999152177477" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentGroup" Width="1.5" PointX="10.072243529405558" PointY="1.6068932272525938" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentGroupSchedule" Width="1.5" PointX="0.3531321288799551" PointY="19.273130947385511" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.StudentPlan" Width="1.5" PointX="10.016946616590465" PointY="12.483225798459364" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroups_Classroom" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentCourse_Course" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Enrollment_Location" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentCourse_Enrollment" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroups_EnrollmentCourse" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroups_Users" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentPlan_Plan" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_StudentPlan_Student" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.PlanDetail" Width="1.5" PointX="10.232038271721471" PointY="31.258171930563716" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentGroup" Width="1.5" PointX="7.4431540646791241" PointY="25.6974658936716" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentGroupSchedule" Width="1.5" PointX="11.04514720805229" PointY="3.6341609375710417" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_Classroom" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroups_EnrollmentCourse" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroups_Users" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

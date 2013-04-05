@@ -16,7 +16,7 @@ namespace FTMatricula.Models
     {
         public Classroom()
         {
-            this.EnrollmentGroups = new HashSet<EnrollmentGroup>();
+            this.EnrollmentGroupSchedules = new HashSet<EnrollmentGroupSchedule>();
         }
     
         public System.Guid? ClassroomID { get; set; }
@@ -26,7 +26,8 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public string Description { get; set; }
     
-        public virtual ICollection<EnrollmentGroup> EnrollmentGroups { get; set; }
+        public virtual ICollection<EnrollmentGroupSchedule> EnrollmentGroupSchedules { get; set; }
     }
 }

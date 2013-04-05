@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using FTMatricula.Utilities.Helper;
 using System.Data;
+using System.Data.SqlTypes;
 
 namespace FTMatricula.Controllers
 {
@@ -136,6 +137,49 @@ namespace FTMatricula.Controllers
                                                 .FirstOrDefault().IsChecked = true;
 
                 db.Entry(model).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return Json("OK");
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult SaveGroup(string EnrollmentCourseID, string ProfessorID, int Quota, string[] EnrollmentCourses)
+        {
+            try
+            {
+                EnrollmentGroup model = new EnrollmentGroup(); 
+                model.EnrollmentGroupID = Guid.NewGuid();
+
+                model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+                model.InsertDate = DateTime.Today;
+                model.IpAddress = Network.GetIpAddress(Request);
+
+                model.EnrollmentCourseID = new Guid(EnrollmentCourseID);
+                model.ProfessorID = new Guid(EnrollmentCourseID);
+                model.Quota = Quota;
+
+                EnrollmentGroupSchedule schedule = new EnrollmentGroupSchedule();
+                schedule.EnrollmentGroupScheduleID = Guid.NewGuid();
+                schedule.EnrollmentGroupID = model.EnrollmentGroupID;
+                schedule.InsertUserID= model.InsertUserID;
+                schedule.InsertDate = model.InsertDate;
+                schedule.IpAddress = model.IpAddress;
+
+                //schedule.cl
+                //schedule.DayOfWeek = DayOfWeek;
+                //schedule.StartTime = StartTime;
+                //schedule.EndTime = EndTime;
+                
+
+                //model.EnrollmentGroupSchedules.Add(
+
+                //db.EnrollmentGroups.Add(model);
                 db.SaveChanges();
 
                 return Json("OK");
