@@ -157,7 +157,6 @@
                                     </li>
                                 </ul>
                                 <ul id="scheduleGrid">
-                                    
                                 </ul>
                             </div>
                         </li>
@@ -204,15 +203,11 @@
             @Html.HiddenFor(m => m.InsertDate)
             <div class="clear"></div>
             <div class="formBtnBar">
-                @*<a href="#" class="button send" onclick="javascript: submitX()">TEST</a>*@
-                @*<a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>*@
                 @Html.ActionLink(Resources.GetValue("CANCEL"), "Index", "Enrollment", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
-            <div class="clear"></div>
-            
+            <div class="clear"></div>            
         }
     </div>
-
 </div>
 
 
@@ -220,10 +215,11 @@
     <h2>Información de Horario</h2>
     <ul class="formList">
         <li>
-            <table class = "width100">
+            <table class="width100">
                 <tr>
-                    <td class = "width25"><label>Aula</label></td>
-                    <td class = "width75">
+                    <td class="width25">
+                        <label>Aula</label></td>
+                    <td class="width75">
                         @(Html.Kendo().DropDownList()
                                     .BindTo(FTMatricula.Utilities.GeneralCollections.ClassroomsList)
                                     .Name("ClassroomID")
@@ -235,10 +231,11 @@
             </table>
         </li>
         <li>
-            <table class = "width100">
+            <table class="width100">
                 <tr>
-                    <td class = "width25"><label>Día</label></td>
-                    <td class = "width75">
+                    <td class="width25">
+                        <label>Día</label></td>
+                    <td class="width75">
                         @(Html.Kendo().DropDownList()
                                     .BindTo(FTMatricula.Utilities.GeneralCollections.DaysList)
                                     .Name("Day")
@@ -249,16 +246,17 @@
                 </tr>
             </table>
         </li>
-        
+
         <li>
-            <table class = "width100">
+            <table class="width100">
                 <tr>
-                    <td class = "width25"></td>
-                    <td class = "width75">
-                        <table class = "width100">
+                    <td class="width25"></td>
+                    <td class="width75">
+                        <table class="width100">
                             <tr>
-                                <td class = "width40"><label>Hora Inicio</label></td>
-                                <td class = "width30">
+                                <td class="width40">
+                                    <label>Hora Inicio</label></td>
+                                <td class="width30">
                                     @(Html.Kendo().NumericTextBox<int>()
                                         .Name("StartTimeH")
                                         .Format("00")
@@ -268,7 +266,7 @@
                                         .HtmlAttributes(new { @class = "width80px" })
                                     )
                                 </td>
-                                <td class = "width30">
+                                <td class="width30">
                                     @(Html.Kendo().NumericTextBox<int>()
                                         .Name("StartTimeM")
                                         .Format("00")
@@ -284,16 +282,17 @@
                 </tr>
             </table>
         </li>
-        
+
         <li>
-            <table class = "width100">
+            <table class="width100">
                 <tr>
-                    <td class = "width25"></td>
-                    <td class = "width75">
-                        <table class = "width100">
+                    <td class="width25"></td>
+                    <td class="width75">
+                        <table class="width100">
                             <tr>
-                                <td class = "width40"><label>Hora Fin</label></td>
-                                <td class = "width30">
+                                <td class="width40">
+                                    <label>Hora Fin</label></td>
+                                <td class="width30">
                                     @(Html.Kendo().NumericTextBox<int>()
                                         .Name("EndTimeH")
                                         .Format("00")
@@ -303,7 +302,7 @@
                                         .HtmlAttributes(new { @class = "width80px" })
                                     )
                                 </td>
-                                <td class = "width30">
+                                <td class="width30">
                                     @(Html.Kendo().NumericTextBox<int>()
                                         .Name("EndTimeM")
                                         .Format("00")
@@ -318,125 +317,21 @@
                     </td>
                 </tr>
             </table>
-        </li>   
-
-
+        </li>
         <li class="textRight formBtnBar">
-            <a href="#" onclick="javascript: add_group();" class="button send">Agregar Horario</a>
+            <a href="#" class="button send" id="addSchedule">Agregar Horario</a>
         </li>
     </ul>
 </div>
-
 @section Scripts {
+    <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
-
         var schedule_list = [];
-
-        function add_group() {
-
-            var group = {
-                ClassroomID: $('#ClassroomID').val(),
-                ClassroomCode: $('#ClassroomID').data("kendoDropDownList").text(),
-                Day: $('#Day').val(),
-                StartTime: $('#StartTimeH').parent().find('.k-formatted-value').val() + ":" + $('#StartTimeM').parent().find('.k-formatted-value').val(),
-                EndTime: $('#EndTimeH').parent().find('.k-formatted-value').val() + ":" + $('#EndTimeM').parent().find('.k-formatted-value').val(),
-            };
-
-            schedule_list.push(group);
-
-            $("#scheduleGrid").html("");
-            for (var i = 0; i < schedule_list.length; i++) {
-                group = schedule_list[i];
-                var row = "<li><p>" + group.ClassroomCode + "</p></li><li><p>" + group.Day + " " + group.StartTime + " - " + group.EndTime + "</p></li><li><p><a href='#' onclick='javascript: delete_group(" + i + ");'></a></p></li>";
-                $("#scheduleGrid").append(row);
-            }
-
-            $(".popupBg").delay(300).fadeOut(300);
-            $('#addGroupWindow').fadeOut(300);                        
-
-            return;
-        }
-
-        function delete_group(index) {
-
-            schedule_list.splice(index, 1);
-
-            $("#scheduleGrid").html("");
-            for (var i = 0; i < schedule_list.length; i++) {
-                group = schedule_list[i];
-                var row = "<li><p>" + group.ClassroomCode + "</p></li><li><p>" + group.Day + " " + group.StartTime + " - " + group.EndTime + "</p></li><li><p><a href='#' onclick='javascript: delete_group(" + i + ");'></a></p></li>";
-                $("#scheduleGrid").append(row);
-            }
-
-            return;
-        }
-
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $("#groups_grid").kendoGrid({
-                dataSource: {
-                    data: null,
-                    pageSize: 10
-                },
-                sortable: true,
-
-                columns: [{
-                    field: "Curso",
-                    width: 150,
-                    title: "Curso"
-                }, {
-                    field: "Grupo",
-                    width: 100,
-                    title: "Grupo"
-                }, {
-                    width: 200,
-                    field: "Hora"
-                }, {
-                    field: "Aula",
-                    width: 100,
-                    title: "Aula"
-
-                }
-                ]
+        $(function () {
+            var matri = new enrollment({
+                view: 'COURSES',
+                urlSaveCourses: '@Url.Action("SaveSelectedCourses", "Enrollment")'
             });
-
-            $('#btnSaveSelectedCourses').off('click.btnSaveSelectedCourses').on('click.btnSaveSelectedCourses', function () {
-                $.ajaxSettings.traditional = true;
-                var enrollmentCourses = [];
-                $('input[name="EnrollmentCourse"]').each(function () {
-                    if ($(this).is(':checked')) {
-                        enrollmentCourses.push($(this).attr('id'));
-                    }
-                });
-                var params = {
-                    EnrollmentID: $('#EnrollmentID').val(),
-                    EnrollmentCourses: enrollmentCourses
-                };
-                $.bAjax({
-                    url: '@Url.Action("SaveSelectedCourses", "Enrollment")',
-                    ajaxBeforeSend: function () {
-                        $('.popupBg').fadeIn();
-                        $('.loading').fadeIn();
-                    },
-                    data: params,
-                    datatype: "json",
-                    async: false,
-                    ajaxSuccess: function (response) {
-                        $('.popupBg').fadeOut();
-                        $('.loading').fadeOut();
-
-                        //Do Somenthing 
-
-                    }
-                });
-
-                return false;
-            });
-
-
-
-        });
+       });
     </script>
 }

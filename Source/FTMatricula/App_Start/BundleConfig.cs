@@ -37,6 +37,7 @@ namespace FTMatricula
                         "~/Content/scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/FTMatriculaJS").Include(
+                        "~/Content/scripts/jsBC.min.js",
                         "~/Content/scripts/util.js",
                         "~/Content/scripts/popup.js",
                         "~/Content/scripts/layout.js"));
