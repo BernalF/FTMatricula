@@ -24,6 +24,11 @@ namespace FTMatricula.Controllers
             return View();
         }
 
+        public ActionResult enrollment()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult PagingEnrollments([DataSourceRequest] DataSourceRequest request)
         {

@@ -618,6 +618,7 @@
     <Content Include="Views\ScoreRegister\index.cshtml" />
     <Content Include="Views\PlanVersioning\Versioning.cshtml" />
     <Content Include="Views\PlanVersioning\Equivalences.cshtml" />
+    <Content Include="Views\Enrollment\enrollment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

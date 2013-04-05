@@ -83,7 +83,7 @@
                 </div>
 
                 <div class="detailBox">
-                    <ul>
+                    <ul class="hide">
                         <li class="width100">
                             <label class="subTitle">Información de nuevo Grupo</label>
                         </li>
@@ -91,7 +91,7 @@
                             <label>&nbsp;</label></li>
                         <li class="width100">
                             <label>&nbsp;</label>
-                        </li>                        
+                        </li>
                         <li>
                             <label>Nombre del Grupo</label>
                         </li>
@@ -118,7 +118,7 @@
                         </li>
                         <li>
                             @(Html.Kendo().NumericTextBox<int>()
-                                .Name("currency")
+                                .Name("Quota")
                                 .Format("n")
                                 .Min(0)
                                 .Max(100)
@@ -155,12 +155,12 @@
 
                         <li class="width100">
                             <div class="formBtnBar">
-                                <a href="#" class="button down">Agregar Grupo</a>
+                                <a href="#" class="button down" id="btnAddGroup">Agregar Grupo</a>
                             </div>
                         </li>
-                    </ul>
-
+                    </ul>                     
                 </div>
+               
 
                 <div class="detailBox100">
                     <ul>
@@ -171,8 +171,25 @@
                             <label>&nbsp;</label>
                         </li>
                         <li class="width100">
-                            <div id="groups_grid">
-                            </div>
+                          @* @(Html.Kendo().Grid<FTMatricula.Models.PlanDetail>()
+                                            .Name("Grid")
+                                            .Columns(columns =>
+                                            {
+                                                columns.Bound(p => p.ProductID).Groupable(false);
+                                                columns.Bound(p => p.ProductName);
+                                                columns.Bound(p => p.UnitPrice);
+                                                columns.Bound(p => p.UnitsInStock);
+                                            })
+                                            .Groupable()
+                                            .Pageable()
+                                            .Sortable()
+                                            .Scrollable()
+                                            .Filterable()
+                                            .DataSource(dataSource => dataSource
+                                                .Ajax()
+                                                .Read(read => read.Action("Products_Read", "Grid"))
+                                            )
+                                        )*@
                         </li>
                     </ul>
                 </div>
@@ -201,7 +218,6 @@
         }
     </div>
 </div>
-
 
 <div class="popupWindow" id="addGroupWindow">
     <h2>Información de Horario</h2>
@@ -315,15 +331,18 @@
         </li>
     </ul>
 </div>
+
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
-    <script type="text/javascript">        
+    <script type="text/javascript">
         var schedule_list = [];
         $(function () {
             var matri = new enrollment({
                 view: 'COURSES',
-                urlSaveCourses: '@Url.Action("SaveSelectedCourses", "Enrollment")'
+                urlSaveCourses: '@Url.Action("SaveSelectedCourses", "Enrollment")',
+                urlAddGroups: '@Url.Action("InsertGroups", "Enrollment")',
+                urlGetGroups: '@Url.Action("GetGroups", "Enrollment")'
             });
-       });
+        });
     </script>
 }

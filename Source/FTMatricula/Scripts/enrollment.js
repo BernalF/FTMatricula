@@ -24,6 +24,7 @@ var enrollment = new Class({
                 this.fillGroupGrid();
                 this.btnSaveSelectedCourses();
                 this.addSchedule();
+                this.enrollmentSelectCourse();
                 break;
         }
     },
@@ -36,10 +37,6 @@ var enrollment = new Class({
             },
             sortable: true,
             columns: [{
-                field: "Curso",
-                width: 150,
-                title: "Curso"
-            }, {
                 field: "Grupo",
                 width: 100,
                 title: "Grupo"
@@ -142,10 +139,75 @@ var enrollment = new Class({
         });
     },
     //Delete Schedule Handle Function
-    deleteSchedule: function () {
-        $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
-            schedule_list.splice($(this).attr('i'), 1);
-            $('li[i=' + $(this).parent().parent().attr('i') + ']').remove();
+    deleteSchedule: function (all) {
+        if (!all) {
+            $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
+                schedule_list.splice($(this).attr('i'), 1);
+                $('li[i=' + $(this).parent().parent().attr('i') + ']').remove();
+            });
+        }
+        else {
+            schedule_list = [];
+            $('#scheduleGrid').html('');
+        }
+    },
+    enrollmentSelectCourse: function () {
+        var self = this;
+        $('.checkSpace').off('click.checkSpace').on('click.checkSpace', function () {
+            if ($(this).hasClass('bgrYellow')) {
+                $('.detailBox ul').fadeIn();
+                $('#Group_Name').val('');
+                self.deleteSchedule(true);
+
+                //Retrieve Groups List    
+                var params = {};
+
+                //$.bAjax({
+                //    url: self.options.urlGetGroups,
+                //    ajaxBeforeSend: function () {
+                //        $('.popupBg').fadeIn();
+                //        $('.loading').fadeIn();
+                //    },
+                //    data: params,
+                //    datatype: "json",
+                //    async: false,
+                //    ajaxSuccess: function (response) {
+                //        $('.popupBg').fadeOut();
+                //        $('.loading').fadeOut();
+                //        //Do Somenthing 
+                //    }
+                //});
+            }
+            self.addGroups();
+            return false;
+        });
+    },
+    addGroups: function () {
+        var self = this;
+        $('#btnAddGroup').off('click.btnAddGroup').on('click.btnAddGroup', function () {
+            var params = {
+                groupName: $('#Group_Name').val(),
+                professor: $('#ProfessorID').val(),
+                quota: $('Quota').val,
+                schedule: schedule_list
+            };
+            //Add new Groups
+            //$.bAjax({
+            //    url: self.options.urlAddGroups,
+            //    ajaxBeforeSend: function () {
+            //        $('.popupBg').fadeIn();
+            //        $('.loading').fadeIn();
+            //    },
+            //    data: params,
+            //    datatype: "json",
+            //    async: false,
+            //    ajaxSuccess: function (response) {
+            //        $('.popupBg').fadeOut();
+            //        $('.loading').fadeOut();
+            //        //Do Somenthing 
+            //    }
+            //});
+            return false;
         });
     }
 });
