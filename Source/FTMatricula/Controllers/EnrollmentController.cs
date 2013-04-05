@@ -227,8 +227,12 @@ namespace FTMatricula.Controllers
             try
             {
                 EnrollmentGroup group = db.EnrollmentGroups.Find(new Guid(EnrollmentGroupID));
-                group.EnrollmentGroupSchedules.ToList().RemoveAll(x => x.EnrollmentGroupID == new Guid(EnrollmentGroupID));
-                //db.SaveChanges();
+
+                foreach (var schedule in group.EnrollmentGroupSchedules.ToList())
+                {
+                    db.EnrollmentGroupSchedules.Remove(schedule);
+                    db.SaveChanges();
+                }                
                 db.EnrollmentGroups.Remove(group);
                 db.SaveChanges();
 
