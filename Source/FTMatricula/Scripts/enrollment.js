@@ -101,13 +101,13 @@ var enrollment = new Class({
             var group = {
                 ClassroomID: $('#ClassroomID').val(),
                 ClassroomCode: $('#ClassroomID').data("kendoDropDownList").text(),
-                Day: $('#Day').val(),
+                DayOfWeek: $('#Day').val(),
                 StartTime: sTime.toString(),
                 EndTime: eTime.toString(),
             };
-            schedule_list.push(group);
+            EnrollSchedule.push(group);
             $('#scheduleGrid').html('');
-            $.each(schedule_list, function (i, val) {
+            $.each(EnrollSchedule, function (i, val) {
                 var content = new StringBuilder();
                 content.append('<li i="');
                 content.append(i + 1);
@@ -117,7 +117,7 @@ var enrollment = new Class({
                 content.append('<li i="');
                 content.append(i + 1);
                 content.append('"><p>');
-                content.append(val.Day);
+                content.append(val.DayOfWeek);
                 content.append(' ');
                 content.append(val.StartTime);
                 content.append(' - ');
@@ -142,12 +142,12 @@ var enrollment = new Class({
     deleteSchedule: function (all) {
         if (!all) {
             $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
-                schedule_list.splice($(this).attr('i'), 1);
+                EnrollSchedule.splice($(this).attr('i'), 1);
                 $('li[i=' + $(this).parent().parent().attr('i') + ']').remove();
             });
         }
         else {
-            schedule_list = [];
+            EnrollSchedule = [];
             $('#scheduleGrid').html('');
         }
     },
@@ -185,28 +185,31 @@ var enrollment = new Class({
     addGroups: function () {
         var self = this;
         $('#btnAddGroup').off('click.btnAddGroup').on('click.btnAddGroup', function () {
-            var params = {
-                groupName: $('#Group_Name').val(),
-                professor: $('#ProfessorID').val(),
-                quota: $('Quota').val,
-                schedule: schedule_list
+            var EnrollGroup = {
+                EnrollmentCourseID: $('.bgrYellow').children('input').attr('id'),
+                GroupName: $('#Group_Name').val(),
+                ProfessorID: $('#ProfessorID').val(),
+                Quota: $('Quota').val,
+                ScheduleList: EnrollSchedule
             };
             //Add new Groups
-            //$.bAjax({
-            //    url: self.options.urlAddGroups,
-            //    ajaxBeforeSend: function () {
-            //        $('.popupBg').fadeIn();
-            //        $('.loading').fadeIn();
-            //    },
-            //    data: params,
-            //    datatype: "json",
-            //    async: false,
-            //    ajaxSuccess: function (response) {
-            //        $('.popupBg').fadeOut();
-            //        $('.loading').fadeOut();
-            //        //Do Somenthing 
-            //    }
-            //});
+            $.ajaxSettings.traditional = true;
+            $.bAjax({
+                url: self.options.urlAddGroups,
+                ajaxBeforeSend: function () {
+                    $('.popupBg').fadeIn();
+                    $('.loading').fadeIn();
+                },
+                data: JSON.stringify(EnrollGroup),
+                datatype: "json",
+                contentType: 'application/json; charset=utf-8', 
+                async: false,
+                ajaxSuccess: function (response) {
+                    $('.popupBg').fadeOut();
+                    $('.loading').fadeOut();
+                    //Do Somenthing 
+                }
+            });
             return false;
         });
     }

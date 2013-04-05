@@ -335,12 +335,12 @@
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
-        var schedule_list = [];
+        var EnrollSchedule = [];
         $(function () {
             var matri = new enrollment({
                 view: 'COURSES',
                 urlSaveCourses: '@Url.Action("SaveSelectedCourses", "Enrollment")',
-                urlAddGroups: '@Url.Action("InsertGroups", "Enrollment")',
+                urlAddGroups: '@Url.Action("SaveGroup", "Enrollment")',
                 urlGetGroups: '@Url.Action("GetGroups", "Enrollment")'
             });
         });
