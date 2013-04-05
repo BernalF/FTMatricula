@@ -196,6 +196,12 @@ namespace FTMatricula.Controllers
         }
 
  
+        /// <summary>
+        /// Retrieve Groups
+        /// </summary>
+        /// <param name="EnrollmentID"></param>
+        /// <param name="EnrollmentCourseID"></param>
+        /// <returns></returns>
         [HttpPost]
         public JsonResult RetrieveGroups(string EnrollmentID, string EnrollmentCourseID)
         {
@@ -228,6 +234,28 @@ namespace FTMatricula.Controllers
                 }
 
                 return Json(result);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+        }
+
+        /// <summary>
+        /// Delete Group
+        /// </summary>
+        /// <param name="EnrollmentGroupID"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult DeleteGroup(string EnrollmentGroupID)
+        {
+            try
+            {
+                EnrollmentGroup group = db.EnrollmentGroups.Find(new Guid(EnrollmentGroupID));
+                db.EnrollmentGroups.Remove(group);
+                db.SaveChanges();
+                return Json(new[] { new { } });
             }
             catch (Exception e)
             {
