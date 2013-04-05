@@ -25,11 +25,6 @@ namespace FTMatricula.Controllers
             return View();
         }
 
-        public ActionResult enrollment()
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult PagingEnrollments([DataSourceRequest] DataSourceRequest request)
         {
@@ -148,8 +143,13 @@ namespace FTMatricula.Controllers
 
         }
 
+        /// <summary>
+        /// Save Group
+        /// </summary>
+        /// <param name="Group"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveGroup(string EnrollmentCourseID, string ProfessorID, int Quota, string[] EnrollmentCourses)
+        public ActionResult SaveGroup(EnrollGroup Group)
         {
             try
             {
@@ -160,26 +160,30 @@ namespace FTMatricula.Controllers
                 model.InsertDate = DateTime.Today;
                 model.IpAddress = Network.GetIpAddress(Request);
 
-                model.EnrollmentCourseID = new Guid(EnrollmentCourseID);
-                model.ProfessorID = new Guid(EnrollmentCourseID);
-                model.Quota = Quota;
-
-                EnrollmentGroupSchedule schedule = new EnrollmentGroupSchedule();
-                schedule.EnrollmentGroupScheduleID = Guid.NewGuid();
-                schedule.EnrollmentGroupID = model.EnrollmentGroupID;
-                schedule.InsertUserID= model.InsertUserID;
-                schedule.InsertDate = model.InsertDate;
-                schedule.IpAddress = model.IpAddress;
-
-                //schedule.cl
-                //schedule.DayOfWeek = DayOfWeek;
-                //schedule.StartTime = StartTime;
-                //schedule.EndTime = EndTime;
+                model.EnrollmentCourseID = new Guid(Group.EnrollmentCourseID);
+                model.GroupName = Group.GroupName;
+                model.ProfessorID = new Guid(Group.EnrollmentCourseID);
+                model.Quota = Group.Quota;
                 
+                foreach (var item in Group.ScheduleList)
+                {
+                    EnrollmentGroupSchedule schedule = new EnrollmentGroupSchedule();
+                    schedule.EnrollmentGroupScheduleID = Guid.NewGuid();
+                    schedule.EnrollmentGroupID = model.EnrollmentGroupID;
+                    schedule.InsertUserID = model.InsertUserID;
+                    schedule.InsertDate = model.InsertDate;
+                    schedule.IpAddress = model.IpAddress;
 
-                //model.EnrollmentGroupSchedules.Add(
+                    schedule.ClassroomID = new Guid(item.ClassroomID);
+                    schedule.DayOfWeek = item.DayOfWeek;
+                    schedule.StartTime = item.StartTime;
+                    schedule.EndTime = item.EndTime;
 
-                //db.EnrollmentGroups.Add(model);
+                    model.EnrollmentGroupSchedules.Add(schedule);
+                    
+                }
+                
+                db.EnrollmentGroups.Add(model);
                 db.SaveChanges();
 
                 return Json("OK");
