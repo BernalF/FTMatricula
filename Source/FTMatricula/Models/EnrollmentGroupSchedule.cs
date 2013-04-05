@@ -16,6 +16,7 @@ namespace FTMatricula.Models
     {
         public System.Guid? EnrollmentGroupScheduleID { get; set; }
         public System.Guid? EnrollmentGroupID { get; set; }
+        public System.Guid? ClassroomID { get; set; }
         public string DayOfWeek { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
@@ -25,6 +26,7 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
     
+        public virtual Classroom Classroom { get; set; }
         public virtual EnrollmentGroup EnrollmentGroup { get; set; }
     }
 }

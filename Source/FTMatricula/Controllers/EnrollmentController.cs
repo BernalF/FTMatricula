@@ -166,13 +166,16 @@ namespace FTMatricula.Controllers
                 schedule.InsertDate = model.InsertDate;
                 schedule.IpAddress = model.IpAddress;
 
-                //schedule.Day = DayOfWeek
-                //schedule.StartTime = DateTime.Parse(SqlDateTime.MaxValue.ToString());
+                //schedule.cl
+                //schedule.DayOfWeek = DayOfWeek;
+                //schedule.StartTime = StartTime;
+                //schedule.EndTime = EndTime;
+                
 
                 //model.EnrollmentGroupSchedules.Add(
 
                 //db.EnrollmentGroups.Add(model);
-                //db.SaveChanges();
+                db.SaveChanges();
 
                 return Json("OK");
             }
