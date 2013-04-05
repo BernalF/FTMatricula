@@ -171,14 +171,16 @@
                             <label>&nbsp;</label>
                         </li>
                         <li class="width100">
-                          @* @(Html.Kendo().Grid<FTMatricula.Models.PlanDetail>()
+                           @(Html.Kendo().Grid<FTMatricula.Models.EnrollmentGridDetail>()
                                             .Name("Grid")
                                             .Columns(columns =>
                                             {
-                                                columns.Bound(p => p.ProductID).Groupable(false);
-                                                columns.Bound(p => p.ProductName);
-                                                columns.Bound(p => p.UnitPrice);
-                                                columns.Bound(p => p.UnitsInStock);
+                                                columns.Bound(e => e.EnrollmentGroupID).Groupable(false);
+                                                columns.Bound(e => e.CourseCode);
+                                                columns.Bound(e => e.GroupName);
+                                                columns.Bound(e => e.ClassroomCode);
+                                                columns.Bound(e => e.Schedule);
+                                                columns.Bound(e => e.ProfessorName);
                                             })
                                             .Groupable()
                                             .Pageable()
@@ -187,9 +189,10 @@
                                             .Filterable()
                                             .DataSource(dataSource => dataSource
                                                 .Ajax()
-                                                .Read(read => read.Action("Products_Read", "Grid"))
+                                                .Read(read => read.Action("RetrieveGroups", "Enrollment")
+                                                .Data("GetIds"))
                                             )
-                                        )*@
+                                        )
                         </li>
                     </ul>
                 </div>
@@ -336,6 +339,14 @@
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
         var EnrollSchedule = [];
+
+        function GetIds() {
+            return {
+                EnrollmentID: $('#EnrollmentID').val(),
+                EnrollmentCourseID: $('.bgrYellow').children('input').attr('id')
+            };
+        }
+
         $(function () {
             var matri = new enrollment({
                 view: 'COURSES',

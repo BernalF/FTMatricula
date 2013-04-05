@@ -157,29 +157,38 @@ var enrollment = new Class({
             if ($(this).hasClass('bgrYellow')) {
                 $('.detailBox ul').fadeIn();
                 $('#Group_Name').val('');
+                $('#Quota').parent().find('.k-formatted-value').val(30);
+                //clean schedule List
                 self.deleteSchedule(true);
-
                 //Retrieve Groups List    
-                var params = {};
-
-                //$.bAjax({
-                //    url: self.options.urlGetGroups,
-                //    ajaxBeforeSend: function () {
-                //        $('.popupBg').fadeIn();
-                //        $('.loading').fadeIn();
-                //    },
-                //    data: params,
-                //    datatype: "json",
-                //    async: false,
-                //    ajaxSuccess: function (response) {
-                //        $('.popupBg').fadeOut();
-                //        $('.loading').fadeOut();
-                //        //Do Somenthing 
-                //    }
-                //});
+                self.retrieveGroups();
             }
+            //handle Add groups button
             self.addGroups();
             return false;
+        });
+    },
+    retrieveGroups: function () {
+        var params = {
+            EnrollmentID: $('#EnrollmentID').val(),
+            EnrollmentCourseID: $(this).children('input').attr('id')
+        };
+        $.ajaxSettings.traditional = true;
+        $.bAjax({
+            url: self.options.urlGetGroups,
+            ajaxBeforeSend: function () {
+                $('.popupBg').fadeIn();
+                $('.loading').fadeIn();
+            },
+            data: JSON.stringify(params),
+            datatype: "json",
+            contentType: 'application/json; charset=utf-8',
+            async: false,
+            ajaxSuccess: function (response) {
+                $('.popupBg').fadeOut();
+                $('.loading').fadeOut();
+                //Do Somenthing 
+            }
         });
     },
     addGroups: function () {
@@ -202,7 +211,7 @@ var enrollment = new Class({
                 },
                 data: JSON.stringify(EnrollGroup),
                 datatype: "json",
-                contentType: 'application/json; charset=utf-8', 
+                contentType: 'application/json; charset=utf-8',
                 async: false,
                 ajaxSuccess: function (response) {
                     $('.popupBg').fadeOut();
