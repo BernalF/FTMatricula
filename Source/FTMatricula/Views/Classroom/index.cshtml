@@ -25,6 +25,7 @@
                                   .Columns(columns =>
                                   {
                                       columns.Bound(m => m.Code).Title(@Resources.GetValue("CLASSROOM_CODE"));
+                                      columns.Bound(m => m.Description).Title(@Resources.GetValue("DESCRIPTION"));
                                       columns.Command(command =>
                                       {
                                           command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
