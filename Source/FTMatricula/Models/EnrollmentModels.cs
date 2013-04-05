@@ -5,6 +5,9 @@ using System.Web;
 
 namespace FTMatricula.Models
 {
+    /// <summary>
+    /// Enroll Group
+    /// </summary>
     public class EnrollGroup
     {
         public string EnrollmentCourseID {get; set;}
@@ -15,6 +18,9 @@ namespace FTMatricula.Models
         public List<EnrollSchedule> ScheduleList { get; set; }
     }
 
+    /// <summary>
+    /// Enroll Schedule
+    /// </summary>
     public class EnrollSchedule
     {
         public string ClassroomID { get; set; }
@@ -22,4 +28,19 @@ namespace FTMatricula.Models
         public string StartTime { get; set; }
         public string EndTime { get; set; }
     }
+
+    /// <summary>
+    /// Enroll Group Detail
+    /// </summary>
+    public class EnrollGroupDetail
+    {
+        public string EnrollmentGroupID { get; set; }
+        public string CourseCode { get; set; }
+        public string GroupName { get; set; }
+        public string ClassroomCode { get; set; }
+        public string Schedule { get; set; }
+        public string ProfessorName { get; set; }
+    }
+
+
 }

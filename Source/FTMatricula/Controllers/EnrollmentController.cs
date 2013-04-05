@@ -149,7 +149,7 @@ namespace FTMatricula.Controllers
         /// <param name="Group"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult SaveGroup(EnrollGroup Group)
+        public JsonResult SaveGroup(EnrollGroup Group)
         {
             try
             {
@@ -162,7 +162,7 @@ namespace FTMatricula.Controllers
 
                 model.EnrollmentCourseID = new Guid(Group.EnrollmentCourseID);
                 model.GroupName = Group.GroupName;
-                model.ProfessorID = new Guid(Group.EnrollmentCourseID);
+                model.ProfessorID = new Guid(Group.ProfessorID);
                 model.Quota = Group.Quota;
                 
                 foreach (var item in Group.ScheduleList)
@@ -186,7 +186,48 @@ namespace FTMatricula.Controllers
                 db.EnrollmentGroups.Add(model);
                 db.SaveChanges();
 
-                return Json("OK");
+                return Json(true);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
+        }
+
+ 
+        [HttpPost]
+        public JsonResult RetrieveGroups(string EnrollmentID, string EnrollmentCourseID)
+        {
+            try
+            {
+                var Groups = db.Enrollments.Where(x => x.EnrollmentID == new Guid(EnrollmentID))
+                            .FirstOrDefault().EnrollmentCourses.Where(x => x.EnrollmentCourseID == new Guid(EnrollmentCourseID))
+                                        .FirstOrDefault().EnrollmentGroups.ToList();
+                
+                IList<EnrollGroupDetail> result = new List<EnrollGroupDetail> ();
+                foreach (var group in Groups)
+                {
+                    var schedules = group.EnrollmentGroupSchedules.ToList();
+                    var professor = group.User.Students.Where(x=>x.UserID == group.ProfessorID).FirstOrDefault();
+                    foreach (var schedule in schedules)
+	                {
+
+                        EnrollGroupDetail aux = new EnrollGroupDetail
+                                                    {
+                                                        EnrollmentGroupID = group.EnrollmentGroupID.ToString(),
+                                                        CourseCode = group.EnrollmentCourse.Course.Code,
+                                                        GroupName = group.GroupName,
+                                                        ClassroomCode = schedule.Classroom.Code,
+                                                        Schedule = schedule.DayOfWeek + " " + schedule.StartTime + " - " + schedule.EndTime,
+                                                        ProfessorName = professor.FirstName + " " + professor.LastName
+                                                    };
+                        result.Add(aux);
+	                }
+                    
+                }
+
+                return Json(result);
             }
             catch (Exception e)
             {
