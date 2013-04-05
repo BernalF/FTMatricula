@@ -72,9 +72,9 @@ var enrollment = new Class({
         var tr = $(e.target).closest("tr"); // get the current table row (tr)
         // get the data bound to the current table row
         var data1 = this.dataItem(tr);       
-
+        $.ajaxSettings.traditional = true;
         $.bAjax({
-            url: self.options.urlDelete,
+            url: '/Enrollment/DeleteGroup',
             ajaxBeforeSend: function () {
                 $('.popupBg').fadeIn();
                 $('.loading').fadeIn();
@@ -88,7 +88,7 @@ var enrollment = new Class({
             ajaxSuccess: function (response) {
                 $('.popupBg').fadeOut();
                 $('.loading').fadeOut();
-                self.fillGroupGrid($.parseJSON(response));
+                enrollment.prototype.fillGroupGrid($.parseJSON(response));
             }
         });
     },
@@ -254,6 +254,12 @@ var enrollment = new Class({
                 async: false,
                 ajaxSuccess: function (response) {
                     self.retrieveGroups();
+                    $('#Group_Name').val('');
+                    $('#Quota').parent().find('.k-formatted-value').val(30);
+                    EnrollSchedule = [];
+                    $('#scheduleGrid').html('');
+                    //clean schedule List
+                    self.deleteSchedule(true);
                 }
             });
             return false;
