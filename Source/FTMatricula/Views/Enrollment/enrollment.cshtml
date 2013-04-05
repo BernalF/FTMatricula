@@ -2,7 +2,33 @@
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
     ViewBag.Title = @Resources.GetValue("ENROLLMENT_STUDENT");
 }
+<div id="content">
+    <div class="mainBox">
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")/@Resources.GetValue("ENROLLMENT_STUDENT")</a></h2>
 
-@section styles {
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-}
+        <div class="editDetail">
+            <div>
+                <ul>
+                   
+                </ul>
+                               
+                <div class="clear"></div>
+                <div class="errorsSpace">
+                    <ul>
+                        <li>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="formBtnBar">
+                    <li>
+                        <a href="#" class="button send" id="btnEnroll">">@Resources.GetValue("ENROLL")</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="button back">Cancel</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

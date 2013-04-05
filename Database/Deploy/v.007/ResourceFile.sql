@@ -257,6 +257,7 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_DATES', 'es-CR', 'Perí
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_EXRTRA_DATES', 'es-CR', 'Período Extra-Ordinario')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_COURSES_DETAILS', 'es-CR', 'Detalle de Cursos')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_GROUPS_DETAILS', 'es-CR', 'Detalle de Grupos')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLL', 'es-CR', 'Matricular')
 ---PLAN VERSIONING
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'EQUIVALENCES', 'es-CR', 'Equivalencias')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'VERSIONING_ACTION', 'es-CR', 'Realizar Versionamiento de Planes')
