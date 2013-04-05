@@ -290,7 +290,7 @@
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.Course-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.Course-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Course-Requirement">
           <Key>
@@ -362,9 +362,9 @@
           </Key>
           <Property Name="EnrollmentGroupScheduleID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="EnrollmentGroupID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Day" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="StartTime" Type="datetime" Nullable="false" />
-          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="DayOfWeek" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="StartTime" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EndTime" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="InsertDate" Type="datetime" />
           <Property Name="InsertUserID" Type="uniqueidentifier" />
           <Property Name="ModifyDate" Type="datetime" />
@@ -414,8 +414,8 @@
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
           <Property Name="Version" Type="varchar" MaxLength="100" />
           <Property Name="ParentID" Type="uniqueidentifier" />
-          <Property Name="hasEnrollment" Type="bit" />
           <Property Name="isActive" Type="bit" />
+          <Property Name="hasEnrollment" Type="bit" />
         </EntityType>
         <EntityType Name="Plan-Course">
           <Key>
@@ -521,7 +521,7 @@
           <Property Name="Code" Type="varchar" MaxLength="120" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.School-Scheme' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.School-Scheme' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="School-Scheme">
           <Key>
@@ -595,7 +595,7 @@
           <Property Name="ReceiveNews" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.Student-Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.Student-Course' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Student-Course">
           <Key>
@@ -664,7 +664,7 @@
           <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.ApplicationUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.ApplicationUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="ApplicationUser">
           <Key>
@@ -699,7 +699,7 @@
           <Property Name="IdentificationTypeID" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.PlanDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.PlanDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="PlanDetails">
           <Key>
@@ -716,7 +716,7 @@
           <Property Name="isActive" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="RequirementDetails">
           <Key>
@@ -731,7 +731,7 @@
           <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="120" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.SchemeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.SchemeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="SchemeDetails">
           <Key>
@@ -1284,7 +1284,6 @@
           </AssociationSet>
           <EntitySet Name="EnrollmentCourses" EntityType="FTMatricula.DBModel.EnrollmentCourse" />
           <EntitySet Name="EnrollmentGroups" EntityType="FTMatricula.DBModel.EnrollmentGroup" />
-          <EntitySet Name="EnrollmentGroupSchedules" EntityType="FTMatricula.DBModel.EnrollmentGroupSchedule" />
           <EntitySet Name="StudentPlans" EntityType="FTMatricula.DBModel.StudentPlan" />
           <AssociationSet Name="FK_EnrollmentGroups_Classroom" Association="FTMatricula.DBModel.FK_EnrollmentGroups_Classroom">
             <End Role="Classroom" EntitySet="Classrooms" />
@@ -1310,10 +1309,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="EnrollmentGroup" EntitySet="EnrollmentGroups" />
           </AssociationSet>
-          <AssociationSet Name="FK_EnrollmentGroupSchedule_EnrollmentGroups" Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups">
-            <End Role="EnrollmentGroup" EntitySet="EnrollmentGroups" />
-            <End Role="EnrollmentGroupSchedule" EntitySet="EnrollmentGroupSchedules" />
-          </AssociationSet>
           <AssociationSet Name="FK_StudentPlan_Plan" Association="FTMatricula.DBModel.FK_StudentPlan_Plan">
             <End Role="Plan" EntitySet="Plans" />
             <End Role="StudentPlan" EntitySet="StudentPlans" />
@@ -1330,6 +1325,11 @@
             <Parameter Name="UserNameOld" Mode="In" Type="String" />
             <Parameter Name="UserNameNew" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="EnrollmentGroupSchedules" EntityType="FTMatricula.DBModel.EnrollmentGroupSchedule" />
+          <AssociationSet Name="FK_EnrollmentGroupSchedule_EnrollmentGroups" Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups">
+            <End Role="EnrollmentGroup" EntitySet="EnrollmentGroups" />
+            <End Role="EnrollmentGroupSchedule" EntitySet="EnrollmentGroupSchedules" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -2118,24 +2118,8 @@
           <NavigationProperty Name="Classroom" Relationship="FTMatricula.DBModel.FK_EnrollmentGroups_Classroom" FromRole="EnrollmentGroup" ToRole="Classroom" />
           <NavigationProperty Name="EnrollmentCourse" Relationship="FTMatricula.DBModel.FK_EnrollmentGroups_EnrollmentCourse" FromRole="EnrollmentGroup" ToRole="EnrollmentCourse" />
           <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_EnrollmentGroups_Users" FromRole="EnrollmentGroup" ToRole="User" />
-          <NavigationProperty Name="EnrollmentGroupSchedules" Relationship="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" FromRole="EnrollmentGroup" ToRole="EnrollmentGroupSchedule" />
           <Property Type="Int32" Name="ExtraQuota" />
-        </EntityType>
-        <EntityType Name="EnrollmentGroupSchedule">
-          <Key>
-            <PropertyRef Name="EnrollmentGroupScheduleID" />
-          </Key>
-          <Property Type="Guid" Name="EnrollmentGroupScheduleID" Nullable="false" />
-          <Property Type="Guid" Name="EnrollmentGroupID" Nullable="false" />
-          <Property Type="String" Name="Day" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="StartTime" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="EndTime" Nullable="false" Precision="3" />
-          <Property Type="DateTime" Name="InsertDate" Precision="3" />
-          <Property Type="Guid" Name="InsertUserID" />
-          <Property Type="DateTime" Name="ModifyDate" Precision="3" />
-          <Property Type="Guid" Name="ModifyUserID" />
-          <Property Type="String" Name="IpAddress" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="EnrollmentGroup" Relationship="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" FromRole="EnrollmentGroupSchedule" ToRole="EnrollmentGroup" />
+          <NavigationProperty Name="EnrollmentGroupSchedules" Relationship="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" FromRole="EnrollmentGroup" ToRole="EnrollmentGroupSchedule" />
         </EntityType>
         <EntityType Name="StudentPlan">
           <Key>
@@ -2224,18 +2208,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_EnrollmentGroupSchedule_EnrollmentGroups">
-          <End Type="FTMatricula.DBModel.EnrollmentGroup" Role="EnrollmentGroup" Multiplicity="1" />
-          <End Type="FTMatricula.DBModel.EnrollmentGroupSchedule" Role="EnrollmentGroupSchedule" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EnrollmentGroup">
-              <PropertyRef Name="EnrollmentGroupID" />
-            </Principal>
-            <Dependent Role="EnrollmentGroupSchedule">
-              <PropertyRef Name="EnrollmentGroupID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_StudentPlan_Plan">
           <End Type="FTMatricula.DBModel.Plan" Role="Plan" Multiplicity="1" />
           <End Type="FTMatricula.DBModel.StudentPlan" Role="StudentPlan" Multiplicity="*" />
@@ -2274,6 +2246,34 @@
           <Property Type="String" Name="Description" MaxLength="300" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="isActive" />
         </EntityType>
+        <EntityType Name="EnrollmentGroupSchedule">
+          <Key>
+            <PropertyRef Name="EnrollmentGroupScheduleID" />
+          </Key>
+          <Property Type="Guid" Name="EnrollmentGroupScheduleID" Nullable="false" />
+          <Property Type="Guid" Name="EnrollmentGroupID" Nullable="false" />
+          <Property Type="String" Name="DayOfWeek" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="StartTime" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EndTime" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="InsertDate" Precision="3" />
+          <Property Type="Guid" Name="InsertUserID" />
+          <Property Type="DateTime" Name="ModifyDate" Precision="3" />
+          <Property Type="Guid" Name="ModifyUserID" />
+          <Property Type="String" Name="IpAddress" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EnrollmentGroup" Relationship="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" FromRole="EnrollmentGroupSchedule" ToRole="EnrollmentGroup" />
+        </EntityType>
+        <Association Name="FK_EnrollmentGroupSchedule_EnrollmentGroups">
+          <End Type="FTMatricula.DBModel.EnrollmentGroup" Role="EnrollmentGroup" Multiplicity="1" />
+          <End Type="FTMatricula.DBModel.EnrollmentGroupSchedule" Role="EnrollmentGroupSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EnrollmentGroup">
+              <PropertyRef Name="EnrollmentGroupID" />
+            </Principal>
+            <Dependent Role="EnrollmentGroupSchedule">
+              <PropertyRef Name="EnrollmentGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2724,22 +2724,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="EnrollmentGroupSchedules">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.EnrollmentGroupSchedule">
-              <MappingFragment StoreEntitySet="EnrollmentGroupSchedule">
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-                <ScalarProperty Name="Day" ColumnName="Day" />
-                <ScalarProperty Name="EnrollmentGroupID" ColumnName="EnrollmentGroupID" />
-                <ScalarProperty Name="EnrollmentGroupScheduleID" ColumnName="EnrollmentGroupScheduleID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="StudentPlans">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.StudentPlan">
               <MappingFragment StoreEntitySet="StudentPlan">
@@ -2768,6 +2752,22 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="uspRetrieveUserID" FunctionName="FTMatricula.DBModel.Store.uspRetrieveUserID" />
           <FunctionImportMapping FunctionImportName="uspUserNameUpdate" FunctionName="FTMatricula.DBModel.Store.uspUserNameUpdate" />
+          <EntitySetMapping Name="EnrollmentGroupSchedules">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.EnrollmentGroupSchedule">
+              <MappingFragment StoreEntitySet="EnrollmentGroupSchedule">
+                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
+                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="DayOfWeek" ColumnName="DayOfWeek" />
+                <ScalarProperty Name="EnrollmentGroupID" ColumnName="EnrollmentGroupID" />
+                <ScalarProperty Name="EnrollmentGroupScheduleID" ColumnName="EnrollmentGroupScheduleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

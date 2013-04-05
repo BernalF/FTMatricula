@@ -57,9 +57,9 @@ namespace FTMatricula.Models
         public DbSet<SchemeDetail> SchemeDetails { get; set; }
         public DbSet<EnrollmentCourse> EnrollmentCourses { get; set; }
         public DbSet<EnrollmentGroup> EnrollmentGroups { get; set; }
-        public DbSet<EnrollmentGroupSchedule> EnrollmentGroupSchedules { get; set; }
         public DbSet<StudentPlan> StudentPlans { get; set; }
         public DbSet<PlanDetail> PlanDetails { get; set; }
+        public DbSet<EnrollmentGroupSchedule> EnrollmentGroupSchedules { get; set; }
     
         public virtual ObjectResult<Nullable<System.Guid>> uspRetrieveUserID(string userName)
         {

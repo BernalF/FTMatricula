@@ -16,9 +16,9 @@ namespace FTMatricula.Models
     {
         public System.Guid? EnrollmentGroupScheduleID { get; set; }
         public System.Guid? EnrollmentGroupID { get; set; }
-        public string Day { get; set; }
-        public System.DateTime StartTime { get; set; }
-        public System.DateTime EndTime { get; set; }
+        public string DayOfWeek { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
