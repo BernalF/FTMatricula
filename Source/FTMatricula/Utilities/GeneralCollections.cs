@@ -162,6 +162,7 @@ namespace FTMatricula.Utilities
 
                 foreach (var c in db.Countries
                                         .ToList()
+                                        .OrderBy(x => x.CountryName)
                                         .Select(x => new { x.CountryID, x.CountryName }).ToArray())
                 {
                     dictionary.Add(c.CountryID, c.CountryName);
@@ -359,7 +360,7 @@ namespace FTMatricula.Utilities
                 return new SelectList(db.Enrollments
                                     .ToList()
                                     //.OrderByDescending(c => c.Code)
-                                    .Select(e => new { e.EnrollmentID, e.Description }), "EnrollmentID", "Description");
+                                    .Select(e => new { e.EnrollmentID, Description = e.Description  +" -- "+ e.Plan.Description}), "EnrollmentID", "Description");
             }
         }
 

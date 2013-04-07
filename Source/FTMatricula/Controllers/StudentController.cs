@@ -38,7 +38,8 @@ namespace FTMatricula.Controllers
 
         public ActionResult Create()
         {
-            return View(new ApplicationUser { DateOfBirth = DateTime.Today });
+            var CountryID = db.Countries.Where(x => x.CountryName == "Costa Rica").FirstOrDefault().CountryID;
+            return View(new ApplicationUser { DateOfBirth = DateTime.Today, CountryID = CountryID });
         }
 
         [HttpPost]

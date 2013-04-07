@@ -1,0 +1,61 @@
+﻿@*@model FTMatricula.Models.Enrollment*@
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = @Resources.GetValue("ENROLLMENT_STUDENT");
+}
+
+<div id="content">
+    <div class="mainBox">
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")/@Resources.GetValue("ENROLLMENT_STUDENT")</a></h2>
+
+
+
+        <div class="editTitle">
+            @*<span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")*@
+            Iniciar proceso de Matrícula
+        </div>
+
+        <div class="editDetail">
+            <div class="headerBox">
+                <ul>
+                    <li class="width25">
+                        <label>Matrículas Acivas</label>
+                    </li>
+                    <li class="width75">
+                        <div>
+                            @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsList)
+                                    .Name("EnrollmentID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="headerBox">
+                <ul>
+                    <li class="width25">
+                        <label>Estudiante</label>
+                    </li>
+                    <li class="width75">
+                        <div>
+                            @Html.TextBox("xxx", "Identificacion, Nombre de Estudiante, Apellidos de Estudiante", new { @class = "input width100" })
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="clear"></div>
+        <div class="formBtnBar">
+            @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
+            <a href="#" class="button send" onclick="javascript: submit_form()">Matricular Estudiante</a>
+
+        </div>
+
+    </div>
+</div>

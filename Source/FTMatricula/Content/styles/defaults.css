@@ -675,7 +675,7 @@ footer {
 }
 
 #content {
-    top: 50px;
+    top: 60px;
     left: 0;
     right: 0;
     bottom: 25px;
@@ -1522,8 +1522,51 @@ ul li.item .menuImage {
 }
 
 
-.detailBox td {
-    padding:5px;
+
+/*******/
+.headerBox {
+    display: block;
+    float: left;
+    width: 100%;
+    font-size: 14px;
+    color: #fff;
 }
 
+.headerBox ul {
+    margin: 20px;
+    padding: 0px;
+    overflow: hidden;
+    /*background-color:red;*/
+}
+
+.headerBox li {
+    display: block;
+    float: left;
+}
+
+/*.headerBox li:nth-child(odd) {
+    padding: 5px 10px 5px 0px;
+}
+
+.headerBox li:nth-child(even) {
+    padding: 5px 0px 5px 10px;
+}*/
+
+.headerBox li label {
+    font-size: 18px;
+    color: #fff;
+    padding: 3px 0 3px 0;
+}
+
+.headerBox li div {
+    padding: 3px 0 3px 0;
+}
+
+/*.headerBox li:nth-child(odd) {
+    width: 40%;
+}
+
+.headerBox li:nth-child(even) {
+    width: 60%;
+}*/
 
