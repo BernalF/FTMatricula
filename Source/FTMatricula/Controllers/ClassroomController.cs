@@ -53,7 +53,7 @@ namespace FTMatricula.Controllers
                 db.Classrooms.Add(model);
                 db.SaveChanges();                
             }
-            return Json(new[] { new { ClassroomID = model.ClassroomID, Code = model.Code } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new { ClassroomID = model.ClassroomID, Code = model.Code, model.Description } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace FTMatricula.Controllers
             model.IpAddress = Network.GetIpAddress(Request);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
-            return Json(new[] { new { ClassroomID = model.ClassroomID, Code = model.Code } }.ToDataSourceResult(request, ModelState));
+            return Json(new[] { new { ClassroomID = model.ClassroomID, Code = model.Code, model.Description } }.ToDataSourceResult(request, ModelState));
         }
 
         /// <summary>

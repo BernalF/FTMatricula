@@ -131,7 +131,7 @@
                                 @*<span class="selectHolder">
                                     @Html.DropDownListFor(m => m.CountryID, FTMatricula.Utilities.GeneralCollections.CountriesList, new { @class = "select" })
                                 </span>*@
-                                @(Html.Kendo().DropDownListFor(m => m.CountryID)
+                                @(Html.Kendo().ComboBoxFor(m => m.CountryID)
                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CountriesList)
                                     .Name("CountryID")
                                     .DataTextField("Text")
