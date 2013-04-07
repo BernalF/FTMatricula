@@ -79,8 +79,7 @@ namespace FTMatricula.Controllers
         /// <param name="request"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        [KendoAjaxErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]        
         public ActionResult DestroyClassrooms([DataSourceRequest] DataSourceRequest request, Classroom model)
         {
             try

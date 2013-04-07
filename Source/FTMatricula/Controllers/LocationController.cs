@@ -80,8 +80,7 @@ namespace FTMatricula.Controllers
         /// <param name="request"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        [KendoAjaxErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]        
         public ActionResult DestroyLocation([DataSourceRequest] DataSourceRequest request, Location model)
         {
             try

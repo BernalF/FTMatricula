@@ -88,8 +88,7 @@ namespace FTMatricula.Controllers
         /// <param name="request"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [AcceptVerbs(HttpVerbs.Post)]
-        [KendoAjaxErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]        
         public ActionResult DestroyModality([DataSourceRequest] DataSourceRequest request, Modality model)
         {
             try

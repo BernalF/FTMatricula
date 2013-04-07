@@ -270,8 +270,7 @@ namespace FTMatricula.Controllers
 
         
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        [KendoAjaxErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]        
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
             try
