@@ -81,12 +81,21 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyLocation([DataSourceRequest] DataSourceRequest request, Location model)
         {
-            Location location = db.Locations.Find(model.LocationID);
-            db.Locations.Remove(location);
-            db.SaveChanges();            
-            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            try
+            {
+                Location location = db.Locations.Find(model.LocationID);
+                db.Locations.Remove(location);
+                db.SaveChanges();
+                return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

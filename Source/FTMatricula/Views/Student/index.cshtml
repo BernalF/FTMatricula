@@ -29,6 +29,7 @@
                                           columns.Bound(m => m.UserName).Title(Resources.GetValue("IDENTIFICATION"));
                                           columns.Bound(m => m.FirstName).Title(Resources.GetValue("FIRST_NAME"));
                                           columns.Bound(m => m.LastName).Title(Resources.GetValue("LAST_NAME"));
+                                          columns.Bound(m => m.Phone1).Title(Resources.GetValue("PHONE_MOB"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");

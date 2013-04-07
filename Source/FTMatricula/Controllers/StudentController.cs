@@ -32,7 +32,14 @@ namespace FTMatricula.Controllers
             return Json(db.Students
                     .Join(db.Users, s => s.UserID, u => u.UserId, (s, u) => new { s, u })
                     .Where(m => m.s.UserID == m.u.UserId && m.s.IsAppUser == false)
-                    .ToList().Select(m => new { m.u.UserId, m.s.StudentID, m.u.UserName, m.s.FirstName, m.s.LastName })
+                    .ToList().Select(m => new { 
+                        m.u.UserId, 
+                        m.s.StudentID, 
+                        m.u.UserName, 
+                        m.s.FirstName, 
+                        m.s.LastName,                       
+                        m.s.Phone1
+                    })
                     .ToDataSourceResult(request));
         }
 
@@ -264,6 +271,7 @@ namespace FTMatricula.Controllers
         
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
             try
@@ -283,7 +291,7 @@ namespace FTMatricula.Controllers
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
             //return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }

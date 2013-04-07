@@ -119,12 +119,21 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyRequirement([DataSourceRequest] DataSourceRequest request, RequirementDetail model)
         {
-            Requirement req = db.Requirements.Find(model.RequirementID);
-            db.Requirements.Remove(req);
-            db.SaveChanges();
-            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            try
+            {
+                Requirement req = db.Requirements.Find(model.RequirementID);
+                db.Requirements.Remove(req);
+                db.SaveChanges();
+                return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
+            
         }
 
         protected override void Dispose(bool disposing)

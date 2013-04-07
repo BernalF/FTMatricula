@@ -78,6 +78,7 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdatePlan([DataSourceRequest] DataSourceRequest request, Plan model)
         {
+            model.isActive = true;
             model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
             model.ModifyDate = DateTime.Today;
             model.IpAddress = Network.GetIpAddress(Request);
@@ -94,6 +95,7 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyPlan([DataSourceRequest] DataSourceRequest request, Plan model)
         {
             try
@@ -109,7 +111,7 @@ namespace FTMatricula.Controllers
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
         }
 
@@ -151,6 +153,7 @@ namespace FTMatricula.Controllers
                         Name = model.PlanName,
                         Description = model.Description,
                         Version = Misc.GenerateVersion(sPlan.PlanID),
+                        isActive = true,
                         InsertUserID = SessApp.GetUserID(User.Identity.Name),
                         InsertDate = DateTime.Today,
                         IpAddress = Network.GetIpAddress(Request),
@@ -208,6 +211,7 @@ namespace FTMatricula.Controllers
                     Name = model.PlanName,
                     Description = model.Description,
                     Version = Misc.GenerateVersion(sPlan.PlanID),
+                    isActive = true,
                     InsertUserID = SessApp.GetUserID(User.Identity.Name),
                     InsertDate = DateTime.Today,
                     IpAddress = Network.GetIpAddress(Request),

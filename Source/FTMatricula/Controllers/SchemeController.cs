@@ -46,6 +46,7 @@ namespace FTMatricula.Controllers
         /// Destroy Scheme
         /// </summary>
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyScheme([DataSourceRequest] DataSourceRequest request, SchemeDetail model)
         {
             try
@@ -61,7 +62,7 @@ namespace FTMatricula.Controllers
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
         }
 

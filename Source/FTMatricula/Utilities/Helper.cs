@@ -89,8 +89,9 @@ namespace FTMatricula.Utilities.Helper
                     Errors = new object[] 
                     { 
                         new { Exception = "Exception", errors = new[] { filterContext.Exception.Message.ToString() } },
-                        new { Detail = "Detail", errors = new[] { 
-                            "Source: " + filterContext.Exception.TargetSite.ToString().Replace(" ","+")
+                        new { Detail = "Detail", errors = new[] {                             
+                            "Source: " //+ filterContext.Exception.TargetSite.ToString().Replace(" ","+")
+                            + ((filterContext.Exception.InnerException.Message.ToString() != null) ? filterContext.Exception.InnerException.Message.ToString() : " ")
                              //System.Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes((filterContext.Exception.Source.ToString())))
                         } }
                     }

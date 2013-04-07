@@ -28,12 +28,21 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingUsers([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.ApplicationUsers.ToList().Select(m => new { m.StudentID, m.UserName, m.FirstName, m.LastName, RoleName = Resources.GetValue(m.RoleName), m.Email }).ToDataSourceResult(request));
+            return Json(db.ApplicationUsers.ToList().Select(m => new { 
+                m.StudentID, 
+                m.UserName, 
+                m.FirstName, 
+                m.LastName, 
+                RoleName = Resources.GetValue(m.RoleName), 
+                m.Email,
+                m.Phone1
+            }).ToDataSourceResult(request));
         }
 
         public ActionResult Create()
         {
-            return View(new ApplicationUser { DateOfBirth=DateTime.Today});
+            var CountryID = db.Countries.Where(x => x.CountryName == "Costa Rica").FirstOrDefault().CountryID;
+            return View(new ApplicationUser { DateOfBirth = DateTime.Today, CountryID = CountryID });
         }
 
         [HttpPost]
@@ -160,6 +169,7 @@ namespace FTMatricula.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
             try
@@ -179,7 +189,7 @@ namespace FTMatricula.Controllers
             }
             catch (Exception e)
             {
-                throw new ApplicationException(e.Message);
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
             //return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }

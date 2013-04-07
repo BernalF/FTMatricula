@@ -89,12 +89,21 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroyModality([DataSourceRequest] DataSourceRequest request, Modality model)
         {
-            Modality modality = db.Modalities.Find(model.ModalityID);
-            db.Modalities.Remove(modality);           
-            db.SaveChanges();                        
-            return Json(new[] { new  {} }.ToDataSourceResult(request, ModelState));
+            try
+            {
+                Modality modality = db.Modalities.Find(model.ModalityID);
+                db.Modalities.Remove(modality);
+                db.SaveChanges();
+                return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
+           
         }
 
         protected override void Dispose(bool disposing)

@@ -21,7 +21,7 @@ namespace FTMatricula.Utilities
 
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 foreach (var t in Roles.GetAllRoles().Where(x => x != "ROLE_STUDENT")
-                                                         .ToList()
+                                                         .ToList()                                                         
                                                          .Select(x => new { RoleId = x, RoleName = x }).ToArray())
                 {
                     dictionary.Add(t.RoleId, Resources.GetValue(t.RoleName));
@@ -79,6 +79,7 @@ namespace FTMatricula.Utilities
                 foreach (var t in db.Types
                                         .Where(x => x.Usage == "MST")
                                         .ToList()
+                                        .OrderBy(x => x.Name)
                                         .Select(x => new { x.TypeID, x.Name }).ToArray())
                 {
                     dictionary.Add(t.TypeID, Resources.GetValue(t.Name));
@@ -220,6 +221,7 @@ namespace FTMatricula.Utilities
                 foreach (var t in db.Types
                                         .Where(t => t.Usage == "REQ")
                                         .ToList()
+                                        .OrderBy(t => t.Name)
                                         .Select(t => new { t.TypeID, t.Name }).ToArray())
                 {
                     dictionary.Add(t.TypeID, Resources.GetValue(t.Name));

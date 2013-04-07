@@ -83,12 +83,21 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
+        [KendoAjaxErrorHandler]
         public ActionResult DestroySchool([DataSourceRequest] DataSourceRequest request, School model)
         {
-            School school = db.Schools.Find(model.SchoolID);
-            db.Schools.Remove(school);            
-            db.SaveChanges();
-            return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            try
+            {
+                School school = db.Schools.Find(model.SchoolID);
+                db.Schools.Remove(school);
+                db.SaveChanges();
+                return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
+            
         }
 
         protected override void Dispose(bool disposing)
