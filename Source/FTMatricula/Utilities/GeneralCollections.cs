@@ -142,6 +142,7 @@ namespace FTMatricula.Utilities
                 foreach (var t in db.Types
                                         .Where(x => x.Usage == "IDS")
                                         .ToList()
+                                        .OrderBy(x => x.Name)
                                         .Select(x => new { x.TypeID, x.Name }).ToArray())
                 {
                     dictionary.Add(t.TypeID, Resources.GetValue(t.Name));
@@ -325,8 +326,8 @@ namespace FTMatricula.Utilities
                 matrifunDBEntities db = new matrifunDBEntities();
                 return new SelectList(db.Classrooms
                                     .ToList()
-                                    .OrderByDescending(c => c.Code)
-                                    .Select(c => new { c.ClassroomID, c.Code }), "ClassroomID", "Code");
+                                    .OrderBy(c => c.Code + " - " + c.Description)
+                                    .Select(c => new { c.ClassroomID, Code = c.Code + " - " + c.Description }), "ClassroomID", "Code");
             }
         }
 

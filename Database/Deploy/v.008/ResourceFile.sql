@@ -206,8 +206,7 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'REQ_PROGRAM', 'es-CR', 'Programa'
 --STUDENT MENU OPTIONS & VIEW
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'STUDENT_MAINTENANCE', 'es-CR', 'Mantenimiento Estudiantes')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ADITIONAL_DATA', 'es-CR', 'Datos Adicionales')
-INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ADD_STUDENT', 'es-CR', 'Agregar Studiante')
-INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ADD_STUDENT_TITLE', 'es-CR', 'Agregar Estudiantes')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ADD_STUDENT', 'es-CR', 'Agregar Estudiante')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'EDIT_STUDENT_TITLE', 'es-CR', 'Edición de Estudiantes')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'STUDENT_PHYSICA_LADDRESS', 'es-CR', 'Dirección de Residencia')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'STUDENT_ADDITIONAL_ADDRESS', 'es-CR', 'Domicilio Durante Curso')
