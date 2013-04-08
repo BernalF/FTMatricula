@@ -259,6 +259,8 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_EXRTRA_DATES', 'es-CR'
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_COURSES_DETAILS', 'es-CR', 'Detalle de Cursos')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLLMENT_GROUPS_DETAILS', 'es-CR', 'Detalle de Grupos')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ENROLL', 'es-CR', 'Matricular')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'GROUP_REQ', 'es-CR', 'El nombre del grupo es requerido')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'SCHEDULE_REQ', 'es-CR', 'Es necesario agregar horarios')
 ---PLAN VERSIONING
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'EQUIVALENCES', 'es-CR', 'Equivalencias')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'VERSIONING_ACTION', 'es-CR', 'Realizar Versionamiento de Planes')

@@ -152,15 +152,20 @@
                                 </ul>
                             </div>
                         </li>
-
                         <li class="width100">
                             <div class="formBtnBar">
                                 <a href="#" class="button down" id="btnAddGroup">Agregar Grupo</a>
                             </div>
-                        </li>
-                    </ul>                     
+                        </li>    
+                        <li class="width100">
+                            <div class="errorsSpace">
+                                <ul id="groupErrorArea">                                    
+                                </ul>
+                            </div>
+                        </li>                   
+                    </ul>
                 </div>
-               
+
 
                 <div class="detailBox100">
                     <ul class="hide">
@@ -171,7 +176,7 @@
                             <label>&nbsp;</label>
                         </li>
                         <li class="width100">
-                          <div id="groups_grid" ></div>
+                            <div id="groups_grid"></div>
                         </li>
                     </ul>
                 </div>
@@ -317,7 +322,7 @@
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
-        var EnrollSchedule = [];      
+        var EnrollSchedule = [];
         $(function () {
             var matri = new enrollment({
                 view: 'COURSES',
@@ -325,6 +330,9 @@
                 urlAddGroups: '@Url.Action("SaveGroup", "Enrollment")',
                 urlGetGroups: '@Url.Action("RetrieveGroups", "Enrollment")',
                 urlDelete: '@Url.Action("DeleteGroup", "Enrollment")',
+                GROUP_REQ: @Resources.GetValue("GROUP_REQ"),
+                SCHEDULE_REQ: @Resources.GetValue("SCHEDULE_REQ")
+
             });
         });
     </script>

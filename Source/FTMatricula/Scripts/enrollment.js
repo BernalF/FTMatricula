@@ -24,7 +24,7 @@ var enrollment = new Class({
                 //this.fillGroupGrid();
                 this.btnSaveSelectedCourses();
                 this.addSchedule();
-                this.enrollmentSelectCourse();                
+                this.enrollmentSelectCourse();
                 break;
         }
     },
@@ -32,10 +32,10 @@ var enrollment = new Class({
     fillGroupGrid: function (data) {
         var self = this;
         $("#groups_grid").kendoGrid({
-            dataSource: { 
+            dataSource: {
                 data: data,
                 group: { field: 'GroupName' }
-            },            
+            },
             columns: [{
                 field: "EnrollmentGroupID",
                 hidden: true
@@ -55,15 +55,15 @@ var enrollment = new Class({
                 field: "ProfessorName",
                 title: "Profesor",
                 width: 250
-            }, {                
+            }, {
                 command: [{
                     name: "delete",
-                    buttonType: "ImageAndText",                    
+                    buttonType: "ImageAndText",
                     text: "Eliminar",
                     click: self.delGroup
                 }]
             }],
-            groupable: false            
+            groupable: false
         });
     },
     delGroup: function (e) {
@@ -71,7 +71,7 @@ var enrollment = new Class({
         // e.target is the DOM element representing the button
         var tr = $(e.target).closest("tr"); // get the current table row (tr)
         // get the data bound to the current table row
-        var data1 = this.dataItem(tr);       
+        var data1 = this.dataItem(tr);
         $.ajaxSettings.traditional = true;
         $.bAjax({
             url: '/Enrollment/DeleteGroup',
@@ -91,6 +91,7 @@ var enrollment = new Class({
                 enrollment.prototype.fillGroupGrid($.parseJSON(response));
             }
         });
+        return false;
     },
     //Save Selected Courses Handle
     btnSaveSelectedCourses: function () {
@@ -194,20 +195,43 @@ var enrollment = new Class({
     },
     enrollmentSelectCourse: function () {
         var self = this;
-        $('.checkSpace').off('click.checkSpace').on('click.checkSpace', function () {
-            if ($(this).hasClass('bgrYellow')) {
+        $('.checkSpace').off('click.checkSpace').on('click.checkSpace', function (e) {
+
+            $('.whiteContentBox label').removeClass('bgrYellow');
+
+            $(this).addClass('bgrYellow');
+
+            var click = e.clientX - $(this).offset().left;
+
+            if ((click >= 0) && (click <= 20)) {
+                if ($(this).children('input').is(':checked')) {
+                    $(this).addClass('hit');
+                } else {
+                    $(this).removeClass('hit');
+                }
+            }
+            else if ((click >= 20)) {
                 $('.detailBox ul').fadeIn();
                 $('.detailBox100 ul').fadeIn();
                 $('#Group_Name').val('');
                 $('#Quota').parent().find('.k-formatted-value').val(30);
+                $('#groupErrorArea').html('');
                 //clean schedule List
                 self.deleteSchedule(true);
                 //Retrieve Groups List    
                 self.retrieveGroups();
+                //handle Add groups button
+                self.addGroups();
+                return false;
             }
-            //handle Add groups button
-            self.addGroups();
-            return false;
+            else {
+                if ($(this).hasClass('hit')) {
+                    $(this).children('input').prop('checked', true);
+                } else {
+                    $(this).children('input').prop('checked', false);
+                }
+            }
+            // return false;
         });
     },
     retrieveGroups: function () {
@@ -230,7 +254,7 @@ var enrollment = new Class({
             ajaxSuccess: function (response) {
                 $('.popupBg').fadeOut();
                 $('.loading').fadeOut();
-                self.fillGroupGrid($.parseJSON(response));                
+                self.fillGroupGrid($.parseJSON(response));
             }
         });
     },
@@ -244,24 +268,32 @@ var enrollment = new Class({
                 Quota: $('Quota').val,
                 ScheduleList: EnrollSchedule
             };
-            //Add new Groups
-            $.ajaxSettings.traditional = true;
-            $.bAjax({
-                url: self.options.urlAddGroups,  
-                data: JSON.stringify(EnrollGroup),
-                datatype: "json",
-                contentType: 'application/json; charset=utf-8',
-                async: false,
-                ajaxSuccess: function (response) {
-                    self.retrieveGroups();
-                    $('#Group_Name').val('');
-                    $('#Quota').parent().find('.k-formatted-value').val(30);
-                    EnrollSchedule = [];
-                    $('#scheduleGrid').html('');
-                    //clean schedule List
-                    self.deleteSchedule(true);
-                }
-            });
+
+            if (EnrollGroup.GroupName == '')
+                $('#groupErrorArea').html('<li class="width100">' + self.GROUP_REQ + '</li>');
+            else if (EnrollGroup.ScheduleList == '')
+                $('#groupErrorArea').html('<li class="width100">' + self.SCHEDULE_REQ + '</li>');
+            else {
+                $('#groupErrorArea').html('');
+                //Add new Groups
+                $.ajaxSettings.traditional = true;
+                $.bAjax({
+                    url: self.options.urlAddGroups,
+                    data: JSON.stringify(EnrollGroup),
+                    datatype: "json",
+                    contentType: 'application/json; charset=utf-8',
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        self.retrieveGroups();
+                        $('#Group_Name').val('');
+                        $('#Quota').parent().find('.k-formatted-value').val(30);
+                        EnrollSchedule = [];
+                        $('#scheduleGrid').html('');
+                        //clean schedule List
+                        self.deleteSchedule(true);
+                    }
+                });
+            }
             return false;
         });
     }
