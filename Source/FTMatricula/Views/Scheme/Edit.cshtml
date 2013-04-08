@@ -104,8 +104,8 @@
             </div>            
             <div class="clear"></div>
             <div class="formBtnBar">
-                <a href="#" class="button send" onclick="javascript: submit_form()">Save</a>
-                @Html.ActionLink("Cancel", "index", "Scheme", routeValues: null, htmlAttributes: new { @class = "button back" })
+                <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
+                @Html.ActionLink(@Resources.GetValue("CANCEL"), "index", "Scheme", routeValues: null, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
                 @Html.HiddenFor(m => m.SchemeID)

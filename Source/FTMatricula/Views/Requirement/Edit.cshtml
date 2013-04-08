@@ -53,7 +53,7 @@
             <div class="clear"></div>
             <div class="formBtnBar">
                 <a href="#" class="button send" onclick="javascript: submit_form()">Save</a>
-                @Html.ActionLink("Cancel", "Index", "Home", routeValues: new { opt = "maintenance" }, htmlAttributes: new { @class = "button back" })
+                @Html.ActionLink("Cancel", "Index", "Requirement", routeValues: new { opt = "maintenance" }, htmlAttributes: new { @class = "button back" })
             </div>
             <div class="clear"></div>
             @Html.HiddenFor(m => m.RequirementID)

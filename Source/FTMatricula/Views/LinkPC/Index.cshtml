@@ -61,10 +61,10 @@
                 </div>
                 <ul class="formBtnBar">
                     <li>
-                        <a href="#" class="button send" id="btnLinkPC">Save</a>
+                        <a href="#" class="button send" id="btnLinkPC">@Resources.GetValue("SAVE")</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancel</a>
+                        <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">@Resources.GetValue("CANCEL")</a>
                     </li>
                 </ul>
             </div>
