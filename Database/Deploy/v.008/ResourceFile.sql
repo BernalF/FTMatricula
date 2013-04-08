@@ -197,7 +197,7 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'COUNTRY', 'es-CR', 'País')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'PHONE_MOB', 'es-CR', 'Tel. Celular')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'PHONE_HOME', 'es-CR', 'Tel. Casa')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'PHONE_OFFICE', 'es-CR', 'Tel. Oficina')
-INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ROLE', 'es-CR', 'Role')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ROLE', 'es-CR', 'Rol')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ADD_USER', 'es-CR', 'Agregar Usuario')
 --REQUIREMENTS TYPES
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'REQ_COURSE', 'es-CR', 'Cursos')

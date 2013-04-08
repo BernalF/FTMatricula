@@ -271,9 +271,9 @@ var enrollment = new Class({
             };
 
             if (EnrollGroup.GroupName == '')
-                $('#groupErrorArea').html('<li class="width100">' + self.GROUP_REQ + '</li>');
+                $('#groupErrorArea').html('<li class="width100">' + self.options.GROUP_REQ + '</li>');
             else if (EnrollGroup.ScheduleList == '')
-                $('#groupErrorArea').html('<li class="width100">' + self.SCHEDULE_REQ + '</li>');
+                $('#groupErrorArea').html('<li class="width100">' + self.options.SCHEDULE_REQ + '</li>');
             else {
                 $('#groupErrorArea').html('');
                 //Add new Groups
