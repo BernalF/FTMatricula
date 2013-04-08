@@ -5,11 +5,6 @@
 @section styles {
 }
 
-@if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
-{
-    Response.Redirect("~/Account/NotAuthorized");
-}
-
 <div id="login_content">
     <ul id="SectionHolder">
         <li style="padding-bottom: 100px;"></li>
@@ -77,11 +72,6 @@
                     </ul>
                     <div class="clear"></div>
                 </div>            
-@*<ul>
-                <li class="textCenter invert">
-                    @Html.ActionLink("Register", "Register") if you don't have an account.                
-                </li>
-            </ul>*@
             }
         </li>
     </ul>

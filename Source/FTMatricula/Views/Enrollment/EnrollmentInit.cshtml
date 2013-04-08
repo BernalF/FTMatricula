@@ -197,6 +197,15 @@
 
 @section Scripts {
 
+    <script>
+        $(function () {
+            $('form').off('submit.form').on('submit.form', function () {
+                $('.popupBg').fadeIn();
+                $('.loading').fadeIn();                
+            });
+        });
+    </script>
+
     @if (Model.StudentList.Count > 1)
     {
         <script>
@@ -214,7 +223,7 @@
                     $('#Student_Phone1').val($($(this).children('span')[3]).html());
                     $('#Student_StudentID').val($($(this).children('span')[4]).html());
                     $('form').submit();
-                });                
+                });
             });
         </script>               
     }

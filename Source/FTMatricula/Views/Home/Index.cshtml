@@ -10,95 +10,110 @@
     <!-- DESKTOPS STARTS -->
     <div class="desk">
         <ul class="menuOpt">
-
-            <li class="item">
-                <div class="itemContent maintenance">
-                    <a href="#" class="itemTitle">@Resources.GetValue("MAINTENANCE")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/gear.png" alt="" />
-                        </a>
+            @if (User.IsInRole("ROLE_ADMINISTRATOR"))
+            { 
+                <li class="item">
+                    <div class="itemContent maintenance">
+                        <a href="#" class="itemTitle">@Resources.GetValue("MAINTENANCE")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/gear.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent student">
-                    <a href="#" class="itemTitle">@Resources.GetValue("STUDENT")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/student.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_STUDENT"))
+            { 
+                <li class="item">
+                    <div class="itemContent student">
+                        <a href="#" class="itemTitle">@Resources.GetValue("STUDENT")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/student.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent programs">
-                    <a href="#" class="itemTitle">@Resources.GetValue("PROGRAM_PLAN_COURSE")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/programs.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR"))
+            { 
+                <li class="item">
+                    <div class="itemContent programs">
+                        <a href="#" class="itemTitle">@Resources.GetValue("PROGRAM_PLAN_COURSE")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/programs.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent enrollment">
-                    <a href="#" class="itemTitle">@Resources.GetValue("ENROLLMENT")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/matricula.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR"))
+            { 
+                <li class="item">
+                    <div class="itemContent enrollment">
+                        <a href="#" class="itemTitle">@Resources.GetValue("ENROLLMENT")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/matricula.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent notes">
-                    <a href="#" class="itemTitle">@Resources.GetValue("NOTES_REGISTER")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/reg_notes.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_TEACHER"))
+            { 
+                <li class="item">
+                    <div class="itemContent notes">
+                        <a href="#" class="itemTitle">@Resources.GetValue("NOTES_REGISTER")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/reg_notes.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent records">
-                    <a href="#" class="itemTitle">@Resources.GetValue("RECORDS")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/archive.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_TEACHER"))
+            { 
+                <li class="item">
+                    <div class="itemContent records">
+                        <a href="#" class="itemTitle">@Resources.GetValue("RECORDS")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/archive.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent certifications">
-                    <a href="#" class="itemTitle">@Resources.GetValue("CERTIFICATIONS")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/degree.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR"))
+            { 
+                <li class="item">
+                    <div class="itemContent certifications">
+                        <a href="#" class="itemTitle">@Resources.GetValue("CERTIFICATIONS")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/degree.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="item">
-                <div class="itemContent auditing">
-                    <a href="#" class="itemTitle">@Resources.GetValue("AUDIT")</a>
-                    <div class="menuImage">
-                        <a href="#">
-                            <img src="~/Content/images/icons/auditoria.png" alt="" />
-                        </a>
+                </li>
+            }
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_AUDITOR"))
+            { 
+                <li class="item">
+                    <div class="itemContent auditing">
+                        <a href="#" class="itemTitle">@Resources.GetValue("AUDIT")</a>
+                        <div class="menuImage">
+                            <a href="#">
+                                <img src="~/Content/images/icons/auditoria.png" alt="" />
+                            </a>
+                        </div>
                     </div>
-                </div>
-            </li>
-
+                </li>
+            }
 
         </ul>
     </div>
@@ -149,7 +164,7 @@
 
 
 @section Scripts {
-        
+
     <script type="text/javascript">
 
         $(function () {
@@ -181,17 +196,17 @@
                 });
             }
 
-            
-            var backOpt = "@ViewBag.Message";            
+
+            var backOpt = "@ViewBag.Message";
             if (backOpt.length > 0) {
                 $('.item').children('div .' + backOpt).parent().trigger('click');
             }
 
-            
+
         });
 
 
-        
+
     </script>
 
 }
