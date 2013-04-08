@@ -173,26 +173,25 @@
         </div>
         <a href="#selectStudentWindow" id="linkSelectStudent" class="popUp hide">link</a>
     </div>
+    @Html.HiddenFor(m => m.Student.StudentID)
     
-    
-    if (Model.StudentList.Count > 1)
-    {    
-        <div class="popupWindow" id="selectStudentWindow">
-            <h2>Resultado de Búsqueda</h2>
-            <h3 class="padBot10 bold">Por favor seleccione un estudiante...
-            </h3>
+            if (Model.StudentList.Count > 1)
+            {    
+    <div class="popupWindow" id="selectStudentWindow">
+        <h2>Resultado de Búsqueda</h2>
+        <h3 class="padBot10 bold">Por favor seleccione un estudiante...
+        </h3>
 
-            <ul class="formPopUpWin">
-                @foreach (var item in Model.StudentList)
-                {
-                    <li>
-                        <p>@item.Identification -- @item.FirstName&nbsp;@item.LastName</p>
-                    </li>
-                }
-            </ul>
-        </div> 
-    }    
-    
+        <ul class="formPopUpWin">
+            @foreach (var item in Model.StudentList)
+            {
+                <li>
+                    <span>@item.Identification</span> -- <span>@item.FirstName</span>&nbsp;<span>@item.LastName</span><span class="hide">@item.Phone1</span><span class="hide">@item.StudentID</span>
+                </li>
+            }
+        </ul>
+    </div> 
+            }
 }
 
 @section Scripts {
@@ -204,22 +203,18 @@
 
             $(function () {
                 $('#linkSelectStudent').trigger('click');
+
+                $('.formPopUpWin li').off('click.formPopUpWin').on('click.formPopUpWin', function () {
+                    $(".popupBg").delay(300).fadeOut(300);
+                    $($(".popUp").attr('href')).fadeOut(300);
+                    $('#Student_Identification').val($($(this).children('span')[0]).html());
+                    $('#Student_FirstName').val($($(this).children('span')[1]).html());
+                    $('#Student_LastName').val($($(this).children('span')[2]).html());
+                    $('#Student_Phone1').val($($(this).children('span')[3]).html());
+                    $('#Student_StudentID').val($($(this).children('span')[4]).html());
+                    $('form').submit();
+                });                
             });
-
-        </script>
-        
-        foreach (var item in Model.StudentList)
-        {
-            <script>
-                student_list.push({
-                    Identification: '@item.Identification',
-                    FirstName: '@item.FirstName',
-                    LastName: '@item.LastName',
-                    Phone1: '@item.Phone1'
-                });
-            </script>
-                        
-        }
+        </script>               
     }
-
 }

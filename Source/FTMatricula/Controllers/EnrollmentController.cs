@@ -363,17 +363,35 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         private void EnrollmentInit_FIND_STUDENT(EnrollmentInit model)
         {
-            var result = db.Students.Where(x => x.User.UserName.Contains(model.Student.Identification)
-                                    || x.FirstName.Contains(model.Student.FirstName)
-                                    || x.LastName.Contains(model.Student.LastName)
-                                    || x.Phone1.Contains(model.Student.Phone1)).Select(m => new EnrollmentStudent
-                                    {
-                                        StudentID = m.StudentID,
-                                        Identification = m.User.UserName,
-                                        FirstName = m.FirstName,
-                                        LastName = m.LastName,
-                                        Phone1 = m.Phone1
-                                    }).ToList();
+            List<EnrollmentStudent> result = null;
+            if (model.Student.StudentID == null)
+                result = db.Students.Where(x => x.User.UserName.Contains(model.Student.Identification)
+                                         || x.FirstName.Contains(model.Student.FirstName)
+                                         || x.LastName.Contains(model.Student.LastName)
+                                         || x.Phone1.Contains(model.Student.Phone1)).Select(m => new EnrollmentStudent
+                                         {
+                                             StudentID = m.StudentID,
+                                             Identification = m.User.UserName,
+                                             FirstName = m.FirstName,
+                                             LastName = m.LastName,
+                                             Phone1 = m.Phone1
+                                         }).ToList();
+            else {
+                result = new List<EnrollmentStudent>();
+                
+               var m = db.Students.Find(model.Student.StudentID) ;
+
+               result.Add(new EnrollmentStudent
+               {
+                   StudentID = m.StudentID,
+                   Identification = m.User.UserName,
+                   FirstName = m.FirstName,
+                   LastName = m.LastName,
+                   Phone1 = m.Phone1
+               });    
+            
+            }
+
             if (result.Count == 1)
             {
                 model.Student = new EnrollmentStudent
