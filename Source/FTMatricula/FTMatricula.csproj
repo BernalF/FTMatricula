@@ -203,7 +203,6 @@
     <Compile Include="Models\Course_Requirement.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\DefaultModels.cs" />
     <Compile Include="Models\Enrollment.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
@@ -530,6 +529,7 @@
     <Content Include="Content\scripts\knockout-2.1.0.js" />
     <Content Include="Content\scripts\layout.js" />
     <Content Include="Content\scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\scoreRegister.js" />
     <Content Include="Scripts\enrollment.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
