@@ -343,11 +343,17 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult EnrollmentInit(EnrollmentInit model)
         {
-            if (model.IsReadyToEnroll)
-                return RedirectToAction("Enrollment", "Enrollment");
-            else
-                this.EnrollmentInit_FIND_STUDENT(model);
-
+            switch (model.ServerRequest)
+            {
+                case "FIND_STUDENT":
+                    this.EnrollmentInit_FIND_STUDENT(model);
+                    break;
+                case "START_ENROLL":
+                    break;
+                default:
+                    this.EnrollmentInit_DEFAULT(model);
+                    break;
+            }
             return View(model);
         }
 
@@ -405,10 +411,24 @@ namespace FTMatricula.Controllers
                                     Severity = MessageSeverity.OK
                                 };
                 model.IsReadyToEnroll = true;
+                model.ServerRequest = null;
 
                 result = new List<EnrollmentStudent>();
             }
             model.StudentList = result;
+
+        }
+        /// <summary>
+        /// Enrollment Init DEFAULT
+        /// </summary>
+        /// <param name="model"></param>
+        private void EnrollmentInit_DEFAULT(EnrollmentInit model)
+        {
+            model.Student = new EnrollmentStudent();
+            model.Message = new ServerMessage();
+            model.IsReadyToEnroll = false;
+            model.IsStudentOK = false;
+
 
         }
 

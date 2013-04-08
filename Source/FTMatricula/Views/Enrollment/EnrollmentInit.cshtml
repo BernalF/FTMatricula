@@ -95,8 +95,8 @@
                                 </div>
                             </li>
                             <li class="width100">
-                                <div class="formBtnBar">                                    
-                                    @Html.ActionLink("Buscar Otro Estudiante", "EnrollmentInit", "Enrollment", routeValues: null, htmlAttributes: new { @class = "button back" })
+                                <div class="formBtnBar">
+                                    <button type="submit" class="button back">Buscar Otro Estudiante</button>
                                 </div>
                             </li>
                         }
@@ -136,7 +136,8 @@
                                 </div>
                             </li>
                             <li class="width100">
-                                <div class="formBtnBar">
+                                <div class="formBtnBar">                                    
+                                    <input type="hidden" id="ServerRequest" name="ServerRequest" value="FIND_STUDENT"/>
                                     <button type="submit" class="button find">Buscar Estudiante</button>
                                 </div>
                             </li>
@@ -163,8 +164,8 @@
             @if (Model.IsReadyToEnroll)
             {
                 <div class="clear"></div>
-                <div class="formBtnBar">
-                    @Html.HiddenFor(m => m.IsReadyToEnroll)
+                <div class="formBtnBar">                    
+                    <input type="hidden" id="ServerRequest" name="ServerRequest" value="START_ENROLL"/>
                     <button type="submit" class="button send">Iniciar Matrícula</button>
                 </div>
             }
