@@ -21,7 +21,7 @@ var enrollment = new Class({
             case 'GROUPS':
                 break;
             case 'COURSES':
-                //this.fillGroupGrid();
+                this.fillGroupGrid();
                 this.btnSaveSelectedCourses();
                 this.addSchedule();
                 this.enrollmentSelectCourse();
@@ -68,30 +68,31 @@ var enrollment = new Class({
     },
     delGroup: function (e) {
         var self = this;
-        // e.target is the DOM element representing the button
-        var tr = $(e.target).closest("tr"); // get the current table row (tr)
-        // get the data bound to the current table row
-        var data1 = this.dataItem(tr);
-        $.ajaxSettings.traditional = true;
-        $.bAjax({
-            url: '/Enrollment/DeleteGroup',
-            ajaxBeforeSend: function () {
-                $('.popupBg').fadeIn();
-                $('.loading').fadeIn();
-            },
-            data: {
-                EnrollmentGroupID: data1.EnrollmentGroupID,
-                EnrollmentID: $('#EnrollmentID').val(),
-                EnrollmentCourseID: $('.bgrYellow').children('input').attr('id')
-            },
-            async: false,
-            ajaxSuccess: function (response) {
-                $('.popupBg').fadeOut();
-                $('.loading').fadeOut();
-                enrollment.prototype.fillGroupGrid($.parseJSON(response));
-            }
-        });
-        return false;
+        if (this.dataItem != undefined) {
+            // e.target is the DOM element representing the button
+            var tr = $(e.target).closest("tr"); // get the current table row (tr)
+            // get the data bound to the current table row
+            var data1 = this.dataItem(tr);
+            $.ajaxSettings.traditional = true;
+            $.bAjax({
+                url: '/Enrollment/DeleteGroup',
+                ajaxBeforeSend: function () {
+                    $('.popupBg').fadeIn();
+                    $('.loading').fadeIn();
+                },
+                data: {
+                    EnrollmentGroupID: data1.EnrollmentGroupID,
+                    EnrollmentID: $('#EnrollmentID').val(),
+                    EnrollmentCourseID: $('.bgrYellow').children('input').attr('id')
+                },
+                async: false,
+                ajaxSuccess: function (response) {
+                    $('.popupBg').fadeOut();
+                    $('.loading').fadeOut();
+                    $("#groups_grid").data("kendoGrid").dataSource.data($.parseJSON(response));
+                }
+            });
+        }        
     },
     //Save Selected Courses Handle
     btnSaveSelectedCourses: function () {
@@ -254,7 +255,7 @@ var enrollment = new Class({
             ajaxSuccess: function (response) {
                 $('.popupBg').fadeOut();
                 $('.loading').fadeOut();
-                self.fillGroupGrid($.parseJSON(response));
+                $("#groups_grid").data("kendoGrid").dataSource.data($.parseJSON(response));
             }
         });
     },
