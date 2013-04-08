@@ -92,8 +92,7 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
-                                            .Events(events => events.Error("error_handler"))
-                                            .ServerOperation(false)
+                                            .Events(events => events.Error("error_handler"))                                            
                                             .Read(read => read.Action("PagingModality", "Modality"))
                                             .Create(create => create.Action("CreateModality", "Modality"))
                                             .Update(update => update.Action("UpdateModality", "Modality"))

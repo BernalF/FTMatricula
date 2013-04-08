@@ -2,20 +2,20 @@
     <li class="userInfo">
         <img class="right" src="~/Content/images/defaults/user_in.png" alt="user" />
 
-            <span>Logued in as:</span>
-            <span>@Html.ActionLink(User.Identity.Name, "ChangePassword", "Account", routeValues: null, htmlAttributes: new { @style = "color:white", title = "Change password" })</span>
+            <span>Autenticado como:</span>
+            <span>@Html.ActionLink(User.Identity.Name, "#", routeValues: null, htmlAttributes: new { @style = "color:white", title = "Change password", href = "#" })</span>
 
     </li>
     
     if (User.IsInRole("Administrator"))
     {
         <li class="users">             
-            <a href="@Url.Action("Settings", "Home", routeValues: null)">
+            <a href="">
                 USERS
             </a>
         </li>
     <li class="settings">             
-            <a href="@Url.Action("Settings", "Estimator", routeValues: null)">
+            <a href="#">
                 SETTINGS
             </a>
         </li>
@@ -23,7 +23,7 @@
  
     <li class="signOut">
         <a href="@Url.Action("LogOff","Account", routeValues: null)">
-            SIGN OUT
+            Cerrar Sesión
         </a>            
     </li>
 }

@@ -94,8 +94,7 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
-                                            .Events(events => events.Error("error_handler"))
-                                            .ServerOperation(false)
+                                            .Events(events => events.Error("error_handler"))                                            
                                             .Read(read => read.Action("PagingCourses", "Course"))
                                             .Create(create => create.Action("CreateCourse", "Course"))
                                             .Update(update => update.Action("UpdateCourse", "Course"))

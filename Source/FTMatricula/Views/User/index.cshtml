@@ -96,8 +96,7 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
-                                            .Events(events => events.Error("error_handler"))
-                                            .ServerOperation(false)
+                                            .Events(events => events.Error("error_handler"))                                            
                                             .Read(read => read.Action("PagingUsers", "User"))
                                             //.Update(update => update.Action("Edit", "User"))
                                             .Destroy(destroy => destroy.Action("DestroyUser", "User"))                                                                                        

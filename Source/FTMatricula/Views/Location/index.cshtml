@@ -91,8 +91,7 @@
                                                 }))
                                   .DataSource(dataSource => dataSource
                                         .Ajax()
-                                        .Events(events => events.Error("error_handler"))
-                                        .ServerOperation(false)
+                                        .Events(events => events.Error("error_handler"))                                        
                                         .Read(read => read.Action("PagingLocation", "Location"))
                                         .Create(create => create.Action("CreateLocation", "Location"))
                                         .Update(update => update.Action("UpdateLocation", "Location"))

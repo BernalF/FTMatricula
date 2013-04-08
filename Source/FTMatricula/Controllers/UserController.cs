@@ -131,6 +131,8 @@ namespace FTMatricula.Controllers
 
                     if (!model.UserName.Equals(model.tmpUserName)) {
                         db.uspUserNameUpdate(model.tmpUserName, model.UserName);
+                        MembershipUser currentUser = Membership.GetUser(model.UserName);
+                        currentUser.ChangePassword(currentUser.ResetPassword(), model.UserName);
                     }
 
                     Roles.AddUserToRole(model.UserName, model.RoleName);

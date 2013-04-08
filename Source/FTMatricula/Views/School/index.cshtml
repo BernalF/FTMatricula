@@ -93,8 +93,7 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
-                                            .Events(events => events.Error("error_handler"))
-                                            .ServerOperation(false)
+                                            .Events(events => events.Error("error_handler"))                                            
                                             .Read(read => read.Action("PagingSchools", "School"))
                                             .Create(create => create.Action("CreateSchool", "School"))
                                             .Update(update => update.Action("UpdateSchool", "School"))

@@ -572,8 +572,8 @@ nav ul li.users a {
 }
 
 nav ul li.signOut a {
-    width: 60px;
-    background: url(../images/defaults/logout.png) #d16700 no-repeat 15px -4px;
+    background: url("../images/defaults/logout.png") no-repeat scroll 26px -4px #D16700;
+    width: 80px;
 }
 
 nav ul li.userInfo {

@@ -87,8 +87,7 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
-                                            .Events(events => events.Error("error_handler"))
-                                            .ServerOperation(false)
+                                            .Events(events => events.Error("error_handler"))                                            
                                             .Read(read => read.Action("PagingPlan", "Plan"))
                                             .Destroy(destroy => destroy.Action("DestroyPlan", "Plan"))
                                             .Model(model => model.Id(m => m.PlanID))

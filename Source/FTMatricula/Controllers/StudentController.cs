@@ -28,19 +28,19 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingUsers([DataSourceRequest] DataSourceRequest request)
         {
-
             return Json(db.Students
-                    .Join(db.Users, s => s.UserID, u => u.UserId, (s, u) => new { s, u })
-                    .Where(m => m.s.UserID == m.u.UserId && m.s.IsAppUser == false)
-                    .ToList().Select(m => new { 
-                        m.u.UserId, 
-                        m.s.StudentID, 
-                        m.u.UserName, 
-                        m.s.FirstName, 
-                        m.s.LastName,                       
-                        m.s.Phone1
-                    })
-                    .ToDataSourceResult(request));
+                   .Where(m => m.IsAppUser == false)
+                   .ToList().Select(m => new
+                   {
+                       m.User.UserId,
+                       m.StudentID,
+                       m.User.UserName,
+                       m.FirstName,
+                       m.LastName,
+                       m.Phone1,
+                       Email = Membership.GetUser(m.User.UserName).Email
+                   })
+                   .ToDataSourceResult(request));
         }
 
         public ActionResult Create()
@@ -116,7 +116,7 @@ namespace FTMatricula.Controllers
                     .FirstOrDefault();
 
                 MembershipUser aux = Membership.GetUser(x.UserName);
-                
+
 
                 return View(new ApplicationUser
                                 {
@@ -239,7 +239,8 @@ namespace FTMatricula.Controllers
                         db.SaveChanges();
                         model = tmp;
                     }
-                    else {
+                    else
+                    {
                         db.StudentAdditionalDatas.Add(model);
                         db.SaveChanges();
                     }
@@ -268,9 +269,9 @@ namespace FTMatricula.Controllers
                     .ToDataSourceResult(request));
         }
 
-        
 
-        [AcceptVerbs(HttpVerbs.Post)]        
+
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
             try

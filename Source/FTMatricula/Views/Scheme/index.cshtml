@@ -95,8 +95,7 @@
                                                     }))
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
-                                            .Events(events => events.Error("error_handler"))
-                                            .ServerOperation(false)
+                                            .Events(events => events.Error("error_handler"))                                            
                                             .Read(read => read.Action("PagingSchemes", "Scheme"))
                                             .Destroy(destroy => destroy.Action("DestroyScheme", "Scheme"))
                                             .Model(model => model.Id(m => m.SchemeID))
