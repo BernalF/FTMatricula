@@ -28,7 +28,7 @@
 
             <div class="editDetail">
                 <div class="defaulBox">
-                    <ul>
+                    <ul class="margin5">
                         <li class="width25">
                             <label>Matrículas Acivas</label>
                         </li>
@@ -45,8 +45,8 @@
                     </ul>
                 </div>
 
-                <div class="defaulBox">
-                    <ul class="border">
+                <div class="defaulBox ">
+                    <ul class="border margin5">
                         <li class="width100 padBot10">
                             <label class="subTitle">Información de Estudiante a Matricular</label>
                         </li>
@@ -95,8 +95,8 @@
                                 </div>
                             </li>
                             <li class="width100">
-                                <div class="formBtnBar">
-                                    <button type="submit" class="button back">Buscar Otro Estudiante</button>
+                                <div class="formBtnBar">                                    
+                                    <button type="submit" onclick="javascript:$('#ServerRequest').val('');" class="button back">Buscar Otro Estudiante</button>
                                 </div>
                             </li>
                         }
@@ -138,9 +138,10 @@
                             <li class="width100">
                                 <div class="formBtnBar">                                    
                                     <input type="hidden" id="ServerRequest" name="ServerRequest" value="FIND_STUDENT"/>
+                                    <input type="hidden" id="Student_StudentID" name="Student.StudentID" value="@Model.Student.StudentID"/>
                                     <button type="submit" class="button find">Buscar Estudiante</button>
                                 </div>
-                            </li>
+                            </li>                            
                         }
 
                     </ul>
@@ -148,8 +149,8 @@
 
                 @if (Model.Message.Show)
                 { 
-                    <div class="defaulBox">
-                        <ul>
+                    <div class="defaulBox margin0">
+                        <ul class="margin5">
                             <li class="width25 textCenter">
                                 <img src="~/Content/images/defaults/@MsjImgURL" />
                             </li>
@@ -166,14 +167,14 @@
                 <div class="clear"></div>
                 <div class="formBtnBar">                    
                     <input type="hidden" id="ServerRequest" name="ServerRequest" value="START_ENROLL"/>
+                    <input type="hidden" id="Student_StudentID" name="Student.StudentID" value="@Model.Student.StudentID"/>                    
                     <button type="submit" class="button send">Iniciar Matrícula</button>
                 </div>
             }
 
         </div>
         <a href="#selectStudentWindow" id="linkSelectStudent" class="popUp hide">link</a>
-    </div>
-    @Html.HiddenFor(m => m.Student.StudentID)
+    </div>   
     
             if (Model.StudentList.Count > 1)
             {    
