@@ -285,8 +285,8 @@ namespace FTMatricula.Utilities
             matrifunDBEntities db = new matrifunDBEntities();
 
             //Get StudentID by LoggedUserID
-            //var uID = SessApp.GetUserID(userName);
-            Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
+            var uID = SessApp.GetUserID(userName);
+            //Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
             var userID = db.Students
                 .Where(s => s.UserID == uID)
                 .Select(s => s.StudentID).FirstOrDefault();

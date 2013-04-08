@@ -9,12 +9,12 @@
         <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "notes" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("NOTES_REGISTER")/@Resources.GetValue("NOTES_COURSE_REGISTER")</a></h2>
 
         <div class="editDetail">
-            <div id="LinkPC">
-                <ul class="linkPlan">
-                    <li class="cWhite">
-                        @Html.Label(@Resources.GetValue("COURSES"))
-                    </li>
+            <div class="detailBox100">
+                <ul>
                     <li>
+                        <label class="subTitle">@Resources.GetValue("COURSES")</label>
+                    </li>
+                    <li class="width100">
                         @(Html.Kendo().DropDownList()
                                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
                                                     .Name("CourseID")
@@ -22,25 +22,38 @@
                                                     .DataValueField("Value")
                                                     .HtmlAttributes(new { @class = "width100" })
                                                     .OptionLabel("Select a Course"))
-
-                    </li>
-                </ul>
-                      
-                <div class="clear"></div>
-                <ul class="formBtnBar">
-                    <li>
-                        <a href="#" class="button send" id="btnLinkPC">Save</a>
-                    </li>
-                    <li>                        
-                        <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancel</a>
                     </li>
                 </ul>
             </div>
+            <div class="detailBox100">
+                <ul>
+                    <li>
+                        <label class="subTitle cWhite">Lista de Estudiantes por Curso</label>
+                    </li>
+                    <li class="width100">
+                        
+                    </li>
+                </ul>
+            </div>
+            <ul class="formBtnBar">
+                <li>
+                    <a href="#" class="button send" id="btnLinkPC">Save</a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancel</a>
+                </li>
+            </ul>
         </div>
-
     </div>
 </div>
 
 @section Scripts {
-    
+    <script type="text/javascript" src="~/Scripts/scoreRegister.js"></script>
+    <script type="text/javascript">        
+        $(function () {
+            var sregis = new scoreRegister({
+                view: 'INDEX'
+            });
+        });
+    </script>
 }

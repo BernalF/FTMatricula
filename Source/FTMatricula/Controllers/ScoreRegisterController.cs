@@ -19,6 +19,8 @@ namespace FTMatricula.Controllers
             return View();
         }
 
+
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
