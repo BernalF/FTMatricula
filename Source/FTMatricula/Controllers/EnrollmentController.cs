@@ -153,7 +153,7 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                EnrollmentGroup model = new EnrollmentGroup(); 
+                EnrollmentGroup model = new EnrollmentGroup();
                 model.EnrollmentGroupID = Guid.NewGuid();
 
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
@@ -164,7 +164,7 @@ namespace FTMatricula.Controllers
                 model.GroupName = Group.GroupName;
                 model.ProfessorID = new Guid(Group.ProfessorID);
                 model.Quota = Group.Quota;
-                
+
                 foreach (var item in Group.ScheduleList)
                 {
                     EnrollmentGroupSchedule schedule = new EnrollmentGroupSchedule();
@@ -180,9 +180,9 @@ namespace FTMatricula.Controllers
                     schedule.EndTime = item.EndTime;
 
                     model.EnrollmentGroupSchedules.Add(schedule);
-                    
+
                 }
-                
+
                 db.EnrollmentGroups.Add(model);
                 db.SaveChanges();
 
@@ -195,7 +195,7 @@ namespace FTMatricula.Controllers
 
         }
 
- 
+
         /// <summary>
         /// Retrieve Groups
         /// </summary>
@@ -222,7 +222,7 @@ namespace FTMatricula.Controllers
         /// <param name="EnrollmentGroupID"></param>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult DeleteGroup(string EnrollmentID, string EnrollmentCourseID,string EnrollmentGroupID)
+        public JsonResult DeleteGroup(string EnrollmentID, string EnrollmentCourseID, string EnrollmentGroupID)
         {
             try
             {
@@ -232,7 +232,7 @@ namespace FTMatricula.Controllers
                 {
                     db.EnrollmentGroupSchedules.Remove(schedule);
                     db.SaveChanges();
-                }                
+                }
                 db.EnrollmentGroups.Remove(group);
                 db.SaveChanges();
 
@@ -314,7 +314,7 @@ namespace FTMatricula.Controllers
             return View(model);
         }
 
-        
+
         /// <summary>
         /// Enrollment
         /// </summary>
@@ -332,9 +332,87 @@ namespace FTMatricula.Controllers
         /// <returns></returns>
         public ActionResult EnrollmentInit()
         {
-            return View();
+            return View(new EnrollmentInit());
         }
-        
+
+        /// <summary>
+        /// Enrollment Init
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EnrollmentInit(EnrollmentInit model)
+        {
+            switch (model.ServerRequest)
+            {
+                case "FIND_STUDENT":
+                    this.EnrollmentInit_FIND_STUDENT(model);
+                    break;
+                case "START_ENROLL":
+                    break;
+                default:
+                    this.EnrollmentInit_DEFAULT(model);
+                    break;
+            }
+            return View(model);
+        }
+
+        /// <summary>
+        /// Enrollment Init FIND_STUDENT
+        /// </summary>
+        /// <param name="model"></param>
+        private void EnrollmentInit_FIND_STUDENT(EnrollmentInit model)
+        {
+            var result = db.Students.Where(x => x.User.UserName.Contains(model.Student.Identification)
+                                    || x.FirstName.Contains(model.Student.FirstName)
+                                    || x.LastName.Contains(model.Student.LastName)
+                                    || x.Phone1.Contains(model.Student.Phone1)).Select(m => new EnrollmentStudent
+                                    {
+                                        StudentID = m.StudentID,
+                                        Identification = m.User.UserName,
+                                        FirstName = m.FirstName,
+                                        LastName = m.LastName,
+                                        Phone1 = m.Phone1
+                                    }).ToList();
+            if (result.Count == 1)
+            {
+                model.Student = new EnrollmentStudent
+                                {
+                                    StudentID = result[0].StudentID,
+                                    Identification = result[0].Identification,
+                                    FirstName = result[0].FirstName,
+                                    LastName = result[0].LastName,
+                                    Phone1 = result[0].Phone1
+                                };
+
+                model.IsStudentOK = true;
+                model.Message = new ServerMessage
+                                {
+                                    Show = true,
+                                    Text = "El Estudiante seleccionado esta verificado en la matrícula seleccionanda y es permitido proceder con dicho proceso",
+                                    Severity = MessageSeverity.OK
+                                };
+                model.IsReadyToEnroll = true;
+
+                result = new List<EnrollmentStudent>();
+            }
+            model.StudentList = result;
+
+        }
+        /// <summary>
+        /// Enrollment Init DEFAULT
+        /// </summary>
+        /// <param name="model"></param>
+        private void EnrollmentInit_DEFAULT(EnrollmentInit model)
+        {
+            model.Student = new EnrollmentStudent();
+            model.Message = new ServerMessage();
+            model.IsReadyToEnroll = false;
+            model.IsStudentOK = false;
+
+
+        }
+
 
         /// <summary>
         /// Get Groups List
@@ -377,8 +455,8 @@ namespace FTMatricula.Controllers
             catch (Exception e)
             {
                 throw new ApplicationException(e.Message);
-                
-            }           
+
+            }
 
         }
 

@@ -1,61 +1,225 @@
-﻿@*@model FTMatricula.Models.Enrollment*@
+﻿@using FTMatricula.Models
+
+@model FTMatricula.Models.EnrollmentInit
 
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
     ViewBag.Title = @Resources.GetValue("ENROLLMENT_STUDENT");
+
+    string MsjImgURL = "proceed_" + (Model.Message.Severity == MessageSeverity.OK ? "OK" : Model.Message.Severity == MessageSeverity.Alert ? "Alert" : "Error") + ".png";
 }
 
-<div id="content">
-    <div class="mainBox">
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")/@Resources.GetValue("ENROLLMENT_STUDENT")</a></h2>
+@section styles{
+    <link rel="stylesheet" href="~/Content/styles/popup_window.css" />
+}
+
+@using (Html.BeginForm())
+{
+    <div id="content">
+        <div class="mainBox">
+            <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")/@Resources.GetValue("ENROLLMENT_STUDENT")</a></h2>
 
 
 
-        <div class="editTitle">
-            @*<span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")*@
-            Iniciar proceso de Matrícula
-        </div>
+            <div class="editTitle">
+                @*<span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")*@
+                <span>Módulo de Validación</span>
+            </div>
 
-        <div class="editDetail">
-            <div class="headerBox">
-                <ul>
-                    <li class="width25">
-                        <label>Matrículas Acivas</label>
-                    </li>
-                    <li class="width75">
-                        <div>
-                            @(Html.Kendo().DropDownList()
+            <div class="editDetail">
+                <div class="defaulBox">
+                    <ul>
+                        <li class="width25">
+                            <label>Matrículas Acivas</label>
+                        </li>
+                        <li class="width75">
+                            <div>
+                                @(Html.Kendo().DropDownListFor(m => m.EnrollmentID)
                                     .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsList)
                                     .Name("EnrollmentID")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
                                     .HtmlAttributes(new { @class = "width100" }))
-                        </div>
-                    </li>
-                </ul>
-            </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-            <div class="headerBox">
-                <ul>
-                    <li class="width25">
-                        <label>Estudiante</label>
-                    </li>
-                    <li class="width75">
-                        <div>
-                            @Html.TextBox("xxx", "Identificacion, Nombre de Estudiante, Apellidos de Estudiante", new { @class = "input width100" })
-                        </div>
-                    </li>
-                </ul>
+                <div class="defaulBox">
+                    <ul class="border">
+                        <li class="width100 padBot10">
+                            <label class="subTitle">Información de Estudiante a Matricular</label>
+                        </li>
+
+                        @if (Model.IsStudentOK)
+                        {
+                            <li class="width25">
+                                <label>Identificación</label>
+                            </li>
+                            <li class="width25">
+                                <label>Nombre</label>
+                            </li>
+                            <li class="width25">
+                                <label>Apellidos</label>
+                            </li>
+                            <li class="width25">
+                                <label>Teléfono</label>
+                            </li>
+
+                            <li class="width25">
+                                <div>
+                                    <span class="readOnly">
+                                        @Model.Student.Identification
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="width25">
+                                <div>
+                                    <span class="readOnly">
+                                        @Model.Student.FirstName
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="width25">
+                                <div>
+                                    <span class="readOnly">
+                                        @Model.Student.LastName
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="width25">
+                                <div>
+                                    <span class="readOnly">
+                                        @Model.Student.Phone1
+                                    </span>
+                                </div>
+                            </li>
+                            <li class="width100">
+                                <div class="formBtnBar">
+                                    <button type="submit" class="button back">Buscar Otro Estudiante</button>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="width25">
+                                <label>Identificación</label>
+                            </li>
+                            <li class="width25">
+                                <label>Nombre</label>
+                            </li>
+                            <li class="width25">
+                                <label>Apellidos</label>
+                            </li>
+                            <li class="width25">
+                                <label>Teléfono</label>
+                            </li>
+
+                            <li class="width25">
+                                <div>
+                                    @Html.TextBoxFor(m => m.Student.Identification, new { @class = "input width100" })
+                                </div>
+                            </li>
+                            <li class="width25">
+                                <div>
+                                    @Html.TextBoxFor(m => m.Student.FirstName, new { @class = "input width100" })
+                                </div>
+                            </li>
+                            <li class="width25">
+                                <div>
+                                    @Html.TextBoxFor(m => m.Student.LastName, new { @class = "input width100" })
+                                </div>
+                            </li>
+                            <li class="width25">
+                                <div>
+                                    @Html.TextBoxFor(m => m.Student.Phone1, new { @class = "input width100" })
+                                </div>
+                            </li>
+                            <li class="width100">
+                                <div class="formBtnBar">
+                                    @Html.Hidden("ServerRequest", "FIND_STUDENT")
+                                    <button type="submit" class="button find">Buscar Estudiante</button>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+
+                @if (Model.Message.Show)
+                { 
+                    <div class="defaulBox">
+                        <ul>
+                            <li class="width25 textCenter">
+                                <img src="~/Content/images/defaults/@MsjImgURL" />
+                            </li>
+                            <li class="width75">
+                                <label>@Model.Message.Text</label>
+                            </li>
+                        </ul>
+                    </div>
+                }
+
             </div>
+            @if (Model.IsReadyToEnroll)
+            {
+                <div class="clear"></div>
+                <div class="formBtnBar">
+                    @Html.Hidden("ServerRequest", "START_ENROLL")
+                    <button type="submit" class="button send">Iniciar Matrícula</button>
+                </div>
+            }
 
         </div>
-
-        <div class="clear"></div>
-        <div class="formBtnBar">
-            @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
-            <a href="#" class="button send" onclick="javascript: submit_form()">Matricular Estudiante</a>
-
-        </div>
-
+        <a href="#selectStudentWindow" id="linkSelectStudent" class="popUp hide">link</a>
     </div>
-</div>
+    
+    
+    if (Model.StudentList.Count > 1)
+    {    
+        <div class="popupWindow" id="selectStudentWindow">
+            <h2>Resultado de Búsqueda</h2>
+            <h3 class="padBot10 bold">Por favor seleccione un estudiante...
+            </h3>
+
+            <ul class="formPopUpWin">
+                @foreach (var item in Model.StudentList)
+                {
+                    <li>
+                        <p>@item.Identification -- @item.FirstName&nbsp;@item.LastName</p>
+                    </li>
+                }
+            </ul>
+        </div> 
+    }    
+    
+}
+
+@section Scripts {
+
+    @if (Model.StudentList.Count > 1)
+    {
+        <script>
+            var student_list = [];
+
+            $(function () {
+                $('#linkSelectStudent').trigger('click');
+            });
+
+        </script>
+        
+        foreach (var item in Model.StudentList)
+        {
+            <script>
+                student_list.push({
+                    Identification: '@item.Identification',
+                    FirstName: '@item.FirstName',
+                    LastName: '@item.LastName',
+                    Phone1: '@item.Phone1'
+                });
+            </script>
+                        
+        }
+    }
+
+}

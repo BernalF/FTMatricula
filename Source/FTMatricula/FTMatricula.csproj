@@ -203,6 +203,7 @@
     <Compile Include="Models\Course_Requirement.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DefaultModels.cs" />
     <Compile Include="Models\Enrollment.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>

@@ -61,6 +61,10 @@ img {
     width: 100%;
 }
 
+.width90 {
+    width: 90%;
+}
+
 li.width100 {
     width: 100% !important;
 }
@@ -236,6 +240,11 @@ a.alpha {
 
 .send {
     background-image: url(../images/defaults/send.png);
+    background-position: right center;
+}
+
+.find {
+    background-image: url(../images/defaults/find.png);
     background-position: right center;
 }
 
@@ -1414,10 +1423,11 @@ ul li.item .menuImage {
     margin: 20px auto 5px auto;
 }
 
-.formBtnBar a {
+.formBtnBar a, .formBtnBar button {
     float: right;
     margin: 0px 0px 0px 15px;
 }
+
 
 .errorsSpace {
     padding: 10px 0 10px 0;
@@ -1524,7 +1534,12 @@ ul li.item .menuImage {
 
 
 /*******/
-.headerBox {
+.border {
+    padding: 10px !important;
+    border: 1px #327376 solid;
+}
+
+.defaulBox {
     display: block;
     float: left;
     width: 100%;
@@ -1532,41 +1547,48 @@ ul li.item .menuImage {
     color: #fff;
 }
 
-.headerBox ul {
+.defaulBox ul {
     margin: 20px;
     padding: 0px;
     overflow: hidden;
     /*background-color:red;*/
 }
 
-.headerBox li {
+.defaulBox li {
     display: block;
     float: left;
 }
 
-/*.headerBox li:nth-child(odd) {
-    padding: 5px 10px 5px 0px;
-}
-
-.headerBox li:nth-child(even) {
-    padding: 5px 0px 5px 10px;
-}*/
-
-.headerBox li label {
+.defaulBox li label {
     font-size: 18px;
     color: #fff;
     padding: 3px 0 3px 0;
 }
 
-.headerBox li div {
-    padding: 3px 0 3px 0;
+.defaulBox li div {
+    padding: 3px 3px 3px 0px;
 }
 
-/*.headerBox li:nth-child(odd) {
-    width: 40%;
+.formPopUpWin{
+    overflow-x:auto;
+    max-height: 270px;
 }
 
-.headerBox li:nth-child(even) {
-    width: 60%;
-}*/
+.formPopUpWin li{
+    background-image: url(../images/defaults/student.png);
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    padding: 3px 0px 3px 40px;
+    line-height:33px;
+}
+
+.formPopUpWin p{
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.formPopUpWin li:hover {
+    background-color:rgba(240, 150, 9,.8);
+    cursor: pointer;
+}
 
