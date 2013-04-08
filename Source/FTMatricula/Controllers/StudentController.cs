@@ -38,7 +38,7 @@ namespace FTMatricula.Controllers
                        m.FirstName,
                        m.LastName,
                        m.Phone1,
-                       Email = Membership.GetUser(m.User.UserName).Email
+                       Email = ""//Membership.GetUser(m.User.UserName).Email
                    })
                    .ToDataSourceResult(request));
         }
