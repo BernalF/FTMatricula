@@ -289,9 +289,6 @@
     <Compile Include="Models\StudentPlan.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Student_Course.cs">
-      <DependentUpon>matrifunDB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\StudiesInformation.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>

@@ -19,7 +19,6 @@ namespace FTMatricula.Models
             this.Course_Requirement = new HashSet<Course_Requirement>();
             this.Plan_Course = new HashSet<Plan_Course>();
             this.Scores = new HashSet<Score>();
-            this.Student_Course = new HashSet<Student_Course>();
             this.EnrollmentCourses = new HashSet<EnrollmentCourse>();
         }
     
@@ -38,7 +37,6 @@ namespace FTMatricula.Models
         public virtual ICollection<Course_Requirement> Course_Requirement { get; set; }
         public virtual ICollection<Plan_Course> Plan_Course { get; set; }
         public virtual ICollection<Score> Scores { get; set; }
-        public virtual ICollection<Student_Course> Student_Course { get; set; }
         public virtual ICollection<EnrollmentCourse> EnrollmentCourses { get; set; }
     }
 }

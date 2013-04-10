@@ -28,8 +28,11 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public Nullable<System.Guid> EnrollmentGroupID { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual ICollection<Record> Records { get; set; }
+        public virtual EnrollmentGroup EnrollmentGroup { get; set; }
+        public virtual Student Student { get; set; }
     }
 }

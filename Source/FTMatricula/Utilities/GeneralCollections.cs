@@ -21,7 +21,7 @@ namespace FTMatricula.Utilities
 
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 foreach (var t in Roles.GetAllRoles().Where(x => x != "ROLE_STUDENT")
-                                                         .ToList()                                                         
+                                                         .ToList()
                                                          .Select(x => new { RoleId = x, RoleName = x }).ToArray())
                 {
                     dictionary.Add(t.RoleId, Resources.GetValue(t.RoleName));
@@ -287,19 +287,11 @@ namespace FTMatricula.Utilities
             //Get StudentID by LoggedUserID
             var uID = SessApp.GetUserID(userName);
             //Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
-            var userID = db.Students
-                .Where(s => s.UserID == uID)
-                .Select(s => s.StudentID).FirstOrDefault();
-
-            return new SelectList(db.Student_Course
-                .Join(db.Courses, sc => sc.CourseID, c => c.CourseID, (sc, c) => new { sc, c })
-                .Where(s => s.sc.StudentID == userID)
-                .ToList()
-                .Select(s => new
-                                    {
-                                        CourseID = s.sc.CourseID,
-                                        Name = s.c.Name + " - " + s.c.Code
-                                    }), "CourseID", "Name");
+            return new SelectList(db.Scores
+                    .Where(s => s.EnrollmentGroup.ProfessorID == db.Students
+                                                                .Where(st => st.UserID == uID)
+                                                                .Select(st => st.StudentID).FirstOrDefault())
+                    .Select(s => new { CourseID = s.CourseID, Name = s.Course.Name }), "CourseID", "Name");
         }
 
 
@@ -362,8 +354,8 @@ namespace FTMatricula.Utilities
                 matrifunDBEntities db = new matrifunDBEntities();
                 return new SelectList(db.Enrollments
                                     .ToList()
-                                    //.OrderByDescending(c => c.Code)
-                                    .Select(e => new { e.EnrollmentID, Description = e.Description  +" -- "+ e.Plan.Description}), "EnrollmentID", "Description");
+                    //.OrderByDescending(c => c.Code)
+                                    .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
             }
         }
 
