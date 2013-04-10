@@ -265,3 +265,5 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'SCHEDULE_REQ', 'es-CR', 'Es neces
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'EQUIVALENCES', 'es-CR', 'Equivalencias')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'VERSIONING_ACTION', 'es-CR', 'Realizar Versionamiento de Planes')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'NEW_VERSION', 'es-CR', 'Generar Nueva Version')
+---SCORE REGISTER
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'RESULT', 'es-CR', 'Nota')

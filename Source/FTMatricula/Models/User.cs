@@ -18,6 +18,8 @@ namespace FTMatricula.Models
         {
             this.Students = new HashSet<Student>();
             this.EnrollmentGroups = new HashSet<EnrollmentGroup>();
+            this.Schemes = new HashSet<Scheme>();
+            this.Schemes1 = new HashSet<Scheme>();
         }
     
         public System.Guid? ApplicationId { get; set; }
@@ -29,5 +31,7 @@ namespace FTMatricula.Models
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<EnrollmentGroup> EnrollmentGroups { get; set; }
         public virtual utbMembership Membership { get; set; }
+        public virtual ICollection<Scheme> Schemes { get; set; }
+        public virtual ICollection<Scheme> Schemes1 { get; set; }
     }
 }

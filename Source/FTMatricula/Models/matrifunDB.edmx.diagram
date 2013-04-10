@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c75e97ecc6a4d4ab648d6e879755144" Name="Diagram1" ZoomLevel="203">
+      <Diagram DiagramId="5c75e97ecc6a4d4ab648d6e879755144" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="FTMatricula.DBModel.Classroom" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Country" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Course" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
@@ -71,6 +71,8 @@
         <AssociationConnector Association="FTMatricula.DBModel.MembershipUser" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Score_EnrollmentGroup" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Student" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_CooUsers" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_OwUsers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

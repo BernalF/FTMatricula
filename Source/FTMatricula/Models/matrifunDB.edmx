@@ -158,8 +158,16 @@
             <End Role="Score" EntitySet="Score" />
             <End Role="Record" EntitySet="Record" />
           </AssociationSet>
+          <AssociationSet Name="FK_Scheme_CooUsers" Association="FTMatricula.DBModel.Store.FK_Scheme_CooUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Scheme" EntitySet="Scheme" />
+          </AssociationSet>
           <AssociationSet Name="FK_Scheme_Modality" Association="FTMatricula.DBModel.Store.FK_Scheme_Modality">
             <End Role="Modality" EntitySet="Modality" />
+            <End Role="Scheme" EntitySet="Scheme" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheme_OwUsers" Association="FTMatricula.DBModel.Store.FK_Scheme_OwUsers">
+            <End Role="Users" EntitySet="Users" />
             <End Role="Scheme" EntitySet="Scheme" />
           </AssociationSet>
           <AssociationSet Name="FK_Scheme-Plan_Plan" Association="FTMatricula.DBModel.Store.FK_Scheme-Plan_Plan">
@@ -911,6 +919,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Scheme_CooUsers">
+          <End Role="Users" Type="FTMatricula.DBModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Scheme" Type="FTMatricula.DBModel.Store.Scheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Scheme">
+              <PropertyRef Name="CoordinatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Scheme_Modality">
           <End Role="Modality" Type="FTMatricula.DBModel.Store.Modality" Multiplicity="0..1" />
           <End Role="Scheme" Type="FTMatricula.DBModel.Store.Scheme" Multiplicity="*" />
@@ -920,6 +940,18 @@
             </Principal>
             <Dependent Role="Scheme">
               <PropertyRef Name="ModalityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheme_OwUsers">
+          <End Role="Users" Type="FTMatricula.DBModel.Store.Users" Multiplicity="0..1" />
+          <End Role="Scheme" Type="FTMatricula.DBModel.Store.Scheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Scheme">
+              <PropertyRef Name="OwnerUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1350,6 +1382,14 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="Score" EntitySet="Scores" />
           </AssociationSet>
+          <AssociationSet Name="FK_Scheme_CooUsers" Association="FTMatricula.DBModel.FK_Scheme_CooUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Scheme" EntitySet="Schemes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Scheme_OwUsers" Association="FTMatricula.DBModel.FK_Scheme_OwUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Scheme" EntitySet="Schemes" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1558,6 +1598,8 @@
           <NavigationProperty Name="Scheme_Plan" Relationship="FTMatricula.DBModel.FK_Scheme_Plan_Scheme" FromRole="Scheme" ToRole="Scheme_Plan" />
           <NavigationProperty Name="Scheme_Requirement" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Scheme" FromRole="Scheme" ToRole="Scheme_Requirement" />
           <NavigationProperty Name="School_Scheme" Relationship="FTMatricula.DBModel.FK_School_Scheme_Scheme" FromRole="Scheme" ToRole="School_Scheme" />
+          <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_Scheme_CooUsers" FromRole="Scheme" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="FTMatricula.DBModel.FK_Scheme_OwUsers" FromRole="Scheme" ToRole="User" />
         </EntityType>
         <EntityType Name="Scheme_Plan">
           <Key>
@@ -1740,6 +1782,8 @@
           <NavigationProperty Name="Students" Relationship="FTMatricula.DBModel.FK_Student_Users" FromRole="Users" ToRole="Student" />
           <NavigationProperty Name="EnrollmentGroups" Relationship="FTMatricula.DBModel.FK_EnrollmentGroups_Users" FromRole="User" ToRole="EnrollmentGroup" />
           <NavigationProperty Name="Membership" Relationship="FTMatricula.DBModel.MembershipUser" FromRole="User" ToRole="Membership" />
+          <NavigationProperty Name="Schemes" Relationship="FTMatricula.DBModel.FK_Scheme_CooUsers" FromRole="User" ToRole="Scheme" />
+          <NavigationProperty Name="Schemes1" Relationship="FTMatricula.DBModel.FK_Scheme_OwUsers" FromRole="User" ToRole="Scheme" />
         </EntityType>
         <EntityType Name="ApplicationUser">
           <Key>
@@ -2318,6 +2362,30 @@
             </Principal>
             <Dependent Role="Score">
               <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheme_CooUsers">
+          <End Type="FTMatricula.DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="FTMatricula.DBModel.Scheme" Role="Scheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Scheme">
+              <PropertyRef Name="CoordinatorUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Scheme_OwUsers">
+          <End Type="FTMatricula.DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="FTMatricula.DBModel.Scheme" Role="Scheme" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Scheme">
+              <PropertyRef Name="OwnerUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
