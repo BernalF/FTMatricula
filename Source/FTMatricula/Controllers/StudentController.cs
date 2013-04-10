@@ -29,16 +29,17 @@ namespace FTMatricula.Controllers
         public ActionResult PagingUsers([DataSourceRequest] DataSourceRequest request)
         {
             return Json(db.Students
-                   .Where(m => m.IsAppUser == false)
+                   .Join(db.utbMemberships, a => a.UserID, b => b.UserId, (a, b) => new { a, b })
+                   .Where(m => m.a.UserID == m.b.UserId && m.a.IsAppUser == false)
                    .ToList().Select(m => new
                    {
-                       m.User.UserId,
-                       m.StudentID,
-                       m.User.UserName,
-                       m.FirstName,
-                       m.LastName,
-                       m.Phone1,
-                       Email = ""//Membership.GetUser(m.User.UserName).Email
+                       m.a.User.UserId,
+                       m.a.StudentID,
+                       m.a.User.UserName,
+                       m.a.FirstName,
+                       m.a.LastName,
+                       m.a.Phone1,
+                       m.b.Email
                    })
                    .ToDataSourceResult(request));
         }

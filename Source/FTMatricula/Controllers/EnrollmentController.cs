@@ -350,9 +350,8 @@ namespace FTMatricula.Controllers
                     break;
                 case "START_ENROLL":
                     return RedirectToAction("Enrollment", "Enrollment", routeValues:  new { sID = model.Student.StudentID, eID = model.EnrollmentID });
-                    break;
                 default:
-                    this.EnrollmentInit_DEFAULT(model);
+                    this.EnrollmentInit_DEFAULT(model); 
                     break;
             }
             return View(model);

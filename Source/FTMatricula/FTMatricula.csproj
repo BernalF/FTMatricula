@@ -301,6 +301,9 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\utbMembership.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ValidationRules.cs" />
     <Compile Include="Utilities\CacheStorageService .cs" />
     <Compile Include="Utilities\GeneralCollections.cs" />

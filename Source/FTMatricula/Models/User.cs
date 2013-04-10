@@ -28,5 +28,6 @@ namespace FTMatricula.Models
     
         public virtual ICollection<Student> Students { get; set; }
         public virtual ICollection<EnrollmentGroup> EnrollmentGroups { get; set; }
+        public virtual utbMembership Membership { get; set; }
     }
 }
