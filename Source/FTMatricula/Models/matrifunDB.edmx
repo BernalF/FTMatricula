@@ -103,7 +103,9 @@
       [SchemeDetails].[CoordinatorUserId] AS [CoordinatorUserId], 
       [SchemeDetails].[CoordinatorName] AS [CoordinatorName], 
       [SchemeDetails].[ModalityID] AS [ModalityID], 
-      [SchemeDetails].[ModalityName] AS [ModalityName]
+      [SchemeDetails].[ModalityName] AS [ModalityName], 
+      [SchemeDetails].[SchoolID] AS [SchoolID], 
+      [SchemeDetails].[SchoolName] AS [SchoolName]
       FROM [dbo].[SchemeDetails] AS [SchemeDetails]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Course-Requirement_Course" Association="FTMatricula.DBModel.Store.FK_Course-Requirement_Course">
@@ -752,6 +754,7 @@
             <PropertyRef Name="OwnerName" />
             <PropertyRef Name="CoordinatorName" />
             <PropertyRef Name="ModalityName" />
+            <PropertyRef Name="SchoolName" />
           </Key>
           <Property Name="SchemeID" Type="uniqueidentifier" Nullable="false" />
           <Property Name="SchemeName" Type="varchar" MaxLength="120" />
@@ -762,6 +765,8 @@
           <Property Name="CoordinatorName" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="ModalityID" Type="uniqueidentifier" />
           <Property Name="ModalityName" Type="varchar" Nullable="false" MaxLength="120" />
+          <Property Name="SchoolID" Type="uniqueidentifier" />
+          <Property Name="SchoolName" Type="varchar" Nullable="false" MaxLength="120" />
         </EntityType>
         <Association Name="FK_Course-Requirement_Course">
           <End Role="Course" Type="FTMatricula.DBModel.Store.Course" Multiplicity="1" />
@@ -1836,6 +1841,7 @@
             <PropertyRef Name="OwnerName" />
             <PropertyRef Name="CoordinatorName" />
             <PropertyRef Name="ModalityName" />
+            <PropertyRef Name="SchoolName" />
           </Key>
           <Property Name="SchemeID" Type="Guid" Nullable="false" />
           <Property Name="SchemeName" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
@@ -1846,6 +1852,8 @@
           <Property Name="CoordinatorName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="ModalityID" Type="Guid" />
           <Property Name="ModalityName" Type="String" Nullable="false" MaxLength="120" Unicode="false" FixedLength="false" />
+          <Property Type="Guid" Name="SchoolID" />
+          <Property Type="String" Name="SchoolName" Nullable="false" MaxLength="120" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Student_Country">
           <End Role="Country" Type="FTMatricula.DBModel.Country" Multiplicity="0..1" />
@@ -2782,6 +2790,8 @@
           <EntitySetMapping Name="SchemeDetails">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.SchemeDetail">
               <MappingFragment StoreEntitySet="SchemeDetails">
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
                 <ScalarProperty Name="SchemeID" ColumnName="SchemeID" />
                 <ScalarProperty Name="SchemeName" ColumnName="SchemeName" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

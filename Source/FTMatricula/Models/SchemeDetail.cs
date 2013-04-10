@@ -23,5 +23,7 @@ namespace FTMatricula.Models
         public string CoordinatorName { get; set; }
         public Nullable<System.Guid> ModalityID { get; set; }
         public string ModalityName { get; set; }
+        public Nullable<System.Guid> SchoolID { get; set; }
+        public string SchoolName { get; set; }
     }
 }

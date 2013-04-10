@@ -31,13 +31,13 @@
                                           columns.Bound(m => m.OwnerName).Title(@Resources.GetValue("OWNER"));
                                           columns.Bound(m => m.CoordinatorName).Title(@Resources.GetValue("COORDINATOR"));
                                           columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("MODALITY_NAME"));
+                                          columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("SCHOOL"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");
                                           }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
                                           columns.Command(command =>
-                                          {
-                                              //command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
+                                          {                                              
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
