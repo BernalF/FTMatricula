@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace FTMatricula.Models
@@ -50,7 +51,8 @@ namespace FTMatricula.Models
         /// <summary>
         /// Default Enrollment Init Constructor
         /// </summary>
-        public EnrollmentInit() {
+        public EnrollmentInit()
+        {
             this.Student = new EnrollmentStudent();
             this.Message = new ServerMessage();
             this.StudentList = new List<EnrollmentStudent>();
@@ -80,7 +82,93 @@ namespace FTMatricula.Models
         public string Phone1 { get; set; }
     }
 
-    
+    /// <summary>
+    /// Enrollment Info
+    /// </summary>
+    public class EnrollmentInfo
+    {
+        /// <summary>
+        /// Default Enrollment Init Constructor
+        /// </summary>
+        public EnrollmentInfo()
+        {
+            this.Student = new EnrollmentStudent();
+            this.Message = new ServerMessage();
+            this.EnrollmentCourses = new List<EnrollCourse>();
+        }
+
+        public System.Guid? EnrollmentID { get; set; }
+        public string EnrollmentDescription { get; set; }
+        public IList<EnrollCourse> EnrollmentCourses { get; set; }
+        public string PlanName { get; set; }
+        public string SchoolDescription { get; set; }
+        public EnrollmentStudent Student { get; set; }
+        public ServerMessage Message { get; set; }
+
+    }
+
+    public class EnrollCourse
+    {
+        //public System.Guid? EnrollmentCourseID { get; set; }
+        public System.Guid? CourseID { get; set; }
+        public string CourseName { get; set; }
+        public IList<EnrollGroupDetail> GroupsList { get; set; }
+        public string JsonGroups
+        {
+            get
+            {
+                if (GroupsList.Count > 0)
+                {
+                    bool isFirst = true;
+                    var s = new StringBuilder();
+                    s.Append("{\"EnrollmentGroup\": [");
+                    foreach (var g in this.GroupsList)
+                    {
+                        if (isFirst) isFirst = false; else s.Append(",");
+                        
+                        s.Append("{");
+
+                        s.Append("\"EnrollmentGroupID\": \""+g.EnrollmentGroupID+"\",");
+                        s.Append("\"CourseCode\": \"" + g.CourseCode + "\",");
+                        s.Append("\"GroupName\": \"" + g.GroupName + "\",");
+                        s.Append("\"ClassroomCode\": \"" + g.ClassroomCode + "\",");
+                        s.Append("\"Schedule\": \"" + g.Schedule + "\",");
+                        s.Append("\"ProfessorName\": \"" + g.ProfessorName + "\"");
+
+                        s.Append("}");
+                    }
+                    s.Append("]}");
+                    return s.ToString();
+                }
+                else
+                    return "";
+            }
+        }
+    }
+
+
+    /**
+     {
+    "EnrollmentGroup": [
+        {
+            'EnrollmentGroupID': 'x',
+            'CourseCode': 'x',
+            'GroupName': 'x',
+            'ClassroomCode': 'x',
+            'Schedule': 'x',
+            'ProfessorName': 'x'
+        },
+        {
+            "EnrollmentGroupID": "x",
+            "CourseCode": "x",
+            "GroupName": "x",
+            "ClassroomCode": "x",
+            "Schedule": "x",
+            "ProfessorName": "x"
+        }
+    ]
+}
+     * **/
 
 
 }

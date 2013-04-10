@@ -319,9 +319,79 @@ namespace FTMatricula.Controllers
         /// Enrollment
         /// </summary>
         /// <returns></returns>
-        public ActionResult Enrollment()
+        public ActionResult Enrollment(Guid sID, Guid eID)
         {
-            var model = db.Enrollments.ToList().FirstOrDefault();
+            Student student = db.Students.Find(sID);
+            Enrollment enrollment = db.Enrollments.Find(eID);
+
+
+            EnrollmentInfo model = new EnrollmentInfo();
+            if (student != null)
+                model.Student = new EnrollmentStudent
+                {
+                    Identification = student.User.UserName,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName
+                };
+            if (enrollment != null)
+            {
+                model.EnrollmentID = enrollment.EnrollmentID;
+                model.EnrollmentDescription = enrollment.Description;
+                foreach (var c in enrollment.EnrollmentCourses.Where(x => x.IsChecked == true).ToList())
+                {
+                    IList<EnrollGroupDetail> groupsList = new List<EnrollGroupDetail>();
+                    foreach (var g in c.EnrollmentGroups)
+                    {
+                        bool isFirst = true;
+                        var professor = g.User.Students.Where(x => x.UserID == g.ProfessorID).FirstOrDefault();
+
+                        foreach (var s in g.EnrollmentGroupSchedules)
+                        {
+                            if (isFirst)
+                            {
+                                isFirst = false;
+
+                                groupsList.Add(new EnrollGroupDetail
+                                {
+                                    EnrollmentGroupID = g.EnrollmentGroupID.ToString(),
+                                    CourseCode = g.EnrollmentCourse.Course.Code,
+                                    GroupName = g.GroupName,
+                                    ClassroomCode = s.Classroom.Code,
+                                    Schedule = s.DayOfWeek + "&nbsp;-&nbsp;" + s.StartTime + "&nbsp;" + s.EndTime,
+                                    ProfessorName = professor.FirstName + "&nbsp;" + professor.LastName
+
+                                });
+                            }
+                            else
+                                groupsList.Add(new EnrollGroupDetail
+                                {
+                                    EnrollmentGroupID = "&nbsp;",
+                                    CourseCode = "&nbsp;",
+                                    GroupName = "&nbsp;",
+                                    ClassroomCode = s.Classroom.Code,
+                                    Schedule = s.DayOfWeek + "&nbsp;-&nbsp;" + s.StartTime + "&nbsp;" + s.EndTime,
+                                    ProfessorName = "&nbsp;"
+
+                                });
+                        }
+
+                    }
+
+                    model.EnrollmentCourses.Add(new EnrollCourse
+                    {
+                        CourseID = c.CourseID,
+                        CourseName = c.Course.Code + " - " + c.Course.Name,
+                        GroupsList = groupsList
+                    });
+
+                };
+                model.PlanName = enrollment.Plan.Name + " " + enrollment.Plan.Description;
+
+                //Guid? SchemeID = db.Scheme_Plan.Where(x => x.PlanID == e.Plan.PlanID).FirstOrDefault().SchemeID;
+                //School school = db.School_Scheme.Where(x => x.SchemeID == SchemeID).FirstOrDefault().School;
+                model.SchoolDescription = "-";//school.Code + " " + school.Description;
+            }
+
             return View(model);
         }
 
@@ -349,9 +419,9 @@ namespace FTMatricula.Controllers
                     this.EnrollmentInit_FIND_STUDENT(model);
                     break;
                 case "START_ENROLL":
-                    return RedirectToAction("Enrollment", "Enrollment", routeValues:  new { sID = model.Student.StudentID, eID = model.EnrollmentID });
+                    return RedirectToAction("Enrollment", "Enrollment", routeValues: new { sID = model.Student.StudentID, eID = model.EnrollmentID });
                 default:
-                    this.EnrollmentInit_DEFAULT(model); 
+                    this.EnrollmentInit_DEFAULT(model);
                     break;
             }
             return View(model);
@@ -376,20 +446,21 @@ namespace FTMatricula.Controllers
                                              LastName = m.LastName,
                                              Phone1 = m.Phone1
                                          }).ToList();
-            else {
+            else
+            {
                 result = new List<EnrollmentStudent>();
-                
-               var m = db.Students.Find(model.Student.StudentID) ;
 
-               result.Add(new EnrollmentStudent
-               {
-                   StudentID = m.StudentID,
-                   Identification = m.User.UserName,
-                   FirstName = m.FirstName,
-                   LastName = m.LastName,
-                   Phone1 = m.Phone1                   
-               });    
-            
+                var m = db.Students.Find(model.Student.StudentID);
+
+                result.Add(new EnrollmentStudent
+                {
+                    StudentID = m.StudentID,
+                    Identification = m.User.UserName,
+                    FirstName = m.FirstName,
+                    LastName = m.LastName,
+                    Phone1 = m.Phone1
+                });
+
             }
 
             if (result.Count == 1)

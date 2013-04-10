@@ -1,4 +1,4 @@
-﻿@model FTMatricula.Models.Enrollment
+﻿@model FTMatricula.Models.EnrollmentInfo
 
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
@@ -16,69 +16,57 @@
             </div>
 
             <div class="editDetail">
-                <div class="detailBox100">
+                <div class="detailBox100" style="width: 40%">
                     <ul>
-                        <li style="text-align:right;">
-                            <label>Seleccione la Matrícula&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <li class="width25">
+                            <img src="~/Content/images/defaults/student_enroll.png" /></li>
+                        <li class="width75">
+                            <label>@Model.Student.FirstName&nbsp;@Model.Student.LastName</label>
                         </li>
-                        <li>
-                            <div>
-                                @(Html.Kendo().DropDownList()
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsList)
-                                    .Name("EnrollmentID")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                            </div>
-                        </li>
-                        <li style="text-align:right;">
-                            <label>Plan de Estudios&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        </li>
-                        <li>
-                            <label class="subTitle">Técnico Asesor de Seguros del INS</label>
-                        </li>
-                        
-                        <li style="text-align:right;">
-                            <label>Estudiante&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        </li>
-                        <li>
-                            <div>
-                                @(Html.Kendo().DropDownList()
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.StudentsList)
-                                    .Name("StudentID")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                            </div>
+
+                        <li class="width75">
+                            <label style="font-size: 12px;">@Model.Student.Identification</label>
                         </li>
                     </ul>
                 </div>
+                <div class="detailBox100" style="width: 60%">
+                    <ul>
+                        <li class="width25">
+                            <label class="bold">Escuela</label>
+                        </li>
+                        <li class="width75">
+                            <label>@Model.SchoolDescription</label>
+                        </li>
+                        <li class="width25">
+                            <label class="bold">Plan</label>
+                        </li>
+                        <li class="width75">
+                            <label>@Model.PlanName</label>
+                        </li>
+                        <li class="width25">
+                            <label class="bold">Matrícula</label>
+                        </li>
+                        <li class="width75">
+                            <label>@Model.EnrollmentDescription</label>
+                        </li>
 
-                <div class="detailBox">
+                    </ul>
+                </div>
+
+                <div class="detailBox" style="width: 40%">
                     <ul>
                         <li class="width100">
                             <label class="subTitle">Lista de cursos</label>
                         </li>
                         <li class="width100">
-                            <div class="whiteContentBox">
+                            <div class="whiteContentBox" style="height: 180px;">
 
-                                @foreach (var item in Model.EnrollmentCourses.Where(x => x.IsChecked == true))
+                                @foreach (var item in Model.EnrollmentCourses)
                                 {
                                     <div>
-                                        @if (item.IsChecked)
-                                        {
-                                            <label class="checkSpace hit">
-                                                <input type="checkbox" id="@item.EnrollmentCourseID" name="EnrollmentCourse" value="@item.IsChecked.ToString().ToLower()" checked="checked"/>
-                                                @item.Course.Code &nbsp;-&nbsp; @item.Course.Name
-                                            </label>
-                                        }
-                                        else
-                                        {
-                                            <label class="checkSpace">
-                                                <input type="checkbox" id="@item.EnrollmentCourseID" name="EnrollmentCourse" value="@item.IsChecked.ToString().ToLower()"/>
-                                                @item.Course.Code &nbsp;-&nbsp; @item.Course.Name
-                                            </label>
-                                        }
+                                        <label id="@item.CourseID" data="@item.JsonGroups" class="itemSpace">
+                                            @item.CourseName
+                                        </label>
                                     </div>
                                 }
                             </div>
@@ -86,74 +74,33 @@
                     </ul>
                 </div>
 
-                <div class="detailBox">
-                    <ul style="border: none">
-                        <li class="width100"></li>
-                        <li class="width100">
-                            <table class="width100" border="1" style="border-color: #327376; color: white;">
 
-                                <tbody style="font-weight: bold">
-                                    <tr>
-                                        <td style="background-color: rgba(240, 150, 9,.8);"></td>
-                                        <td style="background-color: rgba(240, 150, 9,.8);">Dia
-                                        </td>
-                                        <td style="background-color: rgba(240, 150, 9,.8);">Hora
-                                        </td>
-                                        <td style="background-color: rgba(240, 150, 9,.8);">Aula
-                                        </td>
-                                        <td style="background-color: rgba(240, 150, 9,.8);">Grupo
-                                        </td>
-                                    </tr>
-                                </tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" /></td>
-                                    <td>L</td>
-                                    <td>13:00 - 15:00
-                <br />
-                                        13:00 - 15:00
-                                    </td>
-                                    <td>A3
-                                    </td>
-                                    <td>1
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" /></td>
-                                    <td>K</td>
-                                    <td>13:00 - 15:00
-                <br />
-                                        13:00 - 15:00
-                                    </td>
-                                    <td>A3
-                                    </td>
-                                    <td>1
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" /></td>
-                                    <td>V</td>
-                                    <td>13:00 - 15:00
-                <br />
-                                        13:00 - 15:00
-                                    </td>
-                                    <td>A3
-                                    </td>
-                                    <td>1
-                                    </td>
-                                </tr>
-                            </table>
+                <div class="groupsGrid" style="width: 60%;">
+                    <ul>
+                        <li>
+                            <p class="header" style="border: none">&nbsp;</p>
                         </li>
-                        <li class="width100">
-                            <div class="formBtnBar">
-                                <a href="#" class="button register">Agregar Cusro</a>
-                            </div>
-
+                        <li>
+                            <p class="header">Grupo</p>
+                        </li>
+                        <li>
+                            <p class="header">Aula</p>
+                        </li>
+                        <li>
+                            <p class="header">Horario</p>
+                        </li>
+                        <li>
+                            <p class="header">Profesor</p>
                         </li>
                     </ul>
+                    <ul id="groupsGrid">
+                    </ul>
+                    
+                    <div style="margin:20px; display: block; float:right">
+                        <a href="#" class="button down">Agregar Curso</a>                        
+                    </div>
                 </div>
+
 
                 <div class="detailBox100">
                     <ul>
@@ -179,9 +126,7 @@
 
             <div class="clear"></div>
             <div class="formBtnBar">
-                @*@Html.ActionLink("Save", "Edit", "User", routeValues: null, htmlAttributes: new { @class = "button send" })*@
-                <a href="#" class="button send" onclick="javascript: submit_form()">Matricular Estudiante</a>
-                
+                <a href="#" class="button send">Matricular Estudiante</a>
             </div>
             <div class="clear"></div>
 
@@ -190,3 +135,40 @@
 
     </div>
 </div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+
+            $('.itemSpace').off('click.checkSpace').on('click.checkSpace', function (e) {
+
+                $('.whiteContentBox label').removeClass('bgrYellow');
+                $(this).addClass('bgrYellow');
+
+                $('#groupsGrid').html('');
+                var data = jQuery.parseJSON($(this).attr('data'));
+                if (data != null) {
+                    data = data.EnrollmentGroup;
+                    for (i = 0; i < data.length; i++) {
+                        var g = "";
+                        if (data[i].EnrollmentGroupID != '&nbsp;') {
+                            g += "<li><p><input id='" + data[i].EnrollmentGroupID + "' type='radio' name='groups'/></p></li>";
+                        } else {
+                            g += "<li><p>" + data[i].EnrollmentGroupID + "</p></li>";
+                        }
+                        g += "<li><p>" + data[i].GroupName + "</p></li>";
+                        g += "<li><p>" + data[i].ClassroomCode + "</p></li>";
+                        g += "<li><p>" + data[i].Schedule + "</p></li>";
+                        g += "<li><p>" + data[i].ProfessorName + "</p></li>";
+
+                        $('#groupsGrid').append(g);
+                    }
+                }
+
+            });
+        });
+
+    </script>
+}
