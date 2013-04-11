@@ -378,12 +378,11 @@ var enrollment = new Class({
                     rows.append(i);
                     rows.append('" ');
                     rows.append('</a></p></li>');
-                    $("#enrollmentGrid").append(rows.toString()).hide().fadeIn();
-                    $.extend(val, {
+                    $("#enrollmentGrid").append(rows.toString()).hide().fadeIn();         
+                    EnrollmentList.push({
                         CourseID: $('.itemSpace.bgrYellow').attr('id'),
-                        Course: $('.itemSpace.bgrYellow').text(),
-                    });  
-                    EnrollmentList.push(val);
+                        EnrollmentGroupID: val.EnrollmentGroupID
+                    });
                 });
                 self.deleteEnrollmentGrid();
                 self.enrollmentAction();
