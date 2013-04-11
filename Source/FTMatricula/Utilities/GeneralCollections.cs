@@ -373,6 +373,20 @@ namespace FTMatricula.Utilities
                                     .Select(s => new { s.StudentID, Name = s.User.UserName + " -- " + s.FirstName + " " + s.LastName }), "StudentID", "Name");
             }
         }
+
+        /// <summary>
+        /// Coordinator List
+        /// </summary>
+        public static SelectList SchoolList
+        {
+            get
+            {
+                matrifunDBEntities db = new matrifunDBEntities();
+                return new SelectList(db.Schools
+                                        .ToList()
+                                        .Select(s => new { s.SchoolID, s.Name }), "SchoolID", "Name");
+            }
+        }
     }
 }
 

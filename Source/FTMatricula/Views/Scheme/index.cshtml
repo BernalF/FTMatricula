@@ -31,7 +31,7 @@
                                           columns.Bound(m => m.OwnerName).Title(@Resources.GetValue("OWNER"));
                                           columns.Bound(m => m.CoordinatorName).Title(@Resources.GetValue("COORDINATOR"));
                                           columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("MODALITY_NAME"));
-                                          columns.Bound(m => m.ModalityName).Title(@Resources.GetValue("SCHOOL"));
+                                          columns.Bound(m => m.SchoolName).Title(@Resources.GetValue("SCHOOL"));
                                           columns.Command(command =>
                                           {
                                               command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");

@@ -81,15 +81,28 @@
                 <div class="detailBox">
                     <ul>
                         <li>
+                            @Html.Label(@Resources.GetValue("SCHOOL"))
+                        </li>
+                        <li style="display: inline">
+                            <div>
+                                @(Html.Kendo().ComboBoxFor(model => model.SchoolID)
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchoolList)
+                                                    .Name("SchoolID")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                        <li>
                             @Html.Label(@Resources.GetValue("REQ_NAME"))
                         </li>
                         <li style="display: inline">
-                            <div>                                
-                                 @Html.CheckBoxListFor(x => x.PostedReq.ReqIDs,
-														  x => x.requirements,
-														  x => x.RequirementID,
-														  x => x.Name,
-														  x => x.SelectedReqs,
+                            <div>
+                                @Html.CheckBoxListFor(x => x.PostedReq.ReqIDs,
+                                                          x => x.requirements,
+                                                          x => x.RequirementID,
+                                                          x => x.Name,
+                                                          x => x.SelectedReqs,
                                                           Position.Vertical)
                             </div>
                         </li>

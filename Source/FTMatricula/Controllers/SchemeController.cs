@@ -38,7 +38,8 @@ namespace FTMatricula.Controllers
                     m.Description,
                     m.OwnerName,
                     m.CoordinatorName,
-                    m.ModalityName
+                    m.ModalityName,
+                    m.SchoolName
                 }).ToDataSourceResult(request));
         }
 
@@ -143,6 +144,9 @@ namespace FTMatricula.Controllers
                         db.Scheme_Requirement.Add(sR);
                         db.SaveChanges();
                     }
+                    School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = schemeID };
+                    db.School_Scheme.Add(ss);
+                    db.SaveChanges();
                 }
                 return RedirectToAction("index");
             }
