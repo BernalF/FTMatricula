@@ -379,9 +379,14 @@ var enrollment = new Class({
                     rows.append('" ');
                     rows.append('</a></p></li>');
                     $("#enrollmentGrid").append(rows.toString()).hide().fadeIn();
+                    $.extend(val, {
+                        CourseID: $('.itemSpace.bgrYellow').attr('id'),
+                        Course: $('.itemSpace.bgrYellow').text(),
+                    });  
                     EnrollmentList.push(val);
                 });
                 self.deleteEnrollmentGrid();
+                self.enrollmentAction();
             }
             else {
                 alert('Seleccione un grupo');
@@ -403,6 +408,11 @@ var enrollment = new Class({
         $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
             EnrollmentList.splice($(this).attr('i'), 1);
             $('li[i=' + $(this).parent().parent().attr('i') + ']').remove().fadeOut();
+        });
+    },
+    enrollmentAction: function () {
+        $('#btnEnrollment').off('click.btnEnrollment').on('click.btnEnrollment', function () {
+            alert(JSON.stringify(EnrollmentList));
         });
     }
 });
