@@ -74,7 +74,7 @@
 
 
                 <div class="groupsGrid" style="width: 60%;">
-                    <ul>
+                    <ul class="hide">
                         <li>
                             <p class="header" style="border: none">&nbsp;</p>
                         </li>
@@ -94,7 +94,7 @@
                     <ul id="groupsGrid">
                     </ul>
 
-                    <div style="margin: 20px; display: block; float: right">
+                    <div style="margin: 20px; float: right" class="hide">
                         <a href="#" class="button down" id="btnAddCourse">Agregar Curso</a>
                     </div>
                 </div>
@@ -166,6 +166,7 @@
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
+        EnrollmentList = [];
         $(function () {
             var matri = new enrollment({
                 view: 'ENROLMENT'

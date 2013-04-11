@@ -304,6 +304,9 @@ var enrollment = new Class({
     },
     groupGrid: function () {
         $('.itemSpace').off('click.itemSpace').on('click.itemSpace', function (e) {
+            $('.groupsGrid ul').fadeIn();
+            $('#btnAddCourse').parent().fadeIn();
+
             $('.whiteContentBox label').removeClass('bgrYellow');
             $(this).addClass('bgrYellow');
 
@@ -331,47 +334,53 @@ var enrollment = new Class({
     addCourse: function () {
         var self = this;
         $('#btnAddCourse').off('click.btnAddCourse').on('click.btnAddCourse', function () {
-            var tmpdata = $.parseJSON($('.itemSpace.bgrYellow').attr('data'));
-            var data = [];
-            var rows = new StringBuilder();
-            data = self.findElement(tmpdata.EnrollmentGroup, 'EnrollmentGroupID', $('#groupsGrid input[name=groups]:checked').attr('id'));
-            
-            $.each(data, function (i, val) {
-                rows.append('<li i="');
-                rows.append(i + 1);
-                rows.append('"><p>');
-                rows.append($('.itemSpace.bgrYellow').text());
-                rows.append('</p></li>');
-                rows.append('<li i="');
-                rows.append(i + 1);
-                rows.append('"><p>');
-                rows.append(val.GroupName);
-                rows.append('</p></li>');
-                rows.append('<li i="');
-                rows.append(i + 1);
-                rows.append('"><p>');
-                rows.append(val.ClassroomCode);
-                rows.append('</p></li>');
-                rows.append('<li i="');
-                rows.append(i + 1);
-                rows.append('"><p>');
-                rows.append(val.Schedule);
-                rows.append('</p></li>');
-                rows.append('<li i="');
-                rows.append(i + 1);
-                rows.append('"><p>');
-                rows.append(val.ProfessorName);
-                rows.append('</p></li>');
-                rows.append('<li i="');
-                rows.append(i + 1);
-                rows.append('"><p>');
-                rows.append('<a href="#" class="delIcon" i="');
-                rows.append(i);
-                rows.append('" ');
-                rows.append('</a></p></li>');
-                $("#enrollmentGrid").append(rows.toString());
-            });
-            self.deleteEnrollmentGrid();
+            if ($('#groupsGrid input[name=groups]:checked').attr('id') != undefined) {
+                var tmpdata = $.parseJSON($('.itemSpace.bgrYellow').attr('data'));
+                var data = [];
+                var rows = new StringBuilder();
+                data = self.findElement(tmpdata.EnrollmentGroup, 'EnrollmentGroupID', $('#groupsGrid input[name=groups]:checked').attr('id'));
+
+                $.each(data, function (i, val) {
+                    rows.append('<li i="');
+                    rows.append(i + 1);
+                    rows.append('"><p>');
+                    rows.append($('.itemSpace.bgrYellow').text());
+                    rows.append('</p></li>');
+                    rows.append('<li i="');
+                    rows.append(i + 1);
+                    rows.append('"><p>');
+                    rows.append(val.GroupName);
+                    rows.append('</p></li>');
+                    rows.append('<li i="');
+                    rows.append(i + 1);
+                    rows.append('"><p>');
+                    rows.append(val.ClassroomCode);
+                    rows.append('</p></li>');
+                    rows.append('<li i="');
+                    rows.append(i + 1);
+                    rows.append('"><p>');
+                    rows.append(val.Schedule);
+                    rows.append('</p></li>');
+                    rows.append('<li i="');
+                    rows.append(i + 1);
+                    rows.append('"><p>');
+                    rows.append(val.ProfessorName);
+                    rows.append('</p></li>');
+                    rows.append('<li i="');
+                    rows.append(i + 1);
+                    rows.append('"><p>');
+                    rows.append('<a href="#" class="delIcon" i="');
+                    rows.append(i);
+                    rows.append('" ');
+                    rows.append('</a></p></li>');
+                    $("#enrollmentGrid").append(rows.toString()).hide().fadeIn();
+                    EnrollmentList.push(val);
+                });
+                self.deleteEnrollmentGrid();
+            }
+            else {
+                alert('Seleccione un grupo');
+            }
             return false;
         });
     },
@@ -384,6 +393,9 @@ var enrollment = new Class({
         return result;
     },
     deleteEnrollmentGrid: function () {
-
+        $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
+            EnrollmentList.splice($(this).attr('i'), 1);
+            $('li[i=' + $(this).parent().parent().attr('i') + ']').remove().fadeOut();
+        });
     }
 });
