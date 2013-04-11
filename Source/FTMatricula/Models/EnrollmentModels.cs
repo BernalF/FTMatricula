@@ -35,6 +35,7 @@ namespace FTMatricula.Models
     /// </summary>
     public class EnrollGroupDetail
     {
+        public bool isFirst { get; set; }
         public string EnrollmentGroupID { get; set; }
         public string CourseCode { get; set; }
         public string GroupName { get; set; }
@@ -128,6 +129,7 @@ namespace FTMatricula.Models
                         
                         s.Append("{");
 
+                        s.Append("\"isFirst\": " + g.isFirst.ToString().ToLower() + ",");
                         s.Append("\"EnrollmentGroupID\": \""+g.EnrollmentGroupID+"\",");
                         s.Append("\"CourseCode\": \"" + g.CourseCode + "\",");
                         s.Append("\"GroupName\": \"" + g.GroupName + "\",");
