@@ -28,6 +28,7 @@ var enrollment = new Class({
                 break;
             case 'ENROLMENT':
                 this.groupGrid();
+                this.addCourse();
                 break;
         }
     },
@@ -95,7 +96,7 @@ var enrollment = new Class({
                     $("#groups_grid").data("kendoGrid").dataSource.data($.parseJSON(response));
                 }
             });
-        }        
+        }
     },
     //Save Selected Courses Handle
     btnSaveSelectedCourses: function () {
@@ -307,23 +308,43 @@ var enrollment = new Class({
             $(this).addClass('bgrYellow');
 
             $('#groupsGrid').html('');
-            var data = jQuery.parseJSON($(this).attr('data'));
+            var data = $.parseJSON($(this).attr('data'));
             if (data != null) {
                 data = data.EnrollmentGroup;
                 for (i = 0; i < data.length; i++) {
                     var g = "";
-                    if (data[i].EnrollmentGroupID != '&nbsp;') {
+                    if (data[i].isFirst) {
                         g += "<li><p><input id='" + data[i].EnrollmentGroupID + "' type='radio' name='groups'/></p></li>";
                     } else {
-                        g += "<li><p>" + data[i].EnrollmentGroupID + "</p></li>";
+                        g += "<li><p>&nbsp;</p></li>";
                     }
                     g += "<li><p>" + data[i].GroupName + "</p></li>";
                     g += "<li><p>" + data[i].ClassroomCode + "</p></li>";
                     g += "<li><p>" + data[i].Schedule + "</p></li>";
                     g += "<li><p>" + data[i].ProfessorName + "</p></li>";
-                    $('#groupsGrid').append(g);
+                    $('#groupsGrid').append(g).hide().fadeIn();
+                    $(this).closest('input').data(data[i]);
                 }
             }
         });
+    },
+    addCourse: function () {
+        var self = this;
+        $('#btnAddCourse').off('click.btnAddCourse').on('click.btnAddCourse', function () {
+            var tmpdata = $.parseJSON($('.itemSpace.bgrYellow').attr('data'));
+            var data = [];
+            data = self.findElement(tmpdata.EnrollmentGroup, 'EnrollmentGroupID', $('#groupsGrid input[name=groups]:checked').attr('id'));
+            data.push({ CourseID: $('.itemSpace.bgrYellow').attr('id') });
+            alert(JSON.stringify(data));
+
+        });
+    },
+    findElement: function (arr, propName, propValue) {
+        result = [];
+        for (var i = 0; i < arr.length; i++)
+            if (arr[i][propName] == propValue)
+                result.push(arr[i]);
+
+        return result;
     }
 });
