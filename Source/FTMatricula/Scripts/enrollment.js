@@ -26,6 +26,9 @@ var enrollment = new Class({
                 this.addSchedule();
                 this.enrollmentSelectCourse();
                 break;
+            case 'ENROLMENT':
+                this.groupGrid();
+                break;
         }
     },
     //fill the Grid Details Group 
@@ -296,6 +299,31 @@ var enrollment = new Class({
                 });
             }
             return false;
+        });
+    },
+    groupGrid: function () {
+        $('.itemSpace').off('click.itemSpace').on('click.itemSpace', function (e) {
+            $('.whiteContentBox label').removeClass('bgrYellow');
+            $(this).addClass('bgrYellow');
+
+            $('#groupsGrid').html('');
+            var data = jQuery.parseJSON($(this).attr('data'));
+            if (data != null) {
+                data = data.EnrollmentGroup;
+                for (i = 0; i < data.length; i++) {
+                    var g = "";
+                    if (data[i].EnrollmentGroupID != '&nbsp;') {
+                        g += "<li><p><input id='" + data[i].EnrollmentGroupID + "' type='radio' name='groups'/></p></li>";
+                    } else {
+                        g += "<li><p>" + data[i].EnrollmentGroupID + "</p></li>";
+                    }
+                    g += "<li><p>" + data[i].GroupName + "</p></li>";
+                    g += "<li><p>" + data[i].ClassroomCode + "</p></li>";
+                    g += "<li><p>" + data[i].Schedule + "</p></li>";
+                    g += "<li><p>" + data[i].ProfessorName + "</p></li>";
+                    $('#groupsGrid').append(g);
+                }
+            }
         });
     }
 });
