@@ -95,20 +95,48 @@
                     </ul>
                     <ul id="groupsGrid">
                     </ul>
-                    
-                    <div style="margin:20px; display: block; float:right">
-                        <a href="#" class="button down">Agregar Curso</a>                        
+
+                    <div style="margin: 20px; display: block; float: right">
+                        <a href="#" class="button down">Agregar Curso</a>
                     </div>
                 </div>
 
 
-                <div class="detailBox100">
-                    <ul>
-                        <li>
+                <div class="defaultBox" style="padding: 0 20px;">
+                    <ul style="padding: 0; margin: 0">
+                        <li class="width100">
                             <label class="subTitle">Detalle de Cursos Matrículados</label>
                         </li>
                     </ul>
                 </div>
+
+                <div class="enrollmentGrid width100">
+                    <ul>
+                        <li>
+                            <p class="header">Curso</p>
+                        </li>
+                        <li>
+                            <p class="header">Grupo</p>
+                        </li>
+                        <li>
+                            <p class="header">Aula</p>
+                        </li>
+                        <li>
+                            <p class="header">Horario</p>
+                        </li>
+                        <li>
+                            <p class="header">Profesor</p>
+                        </li>
+                        <li>
+                            <p class="header">&nbsp;</p>
+                        </li>
+                    </ul>
+                    <ul id="enrollmentGrid">
+                        
+                    </ul>
+
+                </div>
+                <div class="defaultBox">&nbsp;</div>
             </div>
             @*<div class="errorsSpace">
                     <ul>
@@ -144,7 +172,7 @@
             var matri = new enrollment({
                 view: 'ENROLMENT'
             });
-         });
+        });
 
     </script>
 }
