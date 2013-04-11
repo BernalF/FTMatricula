@@ -64,9 +64,7 @@
                                 @foreach (var item in Model.EnrollmentCourses)
                                 {
                                     <div>
-                                        <label id="@item.CourseID" data="@item.JsonGroups" class="itemSpace">
-                                            @item.CourseName
-                                        </label>
+                                        <label id="@item.CourseID" data="@item.JsonGroups" class="itemSpace">@item.CourseName</label>
                                     </div>
                                 }
                             </div>
@@ -97,7 +95,7 @@
                     </ul>
 
                     <div style="margin: 20px; display: block; float: right">
-                        <a href="#" class="button down">Agregar Curso</a>
+                        <a href="#" class="button down" id="btnAddCourse">Agregar Curso</a>
                     </div>
                 </div>
 
