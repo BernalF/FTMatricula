@@ -198,6 +198,7 @@ var enrollment = new Class({
             $('#scheduleGrid').html('');
         }
     },
+    //Enrollment Select Course
     enrollmentSelectCourse: function () {
         var self = this;
         $('.checkSpace').off('click.checkSpace').on('click.checkSpace', function (e) {
@@ -239,6 +240,7 @@ var enrollment = new Class({
             // return false;
         });
     },
+    //RetrievevGroups
     retrieveGroups: function () {
         var self = this;
         var params = {
@@ -263,6 +265,7 @@ var enrollment = new Class({
             }
         });
     },
+    //Add Groups
     addGroups: function () {
         var self = this;
         $('#btnAddGroup').off('click.btnAddGroup').on('click.btnAddGroup', function () {
@@ -302,6 +305,7 @@ var enrollment = new Class({
             return false;
         });
     },
+    //Group Grids
     groupGrid: function () {
         $('.itemSpace').off('click.itemSpace').on('click.itemSpace', function (e) {
             $('.groupsGrid ul').fadeIn();
@@ -331,6 +335,7 @@ var enrollment = new Class({
             }
         });
     },
+    //Add Course
     addCourse: function () {
         var self = this;
         $('#btnAddCourse').off('click.btnAddCourse').on('click.btnAddCourse', function () {
@@ -384,6 +389,7 @@ var enrollment = new Class({
             return false;
         });
     },
+    //Find Element
     findElement: function (arr, propName, propValue) {
         result = [];
         for (var i = 0; i < arr.length; i++)
@@ -392,6 +398,7 @@ var enrollment = new Class({
 
         return result;
     },
+    //Delete Enrollment Grid
     deleteEnrollmentGrid: function () {
         $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
             EnrollmentList.splice($(this).attr('i'), 1);
