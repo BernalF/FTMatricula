@@ -353,7 +353,6 @@ namespace FTMatricula.Controllers
 
                                 groupsList.Add(new EnrollGroupDetail
                                 {
-                                    isFirst = true,
                                     EnrollmentGroupID = g.EnrollmentGroupID.ToString(),
                                     CourseCode = g.EnrollmentCourse.Course.Code,
                                     GroupName = g.GroupName,
@@ -366,8 +365,7 @@ namespace FTMatricula.Controllers
                             else
                                 groupsList.Add(new EnrollGroupDetail
                                 {
-                                    isFirst = false,
-                                    EnrollmentGroupID = g.EnrollmentGroupID.ToString(),
+                                    EnrollmentGroupID = "&nbsp;",
                                     CourseCode = "&nbsp;",
                                     GroupName = "&nbsp;",
                                     ClassroomCode = s.Classroom.Code,
