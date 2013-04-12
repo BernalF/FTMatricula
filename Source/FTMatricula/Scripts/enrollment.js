@@ -344,15 +344,27 @@ var enrollment = new Class({
                 var data = [];
 
                 data = self.findElement(tmpdata.EnrollmentGroup, 'EnrollmentGroupID', $('#groupsGrid input[name=groups]:checked').attr('id'));
-
+                var inserted = true;
                 $.each(data, function (i, val) {
-                    if (i == 0)
-                        EnrollmentList.push({
-                            CourseID: $('.itemSpace.bgrYellow').attr('id'),
-                            EnrollmentGroupID: val.EnrollmentGroupID,
-                            HTML: new StringBuilder()
-                        });
+                    if (i == 0) {
 
+                        $.each(EnrollmentList, function (i, val) {
+                            if (val.CourseID == $('.itemSpace.bgrYellow').attr('id')) {
+                                alert('No puede agregar el curso otra vez');
+                                inserted = false;
+                                return false;
+                            }
+                        });
+                        if (inserted)
+                            EnrollmentList.push({
+                                CourseID: $('.itemSpace.bgrYellow').attr('id'),
+                                EnrollmentGroupID: val.EnrollmentGroupID,
+                                HTML: new StringBuilder()
+                            });
+                        else {
+                            return false;
+                        }
+                    }
                     var rows = new StringBuilder();
                     rows.append('<li><p>');
                     rows.append(i == 0 ? $('.itemSpace.bgrYellow').text() : '&nbsp;');
@@ -363,16 +375,18 @@ var enrollment = new Class({
                     rows.append('<li><p>' + val.Schedule + '</p></li>');
                     rows.append('<li><p>' + val.ProfessorName + '</p></li>');
                     rows.append('<li><p>');
-                    rows.append(i == 0 ? '<a href="#" class="delIcon" CourseID="' + EnrollmentList[EnrollmentList.length - 1].CourseID + '"></a>' : '&nbsp;');
+                    rows.append(i == 0 ? '<a href="#" class="delIcon" i="#INDEX#"></a>' : '&nbsp;');
                     rows.append('</p></li>');
 
                     EnrollmentList[EnrollmentList.length - 1].HTML.append(rows.toString());
 
                 });
-                $("#enrollmentGrid").append(EnrollmentList[EnrollmentList.length - 1].HTML.toString()).hide().fadeIn();
+                if (inserted) {
+                    $("#enrollmentGrid").append(EnrollmentList[EnrollmentList.length - 1].HTML.toString().replace("#INDEX#", (EnrollmentList.length - 1))).hide().fadeIn();
 
-                self.deleteEnrollmentGrid();
-                self.enrollmentAction();
+                    self.deleteEnrollmentGrid();
+                    self.enrollmentAction();
+                }
             }
             else {
                 alert('Seleccione un grupo');
@@ -391,24 +405,18 @@ var enrollment = new Class({
     },
     //Delete Enrollment Grid
     deleteEnrollmentGrid: function () {
+        var self = this;
         $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
-            var CourseID = $(this).attr('CourseID');
 
-            $.each(EnrollmentList, function (i, val) {
-                
-                if (val.CourseID == CourseID) {
-                    EnrollmentList.splice(i, 1);
-                    return false;
-                }
-                
-            });
+            EnrollmentList.splice($(this).attr('i'), 1);
             
             $("#enrollmentGrid").html("");
 
             $.each(EnrollmentList, function (i, val) {
-                $("#enrollmentGrid").append(val.HTML.toString());
+                $("#enrollmentGrid").append(val.HTML.toString().replace("#INDEX#", i)).hide().fadeIn();
             });
-           // $('li[i=' + $(this).parent().parent().attr('i') + ']').remove().fadeOut();
+            self.deleteEnrollmentGrid();
+            return false;
         });
     },
     enrollmentAction: function () {
