@@ -37,7 +37,8 @@
                                               command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");
                                           }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
                                           columns.Command(command =>
-                                          {                                              
+                                          {
+                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
                                       })
@@ -96,7 +97,7 @@
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))                                            
-                                            .Read(read => read.Action("PagingSchemes", "Scheme"))
+                                            .Read(read => read.Action("PagingSchemes", "Scheme"))                                            
                                             .Destroy(destroy => destroy.Action("DestroyScheme", "Scheme"))
                                             .Model(model => model.Id(m => m.SchemeID))
                                       )

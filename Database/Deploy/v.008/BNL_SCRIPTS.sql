@@ -1,6 +1,6 @@
 --- Delete table student course
 DROP TABLE [Student-Course]
-
+GO
 --- Add Foreign key to table score with student
 ALTER TABLE [dbo].[Score]  WITH CHECK ADD  CONSTRAINT [FK_Score_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] (StudentID)
@@ -46,3 +46,5 @@ LEFT JOIN Users u1 ON u1.UserId = s.OwnerUserId
 LEFT JOIN Users u2 ON u2.UserId= s.CoordinatorUserId 
 LEFT JOIN [School-Scheme] ss ON ss.SchemeID = s.SchemeID 
 LEFT JOIN School sc ON sc.SchoolID = ss.SchoolID
+--- Add primary key to table school - scheme
+GO

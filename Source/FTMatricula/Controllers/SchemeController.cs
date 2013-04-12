@@ -144,6 +144,7 @@ namespace FTMatricula.Controllers
                         db.Scheme_Requirement.Add(sR);
                         db.SaveChanges();
                     }
+                    // Assign school to a scheme
                     School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = schemeID };
                     db.School_Scheme.Add(ss);
                     db.SaveChanges();

@@ -36,17 +36,7 @@
           <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" store:Schema="dbo" store:Name="School-Scheme">
-            <DefiningQuery>SELECT 
-      [School-Scheme].[SchoolID] AS [SchoolID], 
-      [School-Scheme].[SchemeID] AS [SchemeID], 
-      [School-Scheme].[InsertDate] AS [InsertDate], 
-      [School-Scheme].[InsertUserID] AS [InsertUserID], 
-      [School-Scheme].[ModifyDate] AS [ModifyDate], 
-      [School-Scheme].[ModifyUserID] AS [ModifyUserID], 
-      [School-Scheme].[IpAddress] AS [IpAddress]
-      FROM [dbo].[School-Scheme] AS [School-Scheme]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Score" EntityType="FTMatricula.DBModel.Store.Score" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Student" EntityType="FTMatricula.DBModel.Store.Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentAdditionalData" EntityType="FTMatricula.DBModel.Store.StudentAdditionalData" store:Type="Tables" Schema="dbo" />
@@ -549,9 +539,6 @@
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
           <Property Name="Code" Type="varchar" MaxLength="120" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.School-Scheme' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
         <EntityType Name="School-Scheme">
           <Key>
             <PropertyRef Name="SchoolID" />
