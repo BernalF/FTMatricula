@@ -342,48 +342,35 @@ var enrollment = new Class({
             if ($('#groupsGrid input[name=groups]:checked').attr('id') != undefined) {
                 var tmpdata = $.parseJSON($('.itemSpace.bgrYellow').attr('data'));
                 var data = [];
-                var rows = new StringBuilder();
+
                 data = self.findElement(tmpdata.EnrollmentGroup, 'EnrollmentGroupID', $('#groupsGrid input[name=groups]:checked').attr('id'));
 
                 $.each(data, function (i, val) {
-                    rows.append('<li i="');
-                    rows.append(i + 1);
-                    rows.append('"><p>');
-                    rows.append($('.itemSpace.bgrYellow').text());
+                    if (i == 0)
+                        EnrollmentList.push({
+                            CourseID: $('.itemSpace.bgrYellow').attr('id'),
+                            EnrollmentGroupID: val.EnrollmentGroupID,
+                            HTML: new StringBuilder()
+                        });
+
+                    var rows = new StringBuilder();
+                    rows.append('<li><p>');
+                    rows.append(i == 0 ? $('.itemSpace.bgrYellow').text() : '&nbsp;');
                     rows.append('</p></li>');
-                    rows.append('<li i="');
-                    rows.append(i + 1);
-                    rows.append('"><p>');
-                    rows.append(val.GroupName);
+
+                    rows.append('<li><p>' + val.GroupName + '</p></li>');
+                    rows.append('<li><p>' + val.ClassroomCode + '</p></li>');
+                    rows.append('<li><p>' + val.Schedule + '</p></li>');
+                    rows.append('<li><p>' + val.ProfessorName + '</p></li>');
+                    rows.append('<li><p>');
+                    rows.append(i == 0 ? '<a href="#" class="delIcon" CourseID="' + EnrollmentList[EnrollmentList.length - 1].CourseID + '"></a>' : '&nbsp;');
                     rows.append('</p></li>');
-                    rows.append('<li i="');
-                    rows.append(i + 1);
-                    rows.append('"><p>');
-                    rows.append(val.ClassroomCode);
-                    rows.append('</p></li>');
-                    rows.append('<li i="');
-                    rows.append(i + 1);
-                    rows.append('"><p>');
-                    rows.append(val.Schedule);
-                    rows.append('</p></li>');
-                    rows.append('<li i="');
-                    rows.append(i + 1);
-                    rows.append('"><p>');
-                    rows.append(val.ProfessorName);
-                    rows.append('</p></li>');
-                    rows.append('<li i="');
-                    rows.append(i + 1);
-                    rows.append('"><p>');
-                    rows.append('<a href="#" class="delIcon" i="');
-                    rows.append(i);
-                    rows.append('" ');
-                    rows.append('</a></p></li>');
-                    $("#enrollmentGrid").append(rows.toString()).hide().fadeIn();         
-                    EnrollmentList.push({
-                        CourseID: $('.itemSpace.bgrYellow').attr('id'),
-                        EnrollmentGroupID: val.EnrollmentGroupID
-                    });
+
+                    EnrollmentList[EnrollmentList.length - 1].HTML.append(rows.toString());
+
                 });
+                $("#enrollmentGrid").append(EnrollmentList[EnrollmentList.length - 1].HTML.toString()).hide().fadeIn();
+
                 self.deleteEnrollmentGrid();
                 self.enrollmentAction();
             }
@@ -405,8 +392,23 @@ var enrollment = new Class({
     //Delete Enrollment Grid
     deleteEnrollmentGrid: function () {
         $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
-            EnrollmentList.splice($(this).attr('i'), 1);
-            $('li[i=' + $(this).parent().parent().attr('i') + ']').remove().fadeOut();
+            var CourseID = $(this).attr('CourseID');
+
+            $.each(EnrollmentList, function (i, val) {
+                
+                if (val.CourseID == CourseID) {
+                    EnrollmentList.splice(i, 1);
+                    return false;
+                }
+                
+            });
+            
+            $("#enrollmentGrid").html("");
+
+            $.each(EnrollmentList, function (i, val) {
+                $("#enrollmentGrid").append(val.HTML.toString());
+            });
+           // $('li[i=' + $(this).parent().parent().attr('i') + ']').remove().fadeOut();
         });
     },
     enrollmentAction: function () {
