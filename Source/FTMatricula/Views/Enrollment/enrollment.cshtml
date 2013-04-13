@@ -138,14 +138,8 @@
             </div>
             <div class="errorsSpace">
                     <ul>
-                        <li>
-                            xxx
-                        </li>
-                        <li>
-                            vv
-                        </li>
-                        <li>
-                            sss
+                        <li id="ServerMsj">
+
                         </li>
                     </ul>
                 </div>
@@ -170,8 +164,7 @@
         EnrollmentList = [];
         $(function () {
             var matri = new enrollment({
-                view: 'ENROLMENT',
-                urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")',
+                view: 'ENROLMENT'
             });
         });
 

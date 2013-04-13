@@ -323,10 +323,11 @@ namespace FTMatricula.Controllers
         {
             Student student = db.Students.Find(sID);
             Enrollment enrollment = db.Enrollments.Find(eID);
-
-
+            
             EnrollmentInfo model = new EnrollmentInfo();
+
             if (student != null)
+            {
                 model.Student = new EnrollStudent
                 {
                     StudentID = student.StudentID,
@@ -334,6 +335,7 @@ namespace FTMatricula.Controllers
                     FirstName = student.FirstName,
                     LastName = student.LastName
                 };
+            }
             if (enrollment != null)
             {
                 model.EnrollmentID = enrollment.EnrollmentID;
@@ -410,7 +412,8 @@ namespace FTMatricula.Controllers
             {
                 if (model != null)
                 {
-                    foreach (var item in db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(model[0].StudentID)).ToList())
+                    var studentCourses = db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(model[0].StudentID)).ToList();
+                    foreach (var item in studentCourses)
                     {
                         db.EnrollmentStudentCourses.Remove(item);
                         db.SaveChanges();
