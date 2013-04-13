@@ -447,6 +447,8 @@ var enrollment = new Class({
                     $('.popupBg').fadeOut();
                     $('.loading').fadeOut();
                     //Do Somenthing 
+                    alert('Matricula Exitosa');
+                    window.location.replace('Enrollment/EnrollmentInit');
                 }
             });
             return false;
