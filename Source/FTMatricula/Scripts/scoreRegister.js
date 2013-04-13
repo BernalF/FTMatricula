@@ -13,30 +13,18 @@ var scoreRegister = new Class({
     PageLoad: function () {
         switch (this.options.view) {            
             case 'INDEX':
-                //this.fillGroupGrid();                
+                this.courseOnchanged();                
                 break;
         }
     },
-    //fill the Grid Details Group 
-    fillGroupGrid: function (data) {
-        var self = this;
-        $("#groups_grid").kendoGrid({
-            dataSource: {
-                data: data                
-            },
-            columns: [{
-                field: "StudentID",
-                hidden: true
-            }, {
-                field: "Name",
-                title: "Nombre"
-            }, {
-                field: "LastName",
-                title: "Apellido"
-            }, {
-                field: "Score",
-                title: "Nota"
-            }]            
+    courseOnchanged: function () {
+        $('#CourseID').off('change.CourseID').on('change.CourseID', function () {
+            var courseID = $("#CourseID").val();    
+            var grid = $("#Grid").data("kendoGrid");
+            grid.dataSource.transport.options.read.url = "/ScoreRegister/PagingScores?CourseID=" + courseID;
+            grid.dataSource.read();
+            grid.refresh();
+
         });
     }
 });

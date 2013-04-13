@@ -26,29 +26,26 @@ namespace FTMatricula.Controllers
         /// Paging Scores by Course
         /// </summary>
         [HttpPost]
-        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, Score model)
+        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, string CourseID )
         {
             var uID = SessApp.GetUserID(User.Identity.Name);
 
             return Json(db.Scores
-                .Where(s => s.EnrollmentGroup.ProfessorID == db.Students
-                                                                .Where(st => st.UserID == uID)
-                                                                .Select(st => st.StudentID).FirstOrDefault()
-                                                                && s.CourseID == model.CourseID)
-                .Select(s => new
-                {
-                    s.ScoreID,
-                    s.Student.User.UserName,
-                    s.Student.FirstName,
-                    s.Student.LastName,
-                    s.Result
+                        .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.CourseID == new Guid(CourseID))
+                        .Select(s => new
+                        {
+                            s.ScoreID,
+                            UserName = s.Student.User.UserName,
+                            FirstName = s.Student.FirstName,
+                            LastName = s.Student.LastName,
+                            s.Result
 
-                })
-                .ToDataSourceResult(request));
+                        })
+                        .ToDataSourceResult(request));
         }
 
         /// <summary>
-        /// Update Users
+        /// Create Score
         /// </summary>
         /// <param name="request"></param>
         /// <param name="model"></param>

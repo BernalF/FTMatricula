@@ -289,7 +289,7 @@ namespace FTMatricula.Utilities
             //Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
             return new SelectList(db.Scores
                     .Where(s => s.EnrollmentGroup.ProfessorID == uID)
-                    .Select(s => new { CourseID = s.CourseID, Name = s.Course.Name }), "CourseID", "Name");
+                    .Select(s => new { CourseID = s.CourseID, Name = s.Course.Name }).Distinct(), "CourseID", "Name");
         }
 
 

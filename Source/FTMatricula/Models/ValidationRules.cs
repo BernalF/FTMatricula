@@ -185,5 +185,17 @@ namespace FTMatricula.Models
         [Display(ResourceType = typeof(ModelResources), Name = "ENROLLMENT_VERIFY_DATES")]
         public bool VerifyDates { get; set; }
     }
+
+    //------ Score Section
+    [MetadataType(typeof(Score_Validation))]
+    public partial class Score {
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
+    public class Score_Validation
+    {        
+    }
 }
 
