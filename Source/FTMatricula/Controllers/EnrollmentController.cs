@@ -329,6 +329,7 @@ namespace FTMatricula.Controllers
             if (student != null)
                 model.Student = new EnrollStudent
                 {
+                    StudentID = student.StudentID,
                     Identification = student.User.UserName,
                     FirstName = student.FirstName,
                     LastName = student.LastName
@@ -407,27 +408,29 @@ namespace FTMatricula.Controllers
 
             try
             {
-                foreach (var item in db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(model[0].StudentID)).ToList())
+                if (model != null)
                 {
-                    db.EnrollmentStudentCourses.Remove(item);
-                    db.SaveChanges();
-                }
-                
-                foreach (var item in model)
-                {
-                    db.EnrollmentStudentCourses.Add(new EnrollmentStudentCourse
-                                                        {
-                                                            EnrollmentStudentCourseID = Guid.NewGuid(),
-                                                            EnrollmentGroupID = new Guid(item.EnrollmentGroupID),
-                                                            StudentID = new Guid(item.StudentID),
+                    foreach (var item in db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(model[0].StudentID)).ToList())
+                    {
+                        db.EnrollmentStudentCourses.Remove(item);
+                        db.SaveChanges();
+                    }
 
-                                                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                                                            InsertDate = DateTime.Today,
-                                                            IpAddress = Network.GetIpAddress(Request)
-                                                        });
-                    db.SaveChanges();
+                    foreach (var item in model)
+                    {
+                        db.EnrollmentStudentCourses.Add(new EnrollmentStudentCourse
+                                                            {
+                                                                EnrollmentStudentCourseID = Guid.NewGuid(),
+                                                                EnrollmentGroupID = new Guid(item.EnrollmentGroupID),
+                                                                StudentID = new Guid(item.StudentID),
+
+                                                                InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                                                                InsertDate = DateTime.Today,
+                                                                IpAddress = Network.GetIpAddress(Request)
+                                                            });
+                        db.SaveChanges();
+                    }
                 }
-                
 
             }
             catch (Exception e)
