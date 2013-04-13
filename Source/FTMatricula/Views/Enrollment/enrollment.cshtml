@@ -171,7 +171,8 @@
         EnrollmentList = [];
         $(function () {
             var matri = new enrollment({
-                view: 'ENROLMENT'
+                view: 'ENROLMENT',
+                urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")',
             });
         });
 

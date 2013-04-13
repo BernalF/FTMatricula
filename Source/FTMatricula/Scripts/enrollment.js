@@ -410,7 +410,7 @@ var enrollment = new Class({
         $('.delIcon').off('click.delIcon').on('click.delIcon', function () {
 
             EnrollmentList.splice($(this).attr('i'), 1);
-            
+
             $("#enrollmentGrid").html("");
             $.each(EnrollmentList, function (i, val) {
                 $("#enrollmentGrid").append(val.HTML.toString().replace("#INDEX#", i)).hide().fadeIn();
@@ -420,9 +420,33 @@ var enrollment = new Class({
         });
     },
     enrollmentAction: function () {
+        var self = this;
         $('#btnEnrollment').off('click.btnEnrollment').on('click.btnEnrollment', function () {
-
-            alert(JSON.stringify(EnrollmentList));
+            var EnrollStudentGroup = [];
+            $.each(EnrollmentList, function () {
+                EnrollStudentGroup.push({
+                    EnrollmentGroupID: this.EnrollmentGroupID,
+                    StudentID: $('#Student_StudentID').val()
+                });
+            });
+            $.ajaxSettings.traditional = true;
+            $.bAjax({
+                url: self.options.urlEnrollemnt,
+                ajaxBeforeSend: function () {
+                    $('.popupBg').fadeIn();
+                    $('.loading').fadeIn();
+                },
+                data: EnrollStudentGroup,
+                datatype: "json",
+                contentType: 'application/json; charset=utf-8',
+                async: false,
+                ajaxSuccess: function (response) {
+                    $('.popupBg').fadeOut();
+                    $('.loading').fadeOut();
+                    //Do Somenthing 
+                }
+            });
+            return false;
         });
     }
 });
