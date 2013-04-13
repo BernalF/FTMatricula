@@ -48,3 +48,13 @@ LEFT JOIN [School-Scheme] ss ON ss.SchemeID = s.SchemeID
 LEFT JOIN School sc ON sc.SchoolID = ss.SchoolID
 --- Add primary key to table school - scheme
 GO
+ALTER TABLE dbo.[School-Scheme] ADD CONSTRAINT
+	[PK_School-Scheme] PRIMARY KEY CLUSTERED 
+	(
+	SchoolID,
+	SchemeID
+	) WITH( STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+
+GO
+ALTER TABLE dbo.[School-Scheme] SET (LOCK_ESCALATION = TABLE)
+GO

@@ -56,6 +56,10 @@ namespace FTMatricula.Controllers
                   .ToList().RemoveAll(s => s.SchemeID == model.SchemeID);
                 db.SaveChanges();
 
+                db.School_Scheme
+                  .ToList().RemoveAll(s => s.SchemeID == model.SchemeID);
+                db.SaveChanges();
+
                 Scheme scheme = db.Schemes.Find(model.SchemeID);
                 db.Schemes.Remove(scheme);
                 db.SaveChanges();
@@ -172,12 +176,12 @@ namespace FTMatricula.Controllers
                                             RequirementID = r.RequirementID,
                                             Name = r.Name
                                         })
-                        .Distinct()
-                        .Select(x => new ReqDetailDTO
-                        {
-                            RequirementID = x.RequirementID,
-                            Name = x.Name
-                        });
+                                        .Distinct()
+                                        .Select(x => new ReqDetailDTO
+                                        {
+                                            RequirementID = x.RequirementID,
+                                            Name = x.Name
+                                        });
 
                 var selectedReq = (from sd in db.SchemeDetails
                                         join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
@@ -193,7 +197,7 @@ namespace FTMatricula.Controllers
                                         .Select(x => new ReqDetailDTO
                                         {
                                             RequirementID = x.RequirementID,
-                                            Name = x.Name
+                                            Name = x.Name                                            
                                         });
                 
                 
