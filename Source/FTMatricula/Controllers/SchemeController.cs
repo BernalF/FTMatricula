@@ -52,17 +52,22 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                db.Scheme_Requirement
-                  .ToList().RemoveAll(s => s.SchemeID == model.SchemeID);
-                db.SaveChanges();
-
-                db.School_Scheme
-                  .ToList().RemoveAll(s => s.SchemeID == model.SchemeID);
-                db.SaveChanges();
-
                 Scheme scheme = db.Schemes.Find(model.SchemeID);
+                foreach (var ss in scheme.School_Scheme.ToList())
+                {
+                    db.School_Scheme.Remove(ss);
+                    db.SaveChanges();
+                }
+
+                foreach (var sr in scheme.Scheme_Requirement.ToList())
+                {
+                    db.Scheme_Requirement.Remove(sr);
+                    db.SaveChanges();
+                }
+
                 db.Schemes.Remove(scheme);
                 db.SaveChanges();
+
                 return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
             }
             catch (Exception e)
@@ -184,23 +189,23 @@ namespace FTMatricula.Controllers
                                         });
 
                 var selectedReq = (from sd in db.SchemeDetails
-                                        join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
-                                        join r in db.Requirements on sr.RequirementID equals r.RequirementID
-                                        join t in db.Types on r.TypeID equals t.TypeID
-                                        where t.Usage == "REQ"
-                                        select new ReqDetailDTO
-                                        {
-                                            RequirementID = r.RequirementID,
-                                            Name = r.Name
-                                        })
+                                   join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
+                                   join r in db.Requirements on sr.RequirementID equals r.RequirementID
+                                   join t in db.Types on r.TypeID equals t.TypeID
+                                   where t.Usage == "REQ"
+                                   select new ReqDetailDTO
+                                   {
+                                       RequirementID = r.RequirementID,
+                                       Name = r.Name
+                                   })
                                         .Distinct()
                                         .Select(x => new ReqDetailDTO
                                         {
                                             RequirementID = x.RequirementID,
-                                            Name = x.Name                                            
+                                            Name = x.Name
                                         });
-                
-                
+
+
                 SchemeDetail scheme = db.SchemeDetails
                                    .Where(s => s.SchemeID == new Guid(id))
                                    .ToList()
@@ -239,7 +244,7 @@ namespace FTMatricula.Controllers
                     IpAddress = Network.GetIpAddress(Request),
                 };
                 db.Entry(scheme).State = EntityState.Modified;
-                db.SaveChanges();                
+                db.SaveChanges();
                 // Insert in scheme-requirement
                 foreach (var item in model.PostedReq.ReqIDs)
                 {
