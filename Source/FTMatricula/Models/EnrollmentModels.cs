@@ -64,6 +64,7 @@ namespace FTMatricula.Models
         public EnrollStudent Student { get; set; }
         public bool IsStudentOK { get; set; }
         public bool IsReadyToEnroll { get; set; }
+        public bool AllowEnterPayNumber { get; set; }
         public string ServerRequest { get; set; }
 
         public ServerMessage Message { get; set; }

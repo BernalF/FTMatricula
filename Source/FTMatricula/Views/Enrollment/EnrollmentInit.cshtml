@@ -95,7 +95,7 @@
                                 </div>
                             </li>
                             <li class="width100">
-                                <div class="formBtnBar">                                    
+                                <div class="formBtnBar">
                                     <button type="submit" onclick="javascript:$('#ServerRequest').val('');" class="button back">Buscar Otro Estudiante</button>
                                 </div>
                             </li>
@@ -136,8 +136,8 @@
                                 </div>
                             </li>
                             <li class="width100">
-                                <div class="formBtnBar">                                    
-                                    <input type="hidden" id="ServerRequest" name="ServerRequest" value="FIND_STUDENT"/>
+                                <div class="formBtnBar">
+                                    <input type="hidden" id="ServerRequest" name="ServerRequest" value="FIND_STUDENT" />
                                     <input type="hidden" id="Student_StudentID" name="Student.StudentID" value="@Model.Student.StudentID"/>
                                     <button type="submit" class="button find">Buscar Estudiante</button>
                                 </div>
@@ -165,15 +165,20 @@
             @if (Model.IsReadyToEnroll)
             {
                 <div class="clear"></div>
-                <div class="formBtnBar">                    
-                    <input type="hidden" id="ServerRequest" name="ServerRequest" value="START_ENROLL"/>
-                    <input type="hidden" id="Student_StudentID" name="Student.StudentID" value="@Model.Student.StudentID"/>                    
+                <div class="formBtnBar">
+                    <input type="hidden" id="ServerRequest" name="ServerRequest" value="START_ENROLL" />
+                    <input type="hidden" id="Student_StudentID" name="Student.StudentID" value="@Model.Student.StudentID"/>
+                    @if (Model.AllowEnterPayNumber)
+                    { 
+                        <a href="#PaymentInfo" id="linkPaymentInfo" class="popUp button sign">Ingresar Pago</a>
+                    }
                     <button type="submit" class="button send">Iniciar Matrícula</button>
                 </div>
             }
 
         </div>
         <a href="#selectStudentWindow" id="linkSelectStudent" class="popUp hide">link</a>
+        
     </div>   
     
             if (Model.StudentList.Count > 1)
@@ -195,16 +200,34 @@
             }
 }
 
+<div class="popupWindow" id="PaymentInfo">
+    <h2>Información de Pago</h2>
+
+    <ul class="formList">
+        <li>Número de Comprobante</li>
+        <li>
+            <input type="text" class="input width100" /></li>
+        <li>
+            <div class="formBtnBar">
+                <input type="hidden" id="StudentID" name="StudentID" value="@Model.Student.StudentID"/>
+                <button type="submit" class="button send">Acceptar</button>
+            </div>
+        </li>
+    </ul>
+</div>
+
 @section Scripts {
 
     <script>
+
         $(function () {
             $('form').off('submit.form').on('submit.form', function () {
                 $('.popupBg').fadeIn();
-                $('.loading').fadeIn();                
+                $('.loading').fadeIn();
             });
         });
     </script>
+    
 
     @if (Model.StudentList.Count > 1)
     {

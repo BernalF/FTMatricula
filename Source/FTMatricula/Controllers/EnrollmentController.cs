@@ -412,7 +412,8 @@ namespace FTMatricula.Controllers
             {
                 if (model != null)
                 {
-                    var studentCourses = db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(model[0].StudentID)).ToList();
+                    string student = model[0].StudentID;
+                    var studentCourses = db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(student)).ToList();
                     foreach (var item in studentCourses)
                     {
                         db.EnrollmentStudentCourses.Remove(item);
@@ -477,6 +478,48 @@ namespace FTMatricula.Controllers
         }
 
         /// <summary>
+        /// Enrollment Init
+        /// </summary>
+        /// <param name="EnrollmentID"></param>
+        /// <param name="StudentID"></param>
+        /// <param name="PaymentNumber"></param>
+        /// <returns></returns>
+        public JsonResult SaveEnrollmentPaymentInfo(Guid? EnrollmentID, Guid? StudentID, string PaymentNumber)
+        {
+            try
+            {
+                EnrollmentStudent aux = db.EnrollmentStudents.Where(m=>m.EnrollmentID == EnrollmentID && m.StudentID == StudentID).First();
+                if (aux == null) {
+                    
+                    db.EnrollmentStudents.Add(new EnrollmentStudent { 
+                                                    EnrollmentStudentID = Guid.NewGuid(),
+                                                    EnrollmentID = EnrollmentID,
+                                                    StudentID = StudentID,
+                                                    PaymentNumber = PaymentNumber,
+
+                                                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                                                    InsertDate = DateTime.Today,
+                                                    IpAddress = Network.GetIpAddress(Request),
+                                                });
+                    db.SaveChanges();
+
+                    // TODO: INSERT Cursos a Score
+
+                } else {
+                    aux.PaymentNumber = PaymentNumber;
+                    db.Entry(aux).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+            return Json(null);
+        }
+
+        /// <summary>
         /// Enrollment Init FIND_STUDENT
         /// </summary>
         /// <param name="model"></param>
@@ -524,16 +567,30 @@ namespace FTMatricula.Controllers
                                 };
 
                 model.IsStudentOK = true;
-                model.Message = new ServerMessage
-                                {
-                                    Show = true,
-                                    Text = "El Estudiante seleccionado esta verificado en la matrícula seleccionanda y es permitido proceder con dicho proceso",
-                                    Severity = MessageSeverity.OK
-                                };
                 model.IsReadyToEnroll = true;
                 model.ServerRequest = null;
 
                 result = new List<EnrollStudent>();
+
+                var tmp = db.EnrollmentStudentCourses.Where(m => m.StudentID == model.Student.StudentID).ToList();
+                if (tmp.Count > 0) { 
+                    model.Message = new ServerMessage
+                    {
+                        Show = true,
+                        Text = "El Estudiante seleccionado posee cursos matriculados, se recomienda prudencia si continúa al editar dicha informacion",
+                        Severity = MessageSeverity.Alert
+                    };
+                    model.AllowEnterPayNumber = true;
+                }
+                else
+                {
+                    model.Message = new ServerMessage
+                    {
+                        Show = true,
+                        Text = "El Estudiante seleccionado esta verificado en la matrícula seleccionanda y es permitido proceder con dicho proceso",
+                        Severity = MessageSeverity.OK
+                    };
+                }
             }
             model.StudentList = result;
 
