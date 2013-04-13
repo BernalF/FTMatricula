@@ -18,8 +18,10 @@ var scoreRegister = new Class({
         }
     },
     courseOnchanged: function () {
-        $('#CourseID').off('change.CourseID').on('change.CourseID', function () {
-            var courseID = $("#CourseID").val();    
+        
+        $('#ddlCourseID').off('change.ddlCourseID').on('change.ddlCourseID', function () {
+            $("#CourseID").val($("#ddlCourseID").val());
+            var courseID = $("#ddlCourseID").val();
             var grid = $("#Grid").data("kendoGrid");
             grid.dataSource.transport.options.read.url = "/ScoreRegister/PagingScores?CourseID=" + courseID;
             grid.dataSource.read();

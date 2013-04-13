@@ -12,10 +12,11 @@ using FTMatricula.Models;
 
 namespace FTMatricula.Controllers
 {
+    [KendoAjaxErrorHandler]
     public class ScoreRegisterController : Controller
     {
         private matrifunDBEntities db = new matrifunDBEntities();
-        
+
         // GET: /Index/
         public ActionResult Index()
         {
@@ -26,46 +27,65 @@ namespace FTMatricula.Controllers
         /// Paging Scores by Course
         /// </summary>
         [HttpPost]
-        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, string CourseID )
+        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, string CourseID)
         {
-            var uID = SessApp.GetUserID(User.Identity.Name);
+            try
+            {
+                if (CourseID != null)
+                {
+                    var uID = SessApp.GetUserID(User.Identity.Name);
 
-            return Json(db.Scores
-                        .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.CourseID == new Guid(CourseID))
-                        .Select(s => new
-                        {
-                            s.ScoreID,
-                            UserName = s.Student.User.UserName,
-                            FirstName = s.Student.FirstName,
-                            LastName = s.Student.LastName,
-                            s.Result
+                    return Json(db.Scores
+                                .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.CourseID == new Guid(CourseID))
+                                .Select(s => new
+                                {
+                                    s.ScoreID,
+                                    s.CourseID,
+                                    s.EnrollmentGroupID,
+                                    s.StudentID,
+                                    UserName = s.Student.User.UserName,
+                                    FirstName = s.Student.FirstName,
+                                    LastName = s.Student.LastName,
+                                    s.Result
 
-                        })
-                        .ToDataSourceResult(request));
+                                })
+                                .ToDataSourceResult(request));
+                }
+                else
+                {
+                    return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
         }
 
         /// <summary>
-        /// Create Score
+        /// Update Batch Method Score
         /// </summary>
         /// <param name="request"></param>
         /// <param name="model"></param>
         /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CreateScore([DataSourceRequest] DataSourceRequest request, Score model)
+        public ActionResult UpdateScore([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<Score> scores)
         {
-            if (ModelState.IsValid)
+            try
             {
-                //model.SchoolID = Guid.NewGuid();
-                //model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                //model.InsertDate = DateTime.Today;
-                //model.IpAddress = Network.GetIpAddress(Request);
-                //db.Schools.Add(model);
-                //db.SaveChanges();
+                foreach (var s in scores)
+                {                    
+                    db.Entry(s).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return Json(ModelState.ToDataSourceResult());
             }
-            return Json("");
-            //return Json(new[] { new { SchoolID = model.SchoolID, Name = model.Name, Description = model.Description, Code = model.Code } }.ToDataSourceResult(request, ModelState));
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();

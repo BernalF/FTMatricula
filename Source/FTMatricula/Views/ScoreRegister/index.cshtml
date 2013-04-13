@@ -31,7 +31,7 @@
                     <li class="width100">
                         @(Html.Kendo().DropDownList()
                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
-                                    .Name("CourseID")
+                                    .Name("ddlCourseID")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
                                     .HtmlAttributes(new { @class = "width100" })
@@ -50,6 +50,9 @@
                                       .Columns(columns =>
                                       {
                                           columns.Bound(m => m.ScoreID).Hidden();
+                                          columns.Bound(m => m.CourseID).Hidden();
+                                          columns.Bound(m => m.StudentID).Hidden();
+                                          columns.Bound(m => m.EnrollmentGroupID).Hidden();
                                           columns.Bound(m => m.UserName).Title(@Resources.GetValue("IDENTIFICATION"));
                                           columns.Bound(m => m.FirstName).Title(@Resources.GetValue("FIRST_NAME"));
                                           columns.Bound(m => m.LastName).Title(@Resources.GetValue("LAST_NAME"));
@@ -110,12 +113,14 @@
                                             .Ajax()
                                             .Batch(true)
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingScores", "ScoreRegister"))
-                                            .Create(create => create.Action("CreateScore", "ScoreRegister"))
+                                            .Read(read => read.Action("PagingScores", "ScoreRegister"))                                            
                                             .Update(update => update.Action("UpdateScore", "ScoreRegister"))
                                             .Model(model =>
                                             {
                                                 model.Id(m => m.ScoreID);
+                                                model.Field(m => m.CourseID).Editable(false);
+                                                model.Field(m => m.StudentID).Editable(false);
+                                                model.Field(m => m.EnrollmentGroupID).Editable(false);
                                                 model.Field(m => m.UserName).Editable(false);
                                                 model.Field(m => m.FirstName).Editable(false);
                                                 model.Field(m => m.LastName).Editable(false);
