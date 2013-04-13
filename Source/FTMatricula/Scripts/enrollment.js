@@ -479,6 +479,8 @@ var enrollment = new Class({
                     $('.loading').fadeOut();
                     if (response = 'true') {
                         alert('Su pago a sido registrado correctamente');
+                        $(".popupBg").delay(300).fadeOut(300);
+                        $('#PaymentInfo').fadeOut();
                     }
                 }
             });
