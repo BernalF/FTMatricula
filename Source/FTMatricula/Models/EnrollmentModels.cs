@@ -85,6 +85,15 @@ namespace FTMatricula.Models
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    public class EnrollStudentCourses {
+        public System.Guid? CourseID { get; set; }
+        public System.Guid? EnrollmentGroupID { get; set; }
+        public HtmlString HTML { get; set; }
+    }
+
+    /// <summary>
     /// Enrollment Info
     /// </summary>
     public class EnrollmentInfo
@@ -97,6 +106,7 @@ namespace FTMatricula.Models
             this.Student = new EnrollStudent();
             this.Message = new ServerMessage();
             this.EnrollmentCourses = new List<EnrollCourse>();
+            this.StudentCourses = new List<EnrollStudentCourses>();            
         }
 
         public System.Guid? EnrollmentID { get; set; }
@@ -106,6 +116,7 @@ namespace FTMatricula.Models
         public string SchoolDescription { get; set; }
         public EnrollStudent Student { get; set; }
         public ServerMessage Message { get; set; }
+        public IList<EnrollStudentCourses> StudentCourses { get; set; }
 
     }
 

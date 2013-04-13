@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using FTMatricula.Utilities.Helper;
 using System.Data;
 using System.Data.SqlTypes;
+using System.Text;
 
 namespace FTMatricula.Controllers
 {
@@ -323,7 +324,7 @@ namespace FTMatricula.Controllers
         {
             Student student = db.Students.Find(sID);
             Enrollment enrollment = db.Enrollments.Find(eID);
-            
+
             EnrollmentInfo model = new EnrollmentInfo();
 
             if (student != null)
@@ -395,6 +396,40 @@ namespace FTMatricula.Controllers
                 Guid? SchemeID = db.Scheme_Plan.Where(x => x.PlanID == enrollment.Plan.PlanID).FirstOrDefault().SchemeID;
                 School_Scheme school_scheme = db.School_Scheme.Where(x => x.SchemeID == SchemeID).FirstOrDefault();
                 model.SchoolDescription = school_scheme != null ? school_scheme.School.Code + " " + school_scheme.School.Description : "--";
+
+                foreach (var studentCourse in db.EnrollmentStudentCourses.Where(m => m.StudentID == sID).ToList())
+                {
+                    int i = 0;
+                    StringBuilder rows = new StringBuilder();
+                    var professor = studentCourse.EnrollmentGroup.User.Students.Where(x => x.UserID == studentCourse.EnrollmentGroup.ProfessorID).FirstOrDefault();
+
+                    foreach (var group in studentCourse.EnrollmentGroup.EnrollmentGroupSchedules)
+                    {
+                        rows.Append("<li><p>");
+                        rows.Append(i == 0 ? studentCourse.EnrollmentGroup.EnrollmentCourse.Course.Code + " - " + studentCourse.EnrollmentGroup.EnrollmentCourse.Course.Name : "&nbsp;");
+                        rows.Append("</p></li>");
+
+                        rows.Append("<li><p>");
+                        rows.Append(i == 0 ? group.EnrollmentGroup.GroupName : "&nbsp;");
+                        rows.Append("</p></li>");
+                        rows.Append("<li><p>" + group.Classroom.Code + "</p></li>");
+                        rows.Append("<li><p>" + group.DayOfWeek + " " + group.StartTime + " - " + group.EndTime + "</p></li>");
+                        rows.Append("<li><p>");
+                        rows.Append(i == 0 ? professor.FirstName + " " + professor.LastName : "&nbsp;");
+                        rows.Append("</p></li>");
+                        rows.Append("<li><p>");
+                        rows.Append(i == 0 ? "<a href='#' class='delIcon' i='#INDEX#'></a>" : "&nbsp;");
+                        rows.Append("</p></li>");
+                        i++;
+                    }
+
+                    model.StudentCourses.Add(new EnrollStudentCourses
+                    {
+                        CourseID = studentCourse.EnrollmentGroup.EnrollmentCourse.CourseID,
+                        EnrollmentGroupID = studentCourse.EnrollmentGroupID,
+                        HTML = new HtmlString(rows.ToString())
+                    });
+                }
             }
 
             return View(model);
@@ -488,24 +523,27 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                EnrollmentStudent aux = db.EnrollmentStudents.Where(m=>m.EnrollmentID == EnrollmentID && m.StudentID == StudentID).FirstOrDefault();
-                if (aux == null) {
-                    
-                    db.EnrollmentStudents.Add(new EnrollmentStudent { 
-                                                    EnrollmentStudentID = Guid.NewGuid(),
-                                                    EnrollmentID = EnrollmentID,
-                                                    StudentID = StudentID,
-                                                    PaymentNumber = PaymentNumber,
+                EnrollmentStudent aux = db.EnrollmentStudents.Where(m => m.EnrollmentID == EnrollmentID && m.StudentID == StudentID).FirstOrDefault();
+                if (aux == null)
+                {
 
-                                                    InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                                                    InsertDate = DateTime.Today,
-                                                    IpAddress = Network.GetIpAddress(Request),
-                                                });
+                    db.EnrollmentStudents.Add(new EnrollmentStudent
+                    {
+                        EnrollmentStudentID = Guid.NewGuid(),
+                        EnrollmentID = EnrollmentID,
+                        StudentID = StudentID,
+                        PaymentNumber = PaymentNumber,
+
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request),
+                    });
                     db.SaveChanges();
 
                     foreach (var item in db.EnrollmentStudentCourses.Where(m => m.StudentID == StudentID).ToList())
                     {
-                        db.Scores.Add(new Score {
+                        db.Scores.Add(new Score
+                        {
                             ScoreID = Guid.NewGuid(),
                             StudentID = StudentID,
                             EnrollmentGroupID = item.EnrollmentGroupID,
@@ -513,12 +551,14 @@ namespace FTMatricula.Controllers
 
                             InsertUserID = SessApp.GetUserID(User.Identity.Name),
                             InsertDate = DateTime.Today,
-                            IpAddress = Network.GetIpAddress(Request)    
+                            IpAddress = Network.GetIpAddress(Request)
                         });
                         db.SaveChanges();
                     }
 
-                } else {
+                }
+                else
+                {
                     aux.PaymentNumber = PaymentNumber;
                     db.Entry(aux).State = EntityState.Modified;
                     db.SaveChanges();
@@ -586,7 +626,8 @@ namespace FTMatricula.Controllers
                 result = new List<EnrollStudent>();
 
                 var tmp = db.EnrollmentStudentCourses.Where(m => m.StudentID == model.Student.StudentID).ToList();
-                if (tmp.Count > 0) { 
+                if (tmp.Count > 0)
+                {
                     model.Message = new ServerMessage
                     {
                         Show = true,

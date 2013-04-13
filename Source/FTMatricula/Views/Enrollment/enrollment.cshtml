@@ -130,19 +130,16 @@
                         </li>
                     </ul>
                     <ul id="enrollmentGrid">
-                        
                     </ul>
 
                 </div>
                 <div class="defaultBox">&nbsp;</div>
             </div>
             <div class="errorsSpace">
-                    <ul>
-                        <li id="ServerMsj">
-
-                        </li>
-                    </ul>
-                </div>
+                <ul>
+                    <li id="ServerMsj"></li>
+                </ul>
+            </div>
 
             <div class="clear"></div>
             <div class="formBtnBar">
@@ -156,18 +153,56 @@
     </div>
 </div>
 
-@Html.HiddenFor(m=>m.Student.StudentID)
+@Html.HiddenFor(m => m.Student.StudentID)
 
 @section Scripts {
     <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script type="text/javascript">
         EnrollmentList = [];
-        $(function () {
-            var matri = new enrollment({
-                view: 'ENROLMENT',
-                urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")'
+    </script>
+
+    @if (Model.StudentCourses.Count > 0)
+    {
+        foreach (var item in Model.StudentCourses)
+        {
+        <script type="text/javascript">
+            EnrollmentList.push({
+                CourseID: '@item.CourseID.ToString()',
+                EnrollmentGroupID: '@item.EnrollmentGroupID.ToString()',
+                HTML: new StringBuilder()
+            });
+            
+            EnrollmentList[EnrollmentList.length - 1].HTML.append("@item.HTML");
+        </script>
+        }
+        
+        <script>
+            $(function () {
+
+
+                var matri = new enrollment({
+                    view: 'ENROLMENT',
+                    urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")'
+                });
+
+
+                $("#enrollmentGrid").html("");
+                $.each(EnrollmentList, function (i, val) {
+                    $("#enrollmentGrid").append(val.HTML.toString().replace("#INDEX#", i)).hide().fadeIn();
+                });
+                matri.deleteEnrollmentGrid();
+            });
+        </script>               
+    }
+    else
+    {
+        <script>
+            $(function () {
+                var matri = new enrollment({
+                    view: 'ENROLMENT',
+                    urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")'
             });
         });
-
-    </script>
+        </script>
+    }
 }
