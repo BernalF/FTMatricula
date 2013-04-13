@@ -392,9 +392,9 @@ namespace FTMatricula.Controllers
                 };
                 model.PlanName = enrollment.Plan.Name + " " + enrollment.Plan.Description;
 
-                //Guid? SchemeID = db.Scheme_Plan.Where(x => x.PlanID == e.Plan.PlanID).FirstOrDefault().SchemeID;
-                //School school = db.School_Scheme.Where(x => x.SchemeID == SchemeID).FirstOrDefault().School;
-                model.SchoolDescription = "-";//school.Code + " " + school.Description;
+                Guid? SchemeID = db.Scheme_Plan.Where(x => x.PlanID == enrollment.Plan.PlanID).FirstOrDefault().SchemeID;
+                School_Scheme school_scheme = db.School_Scheme.Where(x => x.SchemeID == SchemeID).FirstOrDefault();
+                model.SchoolDescription = school_scheme != null ? school_scheme.School.Code + " " + school_scheme.School.Description : "--";
             }
 
             return View(model);
@@ -488,7 +488,7 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                EnrollmentStudent aux = db.EnrollmentStudents.Where(m=>m.EnrollmentID == EnrollmentID && m.StudentID == StudentID).First();
+                EnrollmentStudent aux = db.EnrollmentStudents.Where(m=>m.EnrollmentID == EnrollmentID && m.StudentID == StudentID).FirstOrDefault();
                 if (aux == null) {
                     
                     db.EnrollmentStudents.Add(new EnrollmentStudent { 
@@ -503,7 +503,19 @@ namespace FTMatricula.Controllers
                                                 });
                     db.SaveChanges();
 
-                    // TODO: INSERT Cursos a Score
+                    foreach (var item in db.EnrollmentStudentCourses.Where(m => m.StudentID == StudentID).ToList())
+                    {
+                        db.Scores.Add(new Score {
+                            ScoreID = Guid.NewGuid(),
+                            StudentID = StudentID,
+                            EnrollmentGroupID = item.EnrollmentGroupID,
+                            CourseID = item.EnrollmentGroup.EnrollmentCourse.CourseID,
+
+                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                            InsertDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)    
+                        });
+                    }
 
                 } else {
                     aux.PaymentNumber = PaymentNumber;
