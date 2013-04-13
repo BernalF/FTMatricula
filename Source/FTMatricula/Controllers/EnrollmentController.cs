@@ -353,7 +353,7 @@ namespace FTMatricula.Controllers
 
                                 groupsList.Add(new EnrollGroupDetail
                                 {
-                                    isFirst  = true,
+                                    isFirst = true,
                                     EnrollmentGroupID = g.EnrollmentGroupID.ToString(),
                                     CourseCode = g.EnrollmentCourse.Course.Code,
                                     GroupName = g.GroupName,
@@ -402,26 +402,38 @@ namespace FTMatricula.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public JsonResult SaveEnrollment()
+        public JsonResult SaveEnrollment(IList<EnrollStudentGroup> model)
         {
-            //try
-            //{
-            //    EnrollmentGroup group = db.EnrollmentGroups.Find(new Guid(EnrollmentGroupID));
 
-            //    foreach (var schedule in group.EnrollmentGroupSchedules.ToList())
-            //    {
-            //        db.EnrollmentGroupSchedules.Remove(schedule);
-            //        db.SaveChanges();
-            //    }
-            //    db.EnrollmentGroups.Remove(group);
-            //    db.SaveChanges();
+            try
+            {
+                foreach (var item in db.EnrollmentStudentCourses.Where(m => m.StudentID == new Guid(model[0].StudentID)).ToList())
+                {
+                    db.EnrollmentStudentCourses.Remove(item);
+                    db.SaveChanges();
+                }
+                
+                foreach (var item in model)
+                {
+                    db.EnrollmentStudentCourses.Add(new EnrollmentStudentCourse
+                                                        {
+                                                            EnrollmentStudentCourseID = Guid.NewGuid(),
+                                                            EnrollmentGroupID = new Guid(item.EnrollmentGroupID),
+                                                            StudentID = new Guid(item.StudentID),
 
-            //    return Json(this.getGroupsList(EnrollmentID, EnrollmentCourseID));
-            //}
-            //catch (Exception e)
-            //{
-            //    throw new ApplicationException(e.Message);
-            //}
+                                                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                                                            InsertDate = DateTime.Today,
+                                                            IpAddress = Network.GetIpAddress(Request)
+                                                        });
+                    db.SaveChanges();
+                }
+                
+
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
             return Json(null);
 
         }

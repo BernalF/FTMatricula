@@ -148,4 +148,12 @@ namespace FTMatricula.Models
         }
     }
 
+    /// <summary>
+    /// Enroll Student Group
+    /// </summary>
+    public class EnrollStudentGroup
+    {
+        public string EnrollmentGroupID { get; set; }
+        public string StudentID { get; set; }
+    }
 }
