@@ -428,17 +428,16 @@ var enrollment = new Class({
                     EnrollmentGroupID: this.EnrollmentGroupID,
                     StudentID: $('#Student_StudentID').val()
                 });
-            });
-            $.ajaxSettings.traditional = true;
+            });            
             $.bAjax({
                 url: self.options.urlEnrollemnt,
                 ajaxBeforeSend: function () {
                     $('.popupBg').fadeIn();
                     $('.loading').fadeIn();
                 },
-                data: EnrollStudentGroup,
-                datatype: "json",
+                data: JSON.stringify(EnrollStudentGroup),
                 contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
                 async: false,
                 ajaxSuccess: function (response) {
                     $('.popupBg').fadeOut();
