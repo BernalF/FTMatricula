@@ -515,6 +515,7 @@ namespace FTMatricula.Controllers
                             InsertDate = DateTime.Today,
                             IpAddress = Network.GetIpAddress(Request)    
                         });
+                        db.SaveChanges();
                     }
 
                 } else {
