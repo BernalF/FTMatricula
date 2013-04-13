@@ -178,7 +178,7 @@
 
         </div>
         <a href="#selectStudentWindow" id="linkSelectStudent" class="popUp hide">link</a>
-        
+
     </div>   
     
             if (Model.StudentList.Count > 1)
@@ -206,37 +206,33 @@
     <ul class="formList">
         <li>Número de Comprobante</li>
         <li>
-            <input type="text" class="input width100" /></li>
+            <input type="text" class="input width100" id="lblPayNum" /></li>
         <li>
             <div class="formBtnBar">
                 <input type="hidden" id="StudentID" name="StudentID" value="@Model.Student.StudentID"/>
-                <button type="submit" class="button send">Acceptar</button>
+                <button id="btnAccept" class="button send">Acceptar</button>
             </div>
         </li>
     </ul>
 </div>
 
 @section Scripts {
-
+    <script type="text/javascript" src="~/Scripts/enrollment.js"></script>
     <script>
-
         $(function () {
-            $('form').off('submit.form').on('submit.form', function () {
-                $('.popupBg').fadeIn();
-                $('.loading').fadeIn();
+            var matri = new enrollment({
+                view: 'ENROLMENTINIT',
+                urlEnrollemnt: '@Url.Action("SaveEnrollmentPaymentInfo", "Enrollment")'
             });
         });
     </script>
-    
 
     @if (Model.StudentList.Count > 1)
     {
         <script>
             var student_list = [];
-
             $(function () {
                 $('#linkSelectStudent').trigger('click');
-
                 $('.formPopUpWin li').off('click.formPopUpWin').on('click.formPopUpWin', function () {
                     $(".popupBg").delay(300).fadeOut(300);
                     $($(".popUp").attr('href')).fadeOut(300);

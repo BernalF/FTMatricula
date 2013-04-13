@@ -516,7 +516,7 @@ namespace FTMatricula.Controllers
             {
                 throw new ApplicationException(e.Message);
             }
-            return Json(null);
+            return Json(true);
         }
 
         /// <summary>

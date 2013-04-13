@@ -30,6 +30,10 @@ var enrollment = new Class({
                 this.groupGrid();
                 this.addCourse();
                 break;
+            case 'ENROLMENTINIT':
+                this.submitForm();
+                this.paymentNumberSave();
+                break;
         }
     },
     //fill the Grid Details Group 
@@ -447,5 +451,39 @@ var enrollment = new Class({
             });
             return false;
         });
+    },
+    submitForm: function () {
+        $('form').off('submit.form').on('submit.form', function () {
+            $('.popupBg').fadeIn();
+            $('.loading').fadeIn();
+        });
+    },
+    paymentNumberSave: function () {
+        var self = this;
+        $('#btnAccept').off('click.btnAccept').on('click.btnAccept', function () {            
+            $.ajaxSettings.traditional = true;
+            $.bAjax({
+                url: self.options.urlEnrollemnt,
+                ajaxBeforeSend: function () {
+                    $('.popupBg').fadeIn();
+                    $('.loading').fadeIn();
+                },
+                data: {
+                    EnrollmentID: $('#EnrollmentID').val(),
+                    StudentID: $('#StudentID').val(),
+                    PaymentNumber: $('#lblPayNum').val()
+                },                
+                async: false,
+                ajaxSuccess: function (response) {
+                    $('.popupBg').fadeOut();
+                    $('.loading').fadeOut();
+                    if (response = 'true') {
+                        alert('Su pago a sido registrado correctamente');
+                    }
+                }
+            });
+            return false;
+        });
     }
+
 });
