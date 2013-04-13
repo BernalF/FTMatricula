@@ -54,27 +54,27 @@ namespace FTMatricula.Models
         /// </summary>
         public EnrollmentInit()
         {
-            this.Student = new EnrollmentStudent();
+            this.Student = new EnrollStudent();
             this.Message = new ServerMessage();
-            this.StudentList = new List<EnrollmentStudent>();
+            this.StudentList = new List<EnrollStudent>();
         }
 
 
         public System.Guid? EnrollmentID { get; set; }
-        public EnrollmentStudent Student { get; set; }
+        public EnrollStudent Student { get; set; }
         public bool IsStudentOK { get; set; }
         public bool IsReadyToEnroll { get; set; }
         public string ServerRequest { get; set; }
 
         public ServerMessage Message { get; set; }
 
-        public IList<EnrollmentStudent> StudentList { get; set; }
+        public IList<EnrollStudent> StudentList { get; set; }
     }
 
     /// <summary>
     /// Enrollment Student
     /// </summary>
-    public class EnrollmentStudent
+    public class EnrollStudent
     {
         public System.Guid? StudentID { get; set; }
         public string Identification { get; set; }
@@ -93,7 +93,7 @@ namespace FTMatricula.Models
         /// </summary>
         public EnrollmentInfo()
         {
-            this.Student = new EnrollmentStudent();
+            this.Student = new EnrollStudent();
             this.Message = new ServerMessage();
             this.EnrollmentCourses = new List<EnrollCourse>();
         }
@@ -103,7 +103,7 @@ namespace FTMatricula.Models
         public IList<EnrollCourse> EnrollmentCourses { get; set; }
         public string PlanName { get; set; }
         public string SchoolDescription { get; set; }
-        public EnrollmentStudent Student { get; set; }
+        public EnrollStudent Student { get; set; }
         public ServerMessage Message { get; set; }
 
     }
@@ -147,30 +147,5 @@ namespace FTMatricula.Models
             }
         }
     }
-
-
-    /**
-     {
-    "EnrollmentGroup": [
-        {
-            'EnrollmentGroupID': 'x',
-            'CourseCode': 'x',
-            'GroupName': 'x',
-            'ClassroomCode': 'x',
-            'Schedule': 'x',
-            'ProfessorName': 'x'
-        },
-        {
-            "EnrollmentGroupID": "x",
-            "CourseCode": "x",
-            "GroupName": "x",
-            "ClassroomCode": "x",
-            "Schedule": "x",
-            "ProfessorName": "x"
-        }
-    ]
-}
-     * **/
-
 
 }

@@ -18,6 +18,7 @@ namespace FTMatricula.Models
         {
             this.EnrollmentGroupSchedules = new HashSet<EnrollmentGroupSchedule>();
             this.Scores = new HashSet<Score>();
+            this.EnrollmentStudentCourses = new HashSet<EnrollmentStudentCourse>();
         }
     
         public System.Guid? EnrollmentGroupID { get; set; }
@@ -36,5 +37,6 @@ namespace FTMatricula.Models
         public virtual User User { get; set; }
         public virtual ICollection<EnrollmentGroupSchedule> EnrollmentGroupSchedules { get; set; }
         public virtual ICollection<Score> Scores { get; set; }
+        public virtual ICollection<EnrollmentStudentCourse> EnrollmentStudentCourses { get; set; }
     }
 }

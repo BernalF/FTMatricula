@@ -217,6 +217,12 @@
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EnrollmentModels.cs" />
+    <Compile Include="Models\EnrollmentStudent.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnrollmentStudentCourse.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Location.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>

@@ -327,7 +327,7 @@ namespace FTMatricula.Controllers
 
             EnrollmentInfo model = new EnrollmentInfo();
             if (student != null)
-                model.Student = new EnrollmentStudent
+                model.Student = new EnrollStudent
                 {
                     Identification = student.User.UserName,
                     FirstName = student.FirstName,
@@ -397,6 +397,35 @@ namespace FTMatricula.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Save Enrollment
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public JsonResult SaveEnrollment()
+        {
+            //try
+            //{
+            //    EnrollmentGroup group = db.EnrollmentGroups.Find(new Guid(EnrollmentGroupID));
+
+            //    foreach (var schedule in group.EnrollmentGroupSchedules.ToList())
+            //    {
+            //        db.EnrollmentGroupSchedules.Remove(schedule);
+            //        db.SaveChanges();
+            //    }
+            //    db.EnrollmentGroups.Remove(group);
+            //    db.SaveChanges();
+
+            //    return Json(this.getGroupsList(EnrollmentID, EnrollmentCourseID));
+            //}
+            //catch (Exception e)
+            //{
+            //    throw new ApplicationException(e.Message);
+            //}
+            return Json(null);
+
+        }
+
 
         /// <summary>
         /// Enrollment Init
@@ -435,12 +464,12 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         private void EnrollmentInit_FIND_STUDENT(EnrollmentInit model)
         {
-            List<EnrollmentStudent> result = null;
+            List<EnrollStudent> result = null;
             if (model.Student.StudentID == null)
                 result = db.Students.Where(x => x.User.UserName.Contains(model.Student.Identification)
                                          || x.FirstName.Contains(model.Student.FirstName)
                                          || x.LastName.Contains(model.Student.LastName)
-                                         || x.Phone1.Contains(model.Student.Phone1)).Select(m => new EnrollmentStudent
+                                         || x.Phone1.Contains(model.Student.Phone1)).Select(m => new EnrollStudent
                                          {
                                              StudentID = m.StudentID,
                                              Identification = m.User.UserName,
@@ -450,11 +479,11 @@ namespace FTMatricula.Controllers
                                          }).ToList();
             else
             {
-                result = new List<EnrollmentStudent>();
+                result = new List<EnrollStudent>();
 
                 var m = db.Students.Find(model.Student.StudentID);
 
-                result.Add(new EnrollmentStudent
+                result.Add(new EnrollStudent
                 {
                     StudentID = m.StudentID,
                     Identification = m.User.UserName,
@@ -467,7 +496,7 @@ namespace FTMatricula.Controllers
 
             if (result.Count == 1)
             {
-                model.Student = new EnrollmentStudent
+                model.Student = new EnrollStudent
                                 {
                                     StudentID = result[0].StudentID,
                                     Identification = result[0].Identification,
@@ -486,7 +515,7 @@ namespace FTMatricula.Controllers
                 model.IsReadyToEnroll = true;
                 model.ServerRequest = null;
 
-                result = new List<EnrollmentStudent>();
+                result = new List<EnrollStudent>();
             }
             model.StudentList = result;
 
@@ -497,7 +526,7 @@ namespace FTMatricula.Controllers
         /// <param name="model"></param>
         private void EnrollmentInit_DEFAULT(EnrollmentInit model)
         {
-            model.Student = new EnrollmentStudent();
+            model.Student = new EnrollStudent();
             model.Message = new ServerMessage();
             model.IsReadyToEnroll = false;
             model.IsStudentOK = false;

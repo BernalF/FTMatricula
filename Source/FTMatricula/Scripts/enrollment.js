@@ -309,6 +309,7 @@ var enrollment = new Class({
     groupGrid: function () {
         $('.itemSpace').off('click.itemSpace').on('click.itemSpace', function (e) {
             $('.groupsGrid ul').fadeIn();
+            $('#groupsGrid ul').fadeIn();
             $('#btnAddCourse').parent().fadeIn();
 
             $('.whiteContentBox label').removeClass('bgrYellow');
@@ -350,7 +351,7 @@ var enrollment = new Class({
 
                         $.each(EnrollmentList, function (i, val) {
                             if (val.CourseID == $('.itemSpace.bgrYellow').attr('id')) {
-                                alert('No puede agregar el curso otra vez');
+                                alert('No se puede agregar el mismo curso más de una vez');
                                 inserted = false;
                                 return false;
                             }
@@ -411,7 +412,6 @@ var enrollment = new Class({
             EnrollmentList.splice($(this).attr('i'), 1);
             
             $("#enrollmentGrid").html("");
-
             $.each(EnrollmentList, function (i, val) {
                 $("#enrollmentGrid").append(val.HTML.toString().replace("#INDEX#", i)).hide().fadeIn();
             });
@@ -421,6 +421,7 @@ var enrollment = new Class({
     },
     enrollmentAction: function () {
         $('#btnEnrollment').off('click.btnEnrollment').on('click.btnEnrollment', function () {
+
             alert(JSON.stringify(EnrollmentList));
         });
     }
