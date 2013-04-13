@@ -229,38 +229,63 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                db.Configuration.ValidateOnSaveEnabled = false;
-                // Insert in scheme
-                Scheme scheme = new Scheme
+                Scheme scheme = db.Schemes.Find(model.SchemeID);
+                foreach (var sss in scheme.School_Scheme.ToList())
                 {
-                    SchemeID = model.SchemeID,
-                    Name = model.SchemeName,
-                    Description = model.Description,
-                    OwnerUserId = model.OwnerUserId,
-                    CoordinatorUserId = model.CoordinatorUserId,
-                    ModalityID = model.ModalityID,
-                    ModifyUserID = SessApp.GetUserID(User.Identity.Name),
-                    ModifyDate = DateTime.Today,
-                    IpAddress = Network.GetIpAddress(Request),
-                };
-                db.Entry(scheme).State = EntityState.Modified;
-                db.SaveChanges();
-                // Insert in scheme-requirement
-                foreach (var item in model.PostedReq.ReqIDs)
-                {
-                    Scheme_Requirement sR = new Scheme_Requirement
-                    {
-                        RequirementID = new Guid(item),
-                        SchemeID = model.SchemeID,
-                        ModifyUserID = SessApp.GetUserID(User.Identity.Name),
-                        ModifyDate = DateTime.Today,
-                        IpAddress = Network.GetIpAddress(Request)
-                    };
-                    db.Entry(sR).State = EntityState.Modified;
-                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.School_Scheme.Remove(sss);
                     db.SaveChanges();
                 }
-                return RedirectToAction("index");
+
+                foreach (var sr in scheme.Scheme_Requirement.ToList())
+                {
+                    db.Scheme_Requirement.Remove(sr);
+                    db.SaveChanges();
+                }
+
+                if (model.PostedReq == null)
+                {
+                    ModelState.AddModelError("", "Por favor seleccione un requisito");
+                    SchemeDetail sd = db.SchemeDetails
+                                   .Where(s => s.SchemeID == model.SchemeID)
+                                   .ToList()
+                                   .FirstOrDefault();
+                    return View(sd);
+                }
+                else if (model.SchoolID == null)
+                {
+                    ModelState.AddModelError("", "Por favor seleccione una Escuela");
+                    SchemeDetail sd = db.SchemeDetails
+                                   .Where(s => s.SchemeID == model.SchemeID)
+                                   .ToList()
+                                   .FirstOrDefault();
+                    return View(sd);
+                }
+                else
+                {
+                    // Insert in scheme
+                    db.Entry(scheme).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    // Insert in scheme-requirement
+                    foreach (var item in model.PostedReq.ReqIDs)
+                    {
+                        Scheme_Requirement sR = new Scheme_Requirement
+                        {
+                            RequirementID = new Guid(item),
+                            SchemeID = model.SchemeID,
+                            ModifyUserID = SessApp.GetUserID(User.Identity.Name),
+                            ModifyDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)
+                        };
+                        db.Scheme_Requirement.Add(sR);
+                        db.SaveChanges();
+                    }
+                    // Assign school to a scheme
+                    School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = model.SchemeID };
+                    db.School_Scheme.Add(ss);
+                    db.SaveChanges();
+                    return RedirectToAction("index");
+                }
             }
             catch (Exception e)
             {
