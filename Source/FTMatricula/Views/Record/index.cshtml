@@ -1,0 +1,130 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = @Resources.GetValue("NOTES_REGISTER");
+}
+
+@section styles {
+    <style>
+        .k-reset {
+            border: 0 none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+    </style>
+}
+<div id="content">
+
+    <div class="mainBox">
+
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "notes" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("NOTES_REGISTER")/@Resources.GetValue("NOTES_COURSE_REGISTER")</a></h2>
+
+        <div class="editDetail">
+            <div class="detailBox100">
+                <ul>
+                    <li>
+                        <label class="subTitle">@Resources.GetValue("COURSES")</label>
+                    </li>
+                    <li class="width100">
+                        @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
+                                    .Name("ddlCourseID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" })
+                                    .OptionLabel("Select a Course"))
+                    </li>
+                </ul>
+            </div>
+            <div class="detailBox100">
+                <ul>
+                    <li>
+                        <label class="subTitle cWhite">Lista de Estudiantes por Curso</label>
+                    </li>
+                    <li class="width100">
+                        @(Html.Kendo().Grid<FTMatricula.Models.Record>()
+                                      .Name("Grid")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(m => m.ScoreID).Hidden();                                          
+                                          columns.Bound(m => m.UserName).Title(@Resources.GetValue("IDENTIFICATION"));
+                                          columns.Bound(m => m.FirstName).Title(@Resources.GetValue("FIRST_NAME"));
+                                          columns.Bound(m => m.LastName).Title(@Resources.GetValue("LAST_NAME"));
+                                          columns.Bound(m => m.Result)
+                                              .Title(@Resources.GetValue("RESULT"))
+                                              .ClientTemplate("")
+                                              .HeaderTemplate("");
+                                      })                                                                          
+                                      .Sortable(sor => sor.AllowUnsort(true))                                      
+                                      .Resizable(resize => resize.Columns(true))
+                                      .Filterable(filter =>
+                                      {
+                                          filter.Enabled(true);
+                                          filter.Extra(false);
+                                          filter.Operators(oper =>
+                                          {
+                                              oper.ForString(ostr =>
+                                              {
+                                                  ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
+                                                  ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
+                                                  ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
+                                                  ostr.Contains(@Resources.GetValue("CONTAINS"));
+                                                  ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
+                                                  ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
+                                              });
+                                          });
+                                          filter.Messages(msj =>
+                                          {
+                                              msj.Filter(@Resources.GetValue("FIND"));
+                                              msj.Clear(@Resources.GetValue("CLEAN"));
+                                              msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
+                                          });
+                                      })
+                                      .Pageable(pager => pager
+                                            .PageSizes(new int[] { 5, 10, 15 })
+                                            .Input(true)
+                                            .Numeric(true)
+                                            .Info(true)
+                                            .PreviousNext(true)
+                                            .Refresh(true)
+                                                    .Messages(messages =>
+                                                    {
+                                                        messages.Empty(@Resources.GetValue("NO_RECORDS"));
+                                                        messages.Display(@Resources.GetValue("DISPLAY_GRID"));
+                                                        messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
+                                                        messages.Page(@Resources.GetValue("PAGE"));
+                                                        messages.Of(@Resources.GetValue("OF_GRID"));
+                                                        messages.First(@Resources.GetValue("FIRST_PAGE"));
+                                                        messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
+                                                        messages.Next(@Resources.GetValue("NEXT_PAGE"));
+                                                        messages.Last(@Resources.GetValue("LAST_PAGE"));
+                                                        messages.Refresh(@Resources.GetValue("UPDATE"));
+                                                    }))
+                                      .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Batch(true)
+                                            .Events(events => events.Error("error_handler"))
+                                            .Read(read => read.Action("PagingRecords", "Record"))                                                                                        
+                                            .Model(model => model.Id(m => m.RecordID)))
+                                    )
+                    </li>
+                </ul>
+            </div>
+            <ul class="formBtnBar">
+                <li>
+                    <a href="@Url.Action("Back", "Home", routeValues: new { opt = "records" })" class="button back">Cancel</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/scoreRegister.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var sregis = new scoreRegister({
+                view: 'INDEX'
+            });
+        });
+    </script>
+}

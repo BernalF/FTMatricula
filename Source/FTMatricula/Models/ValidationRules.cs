@@ -140,8 +140,8 @@ namespace FTMatricula.Models
     public partial class StudentAdditionalData
     {
 
-    }   
-    
+    }
+
     public class StudentAdditionalData_Validation
     {
         [Display(ResourceType = typeof(ModelResources), Name = "STUDENT_PHYSICA_LADDRESS")]
@@ -163,7 +163,7 @@ namespace FTMatricula.Models
     {
         public string PlanDescription { get; set; }
         public string LocationName { get; set; }
-        
+
     }
 
     public class Enrollment_Validation
@@ -188,14 +188,30 @@ namespace FTMatricula.Models
 
     //------ Score Section
     [MetadataType(typeof(Score_Validation))]
-    public partial class Score {
+    public partial class Score
+    {
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 
     public class Score_Validation
-    {        
+    {
+    }
+
+    //------ Record Section
+    [MetadataType(typeof(Record_Validation))]
+    public partial class Record
+    {
+        public string UserName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Result { get; set; }
+
+    }
+
+    public class Record_Validation
+    {
     }
 }
 
