@@ -36,6 +36,7 @@ namespace FTMatricula.Models
     /// </summary>
     public class StudentCourses {
 
+        public string PlanCode { get; set; }
         public string CourseCode { get; set; }
         public string CourseName { get; set; }
         public string ClassroomCode { get; set; }
