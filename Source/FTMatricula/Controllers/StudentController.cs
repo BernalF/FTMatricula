@@ -10,6 +10,7 @@ using Kendo.Mvc.Extensions;
 using FTMatricula.Utilities.Helper;
 using FTMatricula.Models;
 using System.Web.Security;
+using System.Text;
 
 namespace FTMatricula.Controllers
 {
@@ -43,6 +44,7 @@ namespace FTMatricula.Controllers
                    })
                    .ToDataSourceResult(request));
         }
+
 
         public ActionResult Create()
         {
@@ -297,9 +299,66 @@ namespace FTMatricula.Controllers
             //return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }
 
-
-        public ActionResult StudentCourses() {
+        /// <summary>
+        /// Student Courses
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StudentCourses()
+        {
             return View();
+        }
+
+        /// <summary>
+        /// Paging Student Courses
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingStudentCourses([DataSourceRequest] DataSourceRequest request)
+        {
+            List<StudentCourses> result = null;
+            //Guid? StudentID = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault().StudentID;
+            var temp = db.Students.Where(m => m.User.UserName == "104190914").FirstOrDefault();
+            if (temp != null)
+            {
+                Guid? StudentID = temp.StudentID;
+
+                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
+
+                result = db.Scores
+                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
+                                .Select(m => new StudentCourses
+                                    {
+                                        EnrollmentGroupID = m.EnrollmentGroupID,
+                                        ProfessorID = m.EnrollmentGroup.ProfessorID,
+                                        CourseID = m.CourseID,
+                                        CourseCode = m.Course.Code,
+                                        CourseName = m.Course.Name,
+                                        PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name
+
+                                    })
+                                .ToList();
+                int i = 0;
+                foreach (var item in result)
+                {
+                    StringBuilder schedule = new StringBuilder();
+                    foreach (var group in db.EnrollmentGroups.Find(item.EnrollmentGroupID).EnrollmentGroupSchedules)
+                    {
+                        if (schedule.Length == 0)
+                            schedule.Append("" + group.Classroom.Code + " " + group.DayOfWeek + " " + group.StartTime + "-" + group.EndTime);
+                        else
+                            schedule.Append(" ; " + group.Classroom.Code + " " + group.DayOfWeek + " " + group.StartTime + "-" + group.EndTime);
+                    }
+                    result[i].Schedule = schedule.ToString();
+
+                    var aux = db.Students.Where(x => x.UserID == item.ProfessorID).FirstOrDefault();
+                    if(aux != null)
+                        result[i].Professor = aux.FirstName + " " + aux.LastName;
+                    i++;
+                }
+            }
+
+            return Json(result.ToDataSourceResult(request));
         }
 
         protected override void Dispose(bool disposing)

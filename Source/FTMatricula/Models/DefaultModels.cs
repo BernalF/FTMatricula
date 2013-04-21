@@ -38,11 +38,13 @@ namespace FTMatricula.Models
 
         public string PlanCode { get; set; }
         public string CourseCode { get; set; }
-        public string CourseName { get; set; }
-        public string ClassroomCode { get; set; }
-        public string ClassroomName { get; set; }
+        public string CourseName { get; set; }        
         public string Professor { get; set; }
         public string Schedule { get; set; }
+
+        public Guid? EnrollmentGroupID { get; set; }
+        public Guid? ProfessorID { get; set; }
+        public Guid? CourseID { get; set; }
 
     }
 

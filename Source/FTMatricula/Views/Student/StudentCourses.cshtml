@@ -25,29 +25,19 @@
             <div class="detailBox100">
                 <ul>
                     <li>
-                        <label class="subTitle cWhite">Lista de Estudiantes por Curso</label>
+                        <label class="subTitle cWhite">Lista de Cursos por Estudiantes</label>
                     </li>
                     <li class="width100">
-                        @(Html.Kendo().Grid<FTMatricula.Models.Score>()
+                        @(Html.Kendo().Grid<FTMatricula.Models.StudentCourses>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {
-                                          columns.Bound(m => m.ScoreID).Hidden();
-                                          columns.Bound(m => m.CourseID).Hidden();
-                                          columns.Bound(m => m.StudentID).Hidden();
-                                          columns.Bound(m => m.EnrollmentGroupID).Hidden();
-                                          columns.Bound(m => m.UserName).Title(@Resources.GetValue("IDENTIFICATION"));
-                                          columns.Bound(m => m.FirstName).Title(@Resources.GetValue("FIRST_NAME"));
-                                          columns.Bound(m => m.LastName).Title(@Resources.GetValue("LAST_NAME"));
-                                          columns.Bound(m => m.Result).Title(@Resources.GetValue("RESULT"));
+                                          columns.Bound(m => m.PlanCode).Title("Plan");
+                                          columns.Bound(m => m.CourseCode).Title("Cód. Curso");
+                                          columns.Bound(m => m.CourseName).Title("Nombre del Curso");
+                                          columns.Bound(m => m.Professor).Title("Profesor");
+                                          columns.Bound(m => m.Schedule).Title("Horario");
                                       })
-                                      .ToolBar(toolbar =>
-                                      {
-                                          toolbar.Save();
-                                      })
-                                      .Editable(e => e.Mode(GridEditMode.InCell))
-                                      .Sortable(sor => sor.AllowUnsort(true))
-                                      .Selectable(s => s.Mode(GridSelectionMode.Single))
                                       .Resizable(resize => resize.Columns(true))
                                       .Filterable(filter =>
                                       {
@@ -72,43 +62,13 @@
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
                                       })
-                                      .Pageable(pager => pager
-                                            .PageSizes(new int[] { 5, 10, 15 })
-                                            .Input(true)
-                                            .Numeric(true)
-                                            .Info(true)
-                                            .PreviousNext(true)
-                                            .Refresh(true)
-                                                    .Messages(messages =>
-                                                    {
-                                                        messages.Empty(@Resources.GetValue("NO_RECORDS"));
-                                                        messages.Display(@Resources.GetValue("DISPLAY_GRID"));
-                                                        messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
-                                                        messages.Page(@Resources.GetValue("PAGE"));
-                                                        messages.Of(@Resources.GetValue("OF_GRID"));
-                                                        messages.First(@Resources.GetValue("FIRST_PAGE"));
-                                                        messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
-                                                        messages.Next(@Resources.GetValue("NEXT_PAGE"));
-                                                        messages.Last(@Resources.GetValue("LAST_PAGE"));
-                                                        messages.Refresh(@Resources.GetValue("UPDATE"));
-                                                    }))
+                                      
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
                                             .Batch(true)
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingScores", "ScoreRegister"))                                            
-                                            .Update(update => update.Action("UpdateScore", "ScoreRegister"))
-                                            .Model(model =>
-                                            {
-                                                model.Id(m => m.ScoreID);
-                                                model.Field(m => m.CourseID).Editable(false);
-                                                model.Field(m => m.StudentID).Editable(false);
-                                                model.Field(m => m.EnrollmentGroupID).Editable(false);
-                                                model.Field(m => m.UserName).Editable(false);
-                                                model.Field(m => m.FirstName).Editable(false);
-                                                model.Field(m => m.LastName).Editable(false);
-                                                model.Field(m => m.Result).Editable(true);
-                                            }))
+                                            .Read(read => read.Action("PagingStudentCourses", "Student"))                                            
+                                           )
                                     )
                     </li>
                 </ul>
