@@ -32,7 +32,7 @@ namespace FTMatricula.Controllers
         /// Paging Records by Course
         /// </summary>
         [HttpPost]
-        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, string CourseID)
+        public ActionResult PagingRecords([DataSourceRequest] DataSourceRequest request, string CourseID)
         {
             try
             {

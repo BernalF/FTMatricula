@@ -505,6 +505,7 @@
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+          <Property Name="FinalScore" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -1658,6 +1659,7 @@
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Score" Relationship="FTMatricula.DBModel.FK_Record_Score" FromRole="Record" ToRole="Score" />
+          <Property Type="String" Name="FinalScore" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Requirement">
           <Key>
@@ -2726,6 +2728,7 @@
           <EntitySetMapping Name="Records">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Record">
               <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="FinalScore" ColumnName="FinalScore" />
                 <ScalarProperty Name="RecordID" ColumnName="RecordID" />
                 <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
                 <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />

@@ -21,6 +21,7 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public string FinalScore { get; set; }
     
         public virtual Score Score { get; set; }
     }

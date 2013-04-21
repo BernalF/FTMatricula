@@ -44,15 +44,12 @@
                         @(Html.Kendo().Grid<FTMatricula.Models.Record>()
                                       .Name("Grid")
                                       .Columns(columns =>
-                                      {
-                                          columns.Bound(m => m.ScoreID).Hidden();                                          
+                                      {                                                                                 
                                           columns.Bound(m => m.UserName).Title(@Resources.GetValue("IDENTIFICATION"));
                                           columns.Bound(m => m.FirstName).Title(@Resources.GetValue("FIRST_NAME"));
                                           columns.Bound(m => m.LastName).Title(@Resources.GetValue("LAST_NAME"));
-                                          columns.Bound(m => m.Result)
-                                              .Title(@Resources.GetValue("RESULT"))
-                                              .ClientTemplate("")
-                                              .HeaderTemplate("");
+                                          columns.Bound(m => m.Result).Title(@Resources.GetValue("RESULT"));
+                                          
                                       })                                                                          
                                       .Sortable(sor => sor.AllowUnsort(true))                                      
                                       .Resizable(resize => resize.Columns(true))
