@@ -22,12 +22,6 @@ namespace FTMatricula.Controllers
           return View();
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-
         /// <summary>
         /// Paging Records by Course
         /// </summary>
@@ -40,15 +34,19 @@ namespace FTMatricula.Controllers
                 {
                     var uID = SessApp.GetUserID(User.Identity.Name);
 
-                    return Json(db.Records
-                                .Where(s => s.Score.EnrollmentGroup.ProfessorID == uID && s.Score.CourseID == new Guid(CourseID))
+                    return Json(db.Scores
+                                .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.CourseID == new Guid(CourseID))
                                 .Select(s => new
                                 {
-                                    s.ScoreID,                                                                                                            
-                                    UserName = s.Score.Student.User.UserName,
-                                    FirstName = s.Score.Student.FirstName,
-                                    LastName = s.Score.Student.LastName,
-                                    Result = s.Score.Result                                    
+                                    s.ScoreID,
+                                    s.CourseID,
+                                    s.EnrollmentGroupID,
+                                    s.StudentID,
+                                    UserName = s.Student.User.UserName,
+                                    FirstName = s.Student.FirstName,
+                                    LastName = s.Student.LastName,
+                                    s.Result,
+                                    FinalScore = s.Result
 
                                 })
                                 .ToDataSourceResult(request));
@@ -64,5 +62,34 @@ namespace FTMatricula.Controllers
             }
         }
 
+        /// <summary>
+        /// Update Batch Method Record
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult UpdateRecord([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<Score> scores)
+        {
+            try
+            {
+                foreach (var s in scores)
+                {
+                    
+                }
+                return Json(ModelState.ToDataSourceResult());
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
+            }
+        }
+
+
+        protected override void Dispose(bool disposing)
+        {
+            db.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

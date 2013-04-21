@@ -12,7 +12,7 @@
         }
         .k-edit-cell input
         {
-            width: 100%;
+            width: 40px;
         }
     </style>
 }
@@ -56,11 +56,13 @@
                                           columns.Bound(m => m.UserName).Title(@Resources.GetValue("IDENTIFICATION"));
                                           columns.Bound(m => m.FirstName).Title(@Resources.GetValue("FIRST_NAME"));
                                           columns.Bound(m => m.LastName).Title(@Resources.GetValue("LAST_NAME"));
-                                          columns.Bound(m => m.Result).Title(@Resources.GetValue("RESULT"));
+                                          columns.Bound(m => m.Result).Title(@Resources.GetValue("RESULT")).Width(30);
                                       })
                                       .ToolBar(toolbar =>
                                       {
-                                          toolbar.Save();
+                                          toolbar.Save()
+                                              .SaveText("Salvar")
+                                              .CancelText("Cancelar");
                                       })
                                       .Editable(e => e.Mode(GridEditMode.InCell))
                                       .Sortable(sor => sor.AllowUnsort(true))

@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("NOTES_REGISTER");
+    ViewBag.Title = "Registro de Actas";
 }
 
 @section styles {
@@ -10,13 +10,17 @@
             margin: 0 !important;
             padding: 0 !important;
         }
+        .k-edit-cell input
+        {
+            width: 40px;
+        }
     </style>
 }
 <div id="content">
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "notes" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("NOTES_REGISTER")/@Resources.GetValue("NOTES_COURSE_REGISTER")</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "records" })" class="internalTitle">@Resources.GetValue("HOME")/Registro de Actas/Registro de Actas por Curso</a></h2>
 
         <div class="editDetail">
             <div class="detailBox100">
@@ -31,7 +35,7 @@
                                     .DataTextField("Text")
                                     .DataValueField("Value")
                                     .HtmlAttributes(new { @class = "width100" })
-                                    .OptionLabel("Select a Course"))
+                                    .OptionLabel("Seleccione un Curso"))
                     </li>
                 </ul>
             </div>
@@ -41,7 +45,7 @@
                         <label class="subTitle cWhite">Lista de Estudiantes por Curso</label>
                     </li>
                     <li class="width100">
-                        @(Html.Kendo().Grid<FTMatricula.Models.Record>()
+                        @(Html.Kendo().Grid<FTMatricula.Models.Score>()
                                       .Name("Grid")
                                       .Columns(columns =>
                                       {                                                                                 
@@ -49,9 +53,20 @@
                                           columns.Bound(m => m.FirstName).Title(@Resources.GetValue("FIRST_NAME"));
                                           columns.Bound(m => m.LastName).Title(@Resources.GetValue("LAST_NAME"));
                                           columns.Bound(m => m.Result).Title(@Resources.GetValue("RESULT"));
-                                          
-                                      })                                                                          
-                                      .Sortable(sor => sor.AllowUnsort(true))                                      
+                                          columns.Bound(m => m.FinalScore)
+                                              .Title("Nota Final")
+                                              .Width(30)
+                                              .HtmlAttributes(new { @class = "editRow" });
+                                      })
+                                      .ToolBar(toolbar =>
+                                      {
+                                          toolbar.Save()
+                                              .SaveText("Salvar")
+                                              .CancelText("Cancelar");
+                                      })                                                                        
+                                      .Editable(e => e.Mode(GridEditMode.InCell))
+                                      .Sortable(sor => sor.AllowUnsort(true))
+                                      .Selectable(s => s.Mode(GridSelectionMode.Single))
                                       .Resizable(resize => resize.Columns(true))
                                       .Filterable(filter =>
                                       {
@@ -100,14 +115,24 @@
                                             .Ajax()
                                             .Batch(true)
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingRecords", "Record"))                                                                                        
-                                            .Model(model => model.Id(m => m.RecordID)))
+                                            .Read(read => read.Action("PagingRecords", "Record"))
+                                            .Update(update => update.Action("UpdateRecord", "Record"))                                                                                      
+                                            .Model(model =>
+                                            {
+                                                model.Id(m => m.ScoreID);
+                                                model.Field(m => m.UserName).Editable(false);
+                                                model.Field(m => m.FirstName).Editable(false);
+                                                model.Field(m => m.LastName).Editable(false);
+                                                model.Field(m => m.Result).Editable(false);
+                                                model.Field(m => m.FinalScore).Editable(true);
+                                            }))
                                     )
                     </li>
                 </ul>
             </div>
             <ul class="formBtnBar">
                 <li>
+                    <a href="#" id="btnRecord" class="button send">Enviar a Actas</a>
                     <a href="@Url.Action("Back", "Home", routeValues: new { opt = "records" })" class="button back">Cancel</a>
                 </li>
             </ul>
@@ -116,10 +141,10 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="~/Scripts/scoreRegister.js"></script>
+    <script type="text/javascript" src="~/Scripts/record.js"></script>
     <script type="text/javascript">
         $(function () {
-            var sregis = new scoreRegister({
+            var r = new record({
                 view: 'INDEX'
             });
         });

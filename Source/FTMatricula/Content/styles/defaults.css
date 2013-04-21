@@ -152,6 +152,7 @@ li.width80 {
 .marTop0 {
     margin-top: 10px !important;
 }
+
 .marTop10 {
     margin-top: 10px;
 }
@@ -354,8 +355,7 @@ a.alpha {
 
 .itemSpace {
     background-color: rgba(255, 255, 255,.1);
-    text-indent:8px;
-
+    text-indent: 8px;
 }
 
 .checkHolder, .checkSpace {
@@ -1396,13 +1396,13 @@ ul li.item .menuImage {
         line-height: 20px;
     }
 
-    
+
 
 #groupsGrid {
     border-top-width: 0px;
 }
 
-    
+
 
 /*******/
 .detailBox100 {
@@ -1756,8 +1756,8 @@ ul li.item .menuImage {
         font-size: 14px;
         color: #fff;
         line-height: 20px;
-        height:20px;
-        overflow:hidden;
+        height: 20px;
+        overflow: hidden;
     }
 
     .enrollmentGrid a.addButton {
@@ -1775,12 +1775,17 @@ ul li.item .menuImage {
     border-top-width: 0px;
 }
 
-    #enrollmentGrid a {
-        display: block;
-        width: 20px;
-        height: 20px;
-        background-image: url(../images/defaults/delete.png);
-        background-repeat: no-repeat;
-        margin-left: auto;
-        margin-right: auto;
-    }
+#enrollmentGrid a {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../images/defaults/delete.png);
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.editRow {
+    background-color: #D16700;
+    color: #FFF;
+}
