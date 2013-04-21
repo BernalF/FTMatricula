@@ -297,6 +297,11 @@ namespace FTMatricula.Controllers
             //return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
         }
 
+
+        public ActionResult StudentCourses() {
+            return View();
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
