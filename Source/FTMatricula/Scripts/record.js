@@ -11,13 +11,13 @@ var record = new Class({
     },
     //Decides which function load according to the View
     PageLoad: function () {
-        switch (this.options.view) {            
+        switch (this.options.view) {
             case 'INDEX':
-                this.courseOnchanged();                
+                this.courseOnchanged();
                 break;
         }
     },
-    courseOnchanged: function () {        
+    courseOnchanged: function () {
         $('#ddlCourseID').off('change.ddlCourseID').on('change.ddlCourseID', function () {
             $("#CourseID").val($("#ddlCourseID").val());
             var courseID = $("#ddlCourseID").val();
@@ -25,6 +25,12 @@ var record = new Class({
             grid.dataSource.transport.options.read.url = "/Record/PagingRecords?CourseID=" + courseID;
             grid.dataSource.read();
             grid.refresh();
+        });
+    },
+    recordSent: function () {
+        $('#btnRecord').off('click.btnRecord').on('click.btnRecord', function () {
+            alert('test');
+            return false;
         });
     }
 });
