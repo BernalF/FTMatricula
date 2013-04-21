@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="FTMatricula.DBModel.Modality" Width="1.5" PointX="7.75" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Plan" Width="1.5" PointX="10" PointY="17.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Plan_Course" Width="1.5" PointX="12.25" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.Record" Width="1.5" PointX="10.5" PointY="22.25" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Requirement" Width="1.5" PointX="13" PointY="18" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Resource" Width="1.5" PointX="5.75" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme" Width="3.375" PointX="9.375" PointY="13" IsExpanded="true" />
@@ -22,7 +21,6 @@
         <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme_Requirement" Width="1.5" PointX="15.25" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.School" Width="1.5" PointX="10" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.School_Scheme" Width="1.5" PointX="12.25" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.Score" Width="1.5" PointX="8.25" PointY="22" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Student" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.StudentAdditionalData" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.StudiesInformation" Width="1.5" PointX="3.625" PointY="15" IsExpanded="true" />
@@ -34,13 +32,11 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Country" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Course_Requirement_Course" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Plan_Course_Course" ManuallyRouted="false" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Course" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Course_Requirement_Requirement" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Enrollment_Plan" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Modality" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Plan_Course_Plan" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Plan_Plan" ManuallyRouted="false" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_Record_Score" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Plan_Scheme" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Requirement_Scheme" ManuallyRouted="false" />
@@ -69,8 +65,6 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentGroupSchedule_EnrollmentGroups" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.utbMembership" Width="1.5" PointX="19.25" PointY="19.75" />
         <AssociationConnector Association="FTMatricula.DBModel.MembershipUser" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_Score_EnrollmentGroup" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Student" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_CooUsers" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_OwUsers" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentStudentCourse" Width="2.75" PointX="15.5" PointY="0.875" />
@@ -79,6 +73,12 @@
         <EntityTypeShape EntityType="FTMatricula.DBModel.EnrollmentStudent" Width="1.5" PointX="10.092269013678781" PointY="11.696337452016929" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentStudent_Enrollment" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_EnrollmentStudent_Student" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.Record" Width="1.5" PointX="8.8540008239699546" PointY="4.3356748690529141" />
+        <EntityTypeShape EntityType="FTMatricula.DBModel.Score" Width="1.5" PointX="1.7176266786258791" PointY="25.689892423194784" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Course" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Score_EnrollmentGroup" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Record_Score" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Student" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -46,7 +46,7 @@ namespace FTMatricula.Controllers
                                     FirstName = s.Student.FirstName,
                                     LastName = s.Student.LastName,
                                     s.Result,
-                                    FinalScore = s.Result
+                                    s.RecordResult
 
                                 })
                                 .ToDataSourceResult(request));
@@ -75,7 +75,11 @@ namespace FTMatricula.Controllers
             {
                 foreach (var s in scores)
                 {
-                    
+                    s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                    s.ModifyDate = DateTime.Today;
+                    s.IpAddress = Network.GetIpAddress(Request);
+                    db.Entry(s).State = EntityState.Modified;
+                    db.SaveChanges();
                 }
                 return Json(ModelState.ToDataSourceResult());
             }

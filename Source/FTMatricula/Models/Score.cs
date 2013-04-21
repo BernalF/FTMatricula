@@ -23,6 +23,7 @@ namespace FTMatricula.Models
         public System.Guid? CourseID { get; set; }
         public Nullable<System.Guid> StudentID { get; set; }
         public string Result { get; set; }
+        public string RecordResult { get; set; }
         public Nullable<System.DateTime> InsertDate { get; set; }
         public Nullable<System.Guid> InsertUserID { get; set; }
         public Nullable<System.DateTime> ModifyDate { get; set; }
@@ -31,8 +32,8 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> EnrollmentGroupID { get; set; }
     
         public virtual Course Course { get; set; }
-        public virtual ICollection<Record> Records { get; set; }
         public virtual EnrollmentGroup EnrollmentGroup { get; set; }
+        public virtual ICollection<Record> Records { get; set; }
         public virtual Student Student { get; set; }
     }
 }

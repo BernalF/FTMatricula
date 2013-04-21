@@ -192,8 +192,7 @@ namespace FTMatricula.Models
     {
         public string UserName { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FinalScore { get; set; }
+        public string LastName { get; set; }        
     }
 
     public class Score_Validation
