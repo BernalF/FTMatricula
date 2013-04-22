@@ -20,7 +20,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "student" })" class="internalTitle">@Resources.GetValue("HOME")/Estudiantes/Consulta de Cursos</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "student" })" class="internalTitle">@Resources.GetValue("HOME")/Estudiantes/Historial Académico</a></h2>
 
             <div class="detailBox100">
                 <ul>
@@ -67,8 +67,8 @@
                                             .Ajax()
                                             .Batch(true)
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingStudentCourses", "Student"))                                            
-                                           )
+                                            .Read(read => read.Action("PagingStudentCourses", "Student"))
+                                            )
                                     )
                     </li>
                 </ul>

@@ -34,10 +34,7 @@
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
-                                             //command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
-                                             command
-                                                 .Destroy()
-                                                 .Text(@Resources.GetValue("DELETE"));
+                                              command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);                                                                                  
                                       })
                                       .Editable(editable =>

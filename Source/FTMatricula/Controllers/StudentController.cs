@@ -317,8 +317,8 @@ namespace FTMatricula.Controllers
         public ActionResult PagingStudentCourses([DataSourceRequest] DataSourceRequest request)
         {
             List<StudentCourses> result = null;
-            //Guid? StudentID = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault().StudentID;
-            var temp = db.Students.Where(m => m.User.UserName == "104190914").FirstOrDefault();
+            
+            var temp = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault();
             if (temp != null)
             {
                 Guid? StudentID = temp.StudentID;
@@ -359,6 +359,15 @@ namespace FTMatricula.Controllers
             }
 
             return Json(result.ToDataSourceResult(request));
+        }
+
+        /// <summary>
+        /// Academic History
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AcademicHistory()
+        {
+            return View();
         }
 
         protected override void Dispose(bool disposing)

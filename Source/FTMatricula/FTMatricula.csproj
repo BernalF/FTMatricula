@@ -633,6 +633,7 @@
     <Content Include="Views\Enrollment\EnrollmentInit.cshtml" />
     <Content Include="Views\Record\index.cshtml" />
     <Content Include="Views\Student\StudentCourses.cshtml" />
+    <Content Include="Views\Student\AcademicHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
