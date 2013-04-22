@@ -75,9 +75,10 @@ namespace FTMatricula.Controllers
             {
                 foreach (var s in scores)
                 {
+                    s.RecordResult = s.Result;
                     s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
                     s.ModifyDate = DateTime.Today;
-                    s.IpAddress = Network.GetIpAddress(Request);
+                    s.IpAddress = Network.GetIpAddress(Request);                    
                     db.Entry(s).State = EntityState.Modified;
                     db.SaveChanges();
                 }

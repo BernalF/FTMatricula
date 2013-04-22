@@ -56,7 +56,8 @@
                                           columns.Bound(m => m.RecordResult)
                                               .Title("Nota Final")
                                               .Width(30)
-                                              .HtmlAttributes(new { @class = "editRow" });
+                                              .HtmlAttributes(new { @class = "editRow" })
+                                              .HeaderHtmlAttributes(new { @class = "editRow" });
                                       })
                                       .ToolBar(toolbar =>
                                       {
@@ -145,7 +146,9 @@
     <script type="text/javascript">
         $(function () {
             var r = new record({
-                view: 'INDEX'
+                view: 'INDEX',
+                urlRecord: '@Url.Action("RecordAction", "Record")',
+                urlHasRecord: '@Url.Action("hasRecord", "Record")'
             });
         });
     </script>
