@@ -44,9 +44,12 @@ var record = new Class({
                         //Do Somenthing
                         if (response == '1') {
                             $('#btnRecord').fadeOut();
+                            $("#Grid").data("kendoGrid").dataSource.at(0).fields["RecordResult"].editable = false;
+
                         }
                         else {
                             $('#btnRecord').fadeIn();
+                            $("#Grid").data("kendoGrid").dataSource.at(0).fields["RecordResult"].editable = true;
                         }
                     }
                 });                
