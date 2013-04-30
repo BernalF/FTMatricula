@@ -287,9 +287,13 @@ namespace FTMatricula.Utilities
             //Get StudentID by LoggedUserID
             var uID = SessApp.GetUserID(userName);
             //Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
-            return new SelectList(db.Scores
+            /*return new SelectList(db.Scores
                     .Where(s => s.EnrollmentGroup.ProfessorID == uID)
-                    .Select(s => new { CourseID = s.CourseID, Name = s.Course.Name }).Distinct(), "CourseID", "Name");
+                    .Select(s => new { CourseID = s.CourseID, Name = s.Course.Name }).Distinct(), "CourseID", "Name");*/
+
+            return new SelectList(db.EnrollmentGroups
+                    .Where(x => x.ProfessorID == uID)
+                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID , Name = x.EnrollmentCourse.Course.Name }), "CourseID", "Name");
         }
 
 

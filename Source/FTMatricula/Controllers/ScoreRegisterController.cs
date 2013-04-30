@@ -31,12 +31,13 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                if (CourseID != null)
+                if ((CourseID != null) && (CourseID.Length > 0))
                 {
                     var uID = SessApp.GetUserID(User.Identity.Name);
-
+                   
                     return Json(db.Scores
-                                .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.CourseID == new Guid(CourseID))
+                                .Where(s => s.EnrollmentGroup.ProfessorID == uID 
+                                    && s.CourseID == new Guid(CourseID))
                                 .Select(s => new
                                 {
                                     s.ScoreID,
@@ -78,7 +79,7 @@ namespace FTMatricula.Controllers
                     s.RecordResult = s.Result;
                     s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
                     s.ModifyDate = DateTime.Today;
-                    s.IpAddress = Network.GetIpAddress(Request);                    
+                    s.IpAddress = Network.GetIpAddress(Request);
                     db.Entry(s).State = EntityState.Modified;
                     db.SaveChanges();
                 }
