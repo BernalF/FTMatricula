@@ -1,0 +1,63 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = "Plantillas";
+}
+
+@section styles {
+}
+<div id="content">
+
+    <div class="mainBox">
+
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "certifications" })" class="internalTitle">@Resources.GetValue("HOME")/Certificaciones/Plantillas</a></h2>
+
+        <div class="editDetail">
+            <div class="detailBox100">
+                <ul>
+                    <li>
+                        <label class="subTitle">Plantillas</label>
+                    </li>
+                    <li class="width100">
+                        @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
+                                    .Name("ddlCourseID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" })
+                                    .OptionLabel("Seleccione un Curso"))
+                    </li>
+                </ul>
+            </div>
+            <div class="detailBox100">
+                <ul>
+                    <li>
+                        <label class="subTitle cWhite">Detalle de la Plantilla</label>
+                    </li>
+                    <li class="width100">
+                       @* @(Html.Kendo().Editor()
+                          .Name("editor")    
+                          .HtmlAttributes(new { style = "width: 100%;height:440px" })                      
+                          .Value(@<text>
+                        <p>
+                          dssfsdfsdf
+                        </p>
+                        </text>))*@
+                    </li>
+                </ul>
+            </div>
+            <ul class="formBtnBar">
+                <li>
+                    <a href="@Url.Action("Back", "Home", routeValues: new { opt = "certifications" })" class="button back">Cancel</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function () {
+
+        });
+    </script>
+}
