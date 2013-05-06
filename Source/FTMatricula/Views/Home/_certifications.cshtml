@@ -2,7 +2,7 @@
 <li menu-option="certifications" class="hide">
     <ul class="subMenuOpt">
         <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("CERTIFICATIONS")</a></li>
-        <li class="optList">
+        @*<li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index", "Certifications")">
                     <div style="background-image: url('Content/images/icons/templates.png');">
@@ -12,6 +12,22 @@
                             </li>
                             <li>
                                 <p>@Resources.GetValue("TEMPLATES_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>*@
+        <li class="optList">
+            <div class="opt">
+                <a href="#">
+                    <div style="background-image: url('Content/images/icons/printer.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("PRINT_CERTIFICATION")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("PRINT_CERTIFICATION_DETAIL")</p>
                             </li>
                         </ul>
                     </div>
@@ -34,7 +50,7 @@
                 </a>
             </div>
         </li>
-        <li class="optList">
+       @* <li class="optList">
             <div class="opt">
                 <a href="#">
                     <div style="background-image: url('Content/images/icons/flow.png');">
@@ -49,9 +65,7 @@
                     </div>
                 </a>
             </div>
-        </li>
-        
-        
+        </li>*@
     </ul>
 </li>
 <!-- END certifications -->
