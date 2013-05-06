@@ -149,6 +149,7 @@
 
 
         </div>
+        
 
     </div>
 </div>
@@ -178,14 +179,12 @@
         
         <script>
             $(function () {
-
-
                 var matri = new enrollment({
                     view: 'ENROLMENT',
-                    urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")'
+                    urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")',
+                    urlBackE: '@Url.Action("EnrollmentInit", "Enrollment")'
                 });
-
-
+                
                 $("#enrollmentGrid").html("");
                 $.each(EnrollmentList, function (i, val) {
                     $("#enrollmentGrid").append(val.HTML.toString().replace("#INDEX#", i)).hide().fadeIn();
@@ -200,7 +199,8 @@
             $(function () {
                 var matri = new enrollment({
                     view: 'ENROLMENT',
-                    urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")'
+                    urlEnrollemnt: '@Url.Action("SaveEnrollment", "Enrollment")',
+                    urlBackE: '@Url.Action("EnrollmentInit", "Enrollment")'
             });
         });
         </script>
