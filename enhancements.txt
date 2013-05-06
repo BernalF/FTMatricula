@@ -1,0 +1,28 @@
+++ Requisitos Implicitos
+			|-> Tabla: ReqImplicitoID, ParentReqID, ChildReqID, FK
+			|-> Agregarlo en el Add y Edit, Drag and Drop
+
+++  Hacer Informacion Academica por Estudiante		
+
+++ Actas -> Aprobado y Reprobado / Score Table
+
+++ Planes -> Nueva columna, Requisitos, (like scheme)
+			|--> Tabla: RequisitoPlan
+
+++ Rename Table Course-Requirement => CourseRequirement	
+			|-> Tabla: Plan-Course, remove PK's (FK) and add PK PlanCourseID
+			|-> Tabla: CourseRequirement, 
+							- remove CourseID 
+							- Add PlanCourseID as FK
+							- Add CourseRequirementID as PK
+			|-> Verificar contra el flag de actas si se esta aprobado o reprobado
+			|-> Opcion Menu: Vincular Requisitos por Curso
+							- Filtro Plan + Filtro Curso
+
+++ Validaciones Matricula
+			[] - 1. Estudiante pertenece a el plan de la matricula
+			[] - 2. Meter validaciones de requisitos
+			[] - 3. Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
+			[] - 4. Eliminar matricula con un log y con todo lo que implique
+
+
