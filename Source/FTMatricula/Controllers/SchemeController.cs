@@ -94,23 +94,7 @@ namespace FTMatricula.Controllers
         /// </summary>
         public ActionResult Create()
         {
-            var requirementsList = (from r in db.Requirements
-                                    join t in db.Types on r.TypeID equals t.TypeID
-                                    where t.Name == "REQ_PROGRAM"
-                                    select new ReqDetailDTO
-                                    {
-                                        RequirementID = r.RequirementID,
-                                        Name = r.Name
-                                    })
-                                    .Distinct()
-                                    .Select(x => new ReqDetailDTO
-                                    {
-                                        RequirementID = x.RequirementID,
-                                        Name = x.Name
-                                    });
-
-            SchemeDetail schemeDetail = new SchemeDetail { requirements = requirementsList };
-            return View(schemeDetail);
+            return View();
         }
 
         /// <summary>
@@ -139,20 +123,7 @@ namespace FTMatricula.Controllers
                     };
                     db.Schemes.Add(scheme);
                     db.SaveChanges();
-                    // Insert in scheme-requirement
-                    foreach (var item in model.PostedReq.ReqIDs)
-                    {
-                        Scheme_Requirement sR = new Scheme_Requirement
-                        {
-                            RequirementID = new Guid(item),
-                            SchemeID = schemeID,
-                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
-                            InsertDate = DateTime.Today,
-                            IpAddress = Network.GetIpAddress(Request)
-                        };
-                        db.Scheme_Requirement.Add(sR);
-                        db.SaveChanges();
-                    }
+                    
                     // Assign school to a scheme
                     School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = schemeID };
                     db.School_Scheme.Add(ss);
@@ -173,45 +144,10 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                var requirementsList = (from r in db.Requirements
-                                        join t in db.Types on r.TypeID equals t.TypeID
-                                        where t.Name == "REQ_PROGRAM"
-                                        select new ReqDetailDTO
-                                        {
-                                            RequirementID = r.RequirementID,
-                                            Name = r.Name
-                                        })
-                                        .Distinct()
-                                        .Select(x => new ReqDetailDTO
-                                        {
-                                            RequirementID = x.RequirementID,
-                                            Name = x.Name
-                                        });
-
-                var selectedReq = (from sd in db.SchemeDetails
-                                   join sr in db.Scheme_Requirement on sd.SchemeID equals sr.SchemeID
-                                   join r in db.Requirements on sr.RequirementID equals r.RequirementID
-                                   join t in db.Types on r.TypeID equals t.TypeID
-                                   where t.Usage == "REQ"
-                                   select new ReqDetailDTO
-                                   {
-                                       RequirementID = r.RequirementID,
-                                       Name = r.Name
-                                   })
-                                        .Distinct()
-                                        .Select(x => new ReqDetailDTO
-                                        {
-                                            RequirementID = x.RequirementID,
-                                            Name = x.Name
-                                        });
-
-
                 SchemeDetail scheme = db.SchemeDetails
                                    .Where(s => s.SchemeID == new Guid(id))
                                    .ToList()
                                    .FirstOrDefault();
-
-                scheme.requirements = requirementsList;
 
                 return View(scheme);
             }
@@ -236,22 +172,7 @@ namespace FTMatricula.Controllers
                     db.SaveChanges();
                 }
 
-                foreach (var sr in scheme.Scheme_Requirement.ToList())
-                {
-                    db.Scheme_Requirement.Remove(sr);
-                    db.SaveChanges();
-                }
-
-                if (model.PostedReq == null)
-                {
-                    ModelState.AddModelError("", "Por favor seleccione un requisito");
-                    SchemeDetail sd = db.SchemeDetails
-                                   .Where(s => s.SchemeID == model.SchemeID)
-                                   .ToList()
-                                   .FirstOrDefault();
-                    return View(sd);
-                }
-                else if (model.SchoolID == null)
+                if (model.SchoolID == null)
                 {
                     ModelState.AddModelError("", "Por favor seleccione una Escuela");
                     SchemeDetail sd = db.SchemeDetails
@@ -266,20 +187,6 @@ namespace FTMatricula.Controllers
                     db.Entry(scheme).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    // Insert in scheme-requirement
-                    foreach (var item in model.PostedReq.ReqIDs)
-                    {
-                        Scheme_Requirement sR = new Scheme_Requirement
-                        {
-                            RequirementID = new Guid(item),
-                            SchemeID = model.SchemeID,
-                            ModifyUserID = SessApp.GetUserID(User.Identity.Name),
-                            ModifyDate = DateTime.Today,
-                            IpAddress = Network.GetIpAddress(Request)
-                        };
-                        db.Scheme_Requirement.Add(sR);
-                        db.SaveChanges();
-                    }
                     // Assign school to a scheme
                     School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = model.SchemeID };
                     db.School_Scheme.Add(ss);

@@ -112,29 +112,6 @@ namespace FTMatricula.Models
 
     }
 
-    //------ SchemeDetail Section
-    [MetadataType(typeof(SchemeDetail_Validation))]
-    public partial class SchemeDetail
-    {
-        public string tmpReqID { get; set; }
-        public IEnumerable<ReqDetailDTO> requirements { get; set; }
-        public IEnumerable<ReqDetailDTO> SelectedReqs { get; set; }
-        public PostedReq PostedReq { get; set; }
-    }
-
-    public class PostedReq { public string[] ReqIDs { get; set; } }
-
-    public class ReqDetailDTO
-    {
-        public System.Guid? RequirementID { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class SchemeDetail_Validation
-    {
-
-    }
-
     //------ StudentAdditionalData Section
     [MetadataType(typeof(StudentAdditionalData_Validation))]
     public partial class StudentAdditionalData
