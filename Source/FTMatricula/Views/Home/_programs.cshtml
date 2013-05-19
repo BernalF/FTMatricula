@@ -4,22 +4,6 @@
         <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("PROGRAM_PLAN_COURSE")</a></li>
         <li class="optList">
             <div class="opt">
-                <a href="@Url.Action("index", "Course")">
-                    <div style="background-image: url('Content/images/icons/books.png');">
-                        <ul>
-                            <li>
-                                <span>@Resources.GetValue("COURSES")</span>
-                            </li>
-                            <li>
-                                <p>@Resources.GetValue("COURSES_DETAIL")</p>
-                            </li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-        </li>
-        <li class="optList">
-            <div class="opt">
                 <a href="@Url.Action("index", "Scheme")">
                     <div style="background-image: url('Content/images/icons/program.png');">
                         <ul>
@@ -49,7 +33,23 @@
                     </div>
                 </a>
             </div>
-        </li>        
+        </li> 
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index", "Course")">
+                    <div style="background-image: url('Content/images/icons/books.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("COURSES")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("COURSES_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>       
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index", "LinkPC")">

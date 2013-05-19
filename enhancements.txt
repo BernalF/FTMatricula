@@ -1,3 +1,14 @@
++++ To Do 18 Mayo
+	@ Arreglar Programas
+	@ Agregar Campo AdminUserID Tabla Escuela
+	@ Tabla Cursos -> Add SchoolID
+	@ Create_Users -> WHERE Rol == "School_Admin" THEN Show ComboSchool and Save that information
+	@ A nivel de menu, User Admin School no ve Mantenimientos Escuela
+	@ Paging Grids -> Programas, Planes, Cursos
+	@ Alerta cuando se agrega curso como User Administrador
+	@ En Matricula, solo ver matriculas relacionadas con la escuela
+			
+---------------------------------------------------------------------------------------------------------------------------
 ++ Requisitos Implicitos
 			|-> Tabla: ReqImplicitoID, ParentReqID, ChildReqID, FK
 			|-> Agregarlo en el Add y Edit, Drag and Drop
