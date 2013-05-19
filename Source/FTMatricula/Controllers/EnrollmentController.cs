@@ -83,7 +83,7 @@ namespace FTMatricula.Controllers
                     model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                     model.InsertDate = DateTime.Today;
                     model.IpAddress = Network.GetIpAddress(Request);
-
+                    
                     db.Enrollments.Add(model);
                     db.SaveChanges();
 
@@ -105,6 +105,19 @@ namespace FTMatricula.Controllers
                         db.EnrollmentCourses.Add(course);
                         db.SaveChanges();
                     }
+
+                    var plan = db.Plans.Find(model.PlanID);
+                    if (plan != null) {
+
+                        plan.hasEnrollment = true;
+
+                        plan.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                        plan.ModifyDate = DateTime.Today;
+                        plan.IpAddress = Network.GetIpAddress(Request);
+                        db.Entry(plan).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    
 
                     return RedirectToAction("Index");
                 }
@@ -273,8 +286,39 @@ namespace FTMatricula.Controllers
                     db.Entry(model).State = EntityState.Modified;
                     db.SaveChanges();
 
+                    
+                    var plan = db.Plans.Find(model.PlanID);
+                    if (plan != null)
+                    {
+
+                        plan.hasEnrollment = true;
+
+                        plan.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                        plan.ModifyDate = DateTime.Today;
+                        plan.IpAddress = Network.GetIpAddress(Request);
+                        db.Entry(plan).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                    if (model.OldPlanID != model.PlanID)
+                    {
+                        int countEnrollsForOldPlanID = db.Enrollments.Where(x => x.PlanID == model.OldPlanID).Select(m => new { m.EnrollmentID }).ToList().Count;
+                        if (countEnrollsForOldPlanID == 0)
+                        {
+                            plan = db.Plans.Find(model.OldPlanID);
+                            plan.hasEnrollment = false;
+
+                            plan.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                            plan.ModifyDate = DateTime.Today;
+                            plan.IpAddress = Network.GetIpAddress(Request);
+                            db.Entry(plan).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+
                     return RedirectToAction("Index");
                 }
+
                 return View(model);
             }
             catch (Exception e)
@@ -294,6 +338,7 @@ namespace FTMatricula.Controllers
             var model = db.Enrollments.Where(x => x.EnrollmentID == new Guid(id))
                                                       .ToList()
                                                       .FirstOrDefault();
+            model.OldPlanID = model.PlanID;
             return View(model);
         }
 
@@ -320,6 +365,7 @@ namespace FTMatricula.Controllers
             var model = db.Enrollments.Where(x => x.EnrollmentID == new Guid(id))
                                                       .ToList()
                                                       .FirstOrDefault();
+
             return View(model);
         }
 

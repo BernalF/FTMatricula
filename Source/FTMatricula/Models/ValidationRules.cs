@@ -143,6 +143,7 @@ namespace FTMatricula.Models
     {
         public string PlanDescription { get; set; }
         public string LocationName { get; set; }
+        public Guid? OldPlanID { get; set; }
 
     }
 
