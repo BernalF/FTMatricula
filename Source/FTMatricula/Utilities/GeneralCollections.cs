@@ -252,11 +252,20 @@ namespace FTMatricula.Utilities
         /// <summary>
         /// Scheme List
         /// </summary>
-        public static SelectList SchemeList
+        public static SelectList SchemeList(string userID, bool isSchoolAdmin)
         {
-            get
+
+            matrifunDBEntities db = new matrifunDBEntities();
+            if (isSchoolAdmin)
             {
-                matrifunDBEntities db = new matrifunDBEntities();
+                Guid? schoolID = Misc.GetSchoolID(userID);
+                return new SelectList(db.Schemes
+                                       .Where(s => s.SchoolID == schoolID)
+                                       .ToList()
+                                       .Select(p => new { p.SchemeID, p.Name }), "SchemeID", "Name");
+            }
+            else
+            {
                 return new SelectList(db.Schemes
                                         .ToList()
                                         .Select(p => new { p.SchemeID, p.Name }), "SchemeID", "Name");

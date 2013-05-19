@@ -24,7 +24,7 @@
                         <li style="display: inline">
                             <div>
                                 @(Html.Kendo().DropDownListFor(model => model.SchemeID)
-                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchemeList)
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchemeList(User.Identity.Name, User.IsInRole("ROLE_SCHOOL_ADMIN")))
                                                     .Name("SchemeID")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value")
