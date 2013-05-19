@@ -2,6 +2,8 @@
 <li menu-option="maintenance" class="hide">
     <ul class="subMenuOpt">
         <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")</a></li>
+        @if (!User.IsInRole("ROLE_SCHOOL_ADMIN"))
+        { 
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index", "School", routeValues: null)">
@@ -18,6 +20,7 @@
                 </a>
             </div>
         </li>
+        }
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index", "Classroom", routeValues: null)">
