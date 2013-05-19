@@ -31,50 +31,47 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingPlan([DataSourceRequest] DataSourceRequest request)
         {
-            if (User.IsInRole("ROLE_ADMINISTRATOR"))
+            try
             {
-                return Json(db.PlanDetails.ToList()
-                  .Where(m => m.isActive == true)
-                  .Select(m => new
-                  {
-                      m.SchemeID,
-                      m.SchemeName,
-                      m.PlanID,
-                      m.PlanName,
-                      m.Description,
-                      m.Version
-                  }).ToDataSourceResult(request));
+                if (User.IsInRole("ROLE_ADMINISTRATOR"))
+                {
+                    return Json(db.Plans.ToList()
+                          .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                          .Where(m => m.p.isActive == true)
+                          .Select(m => new
+                          {
+                              SchemeID = m.sp.Scheme.SchemeID,
+                              SchemeName = m.sp.Scheme.Name,
+                              PlanID = m.p.PlanID,
+                              PlanName = m.p.Name,
+                              Description = m.p.Description,
+                              Version = m.p.Version
+                          }).ToDataSourceResult(request));
+                }
+                else
+                {
+                    return Json(db.Plans.ToList()
+                          .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                          .Where(m => m.p.isActive == true
+                              && (m.sp.Scheme.School_Scheme
+                              .Join(db.Schools, ss => ss.SchoolID, s => s.SchoolID, (ss, s) => new { ss, s })
+                              .Select(x => x.s.SchoolID).FirstOrDefault()) == Misc.GetSchoolID(User.Identity.Name))
+                          .Select(m => new
+                          {
+                              SchemeID = m.sp.Scheme.SchemeID,
+                              SchemeName = m.sp.Scheme.Name,
+                              PlanID = m.p.PlanID,
+                              PlanName = m.p.Name,
+                              Description = m.p.Description,
+                              Version = m.p.Version
+                          }).ToDataSourceResult(request));
+                }
             }
-            else
-            {
-                //CREATE VIEW [dbo].[PlanDetails]    
-                //AS    
-                //SELECT sp.SchemeID,    
-                //  s.Name AS SchemeName,        
-                //  p.PlanID,     
-                //  p.Name AS PlanName,    
-                //  p.[Description],    
-                //  p.[Version],  
-                //  p.isActive     
-                //FROM [Plan] p    
-                //INNER JOIN [Scheme-Plan] sp ON p.PlanID = sp.PlanID    
-                //INNER JOIN Scheme s ON s.SchemeID = sp.SchemeID    
-                //WHERE isActive = 1 
-
-
-
-                return Json(db.PlanDetails.ToList()
-                      .Where(m => m.isActive == true)
-                      .Select(m => new
-                      {
-                          m.SchemeID,
-                          m.SchemeName,
-                          m.PlanID,
-                          m.PlanName,
-                          m.Description,
-                          m.Version
-                      }).ToDataSourceResult(request));
+            catch (Exception e)
+            {                
+                throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
+            
         }
 
         /// <summary>

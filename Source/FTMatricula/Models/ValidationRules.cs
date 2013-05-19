@@ -176,6 +176,19 @@ namespace FTMatricula.Models
     public class Score_Validation
     {
     }
+
+    //------ Plan Section
+    [MetadataType(typeof(Plan_Validation))]
+    public partial class Plan
+    {
+        public string SchemeID { get; set; }
+        public string SchemeName { get; set; }
+        public string PlanName { get; set; }        
+    }
+
+    public class Plan_Validation
+    {
+    }
    
 }
 
