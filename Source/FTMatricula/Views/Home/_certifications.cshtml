@@ -20,7 +20,7 @@
         </li>*@
         <li class="optList">
             <div class="opt">
-                <a href="#">
+                <a href="@Url.Action("index", "Certifications", routeValues: null)">
                     <div style="background-image: url('Content/images/icons/printer.png');">
                         <ul>
                             <li>
@@ -33,24 +33,8 @@
                     </div>
                 </a>
             </div>
-        </li>
-        <li class="optList">
-            <div class="opt">
-                <a href="#">
-                    <div style="background-image: url('Content/images/icons/printer.png');">
-                        <ul>
-                            <li>
-                                <span>@Resources.GetValue("PRINT_CERTIFICATION")</span>
-                            </li>
-                            <li>
-                                <p>@Resources.GetValue("PRINT_CERTIFICATION_DETAIL")</p>
-                            </li>
-                        </ul>
-                    </div>
-                </a>
-            </div>
-        </li>
-       @* <li class="optList">
+        </li>       
+        <li class="optList hide">
             <div class="opt">
                 <a href="#">
                     <div style="background-image: url('Content/images/icons/flow.png');">
@@ -65,7 +49,7 @@
                     </div>
                 </a>
             </div>
-        </li>*@
+        </li>
     </ul>
 </li>
 <!-- END certifications -->

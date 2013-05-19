@@ -103,7 +103,7 @@
             }
             @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_AUDITOR"))
             { 
-                <li class="item">
+                <li class="item hide">
                     <div class="itemContent auditing">
                         <a href="#" class="itemTitle">@Resources.GetValue("AUDIT")</a>
                         <div class="menuImage">

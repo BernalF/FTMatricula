@@ -1,24 +1,38 @@
-+++ To Do 18 Mayo
-	@ Arreglar Programas
-	@ Agregar Campo AdminUserID Tabla Escuela
-	@ Tabla Cursos -> Add SchoolID
-	@ Create_Users -> WHERE Rol == "School_Admin" THEN Show ComboSchool and Save that information
-	@ A nivel de menu, User Admin School no ve Mantenimientos Escuela
-	@ Paging Grids -> Programas, Planes, Cursos
-	@ Alerta cuando se agrega curso como User Administrador
-	@ En Matricula, solo ver matriculas relacionadas con la escuela
-	@ Vincular Cursos a Planes, solo info del Usuario Administrador de Escuela
-			
 ---------------------------------------------------------------------------------------------------------------------------
+--------------------------------- To Do 18 Mayo
+---------------------------------------------------------------------------------------------------------------------------
+++ Arreglar Programas
+++ Agregar Campo AdminUserID Tabla Escuela
+++ Tabla Cursos -> Add SchoolID
+++ Create_Users -> WHERE Rol == "School_Admin" THEN Show ComboSchool and Save that information
+++ A nivel de menu, User Admin School no ve Mantenimientos Escuela
+++ Paging Grids -> Programas, Planes, Cursos
+++ Alerta cuando se agrega curso como User Administrador
+++ En Matricula, solo ver matriculas relacionadas con la escuela
+++ Vincular Cursos a Planes, solo info del Usuario Administrador de Escuela		
+++ Certificaciones -> Imprimir Certificaciones	
+---------------------------------------------------------------------------------------------------------------------------
+--------------------------------- To Do 31 Mayo
+---------------------------------------------------------------------------------------------------------------------------
+++ Cursos -> Valoracion Criterio Calificacion
+++ Validaciones Matricula
+			|-> Estudiante pertenece a el plan de la matricula			
+			|-> Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
+++ Estudiantes -> Historial Academico			
+++ Estudiantes -> Consulta Notas			
+++ Matricula -> Convalidacion de Cursos
+++ Cambiar los Grids (html) de Matricula por Grids de Kendo
+---------------------------------------------------------------------------------------------------------------------------
+--------------------------------- Fuera Scope 31 Mayo
+---------------------------------------------------------------------------------------------------------------------------
+++ Validaciones Matricula
+			|-> Meter validaciones de requisitos
+			|-> Eliminar matricula con un log y con todo lo que implique
+++  Hacer Informacion Academica por Estudiante
 ++ Requisitos Implicitos
 			|-> Tabla: ReqImplicitoID, ParentReqID, ChildReqID, FK
-			|-> Agregarlo en el Add y Edit, Drag and Drop
-
-++  Hacer Informacion Academica por Estudiante		
-
-++ Actas -> Aprobado y Reprobado / Score Table
-
-++ Planes -> Nueva columna, Requisitos, (like scheme)
+			|-> Agregarlo en el Add y Edit, Drag and Drop			
+++ Planes -> Nueva columna, Requisitos
 			|--> Tabla: RequisitoPlan
 
 ++ Rename Table Course-Requirement => CourseRequirement	
@@ -29,14 +43,13 @@
 							- Add CourseRequirementID as PK
 			|-> Verificar contra el flag de actas si se esta aprobado o reprobado
 			|-> Opcion Menu: Vincular Requisitos por Curso
-							- Filtro Plan + Filtro Curso
-
-++ Validaciones Matricula
-			[] - 1. Estudiante pertenece a el plan de la matricula
-			[] - 2. Meter validaciones de requisitos
-			[] - 3. Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
-			[] - 4. Eliminar matricula con un log y con todo lo que implique
-
-++ Cambiar los Grids (html) de Matricula por Grids de Kendo
+							- Filtro Plan + Filtro Curso							
+++ Opciones Ocultadas
+			- Requisitos
+			- Informacion academica en Editar estudiante
+			- Versionamiento de Planes
+			- Consulta Matriculas por estudiante
+			- Importar Notas
+			- Auditoria
 
 
