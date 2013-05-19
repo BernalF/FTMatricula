@@ -7,6 +7,7 @@
 	@ Paging Grids -> Programas, Planes, Cursos
 	@ Alerta cuando se agrega curso como User Administrador
 	@ En Matricula, solo ver matriculas relacionadas con la escuela
+	@ Vincular Cursos a Planes, solo info del Usuario Administrador de Escuela
 			
 ---------------------------------------------------------------------------------------------------------------------------
 ++ Requisitos Implicitos
@@ -35,5 +36,7 @@
 			[] - 2. Meter validaciones de requisitos
 			[] - 3. Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
 			[] - 4. Eliminar matricula con un log y con todo lo que implique
+
+++ Cambiar los Grids (html) de Matricula por Grids de Kendo
 
 
