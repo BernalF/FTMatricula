@@ -63,46 +63,115 @@ namespace FTMatricula.Controllers
                                 m.Name,
                                 m.TeachingHours,
                                 m.Charge,
-                                SchoolName = (string.IsNullOrEmpty(m.School.Name) ? null : m.School.Name)
+                                SchoolName = m.School == null ? "" : m.School.Name
                             }).ToDataSourceResult(request));
                 }
             }
             catch (Exception e)
-            {                
+            {
                 throw new ApplicationException(e.Message);
             }
-            
+
+        }
+
+        /// <summary>
+        /// Create
+        /// </summary>
+        public ActionResult Create()
+        {
+            return View();
         }
 
         /// <summary>
         /// Create Course
         /// </summary>
-        /// <param name="request"></param>
-        /// <param name="model"></param>
-        /// <returns></returns>
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CreateCourse([DataSourceRequest] DataSourceRequest request, Course model)
+        public ActionResult Create(Course model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
-                model.SchoolID = schoolID;
-                model.CourseID = Guid.NewGuid();
-                model.IsActive = true;
-                model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
-                model.InsertDate = DateTime.Today;
-                model.IpAddress = Network.GetIpAddress(Request);
-                db.Courses.Add(model);
-                db.SaveChanges();
+                if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+                {
+                    if (ModelState.IsValid)
+                    {
+                        Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+                        model.SchoolID = schoolID;
+                        model.CourseID = Guid.NewGuid();
+                        model.IsActive = true;
+                        model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
+                        model.InsertDate = DateTime.Today;
+                        model.IpAddress = Network.GetIpAddress(Request);
+                        db.Courses.Add(model);
+                        db.SaveChanges();
+                        return RedirectToAction("index");
+                    }
+                    return View();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Solo administradores de escuela pueden agregar cursos");
+                    return View();
+                }
             }
-            return Json(new[] { new 
-            { 
-                CourseID = model.CourseID, 
-                Code = model.Code, 
-                Name = model.Name, 
-                TeachingHours = model.TeachingHours, 
-                Charge = model.Charge
-            } }.ToDataSourceResult(request, ModelState));
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Edit
+        /// </summary>
+        public ActionResult Edit(string id)
+        {
+            try
+            {
+                Course course = db.Courses
+                                   .Where(c => c.CourseID == new Guid(id))
+                                   .ToList()
+                                   .FirstOrDefault();
+                return View(course);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Edit Course
+        /// </summary>        
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult Edit(Course model)
+        {
+            try
+            {
+                if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+                {
+                    Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+                    model.SchoolID = schoolID;
+                    model.IsActive = true;
+                    model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                    model.ModifyDate = DateTime.Today;
+                    model.IpAddress = Network.GetIpAddress(Request);
+                    db.Entry(model).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Solo administradores de escuela pueden agregar cursos");
+                    Course course = db.Courses
+                                   .Where(c => c.CourseID == model.CourseID)
+                                   .ToList()
+                                   .FirstOrDefault();
+                    return View(course);                    
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
 
         /// <summary>
@@ -114,14 +183,7 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateCourse([DataSourceRequest] DataSourceRequest request, Course model)
         {
-            Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
-            model.SchoolID = schoolID;
-            model.IsActive = true;
-            model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
-            model.ModifyDate = DateTime.Today;
-            model.IpAddress = Network.GetIpAddress(Request);
-            db.Entry(model).State = EntityState.Modified;
-            db.SaveChanges();
+            
             return Json(new[] { new 
             { 
                 CourseID = model.CourseID, 

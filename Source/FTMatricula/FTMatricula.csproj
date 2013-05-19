@@ -576,7 +576,6 @@
     <Content Include="Views\Modality\EditorTemplates\AddModality.cshtml" />
     <Content Include="Views\Shared\AjaxError.cshtml" />
     <Content Include="Views\Course\index.cshtml" />
-    <Content Include="Views\Course\EditorTemplates\AddCourse.cshtml" />
     <Content Include="Views\User\index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Create.cshtml" />
@@ -630,6 +629,8 @@
     <Content Include="Views\Student\StudentCourses.cshtml" />
     <Content Include="Views\Student\AcademicHistory.cshtml" />
     <Content Include="Views\Certifications\index.cshtml" />
+    <Content Include="Views\Course\Create.cshtml" />
+    <Content Include="Views\Course\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

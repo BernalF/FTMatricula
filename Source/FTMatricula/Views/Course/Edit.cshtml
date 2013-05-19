@@ -1,0 +1,106 @@
+﻿@model FTMatricula.Models.Course
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml"; ;
+    ViewBag.Title = @Resources.GetValue("ADD_COURSE");
+}
+@section styles {
+
+}
+
+<div id="content">
+    <div class="editBox">
+        @using (Html.BeginForm())
+        { 
+            <div class="editTitle">
+                @Resources.GetValue("ADD_COURSE")
+            </div>
+
+            <div class="editDetail">
+                <div class="detailBox centererDetailBox">
+                    <ul>
+                        <li>
+                             @Html.Label(@Resources.GetValue("COURSE_CODE"))
+                        </li>
+                        <li>
+                            <div>
+                                <div>
+                                    @Html.TextBoxFor(model => model.Code, new { @class = "input width100" })
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            @Html.Label( @Resources.GetValue("COURSE_NAME"))
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(model => model.Name, new { @class = "input width100" })
+                            </div>
+                        </li>
+                        <li>
+                            @Html.Label(@Resources.GetValue("TEACHING_HOURS"))
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(model => model.TeachingHours, new { @class = "input width100" })
+                            </div>
+                        </li>
+                        <li>
+                            @Html.Label(@Resources.GetValue("COURSE_COST"))
+                        </li>
+                        <li>
+                            <div>
+                                @Html.TextBoxFor(model => model.Charge, new { @class = "input width100" })
+                            </div>
+                        </li>                                                
+                    </ul>
+                </div>                
+            </div>
+            <div class="errorsSpace">
+                <ul>
+                    <li>
+                        @Html.ValidationMessageFor(model => model.Code)
+                        @Html.ValidationMessageFor(model => model.Name)
+                        @Html.ValidationMessageFor(model => model.TeachingHours)
+                        @Html.ValidationMessageFor(model => model.Charge)
+                        @Html.ValidationSummary(false)
+                    </li>
+                </ul>
+            </div>            
+            <div class="clear"></div>
+            <div class="formBtnBar">
+                <a href="#" class="button send" onclick="javascript: submit_form()">@Resources.GetValue("SAVE")</a>
+                @Html.ActionLink(@Resources.GetValue("CANCEL"), "index", "Course", routeValues: null, htmlAttributes: new { @class = "button back" })
+            </div>
+            <div class="clear"></div>
+            @Html.HiddenFor(m => m.CourseID)
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        function keypressHandler(event) {
+            var key = event.which || event.keyCode;
+
+            switch (key) {
+                default:
+                    return true;
+                case 13:
+                    submit_form();
+                    return false;
+            }
+        }
+
+        function submit_form() {
+            $('.popupBg').fadeIn();
+            $('.loading').fadeIn();
+            document.forms[0].submit();
+            return true;
+        }
+
+    </script>
+}
