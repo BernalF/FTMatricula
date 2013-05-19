@@ -34,10 +34,6 @@
                                           columns.Bound(m => m.SchoolName).Title(@Resources.GetValue("SCHOOL"));
                                           columns.Command(command =>
                                           {
-                                              command.Custom(@Resources.GetValue("VIEW_DETAILS")).Click("showDetails");
-                                          }).Width(105).Title(@Resources.GetValue("REQUERIMENT"));
-                                          columns.Command(command =>
-                                          {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
                                               command.Destroy().Text(@Resources.GetValue("DELETE"));
                                           }).Width(180);
