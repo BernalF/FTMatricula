@@ -233,19 +233,33 @@ namespace FTMatricula.Utilities
         /// <summary>
         /// Plan List
         /// </summary>
-        public static SelectList PlanList
+        public static SelectList PlanList(string userID, bool isSchoolAdmin)
         {
-            get
+            matrifunDBEntities db = new matrifunDBEntities();
+            if (isSchoolAdmin)
             {
-                matrifunDBEntities db = new matrifunDBEntities();
+                Guid? schoolID = Misc.GetSchoolID(userID);
                 return new SelectList(db.Plans
-                                        .ToList()
-                                        .Where(p => p.isActive == true)
-                                        .Select(p => new
-                                        {
-                                            p.PlanID,
-                                            Name = p.Name + " - " + p.Description + " - v. " + p.Version
-                                        }), "PlanID", "Name");
+                                            .ToList()
+                                            .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                                            .Where(m => m.p.isActive == true
+                                               && m.sp.Scheme.SchoolID == schoolID)
+                                            .Select(m => new
+                                            {
+                                                m.p.PlanID,
+                                                Name = m.p.Name + " - " + m.p.Description + " - v. " + m.p.Version
+                                            }), "PlanID", "Name");
+            }
+            else
+            {
+                return new SelectList(db.Plans
+                                            .ToList()
+                                            .Where(p => p.isActive == true)
+                                            .Select(p => new
+                                            {
+                                                p.PlanID,
+                                                Name = p.Name + " - " + p.Description + " - v. " + p.Version
+                                            }), "PlanID", "Name");
             }
         }
 

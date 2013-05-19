@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         @(Html.Kendo().DropDownList()
-                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.PlanList)
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.PlanList(User.Identity.Name, User.IsInRole("ROLE_SCHOOL_ADMIN")))
                                                     .Name("PlanID")
                                                     .DataTextField("Text")
                                                     .DataValueField("Value")
