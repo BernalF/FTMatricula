@@ -57,32 +57,51 @@ namespace FTMatricula.Controllers
                 hasEnrollment = db.Plans.Where(p => p.PlanID == new Guid(planID)).Select(p => p.hasEnrollment).FirstOrDefault();
             else
                 hasEnrollment = false;
-            
-            //SchoolID by PlanID
-            Guid? schoolID = db.Plans
-                .ToList()
-                .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
-                .Where(m => m.p.PlanID == new Guid(planID)
-                    && m.p.isActive == true)
-                    .Select(m => m.sp.Scheme == null ? new Guid("") : m.sp.Scheme.SchoolID).FirstOrDefault();
 
             //List of Courses ID by Plan
             IQueryable<Guid?> lCourseID = from pc in db.Plan_Course
                                           join c in db.Courses on pc.CourseID equals c.CourseID
                                           where pc.PlanID == new Guid(planID)
                                           select c.CourseID;
-            //List of Courses that did't Linked
-            var x = from c in db.Courses
-                    where !lCourseID.Contains(c.CourseID)
-                    select new { c.CourseID, c.Code, c.Name };
 
-            //List of Linked Courses
-            var y = from pc in db.Plan_Course
-                    join c in db.Courses on pc.CourseID equals c.CourseID
-                    where pc.PlanID == new Guid(planID)
-                    select new { c.CourseID, c.Code, c.Name, pc.PlanID };
+            if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            {
+                //SchoolID by PlanID
+                Guid? schoolID = db.Plans
+                    .ToList()
+                    .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                    .Where(m => m.p.PlanID == new Guid(planID)
+                        && m.p.isActive == true)
+                        .Select(m => m.sp.Scheme == null ? new Guid("") : m.sp.Scheme.SchoolID).FirstOrDefault();
 
-            return Json(new { cUassigned = x, cAssigned = y, hEnrollment = hasEnrollment });
+                //List of Courses that did't Linked
+                var x = from c in db.Courses
+                        where !lCourseID.Contains(c.CourseID) && c.SchoolID == schoolID
+                        select new { c.CourseID, c.Code, c.Name };
+
+                //List of Linked Courses
+                var y = from pc in db.Plan_Course
+                        join c in db.Courses on pc.CourseID equals c.CourseID
+                        where pc.PlanID == new Guid(planID) && c.SchoolID == schoolID
+                        select new { c.CourseID, c.Code, c.Name, pc.PlanID };
+
+                return Json(new { cUassigned = x, cAssigned = y, hEnrollment = hasEnrollment });
+            }
+            else
+            {
+                //List of Courses that did't Linked
+                var x = from c in db.Courses
+                        where !lCourseID.Contains(c.CourseID)
+                        select new { c.CourseID, c.Code, c.Name };
+
+                //List of Linked Courses
+                var y = from pc in db.Plan_Course
+                        join c in db.Courses on pc.CourseID equals c.CourseID
+                        where pc.PlanID == new Guid(planID)
+                        select new { c.CourseID, c.Code, c.Name, pc.PlanID };
+
+                return Json(new { cUassigned = x, cAssigned = y, hEnrollment = hasEnrollment });
+            }
         }
 
         /// <summary>
