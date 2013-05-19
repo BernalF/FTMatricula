@@ -17,7 +17,6 @@ namespace FTMatricula.Models
         public Scheme()
         {
             this.Scheme_Plan = new HashSet<Scheme_Plan>();
-            this.Scheme_Requirement = new HashSet<Scheme_Requirement>();
             this.School_Scheme = new HashSet<School_Scheme>();
         }
     
@@ -35,7 +34,6 @@ namespace FTMatricula.Models
     
         public virtual Modality Modality { get; set; }
         public virtual ICollection<Scheme_Plan> Scheme_Plan { get; set; }
-        public virtual ICollection<Scheme_Requirement> Scheme_Requirement { get; set; }
         public virtual ICollection<School_Scheme> School_Scheme { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

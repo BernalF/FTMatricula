@@ -17,6 +17,7 @@ namespace FTMatricula.Models
         public School()
         {
             this.School_Scheme = new HashSet<School_Scheme>();
+            this.Courses = new HashSet<Course>();
         }
     
         public System.Guid? SchoolID { get; set; }
@@ -28,7 +29,10 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
         public string Code { get; set; }
+        public Nullable<System.Guid> AdminUserID { get; set; }
     
         public virtual ICollection<School_Scheme> School_Scheme { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual User User { get; set; }
     }
 }

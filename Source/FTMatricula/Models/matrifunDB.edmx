@@ -36,7 +36,6 @@
           <EntitySet Name="Resource" EntityType="FTMatricula.DBModel.Store.Resource" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scheme" EntityType="FTMatricula.DBModel.Store.Scheme" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Scheme-Requirement" EntityType="FTMatricula.DBModel.Store.Scheme-Requirement" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School-Scheme" EntityType="FTMatricula.DBModel.Store.School-Scheme" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Score" EntityType="FTMatricula.DBModel.Store.Score" store:Type="Tables" Schema="dbo" />
@@ -100,6 +99,10 @@
       [SchemeDetails].[SchoolName] AS [SchoolName]
       FROM [dbo].[SchemeDetails] AS [SchemeDetails]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_Course_School" Association="FTMatricula.DBModel.Store.FK_Course_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
           <AssociationSet Name="FK_Course-Requirement_Course" Association="FTMatricula.DBModel.Store.FK_Course-Requirement_Course">
             <End Role="Course" EntitySet="Course" />
             <End Role="Course-Requirement" EntitySet="Course-Requirement" />
@@ -188,13 +191,9 @@
             <End Role="Scheme" EntitySet="Scheme" />
             <End Role="Scheme-Plan" EntitySet="Scheme-Plan" />
           </AssociationSet>
-          <AssociationSet Name="FK_Scheme-Requirement_Requirement" Association="FTMatricula.DBModel.Store.FK_Scheme-Requirement_Requirement">
-            <End Role="Requirement" EntitySet="Requirement" />
-            <End Role="Scheme-Requirement" EntitySet="Scheme-Requirement" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scheme-Requirement_Scheme" Association="FTMatricula.DBModel.Store.FK_Scheme-Requirement_Scheme">
-            <End Role="Scheme" EntitySet="Scheme" />
-            <End Role="Scheme-Requirement" EntitySet="Scheme-Requirement" />
+          <AssociationSet Name="FK_School_Users" Association="FTMatricula.DBModel.Store.FK_School_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="School" EntitySet="School" />
           </AssociationSet>
           <AssociationSet Name="FK_School-Scheme_Scheme" Association="FTMatricula.DBModel.Store.FK_School-Scheme_Scheme">
             <End Role="Scheme" EntitySet="Scheme" />
@@ -301,9 +300,10 @@
           <Property Name="ModifyDate" Type="datetime" />
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
+          <Property Name="SchoolID" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.Course-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.Course-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Course-Requirement">
           <Key>
@@ -557,19 +557,6 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
         </EntityType>
-        <EntityType Name="Scheme-Requirement">
-          <Key>
-            <PropertyRef Name="SchemeID" />
-            <PropertyRef Name="RequirementID" />
-          </Key>
-          <Property Name="SchemeID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="RequirementID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="InsertDate" Type="datetime" />
-          <Property Name="InsertUserID" Type="uniqueidentifier" />
-          <Property Name="ModifyDate" Type="datetime" />
-          <Property Name="ModifyUserID" Type="uniqueidentifier" />
-          <Property Name="IpAddress" Type="varchar" MaxLength="200" />
-        </EntityType>
         <EntityType Name="School">
           <Key>
             <PropertyRef Name="SchoolID" />
@@ -583,6 +570,7 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
           <Property Name="Code" Type="varchar" MaxLength="120" />
+          <Property Name="AdminUserID" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="School-Scheme">
           <Key>
@@ -711,7 +699,7 @@
           <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.ApplicationUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.ApplicationUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="ApplicationUser">
           <Key>
@@ -746,7 +734,7 @@
           <Property Name="IdentificationTypeID" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.PlanDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.PlanDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="PlanDetails">
           <Key>
@@ -763,7 +751,7 @@
           <Property Name="isActive" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.RequirementDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="RequirementDetails">
           <Key>
@@ -778,7 +766,7 @@
           <Property Name="TypeName" Type="varchar" Nullable="false" MaxLength="120" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'matrifunDB.dbo.SchemeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'matriFunDB.dbo.SchemeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="SchemeDetails">
           <Key>
@@ -801,6 +789,18 @@
           <Property Name="SchoolID" Type="uniqueidentifier" />
           <Property Name="SchoolName" Type="varchar" Nullable="false" MaxLength="120" />
         </EntityType>
+        <Association Name="FK_Course_School">
+          <End Role="School" Type="FTMatricula.DBModel.Store.School" Multiplicity="0..1" />
+          <End Role="Course" Type="FTMatricula.DBModel.Store.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Course-Requirement_Course">
           <End Role="Course" Type="FTMatricula.DBModel.Store.Course" Multiplicity="1" />
           <End Role="Course-Requirement" Type="FTMatricula.DBModel.Store.Course-Requirement" Multiplicity="*" />
@@ -1065,27 +1065,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Scheme-Requirement_Requirement">
-          <End Role="Requirement" Type="FTMatricula.DBModel.Store.Requirement" Multiplicity="1" />
-          <End Role="Scheme-Requirement" Type="FTMatricula.DBModel.Store.Scheme-Requirement" Multiplicity="*" />
+        <Association Name="FK_School_Users">
+          <End Role="Users" Type="FTMatricula.DBModel.Store.Users" Multiplicity="0..1" />
+          <End Role="School" Type="FTMatricula.DBModel.Store.School" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Requirement">
-              <PropertyRef Name="RequirementID" />
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="Scheme-Requirement">
-              <PropertyRef Name="RequirementID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Scheme-Requirement_Scheme">
-          <End Role="Scheme" Type="FTMatricula.DBModel.Store.Scheme" Multiplicity="1" />
-          <End Role="Scheme-Requirement" Type="FTMatricula.DBModel.Store.Scheme-Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Scheme">
-              <PropertyRef Name="SchemeID" />
-            </Principal>
-            <Dependent Role="Scheme-Requirement">
-              <PropertyRef Name="SchemeID" />
+            <Dependent Role="School">
+              <PropertyRef Name="AdminUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1306,7 +1294,6 @@
           <EntitySet Name="Resources" EntityType="FTMatricula.DBModel.Resource" />
           <EntitySet Name="Schemes" EntityType="FTMatricula.DBModel.Scheme" />
           <EntitySet Name="Scheme_Plan" EntityType="FTMatricula.DBModel.Scheme_Plan" />
-          <EntitySet Name="Scheme_Requirement" EntityType="FTMatricula.DBModel.Scheme_Requirement" />
           <EntitySet Name="Schools" EntityType="FTMatricula.DBModel.School" />
           <EntitySet Name="School_Scheme" EntityType="FTMatricula.DBModel.School_Scheme" />
           <EntitySet Name="Students" EntityType="FTMatricula.DBModel.Student" />
@@ -1349,17 +1336,9 @@
             <End Role="Plan" EntitySet="Plans" />
             <End Role="Scheme_Plan" EntitySet="Scheme_Plan" />
           </AssociationSet>
-          <AssociationSet Name="FK_Scheme_Requirement_Requirement" Association="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement">
-            <End Role="Requirement" EntitySet="Requirements" />
-            <End Role="Scheme_Requirement" EntitySet="Scheme_Requirement" />
-          </AssociationSet>
           <AssociationSet Name="FK_Scheme_Plan_Scheme" Association="FTMatricula.DBModel.FK_Scheme_Plan_Scheme">
             <End Role="Scheme" EntitySet="Schemes" />
             <End Role="Scheme_Plan" EntitySet="Scheme_Plan" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Scheme_Requirement_Scheme" Association="FTMatricula.DBModel.FK_Scheme_Requirement_Scheme">
-            <End Role="Scheme" EntitySet="Schemes" />
-            <End Role="Scheme_Requirement" EntitySet="Scheme_Requirement" />
           </AssociationSet>
           <AssociationSet Name="FK_School_Scheme_Scheme" Association="FTMatricula.DBModel.FK_School_Scheme_Scheme">
             <End Role="Scheme" EntitySet="Schemes" />
@@ -1494,6 +1473,14 @@
             <End Role="Student" EntitySet="Students" />
             <End Role="Score" EntitySet="Scores" />
           </AssociationSet>
+          <AssociationSet Name="FK_Course_School" Association="FTMatricula.DBModel.FK_Course_School">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_School_Users" Association="FTMatricula.DBModel.FK_School_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="School" EntitySet="Schools" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1541,6 +1528,8 @@
           <NavigationProperty Name="Plan_Course" Relationship="FTMatricula.DBModel.FK_Plan_Course_Course" FromRole="Course" ToRole="Plan_Course" />
           <NavigationProperty Name="EnrollmentCourses" Relationship="FTMatricula.DBModel.FK_EnrollmentCourse_Course" FromRole="Course" ToRole="EnrollmentCourse" />
           <NavigationProperty Name="Scores" Relationship="FTMatricula.DBModel.FK_Score_Course" FromRole="Course" ToRole="Score" />
+          <Property Type="Guid" Name="SchoolID" />
+          <NavigationProperty Name="School" Relationship="FTMatricula.DBModel.FK_Course_School" FromRole="Course" ToRole="School" />
         </EntityType>
         <EntityType Name="Course_Requirement">
           <Key>
@@ -1660,7 +1649,6 @@
           <Property Name="ModifyUserID" Type="Guid" />
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Course_Requirement" Relationship="FTMatricula.DBModel.FK_Course_Requirement_Requirement" FromRole="Requirement" ToRole="Course_Requirement" />
-          <NavigationProperty Name="Scheme_Requirement" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement" FromRole="Requirement" ToRole="Scheme_Requirement" />
         </EntityType>
         <EntityType Name="Resource">
           <Key>
@@ -1688,7 +1676,6 @@
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="Modality" Relationship="FTMatricula.DBModel.FK_Scheme_Modality" FromRole="Scheme" ToRole="Modality" />
           <NavigationProperty Name="Scheme_Plan" Relationship="FTMatricula.DBModel.FK_Scheme_Plan_Scheme" FromRole="Scheme" ToRole="Scheme_Plan" />
-          <NavigationProperty Name="Scheme_Requirement" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Scheme" FromRole="Scheme" ToRole="Scheme_Requirement" />
           <NavigationProperty Name="School_Scheme" Relationship="FTMatricula.DBModel.FK_School_Scheme_Scheme" FromRole="Scheme" ToRole="School_Scheme" />
           <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_Scheme_CooUsers" FromRole="Scheme" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="FTMatricula.DBModel.FK_Scheme_OwUsers" FromRole="Scheme" ToRole="User" />
@@ -1708,21 +1695,6 @@
           <NavigationProperty Name="Plan" Relationship="FTMatricula.DBModel.FK_Scheme_Plan_Plan" FromRole="Scheme_Plan" ToRole="Plan" />
           <NavigationProperty Name="Scheme" Relationship="FTMatricula.DBModel.FK_Scheme_Plan_Scheme" FromRole="Scheme_Plan" ToRole="Scheme" />
         </EntityType>
-        <EntityType Name="Scheme_Requirement">
-          <Key>
-            <PropertyRef Name="SchemeID" />
-            <PropertyRef Name="RequirementID" />
-          </Key>
-          <Property Name="SchemeID" Type="Guid" Nullable="false" />
-          <Property Name="RequirementID" Type="Guid" Nullable="false" />
-          <Property Name="InsertDate" Type="DateTime" Precision="3" />
-          <Property Name="InsertUserID" Type="Guid" />
-          <Property Name="ModifyDate" Type="DateTime" Precision="3" />
-          <Property Name="ModifyUserID" Type="Guid" />
-          <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="Requirement" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement" FromRole="Scheme_Requirement" ToRole="Requirement" />
-          <NavigationProperty Name="Scheme" Relationship="FTMatricula.DBModel.FK_Scheme_Requirement_Scheme" FromRole="Scheme_Requirement" ToRole="Scheme" />
-        </EntityType>
         <EntityType Name="School">
           <Key>
             <PropertyRef Name="SchoolID" />
@@ -1737,6 +1709,9 @@
           <Property Name="IpAddress" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
           <Property Name="Code" Type="String" MaxLength="120" Unicode="false" FixedLength="false" />
           <NavigationProperty Name="School_Scheme" Relationship="FTMatricula.DBModel.FK_School_Scheme_School" FromRole="School" ToRole="School_Scheme" />
+          <Property Type="Guid" Name="AdminUserID" />
+          <NavigationProperty Name="Courses" Relationship="FTMatricula.DBModel.FK_Course_School" FromRole="School" ToRole="Course" />
+          <NavigationProperty Name="User" Relationship="FTMatricula.DBModel.FK_School_Users" FromRole="School" ToRole="User" />
         </EntityType>
         <EntityType Name="School_Scheme">
           <Key>
@@ -1859,6 +1834,7 @@
           <NavigationProperty Name="Membership" Relationship="FTMatricula.DBModel.MembershipUser" FromRole="User" ToRole="Membership" />
           <NavigationProperty Name="Schemes" Relationship="FTMatricula.DBModel.FK_Scheme_CooUsers" FromRole="User" ToRole="Scheme" />
           <NavigationProperty Name="Schemes1" Relationship="FTMatricula.DBModel.FK_Scheme_OwUsers" FromRole="User" ToRole="Scheme" />
+          <NavigationProperty Name="Schools" Relationship="FTMatricula.DBModel.FK_School_Users" FromRole="User" ToRole="School" />
         </EntityType>
         <EntityType Name="ApplicationUser">
           <Key>
@@ -2021,18 +1997,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Scheme_Requirement_Requirement">
-          <End Role="Requirement" Type="FTMatricula.DBModel.Requirement" Multiplicity="1" />
-          <End Role="Scheme_Requirement" Type="FTMatricula.DBModel.Scheme_Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Requirement">
-              <PropertyRef Name="RequirementID" />
-            </Principal>
-            <Dependent Role="Scheme_Requirement">
-              <PropertyRef Name="RequirementID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Scheme_Plan_Scheme">
           <End Role="Scheme" Type="FTMatricula.DBModel.Scheme" Multiplicity="1" />
           <End Role="Scheme_Plan" Type="FTMatricula.DBModel.Scheme_Plan" Multiplicity="*" />
@@ -2041,18 +2005,6 @@
               <PropertyRef Name="SchemeID" />
             </Principal>
             <Dependent Role="Scheme_Plan">
-              <PropertyRef Name="SchemeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Scheme_Requirement_Scheme">
-          <End Role="Scheme" Type="FTMatricula.DBModel.Scheme" Multiplicity="1" />
-          <End Role="Scheme_Requirement" Type="FTMatricula.DBModel.Scheme_Requirement" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Scheme">
-              <PropertyRef Name="SchemeID" />
-            </Principal>
-            <Dependent Role="Scheme_Requirement">
               <PropertyRef Name="SchemeID" />
             </Dependent>
           </ReferentialConstraint>
@@ -2580,6 +2532,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Course_School">
+          <End Type="FTMatricula.DBModel.School" Role="School" Multiplicity="0..1" />
+          <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolID" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_School_Users">
+          <End Type="FTMatricula.DBModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="FTMatricula.DBModel.School" Role="School" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="School">
+              <PropertyRef Name="AdminUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2616,6 +2592,7 @@
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Course">
               <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -2779,22 +2756,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Scheme_Requirement">
-            <EntityTypeMapping TypeName="FTMatricula.DBModel.Scheme_Requirement">
-              <MappingFragment StoreEntitySet="Scheme-Requirement">
-                <ScalarProperty Name="SchemeID" ColumnName="SchemeID" />
-                <ScalarProperty Name="RequirementID" ColumnName="RequirementID" />
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="InsertUserID" ColumnName="InsertUserID" />
-                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
-                <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
-                <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Schools">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.School">
               <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="AdminUserID" ColumnName="AdminUserID" />
                 <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

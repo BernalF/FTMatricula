@@ -33,10 +33,12 @@ namespace FTMatricula.Models
         public Nullable<System.DateTime> ModifyDate { get; set; }
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
+        public Nullable<System.Guid> SchoolID { get; set; }
     
         public virtual ICollection<Course_Requirement> Course_Requirement { get; set; }
         public virtual ICollection<Plan_Course> Plan_Course { get; set; }
         public virtual ICollection<EnrollmentCourse> EnrollmentCourses { get; set; }
         public virtual ICollection<Score> Scores { get; set; }
+        public virtual School School { get; set; }
     }
 }
