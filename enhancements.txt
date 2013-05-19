@@ -10,10 +10,10 @@
 ++ Alerta cuando se agrega curso como User Administrador
 ++ En Matricula, solo ver matriculas relacionadas con la escuela
 ++ Vincular Cursos a Planes, solo info del Usuario Administrador de Escuela		
-++ Certificaciones -> Imprimir Certificaciones	
 ---------------------------------------------------------------------------------------------------------------------------
 --------------------------------- To Do 31 Mayo
 ---------------------------------------------------------------------------------------------------------------------------
+++ Certificaciones -> Imprimir Certificaciones	
 ++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
 ++ Cursos -> Valoracion Criterio Calificacion - Score table add isApproved
 ++ Validaciones Matricula
