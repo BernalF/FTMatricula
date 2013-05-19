@@ -394,8 +394,8 @@ namespace FTMatricula.Controllers
                 model.PlanName = enrollment.Plan.Name + " " + enrollment.Plan.Description;
 
                 Guid? SchemeID = db.Scheme_Plan.Where(x => x.PlanID == enrollment.Plan.PlanID).FirstOrDefault().SchemeID;
-                School_Scheme school_scheme = db.School_Scheme.Where(x => x.SchemeID == SchemeID).FirstOrDefault();
-                model.SchoolDescription = school_scheme != null ? school_scheme.School.Code + " " + school_scheme.School.Description : "--";
+                Scheme scheme = db.Schemes.Where(x => x.SchemeID == SchemeID).FirstOrDefault();
+                model.SchoolDescription = scheme != null ? scheme.School.Code + " " + scheme.School.Description : "--";
 
                 foreach (var studentCourse in db.EnrollmentStudentCourses.Where(m => m.StudentID == sID).ToList())
                 {
