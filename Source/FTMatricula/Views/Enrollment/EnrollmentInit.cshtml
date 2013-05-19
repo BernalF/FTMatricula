@@ -34,22 +34,13 @@
                         </li>
                         <li class="width75">
                             <div>
-                                @if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
-                                {
-                                    @(Html.Kendo().DropDownListFor(m => m.EnrollmentID)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsListBySchoolAdmin(@User.Identity.Name))
-                                    .Name("EnrollmentID")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                                }else{
-                                    @(Html.Kendo().DropDownListFor(m => m.EnrollmentID)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsList)
-                                    .Name("EnrollmentID")
-                                    .DataTextField("Text")
-                                    .DataValueField("Value")
-                                    .HtmlAttributes(new { @class = "width100" }))
-                                }
+                                @(Html.Kendo().DropDownListFor(m => m.EnrollmentID)
+                                .BindTo(FTMatricula.Utilities.GeneralCollections.EnrollmentsList(@User.Identity.Name, User.IsInRole("ROLE_SCHOOL_ADMIN")))
+                                .Name("EnrollmentID")
+                                .DataTextField("Text")
+                                .DataValueField("Value")
+                                .HtmlAttributes(new { @class = "width100" }))
+                                
                             </div>
                         </li>
                     </ul>

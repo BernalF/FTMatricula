@@ -372,28 +372,18 @@ namespace FTMatricula.Utilities
         /// <summary>
         /// Enrollments List
         /// </summary>
-        public static SelectList EnrollmentsList
-        {
-            get
-            {
-                matrifunDBEntities db = new matrifunDBEntities();
-
-                return new SelectList(db.Enrollments
-                                    .ToList()
-                                    .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
-
-            }
-        }
-
-        public static SelectList EnrollmentsListBySchoolAdmin(string userName)
+    
+        public static SelectList EnrollmentsList(string userName, bool IsSchoolAdmin)
         {
             matrifunDBEntities db = new matrifunDBEntities();
-            Guid? schoolID = Misc.GetSchoolID(userName);
 
-            IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == schoolID).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
+            Guid? schoolID = IsSchoolAdmin?Misc.GetSchoolID(userName):null;
+            IList<Guid?> aux = IsSchoolAdmin ?
+                                            db.Schemes.Where(x => x.SchoolID == schoolID).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList()
+                                            : new List<Guid?>();
 
             return new SelectList(db.Enrollments
-                                .Where(x => aux.Contains(x.PlanID))
+                                .Where(e => IsSchoolAdmin == false || aux.Contains(e.PlanID))
                                 .ToList()
                                 .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
         }
