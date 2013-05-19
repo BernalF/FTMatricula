@@ -49,6 +49,14 @@ namespace FTMatricula.Utilities.Helper
             }
             return newVersion;
         }
+
+        public static Guid? GetSchoolID(string Username)
+        {
+            matrifunDBEntities db = new matrifunDBEntities();
+            return db.Schools
+                .Where(s => s.AdminUserID == (Guid)Membership.GetUser(Username).ProviderUserKey)
+                .Select(s => s.SchoolID).FirstOrDefault();             
+        }         
     }
 
     public static class Resources

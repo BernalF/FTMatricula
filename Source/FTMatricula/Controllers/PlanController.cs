@@ -31,17 +31,50 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingPlan([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.PlanDetails.ToList()
-                .Where(m => m.isActive == true)
-                .Select(m => new
-                {
-                    m.SchemeID,
-                    m.SchemeName,
-                    m.PlanID,
-                    m.PlanName,
-                    m.Description,
-                    m.Version
-                }).ToDataSourceResult(request));
+            if (User.IsInRole("ROLE_ADMINISTRATOR"))
+            {
+                return Json(db.PlanDetails.ToList()
+                  .Where(m => m.isActive == true)
+                  .Select(m => new
+                  {
+                      m.SchemeID,
+                      m.SchemeName,
+                      m.PlanID,
+                      m.PlanName,
+                      m.Description,
+                      m.Version
+                  }).ToDataSourceResult(request));
+            }
+            else
+            {
+                //CREATE VIEW [dbo].[PlanDetails]    
+                //AS    
+                //SELECT sp.SchemeID,    
+                //  s.Name AS SchemeName,        
+                //  p.PlanID,     
+                //  p.Name AS PlanName,    
+                //  p.[Description],    
+                //  p.[Version],  
+                //  p.isActive     
+                //FROM [Plan] p    
+                //INNER JOIN [Scheme-Plan] sp ON p.PlanID = sp.PlanID    
+                //INNER JOIN Scheme s ON s.SchemeID = sp.SchemeID    
+                //WHERE isActive = 1 
+
+
+
+                return Json(db.PlanDetails.ToList()
+                      .Where(m => m.isActive == true)
+                      .Select(m => new
+                      {
+                          m.SchemeID,
+                          m.SchemeName,
+                          m.PlanID,
+                          m.PlanName,
+                          m.Description,
+                          m.Version
+                      }).ToDataSourceResult(request));
+            }
         }
 
         /// <summary>

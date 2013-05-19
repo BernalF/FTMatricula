@@ -30,17 +30,38 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingSchemes([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.SchemeDetails.ToList().Select(m =>
-                new
-                {
-                    m.SchemeID,
-                    m.SchemeName,
-                    m.Description,
-                    m.OwnerName,
-                    m.CoordinatorName,
-                    m.ModalityName,
-                    m.SchoolName
-                }).ToDataSourceResult(request));
+            if (User.IsInRole("ROLE_ADMINISTRATOR"))
+            {
+                return Json(db.SchemeDetails                
+                .ToList()
+                .Select(m =>
+                    new
+                    {
+                        m.SchemeID,
+                        m.SchemeName,
+                        m.Description,
+                        m.OwnerName,
+                        m.CoordinatorName,
+                        m.ModalityName,
+                        m.SchoolName
+                    }).ToDataSourceResult(request));
+            }
+            else {
+                return Json(db.SchemeDetails
+                .Where(m => m.SchoolID == Misc.GetSchoolID(User.Identity.Name))
+                .ToList()
+                .Select(m =>
+                    new
+                    {
+                        m.SchemeID,
+                        m.SchemeName,
+                        m.Description,
+                        m.OwnerName,
+                        m.CoordinatorName,
+                        m.ModalityName,
+                        m.SchoolName
+                    }).ToDataSourceResult(request));
+            }            
         }
 
         /// <summary>
@@ -117,7 +138,7 @@ namespace FTMatricula.Controllers
                     };
                     db.Schemes.Add(scheme);
                     db.SaveChanges();
-                    
+
                     // Assign school to a scheme
                     School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = schemeID };
                     db.School_Scheme.Add(ss);
