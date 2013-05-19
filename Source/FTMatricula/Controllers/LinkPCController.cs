@@ -33,10 +33,13 @@ namespace FTMatricula.Controllers
                 hasEnrollment = db.Plans.Where(p => p.PlanID == new Guid(planID)).Select(p => p.hasEnrollment).FirstOrDefault();
             else
                 hasEnrollment = false;
+
+            Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+
             return Json(new
             {
                 Courses = db.Courses
-                            .Where(c => c.IsActive == true)
+                            .Where(c => c.IsActive == true && c.SchoolID == schoolID)
                             .ToList()
                             .Select(c => new { c.CourseID, c.Code, c.Name }),
                 hEnrollment = hasEnrollment
@@ -54,6 +57,15 @@ namespace FTMatricula.Controllers
                 hasEnrollment = db.Plans.Where(p => p.PlanID == new Guid(planID)).Select(p => p.hasEnrollment).FirstOrDefault();
             else
                 hasEnrollment = false;
+            
+            //SchoolID by PlanID
+            Guid? schoolID = db.Plans
+                .ToList()
+                .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                .Where(m => m.p.PlanID == new Guid(planID)
+                    && m.p.isActive == true)
+                    .Select(m => m.sp.Scheme == null ? new Guid("") : m.sp.Scheme.SchoolID).FirstOrDefault();
+
             //List of Courses ID by Plan
             IQueryable<Guid?> lCourseID = from pc in db.Plan_Course
                                           join c in db.Courses on pc.CourseID equals c.CourseID
@@ -63,11 +75,13 @@ namespace FTMatricula.Controllers
             var x = from c in db.Courses
                     where !lCourseID.Contains(c.CourseID)
                     select new { c.CourseID, c.Code, c.Name };
+
             //List of Linked Courses
             var y = from pc in db.Plan_Course
                     join c in db.Courses on pc.CourseID equals c.CourseID
                     where pc.PlanID == new Guid(planID)
                     select new { c.CourseID, c.Code, c.Name, pc.PlanID };
+
             return Json(new { cUassigned = x, cAssigned = y, hEnrollment = hasEnrollment });
         }
 
