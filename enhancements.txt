@@ -15,7 +15,7 @@
 --------------------------------- To Do 31 Mayo
 ---------------------------------------------------------------------------------------------------------------------------
 ++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
-++ Cursos -> Valoracion Criterio Calificacion
+++ Cursos -> Valoracion Criterio Calificacion - Score table add isApproved
 ++ Validaciones Matricula
 			|-> Estudiante pertenece a el plan de la matricula		
 			|-> Verificar si hay Cupo disponible		
