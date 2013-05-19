@@ -126,6 +126,10 @@ li.width80 {
 }
 
 .hide {
+    display: none;
+}
+
+.hide2 {
     display: none !important;
 }
 

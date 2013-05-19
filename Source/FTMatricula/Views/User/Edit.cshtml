@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
     ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
 
-    string schoolClass = Model.RoleName.Equals("ROLE_SCHOOL_ADMIN") ? "" : "hide";
+    string schoolClass = Model.RoleName.Equals("ROLE_SCHOOL_ADMIN") ? "" : "hide2";
 }
 
 @section styles {
@@ -260,11 +260,11 @@
 
         function change() {
             if (this.value() == "ROLE_SCHOOL_ADMIN") {
-                $('#School_1').removeClass('hide');
-                $('#School_2').removeClass('hide');
+                $('#School_1').removeClass('hide2');
+                $('#School_2').removeClass('hide2');
             } else {
-                $('#School_1').addClass('hide');
-                $('#School_2').addClass('hide');
+                $('#School_1').addClass('hide2');
+                $('#School_2').addClass('hide2');
             }
         }
     </script>

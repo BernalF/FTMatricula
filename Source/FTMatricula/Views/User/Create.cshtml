@@ -192,10 +192,10 @@
                             </div>
                         </li>
 
-                        <li id="School_1" class="hide">
+                        <li id="School_1" class="hide2">
                             <label>Escuela</label>
                         </li>
-                        <li id="School_2" class="hide">
+                        <li id="School_2" class="hide2">
                             <div>
                                 
                                 @(Html.Kendo().DropDownListFor(m => m.SchoolID)
@@ -255,11 +255,11 @@
 
         function change() {
             if (this.value() == "ROLE_SCHOOL_ADMIN") {
-                $('#School_1').removeClass('hide');
-                $('#School_2').removeClass('hide');
+                $('#School_1').removeClass('hide2');
+                $('#School_2').removeClass('hide2');
             } else {
-                $('#School_1').addClass('hide');
-                $('#School_2').addClass('hide');
+                $('#School_1').addClass('hide2');
+                $('#School_2').addClass('hide2');
             }
         }
     </script>
