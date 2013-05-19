@@ -60,7 +60,9 @@ namespace FTMatricula.Models
 
     //------ Course Section
     [MetadataType(typeof(Course_Validation))]
-    public partial class Course { }
+    public partial class Course {
+        public string SchoolName { get; set; }
+    }
 
     public class Course_Validation
     {

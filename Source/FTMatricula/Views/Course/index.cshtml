@@ -30,6 +30,7 @@
                                           columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));
                                           columns.Bound(m => m.TeachingHours).Title(@Resources.GetValue("TEACHING_HOURS"));
                                           columns.Bound(m => m.Charge).Title(@Resources.GetValue("COURSE_COST"));
+                                          columns.Bound(m => m.SchoolName).Title(@Resources.GetValue("SCHOOL"));
                                           columns.Command(command =>
                                           {
                                               command.Edit().Text(@Resources.GetValue("EDIT")).UpdateText(@Resources.GetValue("UPDATE")).CancelText(@Resources.GetValue("CANCEL"));
@@ -115,5 +116,13 @@
 </div>
 
 @section Scripts {
-    @if()
+    @if (!User.IsInRole("ROLE_SCHOOL_ADMIN")){
+        <script>            
+            $("#Grid").kendoGrid({
+                dataBound: function () {
+                    $(".k-button").remove();
+                }
+            });            
+        </script>
+    }
 }

@@ -33,7 +33,45 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingCourses([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.Courses.ToList().Select(m => new { m.CourseID, m.Code, m.Name, m.TeachingHours, m.Charge }).ToDataSourceResult(request));
+            try
+            {
+                if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+                {
+                    Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+                    return Json(db.Courses.ToList()
+                        .Where(c => c.SchoolID == schoolID)
+                        .Select(m =>
+                            new
+                            {
+                                m.CourseID,
+                                m.Code,
+                                m.Name,
+                                m.TeachingHours,
+                                m.Charge,
+                                SchoolName = m.School.Name
+                            }).ToDataSourceResult(request));
+                }
+                else
+                {
+                    return Json(db.Courses
+                        .ToList()
+                        .Select(m =>
+                            new
+                            {
+                                m.CourseID,
+                                m.Code,
+                                m.Name,
+                                m.TeachingHours,
+                                m.Charge,
+                                SchoolName = (string.IsNullOrEmpty(m.School.Name) ? null : m.School.Name)
+                            }).ToDataSourceResult(request));
+                }
+            }
+            catch (Exception e)
+            {                
+                throw new ApplicationException(e.Message);
+            }
+            
         }
 
         /// <summary>
@@ -47,6 +85,8 @@ namespace FTMatricula.Controllers
         {
             if (ModelState.IsValid)
             {
+                Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+                model.SchoolID = schoolID;
                 model.CourseID = Guid.NewGuid();
                 model.IsActive = true;
                 model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
@@ -74,6 +114,8 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateCourse([DataSourceRequest] DataSourceRequest request, Course model)
         {
+            Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+            model.SchoolID = schoolID;
             model.IsActive = true;
             model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
             model.ModifyDate = DateTime.Today;
@@ -96,7 +138,7 @@ namespace FTMatricula.Controllers
         /// <param name="request"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        [AcceptVerbs(HttpVerbs.Post)]        
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyCourse([DataSourceRequest] DataSourceRequest request, Course model)
         {
             try
@@ -110,7 +152,7 @@ namespace FTMatricula.Controllers
             {
                 throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
-            
+
         }
 
         protected override void Dispose(bool disposing)
