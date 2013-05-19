@@ -14,6 +14,7 @@
 ---------------------------------------------------------------------------------------------------------------------------
 --------------------------------- To Do 31 Mayo
 ---------------------------------------------------------------------------------------------------------------------------
+++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
 ++ Cursos -> Valoracion Criterio Calificacion
 ++ Validaciones Matricula
 			|-> Estudiante pertenece a el plan de la matricula			
@@ -51,5 +52,3 @@
 			- Consulta Matriculas por estudiante
 			- Importar Notas
 			- Auditoria
-
-
