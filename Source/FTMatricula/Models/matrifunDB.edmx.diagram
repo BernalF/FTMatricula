@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="FTMatricula.DBModel.Resource" Width="1.5" PointX="5.75" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme" Width="3.375" PointX="9.375" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme_Plan" Width="1.5" PointX="12.25" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme_Requirement" Width="1.5" PointX="15.25" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.School" Width="1.5" PointX="10" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.School_Scheme" Width="1.5" PointX="12.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Student" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
@@ -37,9 +36,7 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Modality" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Plan_Course_Plan" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Plan_Plan" ManuallyRouted="false" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Requirement_Requirement" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Plan_Scheme" ManuallyRouted="false" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Requirement_Scheme" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_School_Scheme_Scheme" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_School_Scheme_School" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Type" ManuallyRouted="false" />
@@ -79,6 +76,8 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Score_EnrollmentGroup" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Record_Score" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Student" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Course_School" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_School_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -17,7 +17,6 @@ namespace FTMatricula.Models
         public Requirement()
         {
             this.Course_Requirement = new HashSet<Course_Requirement>();
-            this.Scheme_Requirement = new HashSet<Scheme_Requirement>();
         }
     
         public System.Guid? RequirementID { get; set; }
@@ -30,6 +29,5 @@ namespace FTMatricula.Models
         public string IpAddress { get; set; }
     
         public virtual ICollection<Course_Requirement> Course_Requirement { get; set; }
-        public virtual ICollection<Scheme_Requirement> Scheme_Requirement { get; set; }
     }
 }
