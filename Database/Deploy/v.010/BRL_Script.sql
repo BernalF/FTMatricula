@@ -50,3 +50,22 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Scheme-Requirement]') AND type in (N'U'))
 DROP TABLE [dbo].[Scheme-Requirement]
 GO
+
+
+
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_School-Scheme_Scheme]') AND parent_object_id = OBJECT_ID(N'[dbo].[School-Scheme]'))
+ALTER TABLE [dbo].[School-Scheme] DROP CONSTRAINT [FK_School-Scheme_Scheme]
+GO
+
+IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_School-Scheme_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[School-Scheme]'))
+ALTER TABLE [dbo].[School-Scheme] DROP CONSTRAINT [FK_School-Scheme_School]
+GO
+
+USE [matriFunDB]
+GO
+
+/****** Object:  Table [dbo].[School-Scheme]    Script Date: 05/18/2013 23:12:04 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[School-Scheme]') AND type in (N'U'))
+DROP TABLE [dbo].[School-Scheme]
+GO
