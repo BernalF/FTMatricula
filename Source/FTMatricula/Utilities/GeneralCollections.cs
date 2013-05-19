@@ -293,7 +293,7 @@ namespace FTMatricula.Utilities
 
             return new SelectList(db.EnrollmentGroups
                     .Where(x => x.ProfessorID == uID)
-                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID , Name = x.EnrollmentCourse.Course.Name }), "CourseID", "Name");
+                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID, Name = x.EnrollmentCourse.Course.Name }), "CourseID", "Name");
         }
 
 
@@ -356,7 +356,7 @@ namespace FTMatricula.Utilities
                 matrifunDBEntities db = new matrifunDBEntities();
 
                 return new SelectList(db.Enrollments
-                                    .ToList()                   
+                                    .ToList()
                                     .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
 
             }
@@ -367,9 +367,9 @@ namespace FTMatricula.Utilities
             matrifunDBEntities db = new matrifunDBEntities();
 
             IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == Misc.GetSchoolID(userName)).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
-           
+
             return new SelectList(db.Enrollments
-                                .Where(x=> aux.Contains(x.PlanID))
+                                .Where(x => aux.Contains(x.PlanID))
                                 .ToList()
                                 .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
         }
@@ -390,16 +390,24 @@ namespace FTMatricula.Utilities
         }
 
         /// <summary>
-        /// Coordinator List
+        /// School List
         /// </summary>
-        public static SelectList SchoolList
+        public static SelectList SchoolList(string userID, bool isSchoolAdmin)
         {
-            get
+            matrifunDBEntities db = new matrifunDBEntities();
+            if (isSchoolAdmin)
             {
-                matrifunDBEntities db = new matrifunDBEntities();
+                Guid? schoolID = Misc.GetSchoolID(userID);
                 return new SelectList(db.Schools
-                                        .ToList()
-                                        .Select(s => new { s.SchoolID, s.Name }), "SchoolID", "Name");
+                                    .Where(s => s.SchoolID == schoolID)
+                                    .ToList()
+                                    .Select(s => new { s.SchoolID, s.Name }), "SchoolID", "Name");
+            }
+            else
+            {
+                return new SelectList(db.Schools
+                                    .ToList()
+                                    .Select(s => new { s.SchoolID, s.Name }), "SchoolID", "Name");
             }
         }
     }
