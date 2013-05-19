@@ -74,12 +74,6 @@ namespace FTMatricula.Controllers
             try
             {
                 Scheme scheme = db.Schemes.Find(model.SchemeID);
-                foreach (var ss in scheme.School_Scheme.ToList())
-                {
-                    db.School_Scheme.Remove(ss);
-                    db.SaveChanges();
-                }
-
                 db.Schemes.Remove(scheme);
                 db.SaveChanges();
 
@@ -132,19 +126,16 @@ namespace FTMatricula.Controllers
                         OwnerUserId = model.OwnerUserId,
                         CoordinatorUserId = model.CoordinatorUserId,
                         ModalityID = model.ModalityID,
+                        SchoolID = model.SchoolID,
                         InsertUserID = SessApp.GetUserID(User.Identity.Name),
                         InsertDate = DateTime.Today,
                         IpAddress = Network.GetIpAddress(Request),
                     };
                     db.Schemes.Add(scheme);
                     db.SaveChanges();
-
-                    // Assign school to a scheme
-                    School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = schemeID };
-                    db.School_Scheme.Add(ss);
-                    db.SaveChanges();
+                    return RedirectToAction("index");
                 }
-                return RedirectToAction("index");
+                return View();                
             }
             catch (Exception e)
             {
@@ -181,12 +172,7 @@ namespace FTMatricula.Controllers
             try
             {
                 Scheme scheme = db.Schemes.Find(model.SchemeID);
-                foreach (var sss in scheme.School_Scheme.ToList())
-                {
-                    db.School_Scheme.Remove(sss);
-                    db.SaveChanges();
-                }
-
+                
                 if (model.SchoolID == null)
                 {
                     ModelState.AddModelError("", "Por favor seleccione una Escuela");
@@ -201,11 +187,7 @@ namespace FTMatricula.Controllers
                     // Insert in scheme                    
                     db.Entry(scheme).State = EntityState.Modified;
                     db.SaveChanges();
-
-                    // Assign school to a scheme
-                    School_Scheme ss = new School_Scheme { SchoolID = model.SchoolID, SchemeID = model.SchemeID };
-                    db.School_Scheme.Add(ss);
-                    db.SaveChanges();
+                    
                     return RedirectToAction("index");
                 }
             }

@@ -53,9 +53,7 @@ namespace FTMatricula.Controllers
                     return Json(db.Plans.ToList()
                           .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
                           .Where(m => m.p.isActive == true
-                              && (m.sp.Scheme.School_Scheme
-                              .Join(db.Schools, ss => ss.SchoolID, s => s.SchoolID, (ss, s) => new { ss, s })
-                              .Select(x => x.s.SchoolID).FirstOrDefault()) == Misc.GetSchoolID(User.Identity.Name))
+                              && m.sp.Scheme.SchoolID == Misc.GetSchoolID(User.Identity.Name))
                           .Select(m => new
                           {
                               SchemeID = m.sp.Scheme.SchemeID,

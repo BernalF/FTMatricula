@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c75e97ecc6a4d4ab648d6e879755144" Name="Diagram1" ZoomLevel="100">
+      <Diagram DiagramId="5c75e97ecc6a4d4ab648d6e879755144" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="FTMatricula.DBModel.Classroom" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Country" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Course" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
@@ -19,7 +19,6 @@
         <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme" Width="3.375" PointX="9.375" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Scheme_Plan" Width="1.5" PointX="12.25" PointY="14.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.School" Width="1.5" PointX="10" PointY="10" IsExpanded="true" />
-        <EntityTypeShape EntityType="FTMatricula.DBModel.School_Scheme" Width="1.5" PointX="12.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.Student" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.StudentAdditionalData" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.StudiesInformation" Width="1.5" PointX="3.625" PointY="15" IsExpanded="true" />
@@ -37,8 +36,6 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Plan_Course_Plan" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Plan_Plan" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_Plan_Scheme" ManuallyRouted="false" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_School_Scheme_Scheme" ManuallyRouted="false" />
-        <AssociationConnector Association="FTMatricula.DBModel.FK_School_Scheme_School" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Type" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Type_MaritalStatus" ManuallyRouted="false" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Student_Users" ManuallyRouted="false" />
@@ -78,6 +75,7 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Score_Student" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_Course_School" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_School_Users" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_School" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

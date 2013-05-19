@@ -62,10 +62,21 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[School-Scheme] DROP CONSTRAINT [FK_School-Scheme_School]
 GO
 
-USE [matriFunDB]
-GO
-
 /****** Object:  Table [dbo].[School-Scheme]    Script Date: 05/18/2013 23:12:04 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[School-Scheme]') AND type in (N'U'))
 DROP TABLE [dbo].[School-Scheme]
+GO
+ALTER TABLE dbo.Scheme ADD
+	SchoolID uniqueidentifier NULL
+GO
+ALTER TABLE dbo.Scheme ADD CONSTRAINT
+	FK_Scheme_School FOREIGN KEY
+	(
+	SchoolID
+	) REFERENCES dbo.School
+	(
+	SchoolID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 
+	
 GO

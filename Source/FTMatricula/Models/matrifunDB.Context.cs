@@ -42,7 +42,6 @@ namespace FTMatricula.Models
         public DbSet<Scheme> Schemes { get; set; }
         public DbSet<Scheme_Plan> Scheme_Plan { get; set; }
         public DbSet<School> Schools { get; set; }
-        public DbSet<School_Scheme> School_Scheme { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<StudentAdditionalData> StudentAdditionalDatas { get; set; }
         public DbSet<StudiesInformation> StudiesInformations { get; set; }
