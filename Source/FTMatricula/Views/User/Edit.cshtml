@@ -201,7 +201,7 @@
                             <div>
                                 
                                 @(Html.Kendo().DropDownListFor(m => m.SchoolID)
-                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchoolList)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchoolList(User.Identity.Name, User.IsInRole("ROLE_SCHOOL_ADMIN")))
                                     .Name("SchoolID")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
