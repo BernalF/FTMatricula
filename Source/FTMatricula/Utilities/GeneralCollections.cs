@@ -374,8 +374,9 @@ namespace FTMatricula.Utilities
         public static SelectList EnrollmentsListBySchoolAdmin(string userName)
         {
             matrifunDBEntities db = new matrifunDBEntities();
+            Guid? schoolID = Misc.GetSchoolID(userName);
 
-            IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == Misc.GetSchoolID(userName)).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
+            IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == schoolID).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
 
             return new SelectList(db.Enrollments
                                 .Where(x => aux.Contains(x.PlanID))
