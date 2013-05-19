@@ -29,9 +29,15 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingEnrollments([DataSourceRequest] DataSourceRequest request)
         {
-            IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == Misc.GetSchoolID(User.Identity.Name)).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
+
+            bool IsSchoolAdmin = User.IsInRole("ROLE_SCHOOL_ADMIN");
+            Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+            IList<Guid?> aux = IsSchoolAdmin ?
+                                            db.Schemes.Where(x => x.SchoolID == schoolID).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList()
+                                            : new List<Guid?>();
 
             var enrollments = db.Enrollments
+                    .Where(e=>IsSchoolAdmin == false || aux.Contains(e.PlanID))
                     .ToList().Select(m => new
                     {
                         m.EnrollmentID,
