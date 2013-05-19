@@ -59,12 +59,6 @@ namespace FTMatricula.Controllers
                     db.SaveChanges();
                 }
 
-                foreach (var sr in scheme.Scheme_Requirement.ToList())
-                {
-                    db.Scheme_Requirement.Remove(sr);
-                    db.SaveChanges();
-                }
-
                 db.Schemes.Remove(scheme);
                 db.SaveChanges();
 
@@ -79,15 +73,15 @@ namespace FTMatricula.Controllers
         /// <summary>
         /// Paging Requirements
         /// </summary>
-        [HttpPost]
-        public ActionResult PagingRequirements(string schemeID)
-        {
-            return Json(db.Scheme_Requirement
-                .Join(db.Requirements, sr => sr.RequirementID, r => r.RequirementID, (sr, r) => new { sr, r })
-                .Where(s => s.sr.SchemeID == new Guid(schemeID))
-                .ToList()
-                .Select(s => s.r.Name));
-        }
+        //[HttpPost]
+        //public ActionResult PagingRequirements(string schemeID)
+        //{
+        //    return Json(db.Scheme_Requirement
+        //        .Join(db.Requirements, sr => sr.RequirementID, r => r.RequirementID, (sr, r) => new { sr, r })
+        //        .Where(s => s.sr.SchemeID == new Guid(schemeID))
+        //        .ToList()
+        //        .Select(s => s.r.Name));
+        //}
 
         /// <summary>
         /// Create
