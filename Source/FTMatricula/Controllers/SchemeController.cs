@@ -12,6 +12,7 @@ using FTMatricula.Models;
 
 namespace FTMatricula.Controllers
 {
+    [KendoAjaxErrorHandler]
     public class SchemeController : Controller
     {
         private matrifunDBEntities db = new matrifunDBEntities();
@@ -30,9 +31,12 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingSchemes([DataSourceRequest] DataSourceRequest request)
         {
-            if (User.IsInRole("ROLE_ADMINISTRATOR"))
+            if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
             {
-                return Json(db.SchemeDetails                
+                Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+
+                return Json(db.SchemeDetails
+                .Where(m => m.SchoolID == schoolID)
                 .ToList()
                 .Select(m =>
                     new
@@ -46,9 +50,9 @@ namespace FTMatricula.Controllers
                         m.SchoolName
                     }).ToDataSourceResult(request));
             }
-            else {
+            else
+            {
                 return Json(db.SchemeDetails
-                .Where(m => m.SchoolID == Misc.GetSchoolID(User.Identity.Name))
                 .ToList()
                 .Select(m =>
                     new
@@ -61,14 +65,13 @@ namespace FTMatricula.Controllers
                         m.ModalityName,
                         m.SchoolName
                     }).ToDataSourceResult(request));
-            }            
+            }
         }
 
         /// <summary>
         /// Destroy Scheme
         /// </summary>
-        [AcceptVerbs(HttpVerbs.Post)]
-        [KendoAjaxErrorHandler]
+        [AcceptVerbs(HttpVerbs.Post)]        
         public ActionResult DestroyScheme([DataSourceRequest] DataSourceRequest request, SchemeDetail model)
         {
             try
@@ -135,7 +138,7 @@ namespace FTMatricula.Controllers
                     db.SaveChanges();
                     return RedirectToAction("index");
                 }
-                return View();                
+                return View();
             }
             catch (Exception e)
             {
@@ -172,7 +175,7 @@ namespace FTMatricula.Controllers
             try
             {
                 Scheme scheme = db.Schemes.Find(model.SchemeID);
-                
+
                 if (model.SchoolID == null)
                 {
                     ModelState.AddModelError("", "Por favor seleccione una Escuela");
@@ -185,9 +188,10 @@ namespace FTMatricula.Controllers
                 else
                 {
                     // Insert in scheme                    
+                    scheme.SchoolID = model.SchoolID;
                     db.Entry(scheme).State = EntityState.Modified;
                     db.SaveChanges();
-                    
+
                     return RedirectToAction("index");
                 }
             }

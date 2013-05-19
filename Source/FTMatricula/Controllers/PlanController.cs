@@ -33,43 +33,45 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                if (User.IsInRole("ROLE_ADMINISTRATOR"))
+                if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
                 {
+                    Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+
                     return Json(db.Plans.ToList()
-                          .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
-                          .Where(m => m.p.isActive == true)
-                          .Select(m => new
-                          {
-                              SchemeID = m.sp.Scheme.SchemeID,
-                              SchemeName = m.sp.Scheme.Name,
-                              PlanID = m.p.PlanID,
-                              PlanName = m.p.Name,
-                              Description = m.p.Description,
-                              Version = m.p.Version
-                          }).ToDataSourceResult(request));
+                           .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                           .Where(m => m.p.isActive == true
+                               && m.sp.Scheme.SchoolID == schoolID)
+                           .Select(m => new
+                           {
+                               SchemeID = m.sp.Scheme.SchemeID,
+                               SchemeName = m.sp.Scheme.Name,
+                               PlanID = m.p.PlanID,
+                               PlanName = m.p.Name,
+                               Description = m.p.Description,
+                               Version = m.p.Version
+                           }).ToDataSourceResult(request));
                 }
                 else
                 {
                     return Json(db.Plans.ToList()
-                          .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
-                          .Where(m => m.p.isActive == true
-                              && m.sp.Scheme.SchoolID == Misc.GetSchoolID(User.Identity.Name))
-                          .Select(m => new
-                          {
-                              SchemeID = m.sp.Scheme.SchemeID,
-                              SchemeName = m.sp.Scheme.Name,
-                              PlanID = m.p.PlanID,
-                              PlanName = m.p.Name,
-                              Description = m.p.Description,
-                              Version = m.p.Version
-                          }).ToDataSourceResult(request));
+                              .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                              .Where(m => m.p.isActive == true)
+                              .Select(m => new
+                              {
+                                  SchemeID = m.sp.Scheme.SchemeID,
+                                  SchemeName = m.sp.Scheme.Name,
+                                  PlanID = m.p.PlanID,
+                                  PlanName = m.p.Name,
+                                  Description = m.p.Description,
+                                  Version = m.p.Version
+                              }).ToDataSourceResult(request));
                 }
             }
             catch (Exception e)
-            {                
+            {
                 throw new ApplicationException(e.Message, e.InnerException.InnerException);
             }
-            
+
         }
 
         /// <summary>

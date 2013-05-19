@@ -53,8 +53,9 @@ namespace FTMatricula.Utilities.Helper
         public static Guid? GetSchoolID(string Username)
         {
             matrifunDBEntities db = new matrifunDBEntities();
+            Guid userID = (Guid)Membership.GetUser(Username).ProviderUserKey;
             return db.Schools
-                .Where(s => s.AdminUserID == (Guid)Membership.GetUser(Username).ProviderUserKey)
+                .Where(s => s.AdminUserID == userID)
                 .Select(s => s.SchoolID).FirstOrDefault();             
         }         
     }
