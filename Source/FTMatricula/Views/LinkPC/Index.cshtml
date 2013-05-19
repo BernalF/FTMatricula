@@ -114,10 +114,14 @@
                                 buildCourseList(result.cAssigned, "#sortable2");
                                 $('#sortable1, #sortable2').sortable("enable");
                                 $('.errorsSpace ul li').html('');
+                                $('#btnLinkPC').fadeIn();
                             }
                             else {
+                                buildCourseList(result.cUassigned, "#sortable1");
+                                buildCourseList(result.cAssigned, "#sortable2");
                                 $('#sortable1, #sortable2').sortable("disable");
                                 $('.errorsSpace ul li').html('@Resources.GetValue("PELPC_WARNING")');
+                                $('#btnLinkPC').fadeOut();
                             }
                             $('.popupBg').fadeOut();
                             $('.loading').fadeOut();
