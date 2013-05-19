@@ -354,11 +354,24 @@ namespace FTMatricula.Utilities
             get
             {
                 matrifunDBEntities db = new matrifunDBEntities();
+
                 return new SelectList(db.Enrollments
-                                    .ToList()
-                    //.OrderByDescending(c => c.Code)
+                                    .ToList()                   
                                     .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
+
             }
+        }
+
+        public static SelectList EnrollmentsListBySchoolAdmin(string userName)
+        {
+            matrifunDBEntities db = new matrifunDBEntities();
+
+            IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == Misc.GetSchoolID(userName)).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
+           
+            return new SelectList(db.Enrollments
+                                .Where(x=> aux.Contains(x.PlanID))
+                                .ToList()
+                                .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
         }
 
         /// <summary>

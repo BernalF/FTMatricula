@@ -29,7 +29,9 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingEnrollments([DataSourceRequest] DataSourceRequest request)
         {
-            var x = db.Enrollments
+            IList<Guid?> aux = db.Schemes.Where(x => x.SchoolID == Misc.GetSchoolID(User.Identity.Name)).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList();
+
+            var enrollments = db.Enrollments
                     .ToList().Select(m => new
                     {
                         m.EnrollmentID,
@@ -44,7 +46,7 @@ namespace FTMatricula.Controllers
                         m.ExtraEndDate
                     })
                     ;
-            return Json(x.ToDataSourceResult(request));
+            return Json(enrollments.ToDataSourceResult(request));
         }
 
 
