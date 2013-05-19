@@ -187,9 +187,29 @@
                                     .Name("RoleName")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
+                                    .Events(e => e.Change("change"))
                                     .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
+
+                        <li id="School_1" class="hide">
+                            <label>Escuela</label>
+                        </li>
+                        <li id="School_2" class="hide">
+                            <div>
+                                <span class="selectHolder">
+                                    @Html.DropDownListFor(m => m.Email, FTMatricula.Utilities.GeneralCollections.UserRolesList, new { @class = "select" })
+                                </span>
+                                @*@(Html.Kendo().DropDownListFor(m => m.RoleName)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.UserRolesList)
+                                    .Name("RoleName")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .Events(e => e.Change("change"))
+                                    .HtmlAttributes(new { @class = "width100" }))*@
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -234,6 +254,16 @@
             //$('.loading').fadeIn();
             document.forms[0].submit();
             return true;
+        }
+
+        function change() {
+            if (this.value() == "ROLE_SCHOOL_ADMIN") {
+                $('#School_1').removeClass('hide');
+                $('#School_2').removeClass('hide');
+            } else {
+                $('#School_1').addClass('hide');
+                $('#School_2').addClass('hide');
+            }
         }
     </script>
 }

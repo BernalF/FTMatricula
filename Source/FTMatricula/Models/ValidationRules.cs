@@ -84,6 +84,7 @@ namespace FTMatricula.Models
     public partial class ApplicationUser
     {
         public string tmpUserName { get; set; }
+        public Guid? SchoolID { get; set; }
     }
 
     public class ApplicationUser_Validation
