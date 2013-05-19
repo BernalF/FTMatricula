@@ -17,7 +17,8 @@
 ++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
 ++ Cursos -> Valoracion Criterio Calificacion
 ++ Validaciones Matricula
-			|-> Estudiante pertenece a el plan de la matricula			
+			|-> Estudiante pertenece a el plan de la matricula		
+			|-> Verificar si hay Cupo disponible		
 			|-> Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
 ++ Estudiantes -> Historial Academico			
 ++ Estudiantes -> Consulta Notas			
