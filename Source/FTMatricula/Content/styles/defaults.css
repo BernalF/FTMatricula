@@ -126,7 +126,7 @@ li.width80 {
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 .block {
