@@ -3,6 +3,8 @@
 @{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
     ViewBag.Title = Resources.GetValue("USER_MAINTENANCE");
+
+    string schoolClass = Model.RoleName.Equals("ROLE_SCHOOL_ADMIN") ? "" : "hide";
 }
 
 @section styles {
@@ -187,9 +189,26 @@
                                     .Name("RoleName")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
+                                    .Events(e => e.Change("change"))
                                     .HtmlAttributes(new { @class = "width100" }))
                             </div>
                         </li>
+
+                        <li id="School_1" class="@schoolClass">
+                            <label>Escuela</label>
+                        </li>
+                        <li id="School_2" class="@schoolClass">
+                            <div>
+                                
+                                @(Html.Kendo().DropDownListFor(m => m.SchoolID)
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.SchoolList)
+                                    .Name("SchoolID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+
                     </ul>
                 </div>
             </div>
@@ -237,6 +256,16 @@
             //$('.loading').fadeIn();
             document.forms[0].submit();
             return true;
+        }
+
+        function change() {
+            if (this.value() == "ROLE_SCHOOL_ADMIN") {
+                $('#School_1').removeClass('hide');
+                $('#School_2').removeClass('hide');
+            } else {
+                $('#School_1').addClass('hide');
+                $('#School_2').addClass('hide');
+            }
         }
     </script>
 }

@@ -28,12 +28,13 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public ActionResult PagingUsers([DataSourceRequest] DataSourceRequest request)
         {
-            return Json(db.ApplicationUsers.ToList().Select(m => new { 
-                m.StudentID, 
-                m.UserName, 
-                m.FirstName, 
-                m.LastName, 
-                RoleName = Resources.GetValue(m.RoleName), 
+            return Json(db.ApplicationUsers.ToList().Select(m => new
+            {
+                m.StudentID,
+                m.UserName,
+                m.FirstName,
+                m.LastName,
+                RoleName = Resources.GetValue(m.RoleName),
                 m.Email,
                 m.Phone1
             }).ToDataSourceResult(request));
@@ -90,6 +91,19 @@ namespace FTMatricula.Controllers
                     db.Students.Add(student);
                     db.SaveChanges();
 
+                    if (model.RoleName.Equals("ROLE_SCHOOL_ADMIN"))
+                    {
+                        School s = db.Schools.Find(model.SchoolID);
+                        if (s != null)
+                        {
+                            s.AdminUserID = user.UserId;
+                            s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                            s.ModifyDate = DateTime.Today;
+                            db.Entry(s).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+
                     return RedirectToAction("index");
                 }
                 return View(model);
@@ -98,7 +112,7 @@ namespace FTMatricula.Controllers
             {
                 throw new ApplicationException(e.Message);
             }
-            
+
         }
 
         public ActionResult Edit(string id)
@@ -109,6 +123,14 @@ namespace FTMatricula.Controllers
                                                       .ToList()
                                                       .FirstOrDefault();
                 user.tmpUserName = user.UserName;
+
+                if (user.RoleName.Equals("ROLE_SCHOOL_ADMIN"))
+                {
+                    School s = db.Schools.Where(x => x.AdminUserID == user.UserId).FirstOrDefault();
+                    if (s != null)
+                        user.SchoolID = s.SchoolID;
+                }
+
                 return View(user);
             }
             catch (Exception e)
@@ -125,11 +147,12 @@ namespace FTMatricula.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+
                     if (Roles.GetRolesForUser(model.tmpUserName).Length > 0)
                         Roles.RemoveUserFromRoles(model.tmpUserName, Roles.GetRolesForUser(model.tmpUserName));
 
-                    if (!model.UserName.Equals(model.tmpUserName)) {
+                    if (!model.UserName.Equals(model.tmpUserName))
+                    {
                         db.uspUserNameUpdate(model.tmpUserName, model.UserName);
                         MembershipUser currentUser = Membership.GetUser(model.UserName);
                         currentUser.ChangePassword(currentUser.ResetPassword(), model.UserName);
@@ -160,6 +183,24 @@ namespace FTMatricula.Controllers
                     db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
 
+
+
+                    School s = db.Schools.Find(model.SchoolID);
+                    if (s != null)
+                    {
+                        if (model.RoleName.Equals("ROLE_SCHOOL_ADMIN"))
+                            s.AdminUserID = model.UserId;
+                        else
+                            s.AdminUserID = null;
+
+                        s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
+                        s.ModifyDate = DateTime.Today;
+                        db.Entry(s).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+
+
                     return RedirectToAction("index");
                 }
                 return View(model);
@@ -170,7 +211,7 @@ namespace FTMatricula.Controllers
             }
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]        
+        [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DestroyUser([DataSourceRequest] DataSourceRequest request, ApplicationUser model)
         {
             try
