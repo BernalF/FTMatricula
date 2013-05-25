@@ -30,6 +30,7 @@ namespace FTMatricula.Models
         public Nullable<System.Guid> ModifyUserID { get; set; }
         public string IpAddress { get; set; }
         public Nullable<System.Guid> EnrollmentGroupID { get; set; }
+        public Nullable<bool> isApproved { get; set; }
     
         public virtual Course Course { get; set; }
         public virtual EnrollmentGroup EnrollmentGroup { get; set; }

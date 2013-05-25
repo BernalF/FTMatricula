@@ -20,6 +20,7 @@ namespace FTMatricula.Models
             this.Students1 = new HashSet<Student>();
             this.StudentAdditionalDatas = new HashSet<StudentAdditionalData>();
             this.StudentAdditionalDatas1 = new HashSet<StudentAdditionalData>();
+            this.ScoreCriterias = new HashSet<ScoreCriteria>();
         }
     
         public System.Guid? TypeID { get; set; }
@@ -36,5 +37,6 @@ namespace FTMatricula.Models
         public virtual ICollection<Student> Students1 { get; set; }
         public virtual ICollection<StudentAdditionalData> StudentAdditionalDatas { get; set; }
         public virtual ICollection<StudentAdditionalData> StudentAdditionalDatas1 { get; set; }
+        public virtual ICollection<ScoreCriteria> ScoreCriterias { get; set; }
     }
 }

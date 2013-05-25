@@ -38,6 +38,7 @@
           <EntitySet Name="Scheme-Plan" EntityType="FTMatricula.DBModel.Store.Scheme-Plan" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="School" EntityType="FTMatricula.DBModel.Store.School" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Score" EntityType="FTMatricula.DBModel.Store.Score" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ScoreCriteria" EntityType="FTMatricula.DBModel.Store.ScoreCriteria" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Student" EntityType="FTMatricula.DBModel.Store.Student" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentAdditionalData" EntityType="FTMatricula.DBModel.Store.StudentAdditionalData" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentPlan" EntityType="FTMatricula.DBModel.Store.StudentPlan" store:Type="Tables" Schema="dbo" />
@@ -209,6 +210,10 @@
           <AssociationSet Name="FK_Score_Student" Association="FTMatricula.DBModel.Store.FK_Score_Student">
             <End Role="Student" EntitySet="Student" />
             <End Role="Score" EntitySet="Score" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ScoreCriteria_Type" Association="FTMatricula.DBModel.Store.FK_ScoreCriteria_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="ScoreCriteria" EntitySet="ScoreCriteria" />
           </AssociationSet>
           <AssociationSet Name="FK_Student_Country" Association="FTMatricula.DBModel.Store.FK_Student_Country">
             <End Role="Country" EntitySet="Country" />
@@ -583,6 +588,15 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
           <Property Name="EnrollmentGroupID" Type="uniqueidentifier" />
+          <Property Name="isApproved" Type="bit" />
+        </EntityType>
+        <EntityType Name="ScoreCriteria">
+          <Key>
+            <PropertyRef Name="ScoreCriteriaID" />
+          </Key>
+          <Property Name="ScoreCriteriaID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TypeID" Type="uniqueidentifier" />
+          <Property Name="MinimumScore" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -1108,6 +1122,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ScoreCriteria_Type">
+          <End Role="Type" Type="FTMatricula.DBModel.Store.Type" Multiplicity="0..1" />
+          <End Role="ScoreCriteria" Type="FTMatricula.DBModel.Store.ScoreCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="ScoreCriteria">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Student_Country">
           <End Role="Country" Type="FTMatricula.DBModel.Store.Country" Multiplicity="0..1" />
           <End Role="Student" Type="FTMatricula.DBModel.Store.Student" Multiplicity="*" />
@@ -1447,6 +1473,11 @@
             <End Role="School" EntitySet="Schools" />
             <End Role="Scheme" EntitySet="Schemes" />
           </AssociationSet>
+          <EntitySet Name="ScoreCriterias" EntityType="FTMatricula.DBModel.ScoreCriteria" />
+          <AssociationSet Name="FK_ScoreCriteria_Type" Association="FTMatricula.DBModel.FK_ScoreCriteria_Type">
+            <End Role="Type" EntitySet="Types" />
+            <End Role="ScoreCriteria" EntitySet="ScoreCriterias" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1771,6 +1802,7 @@
           <NavigationProperty Name="Students1" Relationship="FTMatricula.DBModel.FK_Student_Type_MaritalStatus" FromRole="Type" ToRole="Student" />
           <NavigationProperty Name="StudentAdditionalDatas" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_HowYouKnow" FromRole="Type" ToRole="StudentAdditionalData" />
           <NavigationProperty Name="StudentAdditionalDatas1" Relationship="FTMatricula.DBModel.FK_StudentAdditionalData_Type_WhoPays" FromRole="Type" ToRole="StudentAdditionalData" />
+          <NavigationProperty Name="ScoreCriterias" Relationship="FTMatricula.DBModel.FK_ScoreCriteria_Type" FromRole="Type" ToRole="ScoreCriteria" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -2411,6 +2443,7 @@
           <NavigationProperty Name="EnrollmentGroup" Relationship="FTMatricula.DBModel.FK_Score_EnrollmentGroup" FromRole="Score" ToRole="EnrollmentGroup" />
           <NavigationProperty Name="Records" Relationship="FTMatricula.DBModel.FK_Record_Score" FromRole="Score" ToRole="Record" />
           <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_Score_Student" FromRole="Score" ToRole="Student" />
+          <Property Type="Boolean" Name="isApproved" />
         </EntityType>
         <Association Name="FK_Score_Course">
           <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="1" />
@@ -2493,6 +2526,27 @@
             </Principal>
             <Dependent Role="Scheme">
               <PropertyRef Name="SchoolID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ScoreCriteria">
+          <Key>
+            <PropertyRef Name="ScoreCriteriaID" />
+          </Key>
+          <Property Type="Guid" Name="ScoreCriteriaID" Nullable="false" />
+          <Property Type="Guid" Name="TypeID" />
+          <Property Type="String" Name="MinimumScore" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Type" Relationship="FTMatricula.DBModel.FK_ScoreCriteria_Type" FromRole="ScoreCriteria" ToRole="Type" />
+        </EntityType>
+        <Association Name="FK_ScoreCriteria_Type">
+          <End Type="FTMatricula.DBModel.Type" Role="Type" Multiplicity="0..1" />
+          <End Type="FTMatricula.DBModel.ScoreCriteria" Role="ScoreCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeID" />
+            </Principal>
+            <Dependent Role="ScoreCriteria">
+              <PropertyRef Name="TypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2999,6 +3053,7 @@
           <EntitySetMapping Name="Scores">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Score">
               <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
                 <ScalarProperty Name="EnrollmentGroupID" ColumnName="EnrollmentGroupID" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />
                 <ScalarProperty Name="ModifyUserID" ColumnName="ModifyUserID" />
@@ -3010,6 +3065,15 @@
                 <ScalarProperty Name="StudentID" ColumnName="StudentID" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="ScoreID" ColumnName="ScoreID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScoreCriterias">
+            <EntityTypeMapping TypeName="FTMatricula.DBModel.ScoreCriteria">
+              <MappingFragment StoreEntitySet="ScoreCriteria">
+                <ScalarProperty Name="MinimumScore" ColumnName="MinimumScore" />
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="ScoreCriteriaID" ColumnName="ScoreCriteriaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

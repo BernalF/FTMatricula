@@ -60,6 +60,7 @@ namespace FTMatricula.Models
         public DbSet<EnrollmentStudent> EnrollmentStudents { get; set; }
         public DbSet<Record> Records { get; set; }
         public DbSet<Score> Scores { get; set; }
+        public DbSet<ScoreCriteria> ScoreCriterias { get; set; }
     
         public virtual ObjectResult<Nullable<System.Guid>> uspRetrieveUserID(string userName)
         {

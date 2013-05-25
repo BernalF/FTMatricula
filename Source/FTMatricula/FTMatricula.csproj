@@ -282,6 +282,9 @@
     <Compile Include="Models\Score.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScoreCriteria.cs">
+      <DependentUpon>matrifunDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Student.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
