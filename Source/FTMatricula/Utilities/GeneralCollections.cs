@@ -424,6 +424,28 @@ namespace FTMatricula.Utilities
                                     .Select(s => new { s.SchoolID, s.Name }), "SchoolID", "Name");
             }
         }
+
+        /// <summary>
+        /// Score Criteria List
+        /// </summary>
+        public static SelectList ScoreCriteriaList
+        {
+            get
+            {
+                Dictionary<Guid?, string> dictionary = new Dictionary<Guid?, string>();
+                matrifunDBEntities db = new matrifunDBEntities();
+
+                foreach (var t in db.Types
+                                        .Where(x => x.Usage == "CSC")
+                                        .ToList()
+                                        .OrderBy(x => x.Name)
+                                        .Select(x => new { x.TypeID, x.Name }).ToArray())
+                {
+                    dictionary.Add(t.TypeID, Resources.GetValue(t.Name));
+                }
+                return new SelectList(dictionary, "Key", "Value");
+            }
+        }
     }
 }
 

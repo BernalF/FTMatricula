@@ -211,6 +211,10 @@
             <End Role="Student" EntitySet="Student" />
             <End Role="Score" EntitySet="Score" />
           </AssociationSet>
+          <AssociationSet Name="FK_ScoreCriteria_Course" Association="FTMatricula.DBModel.Store.FK_ScoreCriteria_Course">
+            <End Role="ScoreCriteria" EntitySet="ScoreCriteria" />
+            <End Role="Course" EntitySet="Course" />
+          </AssociationSet>
           <AssociationSet Name="FK_ScoreCriteria_Type" Association="FTMatricula.DBModel.Store.FK_ScoreCriteria_Type">
             <End Role="Type" EntitySet="Type" />
             <End Role="ScoreCriteria" EntitySet="ScoreCriteria" />
@@ -301,6 +305,7 @@
           <Property Name="ModifyUserID" Type="uniqueidentifier" />
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
           <Property Name="SchoolID" Type="uniqueidentifier" />
+          <Property Name="ScoreCriteriaID" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'matrifunDB.dbo.Course-Requirement' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -1122,6 +1127,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ScoreCriteria_Course">
+          <End Role="ScoreCriteria" Type="FTMatricula.DBModel.Store.ScoreCriteria" Multiplicity="0..1" />
+          <End Role="Course" Type="FTMatricula.DBModel.Store.Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScoreCriteria">
+              <PropertyRef Name="ScoreCriteriaID" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="ScoreCriteriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ScoreCriteria_Type">
           <End Role="Type" Type="FTMatricula.DBModel.Store.Type" Multiplicity="0..1" />
           <End Role="ScoreCriteria" Type="FTMatricula.DBModel.Store.ScoreCriteria" Multiplicity="*" />
@@ -1478,6 +1495,10 @@
             <End Role="Type" EntitySet="Types" />
             <End Role="ScoreCriteria" EntitySet="ScoreCriterias" />
           </AssociationSet>
+          <AssociationSet Name="FK_ScoreCriteria_Course" Association="FTMatricula.DBModel.FK_ScoreCriteria_Course">
+            <End Role="ScoreCriteria" EntitySet="ScoreCriterias" />
+            <End Role="Course" EntitySet="Courses" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Classroom">
           <Key>
@@ -1527,6 +1548,8 @@
           <NavigationProperty Name="Scores" Relationship="FTMatricula.DBModel.FK_Score_Course" FromRole="Course" ToRole="Score" />
           <Property Type="Guid" Name="SchoolID" />
           <NavigationProperty Name="School" Relationship="FTMatricula.DBModel.FK_Course_School" FromRole="Course" ToRole="School" />
+          <Property Type="Guid" Name="ScoreCriteriaID" />
+          <NavigationProperty Name="ScoreCriteria" Relationship="FTMatricula.DBModel.FK_ScoreCriteria_Course" FromRole="Course" ToRole="ScoreCriteria" />
         </EntityType>
         <EntityType Name="Course_Requirement">
           <Key>
@@ -2537,6 +2560,7 @@
           <Property Type="Guid" Name="TypeID" />
           <Property Type="String" Name="MinimumScore" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Type" Relationship="FTMatricula.DBModel.FK_ScoreCriteria_Type" FromRole="ScoreCriteria" ToRole="Type" />
+          <NavigationProperty Name="Courses" Relationship="FTMatricula.DBModel.FK_ScoreCriteria_Course" FromRole="ScoreCriteria" ToRole="Course" />
         </EntityType>
         <Association Name="FK_ScoreCriteria_Type">
           <End Type="FTMatricula.DBModel.Type" Role="Type" Multiplicity="0..1" />
@@ -2547,6 +2571,18 @@
             </Principal>
             <Dependent Role="ScoreCriteria">
               <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ScoreCriteria_Course">
+          <End Type="FTMatricula.DBModel.ScoreCriteria" Role="ScoreCriteria" Multiplicity="0..1" />
+          <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScoreCriteria">
+              <PropertyRef Name="ScoreCriteriaID" />
+            </Principal>
+            <Dependent Role="Course">
+              <PropertyRef Name="ScoreCriteriaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2586,6 +2622,7 @@
           <EntitySetMapping Name="Courses">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Course">
               <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="ScoreCriteriaID" ColumnName="ScoreCriteriaID" />
                 <ScalarProperty Name="SchoolID" ColumnName="SchoolID" />
                 <ScalarProperty Name="CourseID" ColumnName="CourseID" />
                 <ScalarProperty Name="Code" ColumnName="Code" />

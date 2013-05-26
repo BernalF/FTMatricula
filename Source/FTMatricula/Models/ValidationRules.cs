@@ -60,8 +60,11 @@ namespace FTMatricula.Models
 
     //------ Course Section
     [MetadataType(typeof(Course_Validation))]
-    public partial class Course {
+    public partial class Course
+    {
         public string SchoolName { get; set; }
+        public string ScoreCriteriaList { get; set; }
+        public string ScoreCriteriaType { get; set; }
     }
 
     public class Course_Validation
@@ -173,7 +176,7 @@ namespace FTMatricula.Models
     {
         public string UserName { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; }        
+        public string LastName { get; set; }
     }
 
     public class Score_Validation
@@ -186,12 +189,12 @@ namespace FTMatricula.Models
     {
         public string SchemeID { get; set; }
         public string SchemeName { get; set; }
-        public string PlanName { get; set; }        
+        public string PlanName { get; set; }
     }
 
     public class Plan_Validation
     {
     }
-   
+
 }
 

@@ -14,10 +14,16 @@ namespace FTMatricula.Models
     
     public partial class ScoreCriteria
     {
+        public ScoreCriteria()
+        {
+            this.Courses = new HashSet<Course>();
+        }
+    
         public System.Guid? ScoreCriteriaID { get; set; }
         public Nullable<System.Guid> TypeID { get; set; }
         public string MinimumScore { get; set; }
     
         public virtual Type Type { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
     }
 }

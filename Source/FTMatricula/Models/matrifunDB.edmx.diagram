@@ -78,6 +78,7 @@
         <AssociationConnector Association="FTMatricula.DBModel.FK_Scheme_School" />
         <EntityTypeShape EntityType="FTMatricula.DBModel.ScoreCriteria" Width="1.5" PointX="4.4849636501096954" PointY="9.2863192005484922" />
         <AssociationConnector Association="FTMatricula.DBModel.FK_ScoreCriteria_Type" />
+        <AssociationConnector Association="FTMatricula.DBModel.FK_ScoreCriteria_Course" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

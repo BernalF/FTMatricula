@@ -31,6 +31,8 @@
                                           columns.Bound(m => m.TeachingHours).Title(@Resources.GetValue("TEACHING_HOURS"));
                                           columns.Bound(m => m.Charge).Title(@Resources.GetValue("COURSE_COST"));
                                           columns.Bound(m => m.SchoolName).Title(@Resources.GetValue("SCHOOL"));
+                                          columns.Bound(m => m.ScoreCriteriaType).Title("Score Criteria");
+                                          columns.Bound(m => m.ScoreCriteriaID).Hidden(true);
                                           columns.Command(command =>
                                           {
                                               command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");

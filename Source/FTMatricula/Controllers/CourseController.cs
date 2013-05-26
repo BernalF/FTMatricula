@@ -9,6 +9,7 @@ using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using FTMatricula.Utilities.Helper;
 using FTMatricula.Models;
+using System.Text;
 
 namespace FTMatricula.Controllers
 {
@@ -48,7 +49,9 @@ namespace FTMatricula.Controllers
                                 m.Name,
                                 m.TeachingHours,
                                 m.Charge,
-                                SchoolName = m.School.Name
+                                SchoolName = m.School == null ? "" : m.School.Name,
+                                ScoreCriteriaType = m.ScoreCriteria == null ? "" : Resources.GetValue(m.ScoreCriteria.Type.Name),
+                                ScoreCriteriaID = m.ScoreCriteriaID
                             }).ToDataSourceResult(request));
                 }
                 else
@@ -63,7 +66,9 @@ namespace FTMatricula.Controllers
                                 m.Name,
                                 m.TeachingHours,
                                 m.Charge,
-                                SchoolName = m.School == null ? "" : m.School.Name
+                                SchoolName = m.School == null ? "" : m.School.Name,
+                                ScoreCriteriaType = m.ScoreCriteria == null ? "" : Resources.GetValue(m.ScoreCriteria.Type.Name),
+                                ScoreCriteriaID = m.ScoreCriteriaID
                             }).ToDataSourceResult(request));
                 }
             }
@@ -79,7 +84,8 @@ namespace FTMatricula.Controllers
         /// </summary>
         public ActionResult Create()
         {
-            return View();
+            Course model = new Course { ScoreCriteriaList = getScoreCriteriaList() };
+            return View(model);
         }
 
         /// <summary>
@@ -101,6 +107,8 @@ namespace FTMatricula.Controllers
                         model.InsertUserID = SessApp.GetUserID(User.Identity.Name);
                         model.InsertDate = DateTime.Today;
                         model.IpAddress = Network.GetIpAddress(Request);
+                        model.ScoreCriteriaID = Guid.NewGuid();
+                        model.ScoreCriteria.ScoreCriteriaID = model.ScoreCriteriaID;
                         db.Courses.Add(model);
                         db.SaveChanges();
                         return RedirectToAction("index");
@@ -130,6 +138,9 @@ namespace FTMatricula.Controllers
                                    .Where(c => c.CourseID == new Guid(id))
                                    .ToList()
                                    .FirstOrDefault();
+
+                course.ScoreCriteriaList = getScoreCriteriaList();
+                
                 return View(course);
             }
             catch (Exception e)
@@ -148,14 +159,36 @@ namespace FTMatricula.Controllers
             {
                 if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
                 {
+                    if (model.ScoreCriteriaID == null)
+                    {
+                        ScoreCriteria sc = new ScoreCriteria
+                        {
+                            ScoreCriteriaID = Guid.NewGuid(),
+                            TypeID = model.ScoreCriteria.TypeID,
+                            MinimumScore = model.ScoreCriteria.MinimumScore
+                        };
+                        model.ScoreCriteriaID = sc.ScoreCriteriaID;                        
+                        db.ScoreCriterias.Add(sc);
+                    }
+                    else {
+                        ScoreCriteria sc = new ScoreCriteria
+                        {
+                            ScoreCriteriaID = model.ScoreCriteriaID,
+                            TypeID = model.ScoreCriteria.TypeID,
+                            MinimumScore = model.ScoreCriteria.MinimumScore
+                        };
+                        db.Entry(sc).State = EntityState.Modified;
+                    }
+                    model.ScoreCriteria = null;
                     Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
                     model.SchoolID = schoolID;
                     model.IsActive = true;
                     model.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
                     model.ModifyDate = DateTime.Today;
                     model.IpAddress = Network.GetIpAddress(Request);
-                    db.Entry(model).State = EntityState.Modified;
+                    db.Entry(model).State = EntityState.Modified;                    
                     db.SaveChanges();
+
                     return RedirectToAction("index");
                 }
                 else
@@ -165,7 +198,7 @@ namespace FTMatricula.Controllers
                                    .Where(c => c.CourseID == model.CourseID)
                                    .ToList()
                                    .FirstOrDefault();
-                    return View(course);                    
+                    return View(course);
                 }
             }
             catch (Exception e)
@@ -183,7 +216,7 @@ namespace FTMatricula.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult UpdateCourse([DataSourceRequest] DataSourceRequest request, Course model)
         {
-            
+
             return Json(new[] { new 
             { 
                 CourseID = model.CourseID, 
@@ -206,7 +239,9 @@ namespace FTMatricula.Controllers
             try
             {
                 Course course = db.Courses.Find(model.CourseID);
+                ScoreCriteria sc = db.ScoreCriterias.Find(model.ScoreCriteriaID);
                 db.Courses.Remove(course);
+                db.ScoreCriterias.Remove(sc);
                 db.SaveChanges();
                 return Json(new[] { new { } }.ToDataSourceResult(request, ModelState));
             }
@@ -221,6 +256,25 @@ namespace FTMatricula.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        private string getScoreCriteriaList()
+        {
+            StringBuilder result = new StringBuilder();
+            result.Append("[ ");
+            foreach (var t in db.Types
+                                    .Where(x => x.Usage == "CSC")
+                                    .ToList()
+                                    .OrderBy(x => x.Name)
+                                    .Select(x => new { x.TypeID, x.Name }).ToArray())
+            {
+                result.Append("{ \"name\": \"");
+                result.Append(t.Name);
+                result.Append("\" ,\"id\": \"");
+                result.Append(t.TypeID);
+                result.Append("\" },"); 
+            }                    
+            return result.ToString().Substring(0, (result.ToString().Length - 1)) + "]";
         }
     }
 }

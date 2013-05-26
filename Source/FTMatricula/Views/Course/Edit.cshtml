@@ -52,6 +52,27 @@
                             <div>
                                 @Html.TextBoxFor(model => model.Charge, new { @class = "input width100" })
                             </div>
+                        </li>
+                        <li>
+                            @Html.Label("Criterio de Calificación")
+                        </li>
+                        <li style="display: inline">
+                            <div>
+                                @(Html.Kendo().DropDownListFor(model => model.ScoreCriteria.TypeID)
+                                                    .BindTo(FTMatricula.Utilities.GeneralCollections.ScoreCriteriaList)
+                                                    .Name("ScoreCriteria.TypeID")
+                                                    .DataTextField("Text")
+                                                    .DataValueField("Value")
+                                                    .HtmlAttributes(new { @class = "width100" }))
+                            </div>
+                        </li>
+                        <li class="minScore">
+                            @Html.Label(@Resources.GetValue("MIN_SCORE"), new {@class = "hide" })
+                        </li>
+                        <li class="minScore">
+                            <div class="hide">
+                                @Html.TextBoxFor(model => model.ScoreCriteria.MinimumScore, new { @class = "input width100" })
+                            </div>
                         </li>                                                
                     </ul>
                 </div>                
@@ -63,6 +84,9 @@
                         @Html.ValidationMessageFor(model => model.Name)
                         @Html.ValidationMessageFor(model => model.TeachingHours)
                         @Html.ValidationMessageFor(model => model.Charge)
+                        @Html.HiddenFor(model => model.ScoreCriteriaList)
+                        @Html.HiddenFor(model => model.ScoreCriteriaID)
+                        @Html.HiddenFor(model => model.ScoreCriteria.ScoreCriteriaID)
                         @Html.ValidationSummary(false)
                     </li>
                 </ul>
@@ -101,6 +125,30 @@
             document.forms[0].submit();
             return true;
         }
+
+        $(function () {
+
+            if ($('#ScoreCriteria_MinimumScore').val() != '')
+                $('.minScore').children().fadeIn();
+
+            $('#ScoreCriteria_TypeID').off('change.ScoreCriteria_TypeID').on('change.ScoreCriteria_TypeID', function () {
+                var el = this;
+                $.each($.parseJSON($('#ScoreCriteriaList').val()), function () {
+                    if (this.name == 'MIN_SCORE') {
+                        if ($(el).val() == this.id) {
+                            $('.minScore').children().fadeIn();
+                        }
+                        else {
+                            $('.minScore').children().fadeOut();
+                            $('#ScoreCriteria_MinimumScore').val('');
+                        }
+                    }
+                });
+
+
+
+            });
+        });
 
     </script>
 }
