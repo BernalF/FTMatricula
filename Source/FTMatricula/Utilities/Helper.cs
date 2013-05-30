@@ -32,7 +32,7 @@ namespace FTMatricula.Utilities.Helper
             matrifunDBEntities db = new matrifunDBEntities();
             int actYear = DateTime.Now.Year;
             string newVersion = "";
-            
+
             var version = db.Plans
                             .Where(p => p.PlanID == PlanId)
                             .ToList()
@@ -41,10 +41,11 @@ namespace FTMatricula.Utilities.Helper
 
             if (version != null)
             {
-                string[] oldVersion = version.Split(new string[] { "-" }, StringSplitOptions.None);                
+                string[] oldVersion = version.Split(new string[] { "-" }, StringSplitOptions.None);
                 newVersion = actYear + "-" + (Convert.ToInt32(oldVersion[1]) + 1);
             }
-            else {
+            else
+            {
                 newVersion = actYear + "-" + 1;
             }
             return newVersion;
@@ -56,8 +57,8 @@ namespace FTMatricula.Utilities.Helper
             Guid userID = (Guid)Membership.GetUser(Username).ProviderUserKey;
             return db.Schools
                 .Where(s => s.AdminUserID == userID)
-                .Select(s => s.SchoolID).FirstOrDefault();             
-        }         
+                .Select(s => s.SchoolID).FirstOrDefault();
+        }
     }
 
     public static class Resources
@@ -98,9 +99,8 @@ namespace FTMatricula.Utilities.Helper
                     Errors = new object[] 
                     { 
                         new { Exception = "Exception", errors = new[] { filterContext.Exception.Message.ToString() } },
-                        new { Detail = "Detail", errors = new[] {                             
-                            "Source: " //+ filterContext.Exception.TargetSite.ToString().Replace(" ","+")
-                            + ((filterContext.Exception.InnerException.Message.ToString() != null) ? filterContext.Exception.InnerException.Message.ToString() : " ")
+                        new { Detail = "Detail", errors = new[] { 
+                            "Source: " + filterContext.Exception.TargetSite.ToString().Replace(" ","+")
                              //System.Convert.ToBase64String(System.Text.Encoding.Unicode.GetBytes((filterContext.Exception.Source.ToString())))
                         } }
                     }
@@ -109,6 +109,4 @@ namespace FTMatricula.Utilities.Helper
             };
         }
     }
-
-
 }

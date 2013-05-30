@@ -36,3 +36,18 @@ GO
 ALTER TABLE dbo.Score ADD
 	isApproved bit NULL
 GO
+--- Link ScoreCriteria
+ALTER TABLE dbo.Course ADD
+	ScoreCriteriaID uniqueidentifier NULL
+GO
+ALTER TABLE dbo.Course ADD CONSTRAINT
+	FK_ScoreCriteria_Course FOREIGN KEY
+	(
+	ScoreCriteriaID
+	) REFERENCES dbo.ScoreCriteria
+	(
+	ScoreCriteriaID
+	) ON UPDATE  NO ACTION 
+	 ON DELETE  NO ACTION 	
+GO	
+	
