@@ -25,8 +25,10 @@ var scoreRegister = new Class({
                     data: { courseID: $(this).val() },
                     async: false,
                     ajaxSuccess: function (response) {
+                        var result = $.parseJSON(response);
                         $('.scoreCriteria').fadeIn();
-                        $($('.scoreCriteria').children('label').get(2)).html($.parseJSON(response).ScoreCriteria);
+                        $($('.scoreCriteria').children('label').get(2)).html(result.ScoreCriteria);
+                        $($('.scoreCriteria').children('label').get(3)).html(result.MinimumScore);
                     }
                 });
 
@@ -39,6 +41,7 @@ var scoreRegister = new Class({
             }
             else {
                 $($('.scoreCriteria').children('label').get(2)).html('');
+                $($('.scoreCriteria').children('label').get(3)).html('');
                 $('.scoreCriteria').fadeOut();
             }
         });

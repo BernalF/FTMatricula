@@ -1639,6 +1639,9 @@ ul li.item .menuImage {
     color: #fff;
 }
 
+.cRed {
+    color: red !important;
+}
 
 
 /*******/
@@ -1779,15 +1782,15 @@ ul li.item .menuImage {
     border-top-width: 0px;
 }
 
-#enrollmentGrid a {
-    display: block;
-    width: 20px;
-    height: 20px;
-    background-image: url(../images/defaults/delete.png);
-    background-repeat: no-repeat;
-    margin-left: auto;
-    margin-right: auto;
-}
+    #enrollmentGrid a {
+        display: block;
+        width: 20px;
+        height: 20px;
+        background-image: url(../images/defaults/delete.png);
+        background-repeat: no-repeat;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
 .editRow {
     background-color: #D16700;

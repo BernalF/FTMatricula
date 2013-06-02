@@ -104,7 +104,8 @@ namespace FTMatricula.Controllers
                 .Select(m => 
                 new 
                 {                     
-                    ScoreCriteria = Resources.GetValue(m.sc.Type.Name)
+                    ScoreCriteria = Resources.GetValue(m.sc.Type.Name),
+                    MinimumScore = (m.sc.MinimumScore == null) ? Resources.GetValue("APPROVED_REPPROVED_ALERT") : Resources.GetValue("MIN_SCORE_ALERT") + m.sc.MinimumScore
                 }).FirstOrDefault());
         }
 
