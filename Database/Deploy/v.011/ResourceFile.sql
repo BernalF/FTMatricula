@@ -270,7 +270,7 @@ INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'RESULT', 'es-CR', 'Nota')
 ---COURSE CRITERIA
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'MIN_SCORE', 'es-CR', 'Nota Minima')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'ASSISTANCE', 'es-CR', 'Asistencia')
-INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'WARNING', 'es-CR', 'Alerta')
+INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'WARNING', 'es-CR', 'Importante:')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'APPROVED_REPPROVED', 'es-CR', 'Aprobado / Reprobado')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'SCORE_CRITERIA', 'es-CR', 'El Criterio de calificación es: ')
 INSERT INTO [dbo].[Resource] VALUES (NEWID(), 'MIN_SCORE_ALERT', 'es-CR', 'La nota minima es: ')

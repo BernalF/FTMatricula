@@ -17,16 +17,30 @@ var scoreRegister = new Class({
                 break;
         }
     },
-    courseOnchanged: function () {
-        
+    courseOnchanged: function () {        
         $('#ddlCourseID').off('change.ddlCourseID').on('change.ddlCourseID', function () {
-            $("#CourseID").val($("#ddlCourseID").val());
-            var courseID = $("#ddlCourseID").val();
-            var grid = $("#Grid").data("kendoGrid");
-            grid.dataSource.transport.options.read.url = "/ScoreRegister/PagingScores?CourseID=" + courseID;
-            grid.dataSource.read();
-            grid.refresh();
+            if ($(this).val() != "") {
+                $.bAjax({
+                    url: 'ScoreRegister/GetScoreCriteriaByPlan',
+                    data: { courseID: $(this).val() },
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        $('.scoreCriteria').fadeIn();
+                        $($('.scoreCriteria').children('label').get(2)).html($.parseJSON(response).ScoreCriteria);
+                    }
+                });
 
+                $("#CourseID").val($("#ddlCourseID").val());
+                var courseID = $("#ddlCourseID").val();
+                var grid = $("#Grid").data("kendoGrid");
+                grid.dataSource.transport.options.read.url = "/ScoreRegister/PagingScores?CourseID=" + courseID;
+                grid.dataSource.read();
+                grid.refresh();
+            }
+            else {
+                $($('.scoreCriteria').children('label').get(2)).html('');
+                $('.scoreCriteria').fadeOut();
+            }
         });
     }
 });

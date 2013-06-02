@@ -91,6 +91,23 @@ namespace FTMatricula.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Score Criteria By Plan
+        /// </summary>
+        [HttpPost]
+        public JsonResult GetScoreCriteriaByPlan(string courseID) {
+            return Json(
+                db.ScoreCriterias
+                .ToList()
+                .Join(db.Courses, sc => sc.ScoreCriteriaID, c => c.ScoreCriteriaID, (sc, c) => new { sc, c })
+                .Where(m => m.c.CourseID ==  new Guid(courseID))
+                .Select(m => 
+                new 
+                {                     
+                    ScoreCriteria = Resources.GetValue(m.sc.Type.Name)
+                }).FirstOrDefault());
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
