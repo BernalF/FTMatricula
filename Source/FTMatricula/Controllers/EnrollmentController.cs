@@ -451,7 +451,10 @@ namespace FTMatricula.Controllers
                 Scheme scheme = db.Schemes.Where(x => x.SchemeID == SchemeID).FirstOrDefault();
                 model.SchoolDescription = scheme != null ? scheme.School.Code + " " + scheme.School.Description : "--";
 
-                foreach (var studentCourse in db.EnrollmentStudentCourses.Where(m => m.StudentID == sID).ToList())
+
+                //pending test
+                var aux = db.Enrollments.Find(model.EnrollmentID).EnrollmentCourses;
+                foreach (var studentCourse in db.EnrollmentStudentCourses.Where(m => m.StudentID == sID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse)).ToList())
                 {
                     int i = 0;
                     StringBuilder rows = new StringBuilder();
@@ -679,7 +682,9 @@ namespace FTMatricula.Controllers
 
                 result = new List<EnrollStudent>();
 
-                var tmp = db.EnrollmentStudentCourses.Where(m => m.StudentID == model.Student.StudentID).ToList();
+                //pending test
+                var aux = db.Enrollments.Find(model.EnrollmentID).EnrollmentCourses;
+                var tmp = db.EnrollmentStudentCourses.Where(m => m.StudentID == model.Student.StudentID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse)).ToList();
                 if (tmp.Count > 0)
                 {
                     model.Message = new ServerMessage
