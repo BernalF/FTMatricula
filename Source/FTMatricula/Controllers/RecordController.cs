@@ -74,8 +74,45 @@ namespace FTMatricula.Controllers
         {
             try
             {
+                double num = 0;
                 foreach (var s in scores)
                 {
+                    if (db.Courses
+                        .Where(m => m.CourseID == s.CourseID)
+                        .Select(m => m.ScoreCriteria.MinimumScore)
+                        .FirstOrDefault() != null)
+                    {
+                        if (double.TryParse(s.RecordResult, out num))
+                        {
+                            string minScore = db.Courses
+                                       .Where(m => m.CourseID == s.CourseID)
+                                       .Select(m => m.ScoreCriteria.MinimumScore)
+                                       .FirstOrDefault();
+
+                            if (Convert.ToInt32(s.RecordResult) < Convert.ToInt32(minScore))
+                                s.isApproved = false;
+                            else
+                                s.isApproved = false;
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Debe de insertar notas válidas (Números de 1 a 100).");
+                            return Json(ModelState.ToDataSourceResult());
+                        }
+                    }
+                    else
+                    {
+                        if (s.RecordResult == null)
+                        {
+                            ModelState.AddModelError("", "No puede insertar una nota en blanco");
+                            return Json(ModelState.ToDataSourceResult());
+                        }
+                        else if (s.RecordResult == "R")
+                            s.isApproved = false;
+                        else if (s.RecordResult == "A")
+                            s.isApproved = true;
+                    }
+                    s.RecordResult = s.RecordResult;
                     s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
                     s.ModifyDate = DateTime.Today;
                     s.IpAddress = Network.GetIpAddress(Request);

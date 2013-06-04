@@ -31,6 +31,18 @@ var record = new Class({
                 grid.refresh();
 
                 $.bAjax({
+                    url: 'ScoreRegister/GetScoreCriteriaByPlan',
+                    data: { courseID: $(this).val() },
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        var result = $.parseJSON(response);
+                        $('.scoreCriteria').fadeIn();
+                        $($('.scoreCriteria').children('label').get(2)).html(result.ScoreCriteria);
+                        $($('.scoreCriteria').children('label').get(3)).html(result.MinimumScore);
+                    }
+                });
+
+                $.bAjax({
                     url: self.options.urlHasRecord,
                     ajaxBeforeSend: function () {
                         $('.popupBg').fadeIn();
@@ -52,8 +64,12 @@ var record = new Class({
                             $("#Grid").data("kendoGrid").dataSource.at(0).fields["RecordResult"].editable = true;
                         }
                     }
-                });                
+                });
+
             } else {
+                $($('.scoreCriteria').children('label').get(2)).html('');
+                $($('.scoreCriteria').children('label').get(3)).html('');
+                $('.scoreCriteria').fadeOut();
                 $('#btnRecord').fadeOut();                
                 $("#Grid").data("kendoGrid").dataSource.data( { "Data": [{}], "Total": 1, "AggregateResults": null, "Errors": null });                
             }

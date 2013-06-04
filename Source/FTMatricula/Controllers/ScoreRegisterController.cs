@@ -34,9 +34,9 @@ namespace FTMatricula.Controllers
                 if ((CourseID != null) && (CourseID.Length > 0))
                 {
                     var uID = SessApp.GetUserID(User.Identity.Name);
-                   
+
                     return Json(db.Scores
-                                .Where(s => s.EnrollmentGroup.ProfessorID == uID 
+                                .Where(s => s.EnrollmentGroup.ProfessorID == uID
                                     && s.CourseID == new Guid(CourseID))
                                 .Select(s => new
                                 {
@@ -74,8 +74,43 @@ namespace FTMatricula.Controllers
         {
             try
             {
+                double num = 0;
                 foreach (var s in scores)
                 {
+                    if (db.Courses
+                        .Where(m => m.CourseID == s.CourseID)
+                        .Select(m => m.ScoreCriteria.MinimumScore)
+                        .FirstOrDefault() != null)
+                    {
+                        if (double.TryParse(s.Result, out num))
+                        {
+                            string minScore = db.Courses
+                                       .Where(m => m.CourseID == s.CourseID)
+                                       .Select(m => m.ScoreCriteria.MinimumScore)
+                                       .FirstOrDefault();
+
+                            if (Convert.ToInt32(s.Result) < Convert.ToInt32(minScore))                            
+                                s.isApproved = false;                            
+                            else
+                                s.isApproved = false;                            
+                        }
+                        else {
+                            ModelState.AddModelError("", "Debe de insertar notas válidas (Números de 1 a 100).");
+                            return Json(ModelState.ToDataSourceResult());
+                        }
+                    }
+                    else
+                    {
+                        if (s.Result == null)
+                        {
+                            ModelState.AddModelError("", "No puede insertar una nota en blanco");
+                            return Json(ModelState.ToDataSourceResult());
+                        }
+                        else if (s.Result == "R")                        
+                            s.isApproved = false;                        
+                        else if (s.Result == "A")                        
+                            s.isApproved = true;                        
+                    }
                     s.RecordResult = s.Result;
                     s.ModifyUserID = SessApp.GetUserID(User.Identity.Name);
                     s.ModifyDate = DateTime.Today;
@@ -95,15 +130,16 @@ namespace FTMatricula.Controllers
         /// Get Score Criteria By Plan
         /// </summary>
         [HttpPost]
-        public JsonResult GetScoreCriteriaByPlan(string courseID) {
+        public JsonResult GetScoreCriteriaByPlan(string courseID)
+        {
             return Json(
                 db.ScoreCriterias
                 .ToList()
                 .Join(db.Courses, sc => sc.ScoreCriteriaID, c => c.ScoreCriteriaID, (sc, c) => new { sc, c })
-                .Where(m => m.c.CourseID ==  new Guid(courseID))
-                .Select(m => 
-                new 
-                {                     
+                .Where(m => m.c.CourseID == new Guid(courseID))
+                .Select(m =>
+                new
+                {
                     ScoreCriteria = Resources.GetValue(m.sc.Type.Name),
                     MinimumScore = (m.sc.MinimumScore == null) ? Resources.GetValue("APPROVED_REPPROVED_ALERT") : Resources.GetValue("MIN_SCORE_ALERT") + m.sc.MinimumScore
                 }).FirstOrDefault());
