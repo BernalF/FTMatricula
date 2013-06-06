@@ -10,6 +10,7 @@ using FTMatricula.Utilities.Helper;
 using System.Data;
 using System.Data.SqlTypes;
 using System.Text;
+using System.Collections.ObjectModel;
 
 namespace FTMatricula.Controllers
 {
@@ -453,8 +454,12 @@ namespace FTMatricula.Controllers
 
 
                 //pending test
-                var aux = db.Enrollments.Find(model.EnrollmentID).EnrollmentCourses;
-                foreach (var studentCourse in db.EnrollmentStudentCourses.Where(m => m.StudentID == sID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse)).ToList())
+                var enroll = db.Enrollments.Find(model.EnrollmentID);
+                ICollection<Guid?> aux = new List<Guid?>();
+                if (enroll != null)
+                    aux = enroll.EnrollmentCourses.Select(m => m.EnrollmentCourseID).ToList();
+
+                foreach (var studentCourse in db.EnrollmentStudentCourses.Where(m => m.StudentID == sID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse.EnrollmentCourseID)).ToList())
                 {
                     int i = 0;
                     StringBuilder rows = new StringBuilder();
@@ -683,8 +688,13 @@ namespace FTMatricula.Controllers
                 result = new List<EnrollStudent>();
 
                 //pending test
-                var aux = db.Enrollments.Find(model.EnrollmentID).EnrollmentCourses;
-                var tmp = db.EnrollmentStudentCourses.Where(m => m.StudentID == model.Student.StudentID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse)).ToList();
+                var enrollment = db.Enrollments.Find(model.EnrollmentID);
+                ICollection<Guid?> aux = new List<Guid?>();
+                if (enrollment != null)
+                    aux = enrollment.EnrollmentCourses.Select(m => m.EnrollmentCourseID).ToList();
+                
+                var tmp = db.EnrollmentStudentCourses
+                    .Where(m => m.StudentID == model.Student.StudentID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse.EnrollmentCourseID)).ToList();
                 if (tmp.Count > 0)
                 {
                     model.Message = new ServerMessage

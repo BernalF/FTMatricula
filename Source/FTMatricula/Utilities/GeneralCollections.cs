@@ -316,7 +316,7 @@ namespace FTMatricula.Utilities
 
             return new SelectList(db.EnrollmentGroups
                     .Where(x => x.ProfessorID == uID)
-                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID, Name = x.EnrollmentCourse.Course.Name }), "CourseID", "Name");
+                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID, Name = x.EnrollmentCourse.Course.Name }).Distinct(), "CourseID", "Name");
         }
 
 

@@ -36,9 +36,16 @@ var record = new Class({
                     async: false,
                     ajaxSuccess: function (response) {
                         var result = $.parseJSON(response);
-                        $('.scoreCriteria').fadeIn();
-                        $($('.scoreCriteria').children('label').get(2)).html(result.ScoreCriteria);
-                        $($('.scoreCriteria').children('label').get(3)).html(result.MinimumScore);
+                        if (result != null) {
+                            $('.scoreCriteria').fadeIn();
+                            $($('.scoreCriteria').children('label').get(1)).html('El Criterio de calificación es: ');
+                            $($('.scoreCriteria').children('label').get(2)).html(result.ScoreCriteria);
+                            $($('.scoreCriteria').children('label').get(3)).html(result.MinimumScore);
+                        }
+                        else {
+                            $('.scoreCriteria').fadeIn();
+                            $($('.scoreCriteria').children('label').get(1)).html('El Curso no posee Criterio de Calificacion, Por favor ir al mantenimientos de cursos!');
+                        }                    
                     }
                 });
 
