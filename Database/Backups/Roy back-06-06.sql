@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [matrifunDB]    Script Date: 06/05/2013 19:58:02 ******/
+/****** Object:  Database [matrifunDB]    Script Date: 06/06/2013 19:06:58 ******/
 IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'matrifunDB')
 BEGIN
 CREATE DATABASE [matrifunDB] ON  PRIMARY 
@@ -76,202 +76,202 @@ EXEC sys.sp_db_vardecimal_storage_format N'matrifunDB', N'ON'
 GO
 USE [matrifunDB]
 GO
-/****** Object:  ForeignKey [RoleApplication]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [RoleApplication]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[RoleApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Roles]'))
 ALTER TABLE [dbo].[Roles] DROP CONSTRAINT [RoleApplication]
 GO
-/****** Object:  ForeignKey [FK_ScoreCriteria_Type]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [FK_ScoreCriteria_Type]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[ScoreCriteria]'))
 ALTER TABLE [dbo].[ScoreCriteria] DROP CONSTRAINT [FK_ScoreCriteria_Type]
 GO
-/****** Object:  ForeignKey [FK_Enrollment_Location]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [FK_Enrollment_Location]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Location]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment] DROP CONSTRAINT [FK_Enrollment_Location]
 GO
-/****** Object:  ForeignKey [FK_Enrollment_Plan]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [FK_Enrollment_Plan]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment] DROP CONSTRAINT [FK_Enrollment_Plan]
 GO
-/****** Object:  ForeignKey [UserApplication]    Script Date: 06/05/2013 19:58:08 ******/
+/****** Object:  ForeignKey [UserApplication]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Users]'))
 ALTER TABLE [dbo].[Users] DROP CONSTRAINT [UserApplication]
 GO
-/****** Object:  ForeignKey [UsersInRoleRole]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  ForeignKey [UsersInRoleRole]    Script Date: 06/06/2013 19:07:05 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleRole]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [UsersInRoleRole]
 GO
-/****** Object:  ForeignKey [UsersInRoleUser]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  ForeignKey [UsersInRoleUser]    Script Date: 06/06/2013 19:07:05 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleUser]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [UsersInRoleUser]
 GO
-/****** Object:  ForeignKey [MembershipApplication]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  ForeignKey [MembershipApplication]    Script Date: 06/06/2013 19:07:08 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships] DROP CONSTRAINT [MembershipApplication]
 GO
-/****** Object:  ForeignKey [MembershipUser]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  ForeignKey [MembershipUser]    Script Date: 06/06/2013 19:07:08 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipUser]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships] DROP CONSTRAINT [MembershipUser]
 GO
-/****** Object:  ForeignKey [FK_Student_Country]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Country]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Country]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] DROP CONSTRAINT [FK_Student_Country]
 GO
-/****** Object:  ForeignKey [FK_Student_Type]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Type]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] DROP CONSTRAINT [FK_Student_Type]
 GO
-/****** Object:  ForeignKey [FK_Student_Type_MaritalStatus]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Type_MaritalStatus]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Type_MaritalStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] DROP CONSTRAINT [FK_Student_Type_MaritalStatus]
 GO
-/****** Object:  ForeignKey [FK_Student_Users]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Users]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] DROP CONSTRAINT [FK_Student_Users]
 GO
-/****** Object:  ForeignKey [FK_School_Users]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_School_Users]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_School_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[School]'))
 ALTER TABLE [dbo].[School] DROP CONSTRAINT [FK_School_Users]
 GO
-/****** Object:  ForeignKey [UserProfile]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [UserProfile]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserProfile]') AND parent_object_id = OBJECT_ID(N'[dbo].[Profiles]'))
 ALTER TABLE [dbo].[Profiles] DROP CONSTRAINT [UserProfile]
 GO
-/****** Object:  ForeignKey [FK_Scheme_CooUsers]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_CooUsers]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_CooUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] DROP CONSTRAINT [FK_Scheme_CooUsers]
 GO
-/****** Object:  ForeignKey [FK_Scheme_Modality]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_Modality]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_Modality]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] DROP CONSTRAINT [FK_Scheme_Modality]
 GO
-/****** Object:  ForeignKey [FK_Scheme_OwUsers]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_OwUsers]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_OwUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] DROP CONSTRAINT [FK_Scheme_OwUsers]
 GO
-/****** Object:  ForeignKey [FK_Scheme_School]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_School]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] DROP CONSTRAINT [FK_Scheme_School]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudent_Enrollment]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudent_Enrollment]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent] DROP CONSTRAINT [FK_EnrollmentStudent_Enrollment]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudent_Student]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudent_Student]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent] DROP CONSTRAINT [FK_EnrollmentStudent_Student]
 GO
-/****** Object:  ForeignKey [FK_Course_School]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Course_School]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course] DROP CONSTRAINT [FK_Course_School]
 GO
-/****** Object:  ForeignKey [FK_ScoreCriteria_Course]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_ScoreCriteria_Course]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course] DROP CONSTRAINT [FK_ScoreCriteria_Course]
 GO
-/****** Object:  ForeignKey [FK_StudiesInformation_Student]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_StudiesInformation_Student]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudiesInformation_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudiesInformation]'))
 ALTER TABLE [dbo].[StudiesInformation] DROP CONSTRAINT [FK_StudiesInformation_Student]
 GO
-/****** Object:  ForeignKey [FK_StudentPlan_Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentPlan_Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan] DROP CONSTRAINT [FK_StudentPlan_Plan]
 GO
-/****** Object:  ForeignKey [FK_StudentPlan_Student]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentPlan_Student]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan] DROP CONSTRAINT [FK_StudentPlan_Student]
 GO
-/****** Object:  ForeignKey [FK_StudentAdditionalData_Student]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentAdditionalData_Student]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] DROP CONSTRAINT [FK_StudentAdditionalData_Student]
 GO
-/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_HowYouKnow]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_HowYouKnow]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Type_HowYouKnow]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] DROP CONSTRAINT [FK_StudentAdditionalData_Type_HowYouKnow]
 GO
-/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_WhoPays]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_WhoPays]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Type_WhoPays]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] DROP CONSTRAINT [FK_StudentAdditionalData_Type_WhoPays]
 GO
-/****** Object:  ForeignKey [FK_Plan-Course_Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Plan-Course_Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course] DROP CONSTRAINT [FK_Plan-Course_Course]
 GO
-/****** Object:  ForeignKey [FK_Plan-Course_Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Plan-Course_Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course] DROP CONSTRAINT [FK_Plan-Course_Plan]
 GO
-/****** Object:  ForeignKey [FK_Course-Requirement_Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Course-Requirement_Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement] DROP CONSTRAINT [FK_Course-Requirement_Course]
 GO
-/****** Object:  ForeignKey [FK_Course-Requirement_Requirement]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Course-Requirement_Requirement]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Requirement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement] DROP CONSTRAINT [FK_Course-Requirement_Requirement]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentCourse_Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentCourse_Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse] DROP CONSTRAINT [FK_EnrollmentCourse_Course]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentCourse_Enrollment]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentCourse_Enrollment]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse] DROP CONSTRAINT [FK_EnrollmentCourse_Enrollment]
 GO
-/****** Object:  ForeignKey [FK_Scheme-Plan_Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Scheme-Plan_Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan] DROP CONSTRAINT [FK_Scheme-Plan_Plan]
 GO
-/****** Object:  ForeignKey [FK_Scheme-Plan_Scheme]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Scheme-Plan_Scheme]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Scheme]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan] DROP CONSTRAINT [FK_Scheme-Plan_Scheme]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroups_EnrollmentCourse]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroups_EnrollmentCourse]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_EnrollmentCourse]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups] DROP CONSTRAINT [FK_EnrollmentGroups_EnrollmentCourse]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroups_Users]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroups_Users]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups] DROP CONSTRAINT [FK_EnrollmentGroups_Users]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_Classroom]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_Classroom]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_Classroom]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule] DROP CONSTRAINT [FK_EnrollmentGroupSchedule_Classroom]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_EnrollmentGroups]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_EnrollmentGroups]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule] DROP CONSTRAINT [FK_EnrollmentGroupSchedule_EnrollmentGroups]
 GO
-/****** Object:  ForeignKey [FK_Score_Course]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Score_Course]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] DROP CONSTRAINT [FK_Score_Course]
 GO
-/****** Object:  ForeignKey [FK_Score_EnrollmentGroup]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Score_EnrollmentGroup]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_EnrollmentGroup]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] DROP CONSTRAINT [FK_Score_EnrollmentGroup]
 GO
-/****** Object:  ForeignKey [FK_Score_Student]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Score_Student]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] DROP CONSTRAINT [FK_Score_Student]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_EnrollmentGroups]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_EnrollmentGroups]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse] DROP CONSTRAINT [FK_EnrollmentStudentCourse_EnrollmentGroups]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_Student]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_Student]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse] DROP CONSTRAINT [FK_EnrollmentStudentCourse_Student]
 GO
-/****** Object:  ForeignKey [FK_Record_Score]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Record_Score]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Record_Score]') AND parent_object_id = OBJECT_ID(N'[dbo].[Record]'))
 ALTER TABLE [dbo].[Record] DROP CONSTRAINT [FK_Record_Score]
 GO
-/****** Object:  Table [dbo].[Record]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[Record]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Record_Score]') AND parent_object_id = OBJECT_ID(N'[dbo].[Record]'))
 ALTER TABLE [dbo].[Record] DROP CONSTRAINT [FK_Record_Score]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Record]') AND type in (N'U'))
 DROP TABLE [dbo].[Record]
 GO
-/****** Object:  Table [dbo].[EnrollmentStudentCourse]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[EnrollmentStudentCourse]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse] DROP CONSTRAINT [FK_EnrollmentStudentCourse_EnrollmentGroups]
 GO
@@ -281,7 +281,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]') AND type in (N'U'))
 DROP TABLE [dbo].[EnrollmentStudentCourse]
 GO
-/****** Object:  Table [dbo].[Score]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[Score]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] DROP CONSTRAINT [FK_Score_Course]
 GO
@@ -294,7 +294,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Score]') AND type in (N'U'))
 DROP TABLE [dbo].[Score]
 GO
-/****** Object:  Table [dbo].[EnrollmentGroupSchedule]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[EnrollmentGroupSchedule]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_Classroom]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule] DROP CONSTRAINT [FK_EnrollmentGroupSchedule_Classroom]
 GO
@@ -304,7 +304,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]') AND type in (N'U'))
 DROP TABLE [dbo].[EnrollmentGroupSchedule]
 GO
-/****** Object:  Table [dbo].[EnrollmentGroups]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[EnrollmentGroups]    Script Date: 06/06/2013 19:07:11 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_EnrollmentCourse]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups] DROP CONSTRAINT [FK_EnrollmentGroups_EnrollmentCourse]
 GO
@@ -314,15 +314,15 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]') AND type in (N'U'))
 DROP TABLE [dbo].[EnrollmentGroups]
 GO
-/****** Object:  View [dbo].[PlanDetails]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  View [dbo].[PlanDetails]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[PlanDetails]'))
 DROP VIEW [dbo].[PlanDetails]
 GO
-/****** Object:  View [dbo].[SchemeDetails]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  View [dbo].[SchemeDetails]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[SchemeDetails]'))
 DROP VIEW [dbo].[SchemeDetails]
 GO
-/****** Object:  Table [dbo].[Scheme-Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[Scheme-Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan] DROP CONSTRAINT [FK_Scheme-Plan_Plan]
 GO
@@ -332,7 +332,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]') AND type in (N'U'))
 DROP TABLE [dbo].[Scheme-Plan]
 GO
-/****** Object:  Table [dbo].[EnrollmentCourse]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[EnrollmentCourse]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse] DROP CONSTRAINT [FK_EnrollmentCourse_Course]
 GO
@@ -342,7 +342,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]') AND type in (N'U'))
 DROP TABLE [dbo].[EnrollmentCourse]
 GO
-/****** Object:  Table [dbo].[Course-Requirement]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[Course-Requirement]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement] DROP CONSTRAINT [FK_Course-Requirement_Course]
 GO
@@ -352,7 +352,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Course-Requirement]') AND type in (N'U'))
 DROP TABLE [dbo].[Course-Requirement]
 GO
-/****** Object:  Table [dbo].[Plan-Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[Plan-Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course] DROP CONSTRAINT [FK_Plan-Course_Course]
 GO
@@ -362,11 +362,11 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Plan-Course]') AND type in (N'U'))
 DROP TABLE [dbo].[Plan-Course]
 GO
-/****** Object:  StoredProcedure [dbo].[uspInsertStudent]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  StoredProcedure [dbo].[uspInsertStudent]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[uspInsertStudent]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[uspInsertStudent]
 GO
-/****** Object:  Table [dbo].[StudentAdditionalData]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[StudentAdditionalData]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] DROP CONSTRAINT [FK_StudentAdditionalData_Student]
 GO
@@ -379,7 +379,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]') AND type in (N'U'))
 DROP TABLE [dbo].[StudentAdditionalData]
 GO
-/****** Object:  Table [dbo].[StudentPlan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[StudentPlan]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan] DROP CONSTRAINT [FK_StudentPlan_Plan]
 GO
@@ -389,14 +389,14 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[StudentPlan]') AND type in (N'U'))
 DROP TABLE [dbo].[StudentPlan]
 GO
-/****** Object:  Table [dbo].[StudiesInformation]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[StudiesInformation]    Script Date: 06/06/2013 19:07:10 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudiesInformation_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudiesInformation]'))
 ALTER TABLE [dbo].[StudiesInformation] DROP CONSTRAINT [FK_StudiesInformation_Student]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[StudiesInformation]') AND type in (N'U'))
 DROP TABLE [dbo].[StudiesInformation]
 GO
-/****** Object:  Table [dbo].[Course]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Course]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course] DROP CONSTRAINT [FK_Course_School]
 GO
@@ -406,11 +406,11 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Course]') AND type in (N'U'))
 DROP TABLE [dbo].[Course]
 GO
-/****** Object:  View [dbo].[ApplicationUser]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  View [dbo].[ApplicationUser]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[ApplicationUser]'))
 DROP VIEW [dbo].[ApplicationUser]
 GO
-/****** Object:  Table [dbo].[EnrollmentStudent]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[EnrollmentStudent]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent] DROP CONSTRAINT [FK_EnrollmentStudent_Enrollment]
 GO
@@ -420,7 +420,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]') AND type in (N'U'))
 DROP TABLE [dbo].[EnrollmentStudent]
 GO
-/****** Object:  Table [dbo].[Scheme]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Scheme]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_CooUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] DROP CONSTRAINT [FK_Scheme_CooUsers]
 GO
@@ -436,21 +436,21 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Scheme]') AND type in (N'U'))
 DROP TABLE [dbo].[Scheme]
 GO
-/****** Object:  Table [dbo].[Profiles]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Profiles]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserProfile]') AND parent_object_id = OBJECT_ID(N'[dbo].[Profiles]'))
 ALTER TABLE [dbo].[Profiles] DROP CONSTRAINT [UserProfile]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Profiles]') AND type in (N'U'))
 DROP TABLE [dbo].[Profiles]
 GO
-/****** Object:  Table [dbo].[School]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[School]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_School_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[School]'))
 ALTER TABLE [dbo].[School] DROP CONSTRAINT [FK_School_Users]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[School]') AND type in (N'U'))
 DROP TABLE [dbo].[School]
 GO
-/****** Object:  Table [dbo].[Student]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Student]    Script Date: 06/06/2013 19:07:09 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Country]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] DROP CONSTRAINT [FK_Student_Country]
 GO
@@ -466,7 +466,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Student]') AND type in (N'U'))
 DROP TABLE [dbo].[Student]
 GO
-/****** Object:  Table [dbo].[Memberships]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  Table [dbo].[Memberships]    Script Date: 06/06/2013 19:07:08 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships] DROP CONSTRAINT [MembershipApplication]
 GO
@@ -476,15 +476,15 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Memberships]') AND type in (N'U'))
 DROP TABLE [dbo].[Memberships]
 GO
-/****** Object:  StoredProcedure [dbo].[uspRetrieveUserID]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  StoredProcedure [dbo].[uspRetrieveUserID]    Script Date: 06/06/2013 19:07:08 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[uspRetrieveUserID]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[uspRetrieveUserID]
 GO
-/****** Object:  StoredProcedure [dbo].[uspUserNameUpdate]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  StoredProcedure [dbo].[uspUserNameUpdate]    Script Date: 06/06/2013 19:07:08 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[uspUserNameUpdate]') AND type in (N'P', N'PC'))
 DROP PROCEDURE [dbo].[uspUserNameUpdate]
 GO
-/****** Object:  Table [dbo].[UsersInRoles]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  Table [dbo].[UsersInRoles]    Script Date: 06/06/2013 19:07:05 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleRole]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles] DROP CONSTRAINT [UsersInRoleRole]
 GO
@@ -494,18 +494,18 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoles]') AND type in (N'U'))
 DROP TABLE [dbo].[UsersInRoles]
 GO
-/****** Object:  View [dbo].[RequirementDetails]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  View [dbo].[RequirementDetails]    Script Date: 06/06/2013 19:07:05 ******/
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[RequirementDetails]'))
 DROP VIEW [dbo].[RequirementDetails]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 06/05/2013 19:58:08 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Users]'))
 ALTER TABLE [dbo].[Users] DROP CONSTRAINT [UserApplication]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Users]') AND type in (N'U'))
 DROP TABLE [dbo].[Users]
 GO
-/****** Object:  Table [dbo].[Enrollment]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Enrollment]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Location]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment] DROP CONSTRAINT [FK_Enrollment_Location]
 GO
@@ -515,61 +515,61 @@ GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Enrollment]') AND type in (N'U'))
 DROP TABLE [dbo].[Enrollment]
 GO
-/****** Object:  Table [dbo].[ScoreCriteria]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[ScoreCriteria]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[ScoreCriteria]'))
 ALTER TABLE [dbo].[ScoreCriteria] DROP CONSTRAINT [FK_ScoreCriteria_Type]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ScoreCriteria]') AND type in (N'U'))
 DROP TABLE [dbo].[ScoreCriteria]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[RoleApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Roles]'))
 ALTER TABLE [dbo].[Roles] DROP CONSTRAINT [RoleApplication]
 GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Roles]') AND type in (N'U'))
 DROP TABLE [dbo].[Roles]
 GO
-/****** Object:  Table [dbo].[Location]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Location]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Location]') AND type in (N'U'))
 DROP TABLE [dbo].[Location]
 GO
-/****** Object:  Table [dbo].[Requirement]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Requirement]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Requirement]') AND type in (N'U'))
 DROP TABLE [dbo].[Requirement]
 GO
-/****** Object:  Table [dbo].[Classroom]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Classroom]    Script Date: 06/06/2013 19:07:03 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Classroom]') AND type in (N'U'))
 DROP TABLE [dbo].[Classroom]
 GO
-/****** Object:  Table [dbo].[Country]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Country]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Country]') AND type in (N'U'))
 DROP TABLE [dbo].[Country]
 GO
-/****** Object:  Table [dbo].[Applications]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Applications]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Applications]') AND type in (N'U'))
 DROP TABLE [dbo].[Applications]
 GO
-/****** Object:  Table [dbo].[Modality]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Modality]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Modality]') AND type in (N'U'))
 DROP TABLE [dbo].[Modality]
 GO
-/****** Object:  Table [dbo].[Plan]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Plan]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Plan]') AND type in (N'U'))
 DROP TABLE [dbo].[Plan]
 GO
-/****** Object:  Table [dbo].[TempStudents]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[TempStudents]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TempStudents]') AND type in (N'U'))
 DROP TABLE [dbo].[TempStudents]
 GO
-/****** Object:  Table [dbo].[Type]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Type]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Type]') AND type in (N'U'))
 DROP TABLE [dbo].[Type]
 GO
-/****** Object:  Table [dbo].[Resource]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Resource]    Script Date: 06/06/2013 19:07:02 ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Resource]') AND type in (N'U'))
 DROP TABLE [dbo].[Resource]
 GO
-/****** Object:  Table [dbo].[Resource]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Resource]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -842,7 +842,7 @@ INSERT [dbo].[Resource] ([ResourceID], [ResourceKey], [Culture], [ResourceValue]
 INSERT [dbo].[Resource] ([ResourceID], [ResourceKey], [Culture], [ResourceValue]) VALUES (N'7dcc9765-c3b3-4ee0-8cc8-fbc18b6df669', N'USERNAME', N'es-CR', N'Nombre Usuario')
 INSERT [dbo].[Resource] ([ResourceID], [ResourceKey], [Culture], [ResourceValue]) VALUES (N'24e9b54f-0853-4781-9c8d-fca37c30cb4d', N'IS_EQUAL_TO', N'es-CR', N'Sean iguales a')
 INSERT [dbo].[Resource] ([ResourceID], [ResourceKey], [Culture], [ResourceValue]) VALUES (N'7f5fb884-0e25-4244-a934-ffdc5f9e2af1', N'PASSWORD', N'es-CR', N'Contraseña')
-/****** Object:  Table [dbo].[Type]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Type]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -895,7 +895,7 @@ INSERT [dbo].[Type] ([TypeID], [Name], [Description], [Usage], [InsertDate], [In
 INSERT [dbo].[Type] ([TypeID], [Name], [Description], [Usage], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'f174ac5c-3a96-4db7-b965-ddac9f2874ee', N'MARITAL_STATUS_MARRIED', N'Marital status married', N'MST', NULL, NULL, NULL, NULL, NULL)
 INSERT [dbo].[Type] ([TypeID], [Name], [Description], [Usage], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'e5122527-5bb0-447d-92bf-de1c0e7b05b4', N'WPS_FAMILY', N'Family', N'WPS', NULL, NULL, NULL, NULL, NULL)
 INSERT [dbo].[Type] ([TypeID], [Name], [Description], [Usage], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'39b6ea3d-02a7-4ce5-87e5-fa65e5ca321e', N'MARITAL_STATUS_WIDOW', N'Marital status widow', N'MST', NULL, NULL, NULL, NULL, NULL)
-/****** Object:  Table [dbo].[TempStudents]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[TempStudents]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1007,7 +1007,7 @@ INSERT [dbo].[TempStudents] ([cedula], [nombre], [apellidos], [tel1], [tel2], [t
 INSERT [dbo].[TempStudents] ([cedula], [nombre], [apellidos], [tel1], [tel2], [tel3], [correo], [genero], [estado]) VALUES (N'701010204', N'DAVE ALAIN', N'SCOTT SCOTRELL', N'8391-9125', N'1', N'1', N'scott@cotarricense.cr', N'M', NULL)
 INSERT [dbo].[TempStudents] ([cedula], [nombre], [apellidos], [tel1], [tel2], [tel3], [correo], [genero], [estado]) VALUES (N'701860685', N'PEDRO ANTONIO', N'CALDERÓN CAMACHO', N'2225-8300', N'8594-6433', N'1', N'ecalderon19@gmail.com', N'M', NULL)
 INSERT [dbo].[TempStudents] ([cedula], [nombre], [apellidos], [tel1], [tel2], [tel3], [correo], [genero], [estado]) VALUES (N'800720477', N'ALVARO EMILIO', N'GONZÁLES DARCE', N'7012-0832', N'2279-1839', N'1', N'agond@usa.net', N'M', NULL)
-/****** Object:  Table [dbo].[Plan]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Plan]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1043,7 +1043,7 @@ INSERT [dbo].[Plan] ([PlanID], [Name], [Description], [InsertDate], [InsertUserI
 INSERT [dbo].[Plan] ([PlanID], [Name], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [Version], [ParentID], [isActive], [hasEnrollment]) VALUES (N'e089e763-fd2f-4571-8793-9dd59d014385', N'01', N'TECNICO EN DISEÑO GRÁFICO EN IMAGEN, EMPAQUE Y EDICIÓN', CAST(0x0000A1CB00000000 AS DateTime), N'bf42d72e-d648-413f-bc02-adabe5ea3477', NULL, NULL, N'172.26.83.177', N'2013-1', NULL, 1, NULL)
 INSERT [dbo].[Plan] ([PlanID], [Name], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [Version], [ParentID], [isActive], [hasEnrollment]) VALUES (N'05bb7eca-4ce0-461c-968b-be215be8a461', N'01', N'TECNICO EN DISEÑO GRÁFICO EN SITIOS WEB', CAST(0x0000A1CB00000000 AS DateTime), N'bf42d72e-d648-413f-bc02-adabe5ea3477', CAST(0x0000A1CB00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'172.26.83.177', N'2013-1', NULL, 1, 1)
 INSERT [dbo].[Plan] ([PlanID], [Name], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [Version], [ParentID], [isActive], [hasEnrollment]) VALUES (N'd53bcd0b-cd9e-4a1a-97eb-ca6c90f3fb7e', N'01', N'Técnico Asesor de Seguros del INS', CAST(0x0000A18000000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'172.26.89.143', N'2013-2', NULL, 1, 1)
-/****** Object:  Table [dbo].[Modality]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Modality]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1075,7 +1075,7 @@ INSERT [dbo].[Modality] ([ModalityID], [Name], [Period], [InsertDate], [InsertUs
 INSERT [dbo].[Modality] ([ModalityID], [Name], [Period], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6deb6676-6399-4c7b-a5c1-bb082c4ac391', N'II', N'Bimestral', NULL, NULL, CAST(0x0000A16400000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', N'172.26.52.168')
 INSERT [dbo].[Modality] ([ModalityID], [Name], [Period], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'009cfcb5-96f8-427f-b8a8-ebc6a3561438', N'IV', N'Cuatrimestre', CAST(0x0000A16200000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168')
 INSERT [dbo].[Modality] ([ModalityID], [Name], [Period], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'c52d429d-f8bc-4a31-bec2-f21ce864444e', N'I', N'Mensual', CAST(0x0000A16200000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168')
-/****** Object:  Table [dbo].[Applications]    Script Date: 06/05/2013 19:58:06 ******/
+/****** Object:  Table [dbo].[Applications]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1094,7 +1094,7 @@ PRIMARY KEY CLUSTERED
 END
 GO
 INSERT [dbo].[Applications] ([ApplicationName], [ApplicationId], [Description]) VALUES (N'MatriFun', N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'Sistema de Matrícula de FundaTEC')
-/****** Object:  Table [dbo].[Country]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Country]    Script Date: 06/06/2013 19:07:02 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1369,7 +1369,7 @@ INSERT [dbo].[Country] ([CountryID], [CountryName], [InsertDate], [InsertUserID]
 INSERT [dbo].[Country] ([CountryID], [CountryName], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'e5424f49-61eb-4b7d-ada3-fdcae26f9bdb', N'Feroe, Islas', CAST(0x0000A193011471F8 AS DateTime), NULL, NULL, NULL, NULL)
 INSERT [dbo].[Country] ([CountryID], [CountryName], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'8a7651de-e8aa-43b8-a279-fe025c6abafb', N'Venezuela', CAST(0x0000A1930114720B AS DateTime), NULL, NULL, NULL, NULL)
 INSERT [dbo].[Country] ([CountryID], [CountryName], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'cc82aa65-fcf2-4dc1-a60f-ff1877d0016f', N'Sudán', CAST(0x0000A19301147209 AS DateTime), NULL, NULL, NULL, NULL)
-/****** Object:  Table [dbo].[Classroom]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Classroom]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1419,7 +1419,7 @@ INSERT [dbo].[Classroom] ([ClassroomID], [Code], [Description], [InsertDate], [I
 INSERT [dbo].[Classroom] ([ClassroomID], [Code], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'4cf41363-8ad2-4a4b-b044-cb4422cfa2e1', N'B6-07', N'B6-07', CAST(0x0000A1A100000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.83.221')
 INSERT [dbo].[Classroom] ([ClassroomID], [Code], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'7ff01408-0dfc-4d2d-951c-d4d5f7c0c162', N'Aula 1', N'San Pedro', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[Classroom] ([ClassroomID], [Code], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'72188838-1764-4030-88fe-fe616c50abf3', N'103', N'ITCR San José', CAST(0x0000A1A100000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.83.221')
-/****** Object:  Table [dbo].[Requirement]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Requirement]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1450,7 +1450,7 @@ INSERT [dbo].[Requirement] ([RequirementID], [Name], [TypeID], [InsertDate], [In
 INSERT [dbo].[Requirement] ([RequirementID], [Name], [TypeID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'3fe79ed2-f103-4086-8937-72b5551eadd7', N'Propiedades y Responsabilidad I', N'6b02ff49-21be-4f4e-9a60-573740ca63cf', NULL, NULL, CAST(0x0000A18200000000 AS DateTime), N'04622c29-cc0f-4876-9f0c-70266450200f', N'172.26.91.77')
 INSERT [dbo].[Requirement] ([RequirementID], [Name], [TypeID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'40fa3530-01b7-4e9d-b0f0-877c41cb9845', N'Asesoramiento al Cliente', N'6b02ff49-21be-4f4e-9a60-573740ca63cf', CAST(0x0000A18200000000 AS DateTime), N'04622c29-cc0f-4876-9f0c-70266450200f', NULL, NULL, N'172.26.91.77')
 INSERT [dbo].[Requirement] ([RequirementID], [Name], [TypeID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'34b5893c-d27c-4391-b7ea-8e2433756af6', N'Certificación', N'6b02ff49-21be-4f4e-9a60-573740ca63cf', CAST(0x0000A18800000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.80.212')
-/****** Object:  Table [dbo].[Location]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Location]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1494,7 +1494,7 @@ INSERT [dbo].[Location] ([LocationID], [Name], [Line1], [Line2], [InsertDate], [
 INSERT [dbo].[Location] ([LocationID], [Name], [Line1], [Line2], [InsertDate], [Latitude], [Longitude], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'dfab2d5c-d3fa-40c5-943d-b71b852f08c9', N'I.N.S', N'Edificio central en San José', N'Frente al Parque España', NULL, NULL, NULL, NULL, CAST(0x0000A16400000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', N'172.26.52.168')
 INSERT [dbo].[Location] ([LocationID], [Name], [Line1], [Line2], [InsertDate], [Latitude], [Longitude], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'81a83f73-ce0d-4dba-8730-d2e45c0a638f', N'ITCR - San José', N'Instituto Tecnológico de Costa Rica - San José', N'Barrio Amón', NULL, NULL, NULL, NULL, CAST(0x0000A1A200000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'172.26.90.30')
 INSERT [dbo].[Location] ([LocationID], [Name], [Line1], [Line2], [InsertDate], [Latitude], [Longitude], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'524fd271-009e-4dae-9693-de6c4dc718fa', N'Heredia', N'Heredia', NULL, CAST(0x0000A1BD00000000 AS DateTime), NULL, NULL, N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
-/****** Object:  Table [dbo].[Roles]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1519,7 +1519,7 @@ INSERT [dbo].[Roles] ([ApplicationId], [RoleId], [RoleName], [Description]) VALU
 INSERT [dbo].[Roles] ([ApplicationId], [RoleId], [RoleName], [Description]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'1aaed1ec-bde1-4804-9a8d-47e1f9d6f5a3', N'ROLE_COORDINATOR', N'Coordinator Role')
 INSERT [dbo].[Roles] ([ApplicationId], [RoleId], [RoleName], [Description]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'272a27f1-8813-43f5-be8b-5028b8bfa003', N'ROLE_ADMINISTRATOR', N'Super Administrator')
 INSERT [dbo].[Roles] ([ApplicationId], [RoleId], [RoleName], [Description]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'3939e289-91d1-44bd-9b15-559af02bb287', N'ROLE_AUDITOR', N'Auditor Role')
-/****** Object:  Table [dbo].[ScoreCriteria]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[ScoreCriteria]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1541,7 +1541,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Enrollment]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  Table [dbo].[Enrollment]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1601,7 +1601,7 @@ INSERT [dbo].[Enrollment] ([EnrollmentID], [Description], [PlanID], [InsertDate]
 INSERT [dbo].[Enrollment] ([EnrollmentID], [Description], [PlanID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [StartDate], [EndDate], [ExtraStartDate], [ExtraEndDate], [VerifyDates], [LocationID]) VALUES (N'5889873e-f930-46c3-b605-c85481cafcf2', N'Bloque III - I Promoción 2013 - San Carlos', N'a5beeeb0-22ff-43ae-b695-2174456633a6', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'172.26.95.118', CAST(0x0000A0F900000000 AS DateTime), CAST(0x0000A11500000000 AS DateTime), CAST(0x0000A11C00000000 AS DateTime), CAST(0x0000A12900000000 AS DateTime), 1, N'8634200d-e9de-498c-a1c9-45be58e570e0')
 INSERT [dbo].[Enrollment] ([EnrollmentID], [Description], [PlanID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [StartDate], [EndDate], [ExtraStartDate], [ExtraEndDate], [VerifyDates], [LocationID]) VALUES (N'218e4f3e-8f41-47e9-a9c8-de7b77542e2a', N'II Bimestre 2013 - ITCR Cartago', N'd53bcd0b-cd9e-4a1a-97eb-ca6c90f3fb7e', CAST(0x0000A1CC00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.90.213', CAST(0x0000A19300000000 AS DateTime), CAST(0x0000A19E00000000 AS DateTime), CAST(0x0000A1A100000000 AS DateTime), CAST(0x0000A1A500000000 AS DateTime), 1, N'0af4846d-c346-4e84-8338-b18c0f85f820')
 INSERT [dbo].[Enrollment] ([EnrollmentID], [Description], [PlanID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [StartDate], [EndDate], [ExtraStartDate], [ExtraEndDate], [VerifyDates], [LocationID]) VALUES (N'e88b0c71-7453-4b43-88fb-fea621e49b23', N'Bloque III - I Promoción 2013 - Cartago', N'a5beeeb0-22ff-43ae-b695-2174456633a6', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'172.26.87.226', CAST(0x0000A0F900000000 AS DateTime), CAST(0x0000A11500000000 AS DateTime), CAST(0x0000A11C00000000 AS DateTime), CAST(0x0000A12900000000 AS DateTime), 1, N'0af4846d-c346-4e84-8338-b18c0f85f820')
-/****** Object:  Table [dbo].[Users]    Script Date: 06/05/2013 19:58:08 ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 06/06/2013 19:07:03 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1625,7 +1625,7 @@ INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [Las
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'4680c870-5dee-4749-9919-0126d8b6759c', N'110914020', 0, CAST(0x0000A1B201551FB1 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'f5a32da9-8a3e-4d62-8df1-03e046058bf7', N'401100524', 0, CAST(0x0000A1A3017AC0FC AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'465b209e-630d-4046-b949-040cccaa80f6', N'106840866', 0, CAST(0x0000A1A40179F265 AS DateTime))
-INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'd15fa872-925e-4ca1-8085-08b4d5541a0f', N'302810869', 0, CAST(0x0000A1CB016D3124 AS DateTime))
+INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'd15fa872-925e-4ca1-8085-08b4d5541a0f', N'302810869', 0, CAST(0x0000A1D50149558D AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'af29b636-918e-4430-8db3-0a0df4c07170', N'109550496', 0, CAST(0x0000A17F010665D1 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'8ef505f5-4ea6-451f-92ea-0a8a1a03beb6', N'503500777', 0, CAST(0x0000A1B6011E4BF3 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'571ad6e8-51c1-4fb7-890f-0b8a3ed78961', N'104121490', 0, CAST(0x0000A1A3017B14F0 AS DateTime))
@@ -1829,7 +1829,7 @@ GO
 print 'Processed 200 total records'
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'acc0713f-44d2-4455-a26a-6959e9ad667e', N'106540264', 0, CAST(0x0000A1B20150B949 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'ac793505-2e71-4511-bf24-6ab52d3d8e16', N'304210258', 0, CAST(0x0000A1B00177BD8A AS DateTime))
-INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'bfb14f56-df50-4d08-8e2d-6b2b19e7f374', N'109170211', 0, CAST(0x0000A1D2014B3121 AS DateTime))
+INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'bfb14f56-df50-4d08-8e2d-6b2b19e7f374', N'109170211', 0, CAST(0x0000A1D50136383A AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'2903b52f-bd35-4f65-ab73-6b376d770db3', N'800760820', 0, CAST(0x0000A17F013E654F AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'3947fc5e-5e55-4cb7-8891-6c3392931e10', N'105170419', 0, CAST(0x0000A1B600EF684C AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'f8adccc3-3494-4408-b822-6c50f60e7c0e', N'110650601', 0, CAST(0x0000A17E011E04E3 AS DateTime))
@@ -1907,7 +1907,7 @@ INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [Las
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'2e15cc6f-c788-4ff9-9a52-8e5264a97d5f', N'206610160', 0, CAST(0x0000A1C50177207B AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'ff6af265-d827-487d-93e0-8ea1b671449f', N'303790434', 0, CAST(0x0000A1B600EEED60 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'38c85d0d-37b8-412d-833b-8ea9678caa20', N'304420777', 0, CAST(0x0000A1B600F1C426 AS DateTime))
-INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'115430230', 0, CAST(0x0000A1D301390C1F AS DateTime))
+INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'115430230', 0, CAST(0x0000A1D5013FCA39 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'de3c64a6-2506-4b6c-b632-8f7ab298b58e', N'600840364', 0, CAST(0x0000A178011AAB2B AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'b62a5cd0-2e08-4957-ba02-902ed03113fa', N'109390677', 0, CAST(0x0000A1A10172AFCC AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'1196cf7c-858d-487e-a582-907ae7f345fc', N'303370124', 0, CAST(0x0000A1CB00F1F564 AS DateTime))
@@ -2029,7 +2029,7 @@ INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [Las
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'440aa3d1-f0fa-47de-bf61-ca46b2643fce', N'302940240', 0, CAST(0x0000A1A80113A880 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'4a7f3464-99a6-43aa-8b8c-cac1b5b20788', N'502520386', 0, CAST(0x0000A1CB00F25D2C AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'834c6180-0388-49eb-96e9-cad90ba5d59d', N'112160638', 0, CAST(0x0000A1B60108FE8C AS DateTime))
-INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', N'admin', 0, CAST(0x0000A1D300381903 AS DateTime))
+INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', N'admin', 0, CAST(0x0000A1D5004E9BC0 AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'59e17246-f32a-40f6-aebe-cd86c3d99f8f', N'303100745', 0, CAST(0x0000A1D2011F8FE6 AS DateTime))
 GO
 print 'Processed 400 total records'
@@ -2145,7 +2145,7 @@ INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [Las
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'5a624347-3066-4daa-92f5-fed551a133ea', N'205020489', 0, CAST(0x0000A1B6010C13FA AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'e64445cd-3d1d-4101-99dc-fefbc3b7173d', N'700840152', 0, CAST(0x0000A17F01048AAD AS DateTime))
 INSERT [dbo].[Users] ([ApplicationId], [UserId], [UserName], [IsAnonymous], [LastActivityDate]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'ee8baca6-5b0c-4353-8106-fffcf976d4aa', N'302940734', 0, CAST(0x0000A1C5017933D1 AS DateTime))
-/****** Object:  View [dbo].[RequirementDetails]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  View [dbo].[RequirementDetails]    Script Date: 06/06/2013 19:07:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2162,7 +2162,7 @@ FROM Requirement r
 INNER JOIN [Type] t ON r.TypeID= t.TypeID
 '
 GO
-/****** Object:  Table [dbo].[UsersInRoles]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  Table [dbo].[UsersInRoles]    Script Date: 06/06/2013 19:07:05 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2702,7 +2702,7 @@ INSERT [dbo].[UsersInRoles] ([UserId], [RoleId]) VALUES (N'175a6362-30b7-43e5-9b
 INSERT [dbo].[UsersInRoles] ([UserId], [RoleId]) VALUES (N'5a624347-3066-4daa-92f5-fed551a133ea', N'f7eb53b9-27bd-4183-bfda-01f8381eb398')
 INSERT [dbo].[UsersInRoles] ([UserId], [RoleId]) VALUES (N'e64445cd-3d1d-4101-99dc-fefbc3b7173d', N'f7eb53b9-27bd-4183-bfda-01f8381eb398')
 INSERT [dbo].[UsersInRoles] ([UserId], [RoleId]) VALUES (N'ee8baca6-5b0c-4353-8106-fffcf976d4aa', N'0698ce6c-1e89-4631-a529-2f94db43a3a9')
-/****** Object:  StoredProcedure [dbo].[uspUserNameUpdate]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  StoredProcedure [dbo].[uspUserNameUpdate]    Script Date: 06/06/2013 19:07:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2729,7 +2729,7 @@ END
 ' 
 END
 GO
-/****** Object:  StoredProcedure [dbo].[uspRetrieveUserID]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  StoredProcedure [dbo].[uspRetrieveUserID]    Script Date: 06/06/2013 19:07:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2757,7 +2757,7 @@ END
 ' 
 END
 GO
-/****** Object:  Table [dbo].[Memberships]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  Table [dbo].[Memberships]    Script Date: 06/06/2013 19:07:08 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -2795,7 +2795,7 @@ INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordForm
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'4680c870-5dee-4749-9919-0126d8b6759c', N'vQt0EQvFcXiAKv+1tf+pLh4SjKyqg6a2RM9OQEerKvg=', 1, N'QV+yq0XQS7o7Nh118TW1Aw==', N'florangel.rodriguez@ucr.ac.cr', NULL, NULL, 1, 0, CAST(0x0000A1B201551F91 AS DateTime), CAST(0x0000A1B201551F91 AS DateTime), CAST(0x0000A1B201551F91 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'f5a32da9-8a3e-4d62-8df1-03e046058bf7', N'ixUBPcXA32MXfA+CrUQiJAZ+hayMAzLG+hQbmVXhRJE=', 1, N'U0jvw/tcJ0vpAX+918z9ig==', N'segurosjmleiton@hotmail.com', NULL, NULL, 1, 0, CAST(0x0000A17F0143396B AS DateTime), CAST(0x0000A17F00E058EB AS DateTime), CAST(0x0000A17F0143396B AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'465b209e-630d-4046-b949-040cccaa80f6', N'UlE+krcel9mj+NEst979xsdbb3+/BvFVDQfxu4M3tkY=', 1, N'o4v4AA7hMryt9+zJ0pPmIA==', N'azuniga@globalseguroscr.com', NULL, NULL, 1, 0, CAST(0x0000A1A40179F244 AS DateTime), CAST(0x0000A1A40179F244 AS DateTime), CAST(0x0000A1A40179F244 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
-INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'd15fa872-925e-4ca1-8085-08b4d5541a0f', N'mLbWDLh14YOqZnmLhmM/ONUQUT8LdS3aWON+EwYB9O0=', 1, N'0/GJVzDiYwxJ8EdCGIYATw==', N'rbrenes@itcr.ac.cr', NULL, NULL, 1, 0, CAST(0x0000A1B90158371B AS DateTime), CAST(0x0000A1CB016D3124 AS DateTime), CAST(0x0000A1B90158371B AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
+INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'd15fa872-925e-4ca1-8085-08b4d5541a0f', N'mLbWDLh14YOqZnmLhmM/ONUQUT8LdS3aWON+EwYB9O0=', 1, N'0/GJVzDiYwxJ8EdCGIYATw==', N'rbrenes@itcr.ac.cr', NULL, NULL, 1, 0, CAST(0x0000A1B90158371B AS DateTime), CAST(0x0000A1D50149558D AS DateTime), CAST(0x0000A1B90158371B AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'af29b636-918e-4430-8db3-0a0df4c07170', N'ruvCnkHu5IAefu4quCZH8DOyr+W4LTfFTOh/pWcRDqs=', 1, N'0Oy+CuuHx190jcoMaLqAXw==', N'jsolisj@pricose.com', NULL, NULL, 1, 0, CAST(0x0000A17F010665B0 AS DateTime), CAST(0x0000A17F010665B0 AS DateTime), CAST(0x0000A17F010665B0 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'8ef505f5-4ea6-451f-92ea-0a8a1a03beb6', N'syfWNmlS8V0NfRPfwAfycIuajRmfW/O09gCw3EyMSAU=', 1, N'typ+1XMaKQ6o/vKzk1J0Ew==', N'alis8644@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A1B6011E4BD2 AS DateTime), CAST(0x0000A1B6011E4BD2 AS DateTime), CAST(0x0000A1B6011E4BD2 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'571ad6e8-51c1-4fb7-890f-0b8a3ed78961', N'XA06rRqEW9WNVltosjzL+3p4VWOoUkL+XLMEPsTcqlA=', 1, N'zhd2O8ZEkGE9uYqotiWxEA==', N'jsaenzy@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A1A30172A0EB AS DateTime), CAST(0x0000A1A3010FC06B AS DateTime), CAST(0x0000A1A30172A0EB AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
@@ -2999,7 +2999,7 @@ GO
 print 'Processed 200 total records'
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'acc0713f-44d2-4455-a26a-6959e9ad667e', N'2U59zUFZURV3Bt6W9zMWDdWhtFsGGknRLb2FLt5elSk=', 1, N'AVoFGbKWnVUBCtasr/6g5A==', N'albediso@hotmail.com', NULL, NULL, 1, 0, CAST(0x0000A1B20150B923 AS DateTime), CAST(0x0000A1B20150B923 AS DateTime), CAST(0x0000A1B20150B923 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'ac793505-2e71-4511-bf24-6ab52d3d8e16', N'cGuff+0VqQLmJlKNNK6JcV791bUb36i82PlvgpK7SKs=', 1, N'sNVfs/wONew1iqDKyHYqmQ==', N'sastua@outlook.com', NULL, NULL, 1, 0, CAST(0x0000A1B00177BD69 AS DateTime), CAST(0x0000A1B00177BD69 AS DateTime), CAST(0x0000A1B00177BD69 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
-INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'bfb14f56-df50-4d08-8e2d-6b2b19e7f374', N'iHRYZjW+xzFkvYPDZQTfYFFRBGUGEbZP9A4lNZ8HgCs=', 1, N'gQx1VRfMGKyKKTBw8Dxj4A==', N'dago@dhrt.net', NULL, NULL, 1, 0, CAST(0x0000A194015D39B7 AS DateTime), CAST(0x0000A1D2014B3121 AS DateTime), CAST(0x0000A194015D39B7 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
+INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'bfb14f56-df50-4d08-8e2d-6b2b19e7f374', N'iHRYZjW+xzFkvYPDZQTfYFFRBGUGEbZP9A4lNZ8HgCs=', 1, N'gQx1VRfMGKyKKTBw8Dxj4A==', N'dago@dhrt.net', NULL, NULL, 1, 0, CAST(0x0000A194015D39B7 AS DateTime), CAST(0x0000A1D50136383A AS DateTime), CAST(0x0000A194015D39B7 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'2903b52f-bd35-4f65-ab73-6b376d770db3', N'xjU1i+j3AkmnhTF8rC7y3/FpDkUWjH0YL8A2NHe3a8Q=', 1, N'aUjyLWO9jzNOzDPHcz2wsQ==', N'lbianco@mseguros.co.cr', NULL, NULL, 1, 0, CAST(0x0000A17F013E652A AS DateTime), CAST(0x0000A17F013E652A AS DateTime), CAST(0x0000A17F013E652A AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'3947fc5e-5e55-4cb7-8891-6c3392931e10', N'0sJkxG9p03KsOBeZY1tOmg5N7k7I11nzEwbl5V7Xvqo=', 1, N'4UkoN+oUmTjmT+ibJ5M9vg==', N'ocgut@yahoo.es', NULL, NULL, 1, 0, CAST(0x0000A1B600EF6822 AS DateTime), CAST(0x0000A1B600EF6822 AS DateTime), CAST(0x0000A1B600EF6822 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'f8adccc3-3494-4408-b822-6c50f60e7c0e', N'YKaZaHKrNQODlylrclPjbxC+Ghs5TlhoegQ0sZjpZYs=', 1, N'/harIZZGUvUa8+0Axvmk/Q==', N'rsotop@pricose.com', NULL, NULL, 1, 0, CAST(0x0000A17E011E04BD AS DateTime), CAST(0x0000A17E011E04BD AS DateTime), CAST(0x0000A17E011E04BD AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
@@ -3077,7 +3077,7 @@ INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordForm
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'2e15cc6f-c788-4ff9-9a52-8e5264a97d5f', N'bWepIxDR/YNzQuB+w2GOcWRhJbreg4kBzD1vP+Vngf4=', 1, N'Hd2bGMK2EkoAhZLByTj0Vg==', N'mei2406@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A1B2015544F4 AS DateTime), CAST(0x0000A1B200F26474 AS DateTime), CAST(0x0000A1B2015544F4 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'ff6af265-d827-487d-93e0-8ea1b671449f', N'uLDvbS4e1eGbTzNgK9sG+vscCP6dK7YSt2A8ymldQys=', 1, N'87VOgzTIMmKtnrxsTjijLw==', N'jd.coto@hotmail.com', NULL, NULL, 1, 0, CAST(0x0000A1B600EEED40 AS DateTime), CAST(0x0000A1B600EEED40 AS DateTime), CAST(0x0000A1B600EEED40 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'38c85d0d-37b8-412d-833b-8ea9678caa20', N'sKGFd8huxfPWNtHxUXfNLLG0nqeqyVSrbj9+Lni001g=', 1, N'1QWUskV1YM/uRabt+QKipA==', N'chico287@hotmail.es', NULL, NULL, 1, 0, CAST(0x0000A1B600F1C406 AS DateTime), CAST(0x0000A1B600F1C406 AS DateTime), CAST(0x0000A1B600F1C406 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
-INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'WBqJLtYl8sjWjz72Xo4NI1EMhanL1WGS+5bYsqJB6n8=', 1, N'vdsuZn45Oplr+nbZLQcm6Q==', N'kortenu@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A1850171977A AS DateTime), CAST(0x0000A1D301390C1F AS DateTime), CAST(0x0000A1850171977A AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
+INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'WBqJLtYl8sjWjz72Xo4NI1EMhanL1WGS+5bYsqJB6n8=', 1, N'vdsuZn45Oplr+nbZLQcm6Q==', N'kortenu@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A1850171977A AS DateTime), CAST(0x0000A1D5013FCA39 AS DateTime), CAST(0x0000A1850171977A AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'de3c64a6-2506-4b6c-b632-8f7ab298b58e', N'yLgwOSKWl4SdRvIcPpcxEs8XtkJKZkYo4kvOq3qA0yY=', 1, N'YIo6EpJfm4n40YjL2MjnOg==', N'juancaruso@ice.co.cr', NULL, NULL, 1, 0, CAST(0x0000A178011AAB0B AS DateTime), CAST(0x0000A178011AAB0B AS DateTime), CAST(0x0000A178011AAB0B AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'b62a5cd0-2e08-4957-ba02-902ed03113fa', N'iLIit0y6LVf9Ig9e5Xcj3OBrt1l+F803srbr3faADIY=', 1, N'prPmb1g0fGpCs7lcx1kJ/Q==', NULL, NULL, NULL, 1, 0, CAST(0x0000A1A10172AFAC AS DateTime), CAST(0x0000A1A10172AFAC AS DateTime), CAST(0x0000A1A10172AFAC AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'1196cf7c-858d-487e-a582-907ae7f345fc', N'fjAUwWZ8MJUdaQVeG85vrYNUjHpT2QivCwpUqlEKM84=', 1, N'1QaNypW595qJmi3Km/soXQ==', N'imontoya@fisagroup.com', NULL, NULL, 1, 0, CAST(0x0000A1BD0169E382 AS DateTime), CAST(0x0000A1CB00F1F564 AS DateTime), CAST(0x0000A1BD0169E382 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
@@ -3199,7 +3199,7 @@ INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordForm
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'440aa3d1-f0fa-47de-bf61-ca46b2643fce', N'95BEy3LSPHQ73cH6G4bWJJKBDsqLXMbkqOV7n3oaj60=', 1, N'qtpt9RmsA+SPnudqqiuQCg==', N'eduardo.miranda@bancreditocr.com', NULL, NULL, 1, 0, CAST(0x0000A1A80113A864 AS DateTime), CAST(0x0000A1A80113A864 AS DateTime), CAST(0x0000A1A80113A864 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'4a7f3464-99a6-43aa-8b8c-cac1b5b20788', N'drbmqDDskx2RwYsMVc81PAaqurU4yMxogf08BXEKyL8=', 1, N'USWqobwk2zYbDI34nx4h+A==', N'zurita1969@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A19A00FF0F20 AS DateTime), CAST(0x0000A1CB00F25D2C AS DateTime), CAST(0x0000A19A00FF0F20 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'834c6180-0388-49eb-96e9-cad90ba5d59d', N'mhQ+zZNiwWBJOThmka517IdX26vqcG+wAt6ziavEVbE=', 1, N'7ctyHfDi+DPIYftFJ6UcYg==', N'ccambronero@coopelesca.co.cr', NULL, NULL, 1, 0, CAST(0x0000A1B60108FE6B AS DateTime), CAST(0x0000A1B60108FE6B AS DateTime), CAST(0x0000A1B60108FE6B AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
-INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', N'TGXzxMcUBFnNyj8Llp2V/dg7WeCpqy2yYVNr+s2jsOA=', 1, N'E7tgtDnm5bt7ob0893W2WA==', N'admin@bandbcorp.com', NULL, NULL, 1, 0, CAST(0x0000A15D0175C18D AS DateTime), CAST(0x0000A1D300381903 AS DateTime), CAST(0x0000A15D0175C18D AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), N'User create by initial script')
+INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', N'TGXzxMcUBFnNyj8Llp2V/dg7WeCpqy2yYVNr+s2jsOA=', 1, N'E7tgtDnm5bt7ob0893W2WA==', N'admin@bandbcorp.com', NULL, NULL, 1, 0, CAST(0x0000A15D0175C18D AS DateTime), CAST(0x0000A1D5004E9BC0 AS DateTime), CAST(0x0000A15D0175C18D AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), N'User create by initial script')
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'59e17246-f32a-40f6-aebe-cd86c3d99f8f', N'EP7mahRQcFNYRdwZfTbJQiy65IjPPJvvPV9pZGXGJYo=', 1, N'4Viv058l6ooy2aEUBAItWw==', N'hrodriguez@itcr.ac.cr', NULL, NULL, 1, 0, CAST(0x0000A1B90174D9D4 AS DateTime), CAST(0x0000A1D2011F8FE6 AS DateTime), CAST(0x0000A1B90174D9D4 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 GO
 print 'Processed 400 total records'
@@ -3315,7 +3315,7 @@ INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordForm
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'5a624347-3066-4daa-92f5-fed551a133ea', N'ujlryudXEuyF2oAhFC+kud/NrC1kiBDXukTVKMZebCQ=', 1, N'qYLpRN2+evRr3dCP5hH8vg==', N'mfabysc@hotmail.com', NULL, NULL, 1, 0, CAST(0x0000A1B6010C13D9 AS DateTime), CAST(0x0000A1B6010C13D9 AS DateTime), CAST(0x0000A1B6010C13D9 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'e64445cd-3d1d-4101-99dc-fefbc3b7173d', N'oQuFZF9ym1KhE0vluaCrrrOy60agLRRZ++Qt+1tKeO0=', 1, N'3D4b3qSHdrMAe/80yjR4dQ==', N'emanley@ins-cr.com', NULL, NULL, 1, 0, CAST(0x0000A17F01048A88 AS DateTime), CAST(0x0000A17F01048A88 AS DateTime), CAST(0x0000A17F01048A88 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
 INSERT [dbo].[Memberships] ([ApplicationId], [UserId], [Password], [PasswordFormat], [PasswordSalt], [Email], [PasswordQuestion], [PasswordAnswer], [IsApproved], [IsLockedOut], [CreateDate], [LastLoginDate], [LastPasswordChangedDate], [LastLockoutDate], [FailedPasswordAttemptCount], [FailedPasswordAttemptWindowStart], [FailedPasswordAnswerAttemptCount], [FailedPasswordAnswerAttemptWindowsStart], [Comment]) VALUES (N'b79950c3-c5ae-4855-8c6e-639b8d85b7bb', N'ee8baca6-5b0c-4353-8106-fffcf976d4aa', N'UFpo2rvLNJcbiBgmQZb5tInnGFmKG7VVkqA9z4GxOlE=', 1, N'3zDeol4D9K8WUMsUhkd6jg==', N'povedamorajohnny@gmail.com', NULL, NULL, 1, 0, CAST(0x0000A1B901632474 AS DateTime), CAST(0x0000A1C5017933D1 AS DateTime), CAST(0x0000A1B901632474 AS DateTime), CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), 0, CAST(0xFFFF2FB300000000 AS DateTime), NULL)
-/****** Object:  Table [dbo].[Student]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Student]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3872,7 +3872,7 @@ INSERT [dbo].[Student] ([StudentID], [InsertDate], [InsertUserID], [ModifyDate],
 INSERT [dbo].[Student] ([StudentID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [UserID], [IdentificationTypeID], [FirstName], [LastName], [Gender], [DateOfBirth], [CountryID], [MaritalStatusTypeID], [Phone1], [Phone2], [Phone3], [IsAppUser]) VALUES (N'8878b2ef-c77a-4ba7-830c-ff41f3fefb8b', NULL, NULL, CAST(0x0000A17800000000 AS DateTime), N'09e4d1cd-a983-432a-80a9-2fc910e920d2', N'172.17.1.198', N'60488e1b-9b99-4ef5-8339-4340748067c5', N'f18e97f6-b298-4f23-8a97-17f0fe527e5f', N'OSCAR FERNANDO', N'CASTRO SANCHEZ', N'M', CAST(0x00004E3600000000 AS DateTime), N'f99afe4a-f84b-49f2-b88a-a64a71c85ed8', N'35e8dde8-9380-4d17-a30a-25ae2e0fb432', N'83900055', NULL, NULL, 0)
 INSERT [dbo].[Student] ([StudentID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [UserID], [IdentificationTypeID], [FirstName], [LastName], [Gender], [DateOfBirth], [CountryID], [MaritalStatusTypeID], [Phone1], [Phone2], [Phone3], [IsAppUser]) VALUES (N'b7e7cf12-aebb-42de-8839-ff759baf3d02', NULL, NULL, CAST(0x0000A17800000000 AS DateTime), N'09e4d1cd-a983-432a-80a9-2fc910e920d2', N'172.17.1.198', N'ea40bef2-f9f6-4f71-a375-7d4ea3f645e2', N'f18e97f6-b298-4f23-8a97-17f0fe527e5f', N'MIGUEL ANTONIO', N'SANCHEZ SOTO', N'M', CAST(0x0000508C00000000 AS DateTime), N'f99afe4a-f84b-49f2-b88a-a64a71c85ed8', N'35e8dde8-9380-4d17-a30a-25ae2e0fb432', N'83842499', NULL, NULL, 0)
 INSERT [dbo].[Student] ([StudentID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [UserID], [IdentificationTypeID], [FirstName], [LastName], [Gender], [DateOfBirth], [CountryID], [MaritalStatusTypeID], [Phone1], [Phone2], [Phone3], [IsAppUser]) VALUES (N'b7cd56b6-7648-483f-ac87-ffa061929474', NULL, NULL, CAST(0x0000A1A800000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', N'172.26.91.84', N'7e3ba470-786e-4427-9480-56fe231db464', N'f18e97f6-b298-4f23-8a97-17f0fe527e5f', N'RAFAEL ALBERTO', N'MARRERO MOLINA', N'M', CAST(0x000067C100000000 AS DateTime), N'f99afe4a-f84b-49f2-b88a-a64a71c85ed8', N'35e8dde8-9380-4d17-a30a-25ae2e0fb432', N'87321603', NULL, NULL, 0)
-/****** Object:  Table [dbo].[School]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[School]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3948,7 +3948,7 @@ INSERT [dbo].[School] ([SchoolID], [Name], [Description], [InsertDate], [InsertU
 INSERT [dbo].[School] ([SchoolID], [Name], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [Code], [AdminUserID]) VALUES (N'1580be3d-2d8b-418f-86d8-f9b387878660', N'Ambiental', N'Escuela de ingeniería ambiental.', CAST(0x0000A18500000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.17.7.10', N'47', NULL)
 INSERT [dbo].[School] ([SchoolID], [Name], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [Code], [AdminUserID]) VALUES (N'a35f4c02-ba83-46f7-91ef-f9bf8e45aad1', N'Biblioteca', N'Departamento de biblioteca - ITCR.', CAST(0x0000A18500000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.17.7.10', N'20', NULL)
 INSERT [dbo].[School] ([SchoolID], [Name], [Description], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [Code], [AdminUserID]) VALUES (N'd4d7176c-e8f4-43de-8309-fc65e9ef173e', N'Arquitectura', N'Escuela de ingeniería en arquitectura - ITCR.', CAST(0x0000A18500000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.17.7.10', N'33', NULL)
-/****** Object:  Table [dbo].[Profiles]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Profiles]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -3977,7 +3977,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Scheme]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Scheme]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4014,7 +4014,7 @@ INSERT [dbo].[Scheme] ([SchemeID], [Name], [Description], [OwnerUserId], [Coordi
 INSERT [dbo].[Scheme] ([SchemeID], [Name], [Description], [OwnerUserId], [CoordinatorUserId], [ModalityID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [SchoolID]) VALUES (N'a9283525-c52b-4446-ab7f-452b55184341', N'Técnico Asesor de Seguros del INS', N'Forma y capacita a asesores de seguros del INS', N'11ba13b7-7df8-437a-bdaf-fe0d065212b4', N'11ba13b7-7df8-437a-bdaf-fe0d065212b4', N'6deb6676-6399-4c7b-a5c1-bb082c4ac391', CAST(0x0000A17F00000000 AS DateTime), N'09e4d1cd-a983-432a-80a9-2fc910e920d2', NULL, NULL, N'172.26.94.204', N'da8f6158-d549-4e99-9a36-0e30fc09bcff')
 INSERT [dbo].[Scheme] ([SchemeID], [Name], [Description], [OwnerUserId], [CoordinatorUserId], [ModalityID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [SchoolID]) VALUES (N'0beb1482-4b9e-4d59-90ff-7625748ddc2f', N'Técnico en Administración de Empresas', N'Formando Líderes para el Desarrollo Empresarial', N'11ba13b7-7df8-437a-bdaf-fe0d065212b4', N'11ba13b7-7df8-437a-bdaf-fe0d065212b4', N'6deb6676-6399-4c7b-a5c1-bb082c4ac391', CAST(0x0000A19700000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168', N'43bf887e-19cf-45e4-8a1b-04c8aec7422b')
 INSERT [dbo].[Scheme] ([SchemeID], [Name], [Description], [OwnerUserId], [CoordinatorUserId], [ModalityID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [SchoolID]) VALUES (N'af9343aa-b8cf-4d19-9600-c21896e640aa', N'test', N'test', N'11ba13b7-7df8-437a-bdaf-fe0d065212b4', N'11ba13b7-7df8-437a-bdaf-fe0d065212b4', N'6deb6676-6399-4c7b-a5c1-bb082c4ac391', CAST(0x0000A17D00000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168', NULL)
-/****** Object:  Table [dbo].[EnrollmentStudent]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[EnrollmentStudent]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4628,7 +4628,7 @@ INSERT [dbo].[EnrollmentStudent] ([EnrollmentStudentID], [EnrollmentID], [Studen
 INSERT [dbo].[EnrollmentStudent] ([EnrollmentStudentID], [EnrollmentID], [StudentID], [PaymentNumber], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6a20bcd7-c905-43b4-9c1d-feca5c8531c9', N'4a4c8705-e004-4490-8472-692a9bffa242', N'3534b746-16c1-4b86-9f8d-69e2fc97860c', N'36815-2012', CAST(0x0000A1C400000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.233')
 INSERT [dbo].[EnrollmentStudent] ([EnrollmentStudentID], [EnrollmentID], [StudentID], [PaymentNumber], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'892e19fa-f8a6-44b4-a033-fedc38ee2717', N'50fcab3d-875d-40b7-a251-90e6e4e5e80c', N'fd8e1ec5-6e21-4004-a9d8-8eca28af6d92', N'74713183', CAST(0x0000A1D200000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.93.86')
 INSERT [dbo].[EnrollmentStudent] ([EnrollmentStudentID], [EnrollmentID], [StudentID], [PaymentNumber], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'362b4003-50eb-45e3-8b85-ff44801193d7', N'2937bf2b-8aaf-48a6-84ad-c6d6ed995f1d', N'f437850d-d200-4d3b-82c4-fc9db506bc36', N'74702787', CAST(0x0000A1A800000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.91.84')
-/****** Object:  View [dbo].[ApplicationUser]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  View [dbo].[ApplicationUser]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4665,7 +4665,7 @@ WHERE (c.IsAppUser is null OR c.IsAppUser = 1)
 
 '
 GO
-/****** Object:  Table [dbo].[Course]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[Course]    Script Date: 06/06/2013 19:07:09 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4728,7 +4728,7 @@ INSERT [dbo].[Course] ([CourseID], [Code], [Name], [TeachingHours], [Charge], [I
 INSERT [dbo].[Course] ([CourseID], [Code], [Name], [TeachingHours], [Charge], [IsActive], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [SchoolID], [ScoreCriteriaID]) VALUES (N'fa5710dc-9f86-40be-a2a6-eda89182b190', N'AE1012', N'Estrategia Empresarial', 28, 75000.0000, 1, CAST(0x0000A19A00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.80.134', N'43bf887e-19cf-45e4-8a1b-04c8aec7422b', NULL)
 INSERT [dbo].[Course] ([CourseID], [Code], [Name], [TeachingHours], [Charge], [IsActive], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [SchoolID], [ScoreCriteriaID]) VALUES (N'52d3fd48-fabd-4f07-a035-f5d04f91224c', N'AE1006', N'Mercadeo I', 28, 75000.0000, 1, CAST(0x0000A19A00000000 AS DateTime), N'7804d856-f49a-45c7-8940-e10eaf175073', NULL, NULL, N'172.26.81.135', N'43bf887e-19cf-45e4-8a1b-04c8aec7422b', NULL)
 INSERT [dbo].[Course] ([CourseID], [Code], [Name], [TeachingHours], [Charge], [IsActive], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [SchoolID], [ScoreCriteriaID]) VALUES (N'198a2444-a45e-4202-bcbe-fb1b39477269', N'AE1011', N'Análisis Administrativo', 28, 75000.0000, 1, CAST(0x0000A19A00000000 AS DateTime), N'7804d856-f49a-45c7-8940-e10eaf175073', NULL, NULL, N'172.26.81.135', N'43bf887e-19cf-45e4-8a1b-04c8aec7422b', NULL)
-/****** Object:  Table [dbo].[StudiesInformation]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  Table [dbo].[StudiesInformation]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4758,7 +4758,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[StudentPlan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[StudentPlan]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4785,7 +4785,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[StudentAdditionalData]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[StudentAdditionalData]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4820,7 +4820,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  StoredProcedure [dbo].[uspInsertStudent]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  StoredProcedure [dbo].[uspInsertStudent]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4874,7 +4874,7 @@ SELECT
 END' 
 END
 GO
-/****** Object:  Table [dbo].[Plan-Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[Plan-Course]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4935,7 +4935,7 @@ INSERT [dbo].[Plan-Course] ([PlanID], [CourseID], [InsertDate], [InsertUserID], 
 INSERT [dbo].[Plan-Course] ([PlanID], [CourseID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd53bcd0b-cd9e-4a1a-97eb-ca6c90f3fb7e', N'9c022ba3-64e9-4921-936d-bbb8b7057128', CAST(0x0000A18C00000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168')
 INSERT [dbo].[Plan-Course] ([PlanID], [CourseID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd53bcd0b-cd9e-4a1a-97eb-ca6c90f3fb7e', N'4d4d7b9a-d279-41fc-a699-dc693ad1490d', CAST(0x0000A18C00000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168')
 INSERT [dbo].[Plan-Course] ([PlanID], [CourseID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd53bcd0b-cd9e-4a1a-97eb-ca6c90f3fb7e', N'8aea151e-8e9c-4870-82a2-e8f711c53f93', CAST(0x0000A18C00000000 AS DateTime), N'22e466ed-5b35-4734-89e9-cc2b9ec3e55a', NULL, NULL, N'172.26.52.168')
-/****** Object:  Table [dbo].[Course-Requirement]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[Course-Requirement]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -4957,7 +4957,7 @@ END
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[EnrollmentCourse]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[EnrollmentCourse]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5367,7 +5367,7 @@ INSERT [dbo].[EnrollmentCourse] ([EnrollmentCourseID], [EnrollmentID], [CourseID
 INSERT [dbo].[EnrollmentCourse] ([EnrollmentCourseID], [EnrollmentID], [CourseID], [IsChecked], [HasGroups], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'7c65c0b9-f153-4aab-b12e-fe4703df5fe3', N'3e28e39c-0d09-4bf9-9382-4c5a9b845f4f', N'60bc2970-b709-4de3-bfbe-7701dafc0b86', 0, 0, CAST(0x0000A1CC00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.90.213')
 INSERT [dbo].[EnrollmentCourse] ([EnrollmentCourseID], [EnrollmentID], [CourseID], [IsChecked], [HasGroups], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'81a13bd2-8a64-40c7-a510-feb4b03dad34', N'961b0d23-1937-4244-8794-b1552f793ee4', N'9e10143f-3e83-4288-86f5-9daa3361d0ac', 0, 0, CAST(0x0000A1A400000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.83.226')
 INSERT [dbo].[EnrollmentCourse] ([EnrollmentCourseID], [EnrollmentID], [CourseID], [IsChecked], [HasGroups], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'8891b518-59d7-4694-a92b-ffa286f071c0', N'be5394a5-1c47-4b35-ad8b-a1c63ffcec26', N'60bc2970-b709-4de3-bfbe-7701dafc0b86', 0, 0, CAST(0x0000A1A200000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.90.30')
-/****** Object:  Table [dbo].[Scheme-Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[Scheme-Plan]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5399,7 +5399,7 @@ INSERT [dbo].[Scheme-Plan] ([SchemeID], [PlanID], [InsertDate], [InsertUserID], 
 INSERT [dbo].[Scheme-Plan] ([SchemeID], [PlanID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'a9283525-c52b-4446-ab7f-452b55184341', N'd53bcd0b-cd9e-4a1a-97eb-ca6c90f3fb7e', CAST(0x0000A17F00000000 AS DateTime), N'09e4d1cd-a983-432a-80a9-2fc910e920d2', NULL, NULL, N'172.26.94.204')
 INSERT [dbo].[Scheme-Plan] ([SchemeID], [PlanID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'0beb1482-4b9e-4d59-90ff-7625748ddc2f', N'a5beeeb0-22ff-43ae-b695-2174456633a6', CAST(0x0000A19A00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.80.134')
 INSERT [dbo].[Scheme-Plan] ([SchemeID], [PlanID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'0beb1482-4b9e-4d59-90ff-7625748ddc2f', N'2be8879e-f16d-4e6d-a828-392e7032aa67', CAST(0x0000A19A00000000 AS DateTime), N'3096d7b8-f414-4100-896b-704dcae0e617', NULL, NULL, N'172.26.80.100')
-/****** Object:  View [dbo].[SchemeDetails]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  View [dbo].[SchemeDetails]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5428,7 +5428,7 @@ LEFT JOIN Users u2 ON u2.UserId= s.CoordinatorUserId
 LEFT JOIN School sc ON sc.SchoolID = s.SchoolID  
 --- Add primary key to table school - scheme  '
 GO
-/****** Object:  View [dbo].[PlanDetails]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  View [dbo].[PlanDetails]    Script Date: 06/06/2013 19:07:10 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5450,7 +5450,7 @@ INNER JOIN Scheme s ON s.SchemeID = sp.SchemeID
 WHERE isActive = 1
 '
 GO
-/****** Object:  Table [dbo].[EnrollmentGroups]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  Table [dbo].[EnrollmentGroups]    Script Date: 06/06/2013 19:07:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5530,7 +5530,7 @@ INSERT [dbo].[EnrollmentGroups] ([EnrollmentGroupID], [EnrollmentCourseID], [Gro
 INSERT [dbo].[EnrollmentGroups] ([EnrollmentGroupID], [EnrollmentCourseID], [GroupName], [ProfessorID], [Quota], [ExtraQuota], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'97a84d3e-4e7e-4640-ae0b-f9a6b1592a6d', N'3846ce25-6c25-46e1-9481-d90f35b65dc9', N'GRUPO 1', N'5f6ad71b-c78e-43f8-b453-5590070ff1a9', 0, NULL, CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
 INSERT [dbo].[EnrollmentGroups] ([EnrollmentGroupID], [EnrollmentCourseID], [GroupName], [ProfessorID], [Quota], [ExtraQuota], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'4e769312-0bed-4c2a-93cd-fe5fb8977fff', N'7cf70ce2-cab1-4e78-ba81-68bd759b2a64', N'Grupo 40', N'49e79030-6d90-4f2f-b0ad-66dea1777c55', 0, NULL, CAST(0x0000A1A200000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.90.30')
 INSERT [dbo].[EnrollmentGroups] ([EnrollmentGroupID], [EnrollmentCourseID], [GroupName], [ProfessorID], [Quota], [ExtraQuota], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'247f8885-fe16-4dee-8b0b-fed8a167f9f7', N'27049e82-3b5f-4f83-b571-0edab5db7df0', N'GRUPO 3', N'ee8baca6-5b0c-4353-8106-fffcf976d4aa', 0, NULL, CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
-/****** Object:  Table [dbo].[EnrollmentGroupSchedule]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[EnrollmentGroupSchedule]    Script Date: 06/06/2013 19:07:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -5631,7 +5631,7 @@ INSERT [dbo].[EnrollmentGroupSchedule] ([EnrollmentGroupScheduleID], [Enrollment
 INSERT [dbo].[EnrollmentGroupSchedule] ([EnrollmentGroupScheduleID], [EnrollmentGroupID], [ClassroomID], [DayOfWeek], [StartTime], [EndTime], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'65df4f64-a233-4cbe-b65a-f3c2c7818df2', N'71afe7bc-db0d-4375-8588-a3b16e318f48', N'bd5befd2-e552-4a1f-a2bf-9c219541d2f6', N'K', N'13:00', N'17:00', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
 INSERT [dbo].[EnrollmentGroupSchedule] ([EnrollmentGroupScheduleID], [EnrollmentGroupID], [ClassroomID], [DayOfWeek], [StartTime], [EndTime], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'a1aad61f-55b6-45ca-a227-fda30a602fb3', N'366ec5d0-8096-407a-b5e0-46aaa2e5bf41', N'0cd4e00f-aad9-4fb3-b412-35da24c9c16d', N'K', N'17:00', N'21:00', CAST(0x0000A1A800000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.91.84')
 INSERT [dbo].[EnrollmentGroupSchedule] ([EnrollmentGroupScheduleID], [EnrollmentGroupID], [ClassroomID], [DayOfWeek], [StartTime], [EndTime], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'5fbd5d26-bc58-44c3-bab2-ffc1a7f838ec', N'd6cfb416-f56c-4961-a1fc-789f74766d5b', N'47b08ee2-5c11-4b39-9c05-9a3c69335a26', N'V', N'18:30', N'21:30', CAST(0x0000A1CC00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.90.213')
-/****** Object:  Table [dbo].[Score]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[Score]    Script Date: 06/06/2013 19:07:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -6724,7 +6724,7 @@ INSERT [dbo].[Score] ([ScoreID], [CourseID], [StudentID], [Result], [RecordResul
 INSERT [dbo].[Score] ([ScoreID], [CourseID], [StudentID], [Result], [RecordResult], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [EnrollmentGroupID], [isApproved]) VALUES (N'bb6651d4-5797-4f94-abe6-ff6864f7b179', N'cc7db2e7-49fb-4ee9-81a1-19705845537b', N'6de465cb-6f8b-4e87-bc35-6fb611bb0f47', N'95', N'95', NULL, NULL, CAST(0x0000A1C500000000 AS DateTime), N'2435a5a2-7ce2-453f-993e-555f19e7b0da', N'172.26.81.74', N'aa642ade-00d3-4921-92b2-e25e2dd404b5', NULL)
 INSERT [dbo].[Score] ([ScoreID], [CourseID], [StudentID], [Result], [RecordResult], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [EnrollmentGroupID], [isApproved]) VALUES (N'aa6d9a87-d883-4a3a-83b9-ff8c48a542cf', N'cc7db2e7-49fb-4ee9-81a1-19705845537b', N'58f43a41-c83a-417a-a77a-bd17ed3ec343', N'100', N'100', NULL, NULL, CAST(0x0000A1C700000000 AS DateTime), N'5df72dbb-66a9-4c31-86f0-5df4a46a744d', N'172.26.91.35', N'a850e6cf-9e3b-474a-855e-e81b1d58f934', NULL)
 INSERT [dbo].[Score] ([ScoreID], [CourseID], [StudentID], [Result], [RecordResult], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress], [EnrollmentGroupID], [isApproved]) VALUES (N'02a09dda-4daa-42ca-a940-ffe6600f5c7a', N'20be1a4a-ed96-4d0b-a692-7f15dee8979b', N'156419e9-391e-4ff9-8fc0-eb759c8b1605', NULL, NULL, CAST(0x0000A1D200000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.93.86', N'1ed79d2e-00a5-4c78-b079-eb0a06653a84', NULL)
-/****** Object:  Table [dbo].[EnrollmentStudentCourse]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[EnrollmentStudentCourse]    Script Date: 06/06/2013 19:07:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7141,7 +7141,6 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'994756d5-8304-4d6a-9556-6ee5035fba1f', N'bcabd5c6-2711-43b4-9306-c70954981e7a', N'ad71ef7d-6597-4051-bd3f-cea99b139328', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6b4de9d3-7846-495f-820f-6f6019be2e73', N'b4a9b338-1cab-4429-a35e-88e23954a21e', N'bb4d5378-e518-49b8-a4bb-7a5f5aeccee5', CAST(0x0000A1A400000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.83.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'9f8f81a7-ac03-4bda-b8ff-6fe0bc166bcf', N'6de465cb-6f8b-4e87-bc35-6fb611bb0f47', N'15d08532-b732-4485-b3c9-3c1331c36134', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
-INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'e361c3a4-fe7a-406f-b4cd-6fe0f305097d', N'5c082bac-efc7-4cd3-a768-18855ed24546', N'0be8b6f5-df9c-44f6-a8ce-f2dbc954ce08', CAST(0x0000A1B800000000 AS DateTime), N'04622c29-cc0f-4876-9f0c-70266450200f', NULL, NULL, N'172.26.83.75')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'3c95c16e-4338-47fb-9697-6fe56690e7bc', N'fabc4436-6147-4f06-a31e-e9e7cf9dc691', N'fd3fb55e-2a4f-4c78-bc5b-7018c1879ed4', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'5775be26-7b74-4612-a533-70cbd9dd94d7', N'086f73ff-790c-409c-a9b7-d751052711a1', N'2cab5659-57ac-4e97-afc2-073ac009c332', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'c557673f-314e-4246-a40d-7254a7eba0a5', N'e71bcc8b-7d27-46f6-85ab-18572f6f7b18', N'22286d56-83ba-4e96-a7eb-2518f25ef0c3', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
@@ -7161,9 +7160,9 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'a3f8f7dc-7b3f-4e8f-9087-75a0e9cb472b', N'd8d94f65-bd57-4ff4-9b6b-95eecec1c1e1', N'dd33a164-93e8-4a26-b1b4-b1381a98f736', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'9eede8a6-eaa1-4654-b166-75f4da5ccb8e', N'b108c18a-deaa-40b3-9a2e-5fd1956a42b4', N'aa642ade-00d3-4921-92b2-e25e2dd404b5', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'9c83fc13-4390-4e82-9444-76100f059f68', N'a8b6b34e-62aa-43f5-b899-e57bac716437', N'366ec5d0-8096-407a-b5e0-46aaa2e5bf41', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
+INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'33ea0f7d-abf6-45dd-89cb-764c98addf3c', N'018fdae4-a45e-480f-857d-86575124a949', N'fd3fb55e-2a4f-4c78-bc5b-7018c1879ed4', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 GO
 print 'Processed 400 total records'
-INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'33ea0f7d-abf6-45dd-89cb-764c98addf3c', N'018fdae4-a45e-480f-857d-86575124a949', N'fd3fb55e-2a4f-4c78-bc5b-7018c1879ed4', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd59dcf84-27f3-4e17-99b6-768b17d85704', N'bbd42aa7-6ac4-4d91-9eff-56ec15323b11', N'aa642ade-00d3-4921-92b2-e25e2dd404b5', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'a0d74757-b24e-412b-ad83-76aac674219c', N'655522a6-633a-417e-a19a-e00a142829e8', N'760fca23-6bdb-4c51-a973-c34e8f567a1a', CAST(0x0000A1B800000000 AS DateTime), N'04622c29-cc0f-4876-9f0c-70266450200f', NULL, NULL, N'172.26.83.75')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'c86429ae-076a-48bf-8fa8-77d293315383', N'2a90b094-2b43-4ef1-838e-7e44883235bf', N'd6cfb416-f56c-4961-a1fc-789f74766d5b', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
@@ -7264,9 +7263,9 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'58460cb4-c9ef-4fcf-864a-90aacebcf73e', N'a79c353f-6958-4a13-bf85-48a9a666e848', N'02e89041-aa90-4c5b-8202-626d9fc7b68f', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'8b86087b-b7d5-40f6-b0d6-90ca85317ca4', N'cf578dcd-1cd8-44fb-8d95-38eeca5fd134', N'10e95ea9-6bf3-4ea1-9663-8ec4a88ef5f9', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'b4fc6d68-e6ed-4375-9d3c-90ee96ea4bb0', N'd68334ff-c224-4afe-915e-a7ebc25254b5', N'366ec5d0-8096-407a-b5e0-46aaa2e5bf41', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
+INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6b6ed259-171d-430b-bfec-91463a667c94', N'dc08085d-00f0-4a49-85a7-bda3827d57cc', N'97a84d3e-4e7e-4640-ae0b-f9a6b1592a6d', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
 GO
 print 'Processed 500 total records'
-INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6b6ed259-171d-430b-bfec-91463a667c94', N'dc08085d-00f0-4a49-85a7-bda3827d57cc', N'97a84d3e-4e7e-4640-ae0b-f9a6b1592a6d', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'810842b2-9075-4e9b-95df-91e3579e3fa6', N'9fe5609a-1e64-4edd-bbaa-bbee38e5d963', N'6f8e73e4-d2a5-4fdf-8989-630c9908bfb4', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6c1fba3b-8fb1-499a-a6dd-920904d72c5a', N'e5d5238b-511f-4340-8fe3-0a8d76c3becd', N'583024d1-fb19-4037-bdf3-1d3f7c139e75', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'57b9ce60-7ce4-4a9c-8d67-924e341ba1c9', N'1ac182b8-6537-4438-b908-f7a253d41694', N'dd33a164-93e8-4a26-b1b4-b1381a98f736', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
@@ -7367,9 +7366,9 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'1e43fba6-f915-47f7-9585-af08d7551b66', N'7ed399a5-f630-4f06-aebc-a18f669134f9', N'cf6553e4-c6db-438d-9cd1-6250f485af6a', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6050eea3-3299-47a0-8db8-af10c6ee6c54', N'9d2cdf59-f032-4e2b-8137-cb0262323131', N'247f8885-fe16-4dee-8b0b-fed8a167f9f7', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'cfe0788f-9f82-46cd-a7e8-afb1b5017483', N'4e50116b-c52a-4ba4-98ef-1b086d93ffd5', N'71afe7bc-db0d-4375-8588-a3b16e318f48', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
+INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'4a55208e-6514-4899-95aa-afccc2ea2d3f', N'c2fa24dd-3565-4914-85f0-042e3f645c56', N'fe660e3f-741c-42dc-80fd-f4205fcd34e2', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 GO
 print 'Processed 600 total records'
-INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'4a55208e-6514-4899-95aa-afccc2ea2d3f', N'c2fa24dd-3565-4914-85f0-042e3f645c56', N'fe660e3f-741c-42dc-80fd-f4205fcd34e2', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'9ad8791e-0f67-4cfb-9029-affcda8b9fed', N'36080075-2f89-4c02-bb5e-71e8e4c9f53a', N'22286d56-83ba-4e96-a7eb-2518f25ef0c3', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd9e7fe0c-d92e-43b6-a781-b23210d405a4', N'845c1ad8-c536-4584-9b06-8cb23a1629cb', N'dd33a164-93e8-4a26-b1b4-b1381a98f736', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'3eb8d2dd-e0bf-4070-8aed-b2817005cc08', N'31284dbd-e162-45a1-96d0-ddb6fb7fefa9', N'583024d1-fb19-4037-bdf3-1d3f7c139e75', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
@@ -7397,6 +7396,7 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'e17159b7-8d21-46d9-a912-b80f70188687', N'74f1bb3f-8ec9-438c-8af7-b6c03698de20', N'3d8f09a5-f630-4f1e-9fac-df345e3a300c', CAST(0x0000A1A800000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.91.84')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd9730c4b-9c43-4147-9170-b8c980aaf620', N'2a038970-a3e4-47d3-a3d4-332d0f84dbd5', N'b9655080-fa17-43fa-a7d2-ed8590370d8c', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'd02f3d40-b5b5-4da1-996d-b8e368344b70', N'7b0ce887-f884-4b43-b55d-82d6ff350bca', N'760fca23-6bdb-4c51-a973-c34e8f567a1a', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
+INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'06e0d30e-93b4-4109-8a4b-b8e5b204b15d', N'5c082bac-efc7-4cd3-a768-18855ed24546', N'd6cfb416-f56c-4961-a1fc-789f74766d5b', CAST(0x0000A1D500000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.93.135')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'9baf6ecf-b24e-481d-8cda-b8fbf6eb17a8', N'e38ff246-0523-4e22-89ec-87c3bdb3dfa4', N'3d8f09a5-f630-4f1e-9fac-df345e3a300c', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'69378e1c-6cd2-41c8-8dc7-b99d495480a1', N'b14a2678-bbec-4ee5-8b6d-a057a65b4875', N'71afe7bc-db0d-4375-8588-a3b16e318f48', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'7364dee8-b515-4337-9ccd-b9b5f89ab0c8', N'ffde5017-0b70-4b34-8543-26d0e47cd975', N'c2e08d1a-f765-4a5b-8196-754de2eee500', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
@@ -7605,7 +7605,6 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'3e45757d-c4c7-4676-89c3-ebc08d9449f0', N'862acc12-627d-4cf9-b81b-68ff6260fe6f', N'c2e08d1a-f765-4a5b-8196-754de2eee500', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'913a6831-58cd-44a2-9d81-ec2312433a50', N'a86eaae3-8623-43f2-9d9a-1ea3ff86c55e', N'3d8f09a5-f630-4f1e-9fac-df345e3a300c', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'3b4bcd76-81fd-4464-9cf8-ec36f85f6397', N'731d502f-d39c-4403-aba1-0dc808d5c492', N'dd33a164-93e8-4a26-b1b4-b1381a98f736', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
-INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'807ee76f-849e-4070-8c89-ec497c9995cf', N'5c082bac-efc7-4cd3-a768-18855ed24546', N'366ec5d0-8096-407a-b5e0-46aaa2e5bf41', CAST(0x0000A1B800000000 AS DateTime), N'04622c29-cc0f-4876-9f0c-70266450200f', NULL, NULL, N'172.26.83.75')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'f20b6049-1027-4448-a5bb-ec7daa51597a', N'18bd6365-24c9-4664-abc1-4d250c8ee5d5', N'c2e08d1a-f765-4a5b-8196-754de2eee500', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'13ca4652-ff5f-4d19-8cc8-ec9e67921213', N'8413b330-279a-4acd-84d5-32202583a288', N'fd3fb55e-2a4f-4c78-bc5b-7018c1879ed4', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'5b0558d8-37ec-4304-9e0c-ecae416ccd69', N'759b1812-ad97-4485-84f7-26633de5b3ed', N'cf6553e4-c6db-438d-9cd1-6250f485af6a', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
@@ -7667,7 +7666,7 @@ INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID]
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'2747d5bb-a8e1-4d4a-86fc-ff74fb534aa1', N'3d91c68c-b0b4-4c7c-af5c-5d2e145a3662', N'd50df1a3-d2b3-431d-b916-e5c23d8ceaa6', CAST(0x0000A1BD00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.95.118')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6b719275-5e5f-4695-93d4-ff7b990de8aa', N'259f2171-df56-4b2e-a82a-1a9475da6dd8', N'c4859e79-3ee0-4330-ab35-ecb8f1c04b42', CAST(0x0000A1CF00000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.89.143')
 INSERT [dbo].[EnrollmentStudentCourse] ([EnrollmentStudentCourseID], [StudentID], [EnrollmentGroupID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'147e4e61-0246-4e65-9eaf-ffecf7a76930', N'8a20d972-4d9b-4b32-aa9a-e47beec0ba1b', N'02e89041-aa90-4c5b-8202-626d9fc7b68f', CAST(0x0000A1B900000000 AS DateTime), N'c8f318ea-34f0-4260-ba62-8f2e92949939', NULL, NULL, N'172.26.87.226')
-/****** Object:  Table [dbo].[Record]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  Table [dbo].[Record]    Script Date: 06/06/2013 19:07:11 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -7810,7 +7809,7 @@ INSERT [dbo].[Record] ([RecordID], [ScoreID], [InsertDate], [InsertUserID], [Mod
 INSERT [dbo].[Record] ([RecordID], [ScoreID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'a11ee0e2-80c6-4b88-b433-f9fd24ead764', N'31fad893-edaf-48a8-be0b-e4d6175deb61', CAST(0x0000A1A900000000 AS DateTime), N'9a71a686-e1c7-412c-a677-bf5a131e244d', NULL, NULL, N'172.26.81.223')
 INSERT [dbo].[Record] ([RecordID], [ScoreID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'1dd63237-3d0c-4bd1-843a-fcf16d462a2c', N'c0f4b6d9-dfb4-4ee8-8746-4b1c162e56b2', CAST(0x0000A1A800000000 AS DateTime), N'49e79030-6d90-4f2f-b0ad-66dea1777c55', NULL, NULL, N'172.26.91.84')
 INSERT [dbo].[Record] ([RecordID], [ScoreID], [InsertDate], [InsertUserID], [ModifyDate], [ModifyUserID], [IpAddress]) VALUES (N'6a14a715-02de-425d-80b0-feb4c10d956d', N'b5ca3470-093f-46d5-a8ab-f2bc76c568d1', CAST(0x0000A1C500000000 AS DateTime), N'2435a5a2-7ce2-453f-993e-555f19e7b0da', NULL, NULL, N'172.26.81.74')
-/****** Object:  ForeignKey [RoleApplication]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [RoleApplication]    Script Date: 06/06/2013 19:07:03 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[RoleApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Roles]'))
 ALTER TABLE [dbo].[Roles]  WITH CHECK ADD  CONSTRAINT [RoleApplication] FOREIGN KEY([ApplicationId])
 REFERENCES [dbo].[Applications] ([ApplicationId])
@@ -7818,7 +7817,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[RoleApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Roles]'))
 ALTER TABLE [dbo].[Roles] CHECK CONSTRAINT [RoleApplication]
 GO
-/****** Object:  ForeignKey [FK_ScoreCriteria_Type]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [FK_ScoreCriteria_Type]    Script Date: 06/06/2013 19:07:03 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[ScoreCriteria]'))
 ALTER TABLE [dbo].[ScoreCriteria]  WITH CHECK ADD  CONSTRAINT [FK_ScoreCriteria_Type] FOREIGN KEY([TypeID])
 REFERENCES [dbo].[Type] ([TypeID])
@@ -7826,7 +7825,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[ScoreCriteria]'))
 ALTER TABLE [dbo].[ScoreCriteria] CHECK CONSTRAINT [FK_ScoreCriteria_Type]
 GO
-/****** Object:  ForeignKey [FK_Enrollment_Location]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [FK_Enrollment_Location]    Script Date: 06/06/2013 19:07:03 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Location]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment]  WITH CHECK ADD  CONSTRAINT [FK_Enrollment_Location] FOREIGN KEY([LocationID])
 REFERENCES [dbo].[Location] ([LocationID])
@@ -7834,7 +7833,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Location]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment] CHECK CONSTRAINT [FK_Enrollment_Location]
 GO
-/****** Object:  ForeignKey [FK_Enrollment_Plan]    Script Date: 06/05/2013 19:58:07 ******/
+/****** Object:  ForeignKey [FK_Enrollment_Plan]    Script Date: 06/06/2013 19:07:03 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment]  WITH CHECK ADD  CONSTRAINT [FK_Enrollment_Plan] FOREIGN KEY([PlanID])
 REFERENCES [dbo].[Plan] ([PlanID])
@@ -7842,7 +7841,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Enrollment_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Enrollment]'))
 ALTER TABLE [dbo].[Enrollment] CHECK CONSTRAINT [FK_Enrollment_Plan]
 GO
-/****** Object:  ForeignKey [UserApplication]    Script Date: 06/05/2013 19:58:08 ******/
+/****** Object:  ForeignKey [UserApplication]    Script Date: 06/06/2013 19:07:03 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Users]'))
 ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [UserApplication] FOREIGN KEY([ApplicationId])
 REFERENCES [dbo].[Applications] ([ApplicationId])
@@ -7850,7 +7849,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Users]'))
 ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [UserApplication]
 GO
-/****** Object:  ForeignKey [UsersInRoleRole]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  ForeignKey [UsersInRoleRole]    Script Date: 06/06/2013 19:07:05 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleRole]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles]  WITH CHECK ADD  CONSTRAINT [UsersInRoleRole] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([RoleId])
@@ -7858,7 +7857,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleRole]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles] CHECK CONSTRAINT [UsersInRoleRole]
 GO
-/****** Object:  ForeignKey [UsersInRoleUser]    Script Date: 06/05/2013 19:58:09 ******/
+/****** Object:  ForeignKey [UsersInRoleUser]    Script Date: 06/06/2013 19:07:05 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleUser]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles]  WITH CHECK ADD  CONSTRAINT [UsersInRoleUser] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7866,7 +7865,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UsersInRoleUser]') AND parent_object_id = OBJECT_ID(N'[dbo].[UsersInRoles]'))
 ALTER TABLE [dbo].[UsersInRoles] CHECK CONSTRAINT [UsersInRoleUser]
 GO
-/****** Object:  ForeignKey [MembershipApplication]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  ForeignKey [MembershipApplication]    Script Date: 06/06/2013 19:07:08 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships]  WITH CHECK ADD  CONSTRAINT [MembershipApplication] FOREIGN KEY([ApplicationId])
 REFERENCES [dbo].[Applications] ([ApplicationId])
@@ -7874,7 +7873,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipApplication]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships] CHECK CONSTRAINT [MembershipApplication]
 GO
-/****** Object:  ForeignKey [MembershipUser]    Script Date: 06/05/2013 19:58:12 ******/
+/****** Object:  ForeignKey [MembershipUser]    Script Date: 06/06/2013 19:07:08 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipUser]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships]  WITH CHECK ADD  CONSTRAINT [MembershipUser] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7882,7 +7881,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[MembershipUser]') AND parent_object_id = OBJECT_ID(N'[dbo].[Memberships]'))
 ALTER TABLE [dbo].[Memberships] CHECK CONSTRAINT [MembershipUser]
 GO
-/****** Object:  ForeignKey [FK_Student_Country]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Country]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Country]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Country] FOREIGN KEY([CountryID])
 REFERENCES [dbo].[Country] ([CountryID])
@@ -7890,7 +7889,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Country]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Country]
 GO
-/****** Object:  ForeignKey [FK_Student_Type]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Type]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Type] FOREIGN KEY([IdentificationTypeID])
 REFERENCES [dbo].[Type] ([TypeID])
@@ -7898,7 +7897,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Type]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Type]
 GO
-/****** Object:  ForeignKey [FK_Student_Type_MaritalStatus]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Type_MaritalStatus]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Type_MaritalStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Type_MaritalStatus] FOREIGN KEY([MaritalStatusTypeID])
 REFERENCES [dbo].[Type] ([TypeID])
@@ -7906,7 +7905,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Type_MaritalStatus]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Type_MaritalStatus]
 GO
-/****** Object:  ForeignKey [FK_Student_Users]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Student_Users]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_Student_Users] FOREIGN KEY([UserID])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7914,7 +7913,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Student_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[Student]'))
 ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_Student_Users]
 GO
-/****** Object:  ForeignKey [FK_School_Users]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_School_Users]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_School_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[School]'))
 ALTER TABLE [dbo].[School]  WITH CHECK ADD  CONSTRAINT [FK_School_Users] FOREIGN KEY([AdminUserID])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7922,7 +7921,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_School_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[School]'))
 ALTER TABLE [dbo].[School] CHECK CONSTRAINT [FK_School_Users]
 GO
-/****** Object:  ForeignKey [UserProfile]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [UserProfile]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserProfile]') AND parent_object_id = OBJECT_ID(N'[dbo].[Profiles]'))
 ALTER TABLE [dbo].[Profiles]  WITH CHECK ADD  CONSTRAINT [UserProfile] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7930,7 +7929,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[UserProfile]') AND parent_object_id = OBJECT_ID(N'[dbo].[Profiles]'))
 ALTER TABLE [dbo].[Profiles] CHECK CONSTRAINT [UserProfile]
 GO
-/****** Object:  ForeignKey [FK_Scheme_CooUsers]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_CooUsers]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_CooUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme]  WITH NOCHECK ADD  CONSTRAINT [FK_Scheme_CooUsers] FOREIGN KEY([CoordinatorUserId])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7938,7 +7937,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_CooUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] CHECK CONSTRAINT [FK_Scheme_CooUsers]
 GO
-/****** Object:  ForeignKey [FK_Scheme_Modality]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_Modality]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_Modality]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme]  WITH CHECK ADD  CONSTRAINT [FK_Scheme_Modality] FOREIGN KEY([ModalityID])
 REFERENCES [dbo].[Modality] ([ModalityID])
@@ -7946,7 +7945,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_Modality]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] CHECK CONSTRAINT [FK_Scheme_Modality]
 GO
-/****** Object:  ForeignKey [FK_Scheme_OwUsers]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_OwUsers]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_OwUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme]  WITH NOCHECK ADD  CONSTRAINT [FK_Scheme_OwUsers] FOREIGN KEY([OwnerUserId])
 REFERENCES [dbo].[Users] ([UserId])
@@ -7954,7 +7953,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_OwUsers]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] CHECK CONSTRAINT [FK_Scheme_OwUsers]
 GO
-/****** Object:  ForeignKey [FK_Scheme_School]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Scheme_School]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme]  WITH CHECK ADD  CONSTRAINT [FK_Scheme_School] FOREIGN KEY([SchoolID])
 REFERENCES [dbo].[School] ([SchoolID])
@@ -7962,7 +7961,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme]'))
 ALTER TABLE [dbo].[Scheme] CHECK CONSTRAINT [FK_Scheme_School]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudent_Enrollment]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudent_Enrollment]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentStudent_Enrollment] FOREIGN KEY([EnrollmentID])
 REFERENCES [dbo].[Enrollment] ([EnrollmentID])
@@ -7970,7 +7969,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent] CHECK CONSTRAINT [FK_EnrollmentStudent_Enrollment]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudent_Student]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudent_Student]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentStudent_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] ([StudentID])
@@ -7978,7 +7977,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudent_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudent]'))
 ALTER TABLE [dbo].[EnrollmentStudent] CHECK CONSTRAINT [FK_EnrollmentStudent_Student]
 GO
-/****** Object:  ForeignKey [FK_Course_School]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_Course_School]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course]  WITH CHECK ADD  CONSTRAINT [FK_Course_School] FOREIGN KEY([SchoolID])
 REFERENCES [dbo].[School] ([SchoolID])
@@ -7986,7 +7985,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course_School]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course] CHECK CONSTRAINT [FK_Course_School]
 GO
-/****** Object:  ForeignKey [FK_ScoreCriteria_Course]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_ScoreCriteria_Course]    Script Date: 06/06/2013 19:07:09 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course]  WITH CHECK ADD  CONSTRAINT [FK_ScoreCriteria_Course] FOREIGN KEY([ScoreCriteriaID])
 REFERENCES [dbo].[ScoreCriteria] ([ScoreCriteriaID])
@@ -7994,7 +7993,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_ScoreCriteria_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course]'))
 ALTER TABLE [dbo].[Course] CHECK CONSTRAINT [FK_ScoreCriteria_Course]
 GO
-/****** Object:  ForeignKey [FK_StudiesInformation_Student]    Script Date: 06/05/2013 19:58:13 ******/
+/****** Object:  ForeignKey [FK_StudiesInformation_Student]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudiesInformation_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudiesInformation]'))
 ALTER TABLE [dbo].[StudiesInformation]  WITH CHECK ADD  CONSTRAINT [FK_StudiesInformation_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] ([StudentID])
@@ -8002,7 +8001,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudiesInformation_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudiesInformation]'))
 ALTER TABLE [dbo].[StudiesInformation] CHECK CONSTRAINT [FK_StudiesInformation_Student]
 GO
-/****** Object:  ForeignKey [FK_StudentPlan_Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentPlan_Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan]  WITH CHECK ADD  CONSTRAINT [FK_StudentPlan_Plan] FOREIGN KEY([PlanID])
 REFERENCES [dbo].[Plan] ([PlanID])
@@ -8010,7 +8009,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan] CHECK CONSTRAINT [FK_StudentPlan_Plan]
 GO
-/****** Object:  ForeignKey [FK_StudentPlan_Student]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentPlan_Student]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan]  WITH CHECK ADD  CONSTRAINT [FK_StudentPlan_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] ([StudentID])
@@ -8018,7 +8017,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentPlan_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentPlan]'))
 ALTER TABLE [dbo].[StudentPlan] CHECK CONSTRAINT [FK_StudentPlan_Student]
 GO
-/****** Object:  ForeignKey [FK_StudentAdditionalData_Student]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentAdditionalData_Student]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData]  WITH CHECK ADD  CONSTRAINT [FK_StudentAdditionalData_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] ([StudentID])
@@ -8026,7 +8025,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] CHECK CONSTRAINT [FK_StudentAdditionalData_Student]
 GO
-/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_HowYouKnow]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_HowYouKnow]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Type_HowYouKnow]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData]  WITH CHECK ADD  CONSTRAINT [FK_StudentAdditionalData_Type_HowYouKnow] FOREIGN KEY([HowYouKnowAboutUsTypeID])
 REFERENCES [dbo].[Type] ([TypeID])
@@ -8034,7 +8033,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Type_HowYouKnow]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] CHECK CONSTRAINT [FK_StudentAdditionalData_Type_HowYouKnow]
 GO
-/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_WhoPays]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_StudentAdditionalData_Type_WhoPays]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Type_WhoPays]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData]  WITH CHECK ADD  CONSTRAINT [FK_StudentAdditionalData_Type_WhoPays] FOREIGN KEY([WhoPaysYourStudiesTypeID])
 REFERENCES [dbo].[Type] ([TypeID])
@@ -8042,7 +8041,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_StudentAdditionalData_Type_WhoPays]') AND parent_object_id = OBJECT_ID(N'[dbo].[StudentAdditionalData]'))
 ALTER TABLE [dbo].[StudentAdditionalData] CHECK CONSTRAINT [FK_StudentAdditionalData_Type_WhoPays]
 GO
-/****** Object:  ForeignKey [FK_Plan-Course_Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Plan-Course_Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course]  WITH CHECK ADD  CONSTRAINT [FK_Plan-Course_Course] FOREIGN KEY([CourseID])
 REFERENCES [dbo].[Course] ([CourseID])
@@ -8050,7 +8049,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course] CHECK CONSTRAINT [FK_Plan-Course_Course]
 GO
-/****** Object:  ForeignKey [FK_Plan-Course_Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Plan-Course_Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course]  WITH CHECK ADD  CONSTRAINT [FK_Plan-Course_Plan] FOREIGN KEY([PlanID])
 REFERENCES [dbo].[Plan] ([PlanID])
@@ -8058,7 +8057,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Plan-Course_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Plan-Course]'))
 ALTER TABLE [dbo].[Plan-Course] CHECK CONSTRAINT [FK_Plan-Course_Plan]
 GO
-/****** Object:  ForeignKey [FK_Course-Requirement_Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Course-Requirement_Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement]  WITH CHECK ADD  CONSTRAINT [FK_Course-Requirement_Course] FOREIGN KEY([CourseID])
 REFERENCES [dbo].[Course] ([CourseID])
@@ -8066,7 +8065,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement] CHECK CONSTRAINT [FK_Course-Requirement_Course]
 GO
-/****** Object:  ForeignKey [FK_Course-Requirement_Requirement]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Course-Requirement_Requirement]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Requirement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement]  WITH CHECK ADD  CONSTRAINT [FK_Course-Requirement_Requirement] FOREIGN KEY([RequirementID])
 REFERENCES [dbo].[Requirement] ([RequirementID])
@@ -8074,7 +8073,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Course-Requirement_Requirement]') AND parent_object_id = OBJECT_ID(N'[dbo].[Course-Requirement]'))
 ALTER TABLE [dbo].[Course-Requirement] CHECK CONSTRAINT [FK_Course-Requirement_Requirement]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentCourse_Course]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentCourse_Course]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentCourse_Course] FOREIGN KEY([CourseID])
 REFERENCES [dbo].[Course] ([CourseID])
@@ -8082,7 +8081,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse] CHECK CONSTRAINT [FK_EnrollmentCourse_Course]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentCourse_Enrollment]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentCourse_Enrollment]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentCourse_Enrollment] FOREIGN KEY([EnrollmentID])
 REFERENCES [dbo].[Enrollment] ([EnrollmentID])
@@ -8090,7 +8089,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentCourse_Enrollment]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentCourse]'))
 ALTER TABLE [dbo].[EnrollmentCourse] CHECK CONSTRAINT [FK_EnrollmentCourse_Enrollment]
 GO
-/****** Object:  ForeignKey [FK_Scheme-Plan_Plan]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Scheme-Plan_Plan]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan]  WITH CHECK ADD  CONSTRAINT [FK_Scheme-Plan_Plan] FOREIGN KEY([PlanID])
 REFERENCES [dbo].[Plan] ([PlanID])
@@ -8098,7 +8097,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Plan]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan] CHECK CONSTRAINT [FK_Scheme-Plan_Plan]
 GO
-/****** Object:  ForeignKey [FK_Scheme-Plan_Scheme]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_Scheme-Plan_Scheme]    Script Date: 06/06/2013 19:07:10 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Scheme]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan]  WITH CHECK ADD  CONSTRAINT [FK_Scheme-Plan_Scheme] FOREIGN KEY([SchemeID])
 REFERENCES [dbo].[Scheme] ([SchemeID])
@@ -8106,7 +8105,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Scheme-Plan_Scheme]') AND parent_object_id = OBJECT_ID(N'[dbo].[Scheme-Plan]'))
 ALTER TABLE [dbo].[Scheme-Plan] CHECK CONSTRAINT [FK_Scheme-Plan_Scheme]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroups_EnrollmentCourse]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroups_EnrollmentCourse]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_EnrollmentCourse]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentGroups_EnrollmentCourse] FOREIGN KEY([EnrollmentCourseID])
 REFERENCES [dbo].[EnrollmentCourse] ([EnrollmentCourseID])
@@ -8114,7 +8113,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_EnrollmentCourse]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups] CHECK CONSTRAINT [FK_EnrollmentGroups_EnrollmentCourse]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroups_Users]    Script Date: 06/05/2013 19:58:14 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroups_Users]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentGroups_Users] FOREIGN KEY([ProfessorID])
 REFERENCES [dbo].[Users] ([UserId])
@@ -8122,7 +8121,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroups_Users]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroups]'))
 ALTER TABLE [dbo].[EnrollmentGroups] CHECK CONSTRAINT [FK_EnrollmentGroups_Users]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_Classroom]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_Classroom]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_Classroom]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentGroupSchedule_Classroom] FOREIGN KEY([ClassroomID])
 REFERENCES [dbo].[Classroom] ([ClassroomID])
@@ -8130,7 +8129,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_Classroom]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule] CHECK CONSTRAINT [FK_EnrollmentGroupSchedule_Classroom]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_EnrollmentGroups]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentGroupSchedule_EnrollmentGroups]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentGroupSchedule_EnrollmentGroups] FOREIGN KEY([EnrollmentGroupID])
 REFERENCES [dbo].[EnrollmentGroups] ([EnrollmentGroupID])
@@ -8138,7 +8137,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentGroupSchedule_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentGroupSchedule]'))
 ALTER TABLE [dbo].[EnrollmentGroupSchedule] CHECK CONSTRAINT [FK_EnrollmentGroupSchedule_EnrollmentGroups]
 GO
-/****** Object:  ForeignKey [FK_Score_Course]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Score_Course]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score]  WITH CHECK ADD  CONSTRAINT [FK_Score_Course] FOREIGN KEY([CourseID])
 REFERENCES [dbo].[Course] ([CourseID])
@@ -8146,7 +8145,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Course]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] CHECK CONSTRAINT [FK_Score_Course]
 GO
-/****** Object:  ForeignKey [FK_Score_EnrollmentGroup]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Score_EnrollmentGroup]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_EnrollmentGroup]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score]  WITH CHECK ADD  CONSTRAINT [FK_Score_EnrollmentGroup] FOREIGN KEY([EnrollmentGroupID])
 REFERENCES [dbo].[EnrollmentGroups] ([EnrollmentGroupID])
@@ -8154,7 +8153,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_EnrollmentGroup]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] CHECK CONSTRAINT [FK_Score_EnrollmentGroup]
 GO
-/****** Object:  ForeignKey [FK_Score_Student]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Score_Student]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score]  WITH CHECK ADD  CONSTRAINT [FK_Score_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] ([StudentID])
@@ -8162,7 +8161,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Score_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[Score]'))
 ALTER TABLE [dbo].[Score] CHECK CONSTRAINT [FK_Score_Student]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_EnrollmentGroups]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_EnrollmentGroups]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentStudentCourse_EnrollmentGroups] FOREIGN KEY([EnrollmentGroupID])
 REFERENCES [dbo].[EnrollmentGroups] ([EnrollmentGroupID])
@@ -8170,7 +8169,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_EnrollmentGroups]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse] CHECK CONSTRAINT [FK_EnrollmentStudentCourse_EnrollmentGroups]
 GO
-/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_Student]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_EnrollmentStudentCourse_Student]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse]  WITH CHECK ADD  CONSTRAINT [FK_EnrollmentStudentCourse_Student] FOREIGN KEY([StudentID])
 REFERENCES [dbo].[Student] ([StudentID])
@@ -8178,7 +8177,7 @@ GO
 IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_EnrollmentStudentCourse_Student]') AND parent_object_id = OBJECT_ID(N'[dbo].[EnrollmentStudentCourse]'))
 ALTER TABLE [dbo].[EnrollmentStudentCourse] CHECK CONSTRAINT [FK_EnrollmentStudentCourse_Student]
 GO
-/****** Object:  ForeignKey [FK_Record_Score]    Script Date: 06/05/2013 19:58:15 ******/
+/****** Object:  ForeignKey [FK_Record_Score]    Script Date: 06/06/2013 19:07:11 ******/
 IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[FK_Record_Score]') AND parent_object_id = OBJECT_ID(N'[dbo].[Record]'))
 ALTER TABLE [dbo].[Record]  WITH CHECK ADD  CONSTRAINT [FK_Record_Score] FOREIGN KEY([ScoreID])
 REFERENCES [dbo].[Score] ([ScoreID])

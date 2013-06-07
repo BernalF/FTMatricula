@@ -35,9 +35,16 @@ namespace FTMatricula.Controllers
                 {
                     var uID = SessApp.GetUserID(User.Identity.Name);
 
+                    var EnrollIdbyProf = db.EnrollmentGroups
+                        .Where(m => m.ProfessorID == uID)
+                        .Select(m => m.EnrollmentCourse)
+                        .Select(m => m.Enrollment)
+                        .OrderByDescending(m => m.InsertDate).ToList()
+                        .Select(m => m.EnrollmentID)
+                        .FirstOrDefault();
+
                     return Json(db.Scores
-                                .Where(s => s.EnrollmentGroup.ProfessorID == uID
-                                    && s.CourseID == new Guid(CourseID))
+                                .Where(s => s.CourseID == new Guid(CourseID) && s.EnrollmentGroup.EnrollmentCourse.EnrollmentID == EnrollIdbyProf)
                                 .Select(s => new
                                 {
                                     s.ScoreID,

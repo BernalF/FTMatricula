@@ -308,15 +308,19 @@ namespace FTMatricula.Utilities
             matrifunDBEntities db = new matrifunDBEntities();
 
             //Get StudentID by LoggedUserID
-            var uID = SessApp.GetUserID(userName);
-            //Guid? uID = new Guid("8EE28BDB-2470-431B-A3DE-FEF8B2A2D4F0");
-            /*return new SelectList(db.Scores
-                    .Where(s => s.EnrollmentGroup.ProfessorID == uID)
-                    .Select(s => new { CourseID = s.CourseID, Name = s.Course.Name }).Distinct(), "CourseID", "Name");*/
+            var uID = SessApp.GetUserID(userName);          
 
+            var EnrollIdbyProf = db.EnrollmentGroups
+                        .Where(m => m.ProfessorID == uID)
+                        .Select(m => m.EnrollmentCourse)
+                        .Select(m => m.Enrollment)
+                        .OrderByDescending(m => m.InsertDate).ToList()
+                        .Select(m=> m.EnrollmentID)
+                        .FirstOrDefault();
+            
             return new SelectList(db.EnrollmentGroups
-                    .Where(x => x.ProfessorID == uID)
-                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID, Name = x.EnrollmentCourse.Course.Name }).Distinct(), "CourseID", "Name");
+                    .Where(x => x.EnrollmentCourse.EnrollmentID == EnrollIdbyProf && x.ProfessorID == uID)
+                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID, Name = x.EnrollmentCourse.Course.Name }), "CourseID", "Name");
         }
 
 
