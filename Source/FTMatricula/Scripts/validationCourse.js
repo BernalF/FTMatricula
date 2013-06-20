@@ -20,7 +20,7 @@ var validationCourse = new Class({
     searchStudent: function () {
         var self = this;
         $.bAjax({
-            url: 'ValidationCourseController/SearchStudent',
+            url: self.options.url.search,
             data: { courseID: $(this).val() },
             async: false,
             ajaxSuccess: function (response) {
