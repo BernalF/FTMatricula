@@ -1,0 +1,114 @@
+﻿@using FTMatricula.Models
+
+@model FTMatricula.Models.ValidationCourse
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = "Convalidacion de Cursos";
+}
+
+@section styles {
+
+}
+<div id="content">
+
+    <div class="mainBox">
+
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")/@Resources.GetValue("VAL_COURSE")</a></h2>
+
+        <div class="editDetail">
+            <div class="defaultBox ">
+                <ul class="border margin5">
+                    <li class="width100 padBot10">
+                        <label class="subTitle">Buscar Estudiante</label>
+                    </li>
+                    <li class="width25">
+                        <label>Identificación</label>
+                    </li>
+                    <li class="width25">
+                        <label>Nombre</label>
+                    </li>
+                    <li class="width25">
+                        <label>Apellidos</label>
+                    </li>
+                    <li class="width25">
+                        <label>Teléfono</label>
+                    </li>
+                    <li class="width25">
+                        <div>
+                            @Html.TextBoxFor(m => m.Identification, new { @class = "input width100" })
+                        </div>
+                    </li>
+                    <li class="width25">
+                        <div>
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "input width100" })
+                        </div>
+                    </li>
+                    <li class="width25">
+                        <div>
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "input width100" })
+                        </div>
+                    </li>
+                    <li class="width25">
+                        <div>
+                            @Html.TextBoxFor(m => m.Phone1, new { @class = "input width100" })
+                        </div>
+                    </li>
+                    <li class="width100">
+                        <div class="formBtnBar">
+                            <button type="button" class="button find">Buscar Estudiante</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="defaultBox" id="valDetail">
+                <ul class="border margin5">
+                    <li>
+                        <label class="subTitle cWhite">Plan</label>
+                    </li>
+                    <li class="width100">
+                        @(Html.Kendo().DropDownList()
+                                    .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
+                                    .Name("ddlCourseID")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .HtmlAttributes(new { @class = "width100" })
+                                    .OptionLabel("Select a Course"))
+                    </li>
+                </ul>
+            </div>
+            <ul class="formBtnBar">
+                <li>
+                    <a href="@Url.Action("Back", "Home", routeValues: new { opt = "programs" })" class="button back">Cancelar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="popupWindow" id="selectStudentWindow">
+        <h2>Resultado de Búsqueda</h2>
+        <h3 class="padBot10 bold">Por favor seleccione un estudiante...
+        </h3>
+        <ul class="formPopUpWin">
+            @*@foreach (var item in Model.StudentList)
+            {
+                <li>
+                    <span>@item.Identification</span> -- <span>@item.FirstName</span>&nbsp;<span>@item.LastName</span><span class="hide">@item.Phone1</span><span class="hide">@item.StudentID</span>
+                </li>
+            }*@
+        </ul>
+    </div> 
+
+@section Scripts {
+    <script type="text/javascript" src="~/Scripts/validationCourse.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var vc = new validationCourse({
+                view: 'INDEX',
+                url: {
+                    search: '@Url.Action("SearchStudent","ValidationCourseController")'
+                }
+            });
+        });
+    </script>
+}

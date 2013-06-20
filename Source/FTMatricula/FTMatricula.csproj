@@ -187,6 +187,7 @@
     <Compile Include="Controllers\LocationController.cs" />
     <Compile Include="Controllers\ModalityController.cs" />
     <Compile Include="Controllers\SchoolController.cs" />
+    <Compile Include="Controllers\ValidationCourseController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,6 +197,7 @@
     <Compile Include="Models\Classroom.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ValidationCourseModel.cs" />
     <Compile Include="Models\Country.cs">
       <DependentUpon>matrifunDB.tt</DependentUpon>
     </Compile>
@@ -535,6 +537,7 @@
     <Content Include="Content\scripts\knockout-2.1.0.js" />
     <Content Include="Content\scripts\layout.js" />
     <Content Include="Content\scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\validationCourse.js" />
     <Content Include="Scripts\record.js" />
     <Content Include="Scripts\scoreRegister.js" />
     <Content Include="Scripts\enrollment.js" />
@@ -634,6 +637,7 @@
     <Content Include="Views\Certifications\index.cshtml" />
     <Content Include="Views\Course\Create.cshtml" />
     <Content Include="Views\Course\Edit.cshtml" />
+    <Content Include="Views\ValidationCourse\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
