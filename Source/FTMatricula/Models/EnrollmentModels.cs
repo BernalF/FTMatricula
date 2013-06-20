@@ -72,6 +72,31 @@ namespace FTMatricula.Models
         public IList<EnrollStudent> StudentList { get; set; }
     }
 
+
+    public class CertificationsInit
+    {
+        /// <summary>
+        /// Default Enrollment Init Constructor
+        /// </summary>
+        public CertificationsInit()
+        {
+            this.Student = new EnrollStudent();
+            this.Message = new ServerMessage();
+            this.StudentList = new List<EnrollStudent>();
+        }
+
+
+        public System.Guid? PlanID { get; set; }
+        public EnrollStudent Student { get; set; }
+        public bool IsStudentOK { get; set; }
+        public bool IsReadyToPrint { get; set; }
+        public string ServerRequest { get; set; }
+
+        public ServerMessage Message { get; set; }
+
+        public IList<EnrollStudent> StudentList { get; set; }
+    }
+
     /// <summary>
     /// Enrollment Student
     /// </summary>

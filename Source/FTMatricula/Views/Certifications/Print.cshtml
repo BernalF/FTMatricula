@@ -1,0 +1,53 @@
+﻿@using FTMatricula.Models
+
+@model FTMatricula.Models.CertificationsInit
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = "Print";
+}
+
+@using (Html.BeginForm())
+{
+    <div id="content">
+        <div class="mainBox">
+            <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "certifications" })" class="internalTitle">@Resources.GetValue("HOME")/Certificaciones/Impresión</a></h2>
+
+
+
+            <div class="editTitle">
+                @*<span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")*@
+                <span>Certificación Generada</span>
+            </div>
+
+            <div class="editDetail">                
+
+                <div class="defaultBox ">
+                    <ul class="margin5">
+                        <li class="width100 padBot10">
+                            <object class="width100" style="background-color:white; height:500px;"
+                                data="" type="application/pdf">
+                                
+                            </object>
+
+                            
+                        </li>
+                    </ul>
+                </div>                
+
+            </div>
+            <div class="clear"></div>
+                <div class="formBtnBar">
+                    
+                    <a href="@Url.Action("Back", "Home", routeValues: new { opt = "certifications" })" class="button back">Regresar</a>
+                </div>
+        </div>       
+
+    </div>
+            
+}
+
+
+@section Scripts {
+    
+}
