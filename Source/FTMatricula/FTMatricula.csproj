@@ -639,6 +639,7 @@
     <Content Include="Views\Course\Edit.cshtml" />
     <Content Include="Views\ValidationCourse\Index.cshtml" />
     <Content Include="Views\Certifications\Print.cshtml" />
+    <Content Include="Views\ValidationCourse\validation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

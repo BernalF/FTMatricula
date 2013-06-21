@@ -8,12 +8,28 @@ using System.ComponentModel;
 
 namespace FTMatricula.Models
 {
-    public class ValidationCourse
+    public class ValidationCourseModel
     {
-        public System.Guid? StudentID { get; set; }
-        public string Identification { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Phone1 { get; set; }
+        /// <summary>
+        /// Default Validation Course Model Constructor
+        /// </summary>
+        public ValidationCourseModel()
+        {
+            this.Student = new EnrollStudent();
+            this.Message = new ServerMessage();
+            this.StudentList = new List<EnrollStudent>();
+        }
+
+
+        public System.Guid? PlanID { get; set; }
+        public string PlanName { get; set; }
+        public EnrollStudent Student { get; set; }
+        public bool IsStudentOK { get; set; }
+        public bool IsReadyToValidate { get; set; }
+        public string ServerRequest { get; set; }
+
+        public ServerMessage Message { get; set; }
+
+        public IList<EnrollStudent> StudentList { get; set; }
     }
 }
