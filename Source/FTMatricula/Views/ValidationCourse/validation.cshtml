@@ -21,7 +21,11 @@
                     <ul class="margin5">
                         <li>
                             <label class="subTitle cWhite">Plan: </label>
-                            <label>@Model.PlanName</label>
+                            <label>@Model.PlanName </label> 
+                        </li>                        
+                        <li>
+                            <label class="subTitle cWhite"> Estudiante: </label>
+                            <label>@Model.StudentName</label>
                         </li>
                         <li class="width100">
                             @(Html.Kendo().Grid<FTMatricula.Models.Course>()
@@ -29,22 +33,17 @@
                                       .Columns(columns =>
                                       {
                                           columns.Bound(m => m.Code).Title(@Resources.GetValue("COURSE_CODE"));
-                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));
-                                          columns.Bound(m => m.TeachingHours).Title(@Resources.GetValue("TEACHING_HOURS"));
-                                          columns.Bound(m => m.Charge).Title(@Resources.GetValue("COURSE_COST"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));                                          
                                           columns.Bound(m => m.SchoolName).Title(@Resources.GetValue("SCHOOL"));
                                           columns.Bound(m => m.ScoreCriteriaType).Title("Criterio de Calificación");
                                           columns.Bound(m => m.ScoreCriteriaID).Hidden(true);
                                           columns.Command(command =>
                                           {
-                                              command.Custom(Resources.GetValue("EDIT")).Text(Resources.GetValue("EDIT")).Click("Edit_Row");
-                                              command.Destroy().Text(@Resources.GetValue("DELETE"));
-                                          }).Width(180);
-                                      })
-                                     .Editable(editable =>
-                                        {
-                                            editable.DisplayDeleteConfirmation(@Resources.GetValue("DELETE_CONFIRMATION"));
-                                        })
+                                              command.Custom("valC").Click("validate")
+                                                  .HtmlAttributes(new { @style = "display: block" })
+                                                  .Text("Details");
+                                          }).Title("Convalidar");
+                                      })                                     
                                       .Sortable(sor => sor.AllowUnsort(true))
                                       .Filterable(filter =>
                                       {
@@ -68,11 +67,7 @@
                                               msj.Clear(@Resources.GetValue("CLEAN"));
                                               msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
                                           });
-                                      })
-                                      .ToolBar(create => create.Custom()
-                                          .Action("Create", "Course", routeValues: null)
-                                          .Text(@Resources.GetValue("ADD_COURSE"))
-                                          .HtmlAttributes(new { @class = "kendoAddbutton" }))
+                                      })                                      
                                       .Pageable(pager => pager
                                             .PageSizes(new int[] { 5, 10, 15 })
                                             .Input(true)
@@ -96,8 +91,7 @@
                                       .DataSource(dataSource => dataSource
                                             .Ajax()
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingCourses", "Course"))                                                                                        
-                                            .Destroy(destroy => destroy.Action("DestroyCourse", "Course"))
+                                            .Read(read => read.Action("PagingCourses", "ValidationCourse"))                                            
                                             .Model(model => model.Id(m => m.CourseID))
                                       )
                                 )
@@ -114,5 +108,12 @@
 }
 
 @section Scripts {
+    <script>
+        function validate(e) {            
+            e.preventDefault();
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
 
+            return false;
+        }
+    </script>
 }

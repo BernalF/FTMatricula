@@ -537,7 +537,6 @@
     <Content Include="Content\scripts\knockout-2.1.0.js" />
     <Content Include="Content\scripts\layout.js" />
     <Content Include="Content\scripts\modernizr-2.5.3.js" />
-    <Content Include="Scripts\validationCourse.js" />
     <Content Include="Scripts\record.js" />
     <Content Include="Scripts\scoreRegister.js" />
     <Content Include="Scripts\enrollment.js" />

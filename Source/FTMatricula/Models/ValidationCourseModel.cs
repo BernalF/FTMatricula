@@ -23,6 +23,7 @@ namespace FTMatricula.Models
 
         public System.Guid? PlanID { get; set; }
         public string PlanName { get; set; }
+        public string StudentName { get; set; }
         public EnrollStudent Student { get; set; }
         public bool IsStudentOK { get; set; }
         public bool IsReadyToValidate { get; set; }

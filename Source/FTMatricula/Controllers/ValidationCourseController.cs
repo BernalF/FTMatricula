@@ -4,8 +4,11 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
 using System.Web.Mvc;
 using FTMatricula.Models;
+using FTMatricula.Utilities.Helper;
 
 namespace FTMatricula.Controllers
 {
@@ -130,11 +133,57 @@ namespace FTMatricula.Controllers
         /// <returns></returns>
         public ActionResult validation(Guid sID, Guid pID)
         {
-            ValidationCourseModel model = new ValidationCourseModel();            
+            ValidationCourseModel model = new ValidationCourseModel();
 
-            model.PlanName = db.Plans.ToList().Where(m => m.PlanID == pID).Select(m => m.Name).FirstOrDefault();
+            TempData.Add("sID", sID);
+            TempData.Add("pID", pID);
+
+            model.PlanName = db.Plans.ToList().Where(m => m.PlanID == pID).Select(m => m.Name + " - " + m.Description + " - v. " + m.Version + " ").FirstOrDefault();
+            model.StudentName = db.Students.ToList().Where(m => m.StudentID == sID).Select(m => m.FirstName + " " + m.LastName).FirstOrDefault();
 
             return View(model);
+        }
+
+        /// <summary>
+        /// Paging Courses
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingCourses([DataSourceRequest] DataSourceRequest request)
+        {
+            try
+            {
+                List<StudentCourses> result = null;
+
+                Guid? StudentID = new Guid(TempData["sID"].ToString());
+
+
+
+                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
+
+                result = db.Scores
+                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
+                                .Select(m => new StudentCourses
+                                {
+                                    EnrollmentGroupID = m.EnrollmentGroupID,
+                                    ProfessorID = m.EnrollmentGroup.ProfessorID,
+                                    CourseID = m.CourseID,
+                                    CourseCode = m.Course.Code,
+                                    CourseName = m.Course.Name,
+                                    PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name
+
+                                })
+                                .ToList();
+
+
+                return Json(result.ToDataSourceResult(request));
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+
         }
 
     }
