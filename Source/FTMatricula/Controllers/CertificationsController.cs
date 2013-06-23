@@ -1,4 +1,5 @@
 ﻿using FTMatricula.Models;
+using FTMatricula.Utilities.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,7 +96,7 @@ namespace FTMatricula.Controllers
 
                 this.Check_StudentPlan(model);
 
-                
+
             }
             model.StudentList = result;
 
@@ -163,6 +164,56 @@ namespace FTMatricula.Controllers
         /// <returns></returns>
         public ActionResult Print(Guid sID, Guid pID)
         {
+
+            Plan plan = db.Plans.Find(pID);
+            Student student = db.Students.Find(sID);
+
+            if ((plan != null) && (student != null))
+            {
+                string coordinatorName = "";
+                User currentUser = db.Users.Where(x => x.UserName == User.Identity.Name).FirstOrDefault();
+                if (currentUser != null)
+                {
+                    Student _currentUser = db.Students.Where(x => x.UserID == currentUser.UserId).FirstOrDefault();
+                    if (_currentUser != null)
+                    {
+                        coordinatorName = _currentUser.FirstName + " " + _currentUser.LastName;
+                    }
+                }
+                PDFCreator pdf = new PDFCreator();
+
+                var courses = db.Plan_Course.Where(x => x.PlanID == plan.PlanID).Select(x => x.CourseID).ToList();
+                var scores = db.Scores.Where(x => x.StudentID == student.StudentID && courses.Contains(x.CourseID)).Select(x => x.ScoreID).ToList();
+                var records = db.Records.Where(x => scores.Contains(x.ScoreID)).Select(x => x.ScoreID).ToList();
+                var final_scores = db.Scores.Where(x => records.Contains(x.ScoreID)).ToList();
+
+                List<string[]> CoursesList = new List<string[]>();
+
+                foreach (Score item in final_scores)
+                {
+                    CoursesList.Add(new string[] { 
+                        item.Course.Code, 
+                        item.Course.Name, 
+                        item.RecordResult, 
+                        item.Course.TeachingHours.ToString(), 
+                        item.EnrollmentGroup.EnrollmentCourse.Enrollment.EndDate.Value.Month.ToString(), 
+                        item.EnrollmentGroup.EnrollmentCourse.Enrollment.EndDate.Value.Year.ToString()});
+
+                }
+
+                string file = student.User.UserName + "_certification.pdf";
+                pdf.BuildCertification(HttpContext.Server.MapPath("~/"),
+                    file,
+                    student.FirstName + " " + student.LastName,
+                    student.User.UserName,
+                    coordinatorName, plan.Name + " - " + plan.Description, CoursesList);
+
+                ViewBag.PdfURL = "/certifications_downloads/" + file;
+            }
+            else
+            {
+                ViewBag.PdfURL = "";
+            }
             return View();
         }
 

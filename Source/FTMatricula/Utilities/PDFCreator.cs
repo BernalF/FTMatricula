@@ -5,6 +5,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 
 namespace FTMatricula.Utilities.Helper
 {
@@ -15,16 +16,22 @@ namespace FTMatricula.Utilities.Helper
         private Font _standardFont = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.NORMAL, BaseColor.BLACK);
         private Font _smallFont = new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL, BaseColor.BLACK);
 
-        public void BuildConstancy(string fileID, string StudentName, string StudentID, string CoordinatorName, string PlanName, List<string[]> CoursesList)
+        public void BuildCertification(string MapPath, string FileName, string StudentName, string StudentID, string CoordinatorName, string PlanName, List<string[]> CoursesList)
         {
             Document doc = null;
 
             try
             {
+                string path = MapPath + "certifications_downloads\\";
+                // Determine whether the directory exists.
+                if (!Directory.Exists(path))
+                    Directory.CreateDirectory(path);
+
+
                 // Initialize the PDF document
                 doc = new Document();
                 PdfWriter writer = PdfWriter.GetInstance(doc,
-                    new System.IO.FileStream(System.IO.Directory.GetCurrentDirectory() + "\\" + fileID + "_Constancy.pdf",
+                    new System.IO.FileStream(path + FileName,
                         System.IO.FileMode.Create));
 
                 // Set the margins and page size
@@ -45,7 +52,8 @@ namespace FTMatricula.Utilities.Helper
                 this.AddPageParagraphs(doc, ParagraphArray);
 
                 this.AddTable(doc, 
-                    new string[] { "Curso", "Nombre", "Nota", "Horas", "Período", "Año" },
+                    //new string[] { "Curso", "Nombre", "Nota", "Horas", "Período", "Año" },
+                    new string[] { "Curso", "Nombre", "Nota", "Horas", "Mes", "Año" },
                     new float[] { 50, 200, 50, 50, 50, 50 },
                     new int[] { 1, 0, 1, 1, 1, 1 }, 
                     CoursesList);
@@ -53,10 +61,15 @@ namespace FTMatricula.Utilities.Helper
 
                 ParagraphArray = new List<PageParagraph>();
                 ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_CENTER, font = this._standardFont, ParagraphText = "---------------------------------------ULTIMA LINEA ---------------------------------------\n\n" });
-                ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_JUSTIFIED, font = this._standardFont, ParagraphText = "LA PRESENTE SE EXTIENDE EN CARTAGO, A SOLICITUD DEL INTERESADO(A) A LOS " + DateTime.Now.Day + " DIAS DEL MES DE " + DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("es")).ToUpper() + " DEL AÑO " + DateTime.Now.Year + ".\n\n" });
+                this.AddPageParagraphs(doc, ParagraphArray);
+
+                doc.NewPage();
+                ParagraphArray = new List<PageParagraph>();
+                ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_JUSTIFIED, font = this._standardFont, ParagraphText = "LA PRESENTE SE EXTIENDE EN CARTAGO, A SOLICITUD DEL INTERESADO(A) A LOS " + DateTime.Now.Day + " DIAS DEL MES DE " + DateTime.Now.ToString("MMMM", CultureInfo.CreateSpecificCulture("es")).ToUpper() + " DEL AÑO " + DateTime.Now.Year + ".\n\n\n" });
                 ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_JUSTIFIED, font = this._standardFont, ParagraphText = "NOTA: LAS CALIFICACIONES SE AJUSTAN A LA ESCALA DE 0 A 100, SIENDO SETENTA LA NOTA MÍNIMA DE APROBACION.\n\n" });
-                ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_JUSTIFIED, font = this._standardFont, ParagraphText = "EQUIVALENCIAS A = APROBADA, REC = RECONOCIDA, UBI = UBICACIÓN EC = EN CURSO, R = REPROBADA RT = RETIRO TOTAL\nMODALIDADES: A=ANUAL, B=BIMESTRAL, C=CUATRIMESTRAL, M=MENSUAL,  S=SEMESTRAL T=TRIMESTRAL\n\n" });
-                ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_JUSTIFIED, font = this._standardFont, ParagraphText = "NOTA: LAS CALIFICACIONES SE AJUSTAN A LA ESCALA DE 0 A 100, SIENDO SETENTA LA NOTA MÍNIMA DE APROBACION.\n\n\n\n" });
+                ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_JUSTIFIED, font = this._standardFont, ParagraphText = "EQUIVALENCIAS A = APROBADA, REC = RECONOCIDA, UBI = UBICACIÓN EC = EN CURSO, R = REPROBADA RT = RETIRO TOTAL\nMODALIDADES: A=ANUAL, B=BIMESTRAL, C=CUATRIMESTRAL, M=MENSUAL,  S=SEMESTRAL T=TRIMESTRAL\n\n\n" });
+                
+
                 ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_CENTER, font = this._standardFont, ParagraphText = CoordinatorName +"\n\n" });
                 ParagraphArray.Add(new PageParagraph { alignment = Element.ALIGN_CENTER, font = this._standardFont, ParagraphText = "COORDINADOR, " + PlanName + "\n\n" });
                 
@@ -73,6 +86,7 @@ namespace FTMatricula.Utilities.Helper
                 doc.Close();
                 doc = null;
             }
+
         }
 
 
