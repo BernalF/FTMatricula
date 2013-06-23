@@ -44,7 +44,7 @@ namespace FTMatricula.Controllers
                         .FirstOrDefault();
 
                     return Json(db.Scores
-                                .Where(s => s.CourseID == new Guid(CourseID) && s.EnrollmentGroup.EnrollmentCourse.EnrollmentID == EnrollIdbyProf)
+                                .Where(s => s.CourseID == new Guid(CourseID) && s.EnrollmentGroup.EnrollmentCourse.EnrollmentID == EnrollIdbyProf && s.Reason == null)
                                 .Select(s => new
                                 {
                                     s.ScoreID,
