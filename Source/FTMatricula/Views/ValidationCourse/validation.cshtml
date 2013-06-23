@@ -103,13 +103,14 @@
         </div>
     </div>
 </div>
+@Html.HiddenFor(m => m.Student.StudentID)
 <a href="#ValidateReason" id="linkValidateReason" class="popUp hide">Link</a>
 <div class="popupWindow" id="ValidateReason">
     <h2>Razon</h2>
     <ul class="formList">
         <li>Ingrese una Razón para la Convalidación del curso</li>
         <li>
-            <textarea class="input width100" id="lblPayNum" ></textarea>
+            <textarea class="input width100" id="lblVal" ></textarea>
         </li>
         <li>
             <div class="formBtnBar">                
@@ -123,9 +124,29 @@
         function validate(e) {
             e.preventDefault();
             var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $('#lblVal').val('');
+            $('#linkValidateReason').trigger('click');
+            $("#btnValidate").off('click.btnValidate').on('click.btnValidate', {
+                courseID: dataItem.CourseID,                
+                studentID: $('#Student_StudentID').val()
+            }, function (e) {
+                $(".popupBg").delay(300).fadeOut(300);
+                $('#ValidateReason').fadeOut(300);
+                $.bAjax({
+                    url: '@Url.Action("ValidateCourses","ValidationCourse")',
+                    data: { studentID: e.data.studentID, courseID: e.data.courseID, reason: $('#lblVal').val() },
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        r = $.parseJSON(response);
+                        if (r.result != 'OK') {
+                            alert(r.result);
+                        }
+                        else {
 
-
-
+                        }
+                    }
+                });
+            })
             return false;
         }
     </script>

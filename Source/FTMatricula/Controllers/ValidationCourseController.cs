@@ -165,7 +165,8 @@ namespace FTMatricula.Controllers
 
             model.PlanName = db.Plans.ToList().Where(m => m.PlanID == pID).Select(m => m.Name + " - " + m.Description + " - v. " + m.Version + " ").FirstOrDefault();
             model.StudentName = db.Students.ToList().Where(m => m.StudentID == sID).Select(m => m.FirstName + " " + m.LastName).FirstOrDefault();
-
+            model.PlanID = pID;
+            model.Student.StudentID = sID;
             return View(model);
         }
 
@@ -178,15 +179,7 @@ namespace FTMatricula.Controllers
         public ActionResult PagingCourses([DataSourceRequest] DataSourceRequest request)
         {
             try
-            {
-                //SELECT c.Name
-                //FROM [Plan-Course] pc
-                //INNER JOIN Course c ON c.CourseID = pc.CourseID
-                //INNER JOIN StudentPlan sp ON sp.PlanID = pc.PlanID
-                //INNER JOIN Score s ON s.CourseID = pc.CourseID
-                //WHERE pc.PlanID = 'a5beeeb0-22ff-43ae-b695-2174456633a6'
-                //AND sp.StudentID = 'b635d615-87b7-4fe3-8b73-e362cf17df02'
-                //GROUP BY c.Name        
+            {      
                 Guid? StudentID = new Guid(TempData["sID"].ToString());
                 Guid? PlanID = new Guid(TempData["pID"].ToString());
 
@@ -207,7 +200,62 @@ namespace FTMatricula.Controllers
             {
                 throw new ApplicationException(e.Message);
             }
+        }
 
+        /// <summary>
+        /// Validate Courses
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ValidateCourses(string studentID, string courseID, string reason) {
+            try
+            {
+                Guid? StudentID = new Guid(studentID);                
+                Guid? CourseID = new Guid(courseID);
+
+                if (db.Courses
+                        .Where(m => m.CourseID == CourseID)
+                        .Select(m => m.ScoreCriteria.MinimumScore)
+                        .FirstOrDefault() != null)
+                {
+                    string MinimumScore = db.Courses
+                        .Where(m => m.CourseID == CourseID)
+                        .Select(m => m.ScoreCriteria.MinimumScore)
+                        .FirstOrDefault();
+
+                    Score score = new Score {
+                        ScoreID = Guid.NewGuid(),
+                        StudentID = StudentID,
+                        CourseID = CourseID,
+                        isApproved = true,
+                        Result = MinimumScore,
+                        RecordResult = MinimumScore,
+                        Reason = reason,
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request)
+                    };
+                    db.Scores.Add(score);
+                    db.Records.Add(new Record {
+                        RecordID = Guid.NewGuid(),
+                        ScoreID = score.ScoreID,
+                        InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                        InsertDate = DateTime.Today,
+                        IpAddress = Network.GetIpAddress(Request)
+                    });
+                    db.SaveChanges();
+                    return Json(new { result = "OK" });
+                }
+                else
+                {
+                    return Json(new { result = "El Curso no posee criterio de calificacion. No se pude Convalidar el curso" });
+                }                
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
         }
 
     }
