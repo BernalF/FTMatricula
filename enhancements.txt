@@ -11,18 +11,21 @@
 ++ En Matricula, solo ver matriculas relacionadas con la escuela
 ++ Vincular Cursos a Planes, solo info del Usuario Administrador de Escuela		
 ---------------------------------------------------------------------------------------------------------------------------
---------------------------------- To Do 31 Mayo
+--------------------------------- To Do 23 Junio
 ---------------------------------------------------------------------------------------------------------------------------
 ++ Certificaciones -> Imprimir Certificaciones	
+++ Cursos -> Valoracion Criterio Calificacion - Score table add isApproved			
+++ Matricula -> Convalidacion de Cursos
+---------------------------------------------------------------------------------------------------------------------------
+--------------------------------- To Do 04 Julio
+---------------------------------------------------------------------------------------------------------------------------
 ++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
-++ Cursos -> Valoracion Criterio Calificacion - Score table add isApproved
 ++ Validaciones Matricula
 			|-> Estudiante pertenece a el plan de la matricula	-> Agregar Mant Estudiante - 109530136
 			|-> Verificar si hay Cupo disponible		
 			|-> Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
 ++ Estudiantes -> Historial Academico			
-++ Estudiantes -> Consulta Notas			
-++ Matricula -> Convalidacion de Cursos
+++ Estudiantes -> Consulta Notas
 ++ Cambiar los Grids (html) de Matricula por Grids de Kendo
 ---------------------------------------------------------------------------------------------------------------------------
 --------------------------------- Fuera Scope 31 Mayo
