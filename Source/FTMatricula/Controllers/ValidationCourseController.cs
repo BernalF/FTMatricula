@@ -92,24 +92,48 @@ namespace FTMatricula.Controllers
                     LastName = result[0].LastName,
                     Phone1 = result[0].Phone1
                 };
-
-                model.IsStudentOK = true;
-                model.IsReadyToValidate = true;
-                model.ServerRequest = null;
-
                 result = new List<EnrollStudent>();
 
-                model.Message = new ServerMessage
-                {
-                    Show = true,
-                    Text = "Verificación de estudiante completado exitosamente, Proceso listo para Convalidar Cursos...",
-                    Severity = MessageSeverity.OK
-                };
-
+                this.Check_StudentPlan(model);
 
             }
             model.StudentList = result;
 
+        }
+
+        /// <summary>
+        /// Check StudentPlan
+        /// </summary>
+        /// <param name="model"></param>
+        private void Check_StudentPlan(ValidationCourseModel model)
+        {
+
+            var r = db.StudentPlans.Where(x => x.PlanID == model.PlanID && x.StudentID == model.Student.StudentID).Select(x => x.PlanID).FirstOrDefault();
+            if (r == null)
+            {
+                model.IsStudentOK = true;
+                model.IsReadyToValidate = false;
+                model.ServerRequest = null;
+
+                model.Message = new ServerMessage
+                {
+                    Show = true,
+                    Text = "El Estudiante no pertenece al plan seleccionado",
+                    Severity = MessageSeverity.Error
+                };
+            }
+            else
+            {
+                model.IsStudentOK = true;
+                model.IsReadyToValidate = true;
+                model.ServerRequest = null;
+                model.Message = new ServerMessage
+                {
+                    Show = true,
+                    Text = "Verificación de estudiante completado exitosamente, Proceso listo para Convalidar cursos...",
+                    Severity = MessageSeverity.OK
+                };
+            }
         }
 
         /// <summary>
@@ -135,8 +159,9 @@ namespace FTMatricula.Controllers
         {
             ValidationCourseModel model = new ValidationCourseModel();
 
-            TempData.Add("sID", sID);
-            TempData.Add("pID", pID);
+
+            TempData["sID"] = sID;
+            TempData["pID"] = pID;
 
             model.PlanName = db.Plans.ToList().Where(m => m.PlanID == pID).Select(m => m.Name + " - " + m.Description + " - v. " + m.Version + " ").FirstOrDefault();
             model.StudentName = db.Students.ToList().Where(m => m.StudentID == sID).Select(m => m.FirstName + " " + m.LastName).FirstOrDefault();
@@ -154,30 +179,29 @@ namespace FTMatricula.Controllers
         {
             try
             {
-                List<StudentCourses> result = null;
-
+                //SELECT c.Name
+                //FROM [Plan-Course] pc
+                //INNER JOIN Course c ON c.CourseID = pc.CourseID
+                //INNER JOIN StudentPlan sp ON sp.PlanID = pc.PlanID
+                //INNER JOIN Score s ON s.CourseID = pc.CourseID
+                //WHERE pc.PlanID = 'a5beeeb0-22ff-43ae-b695-2174456633a6'
+                //AND sp.StudentID = 'b635d615-87b7-4fe3-8b73-e362cf17df02'
+                //GROUP BY c.Name        
                 Guid? StudentID = new Guid(TempData["sID"].ToString());
+                Guid? PlanID = new Guid(TempData["pID"].ToString());
 
-
-
-                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
-
-                result = db.Scores
-                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
-                                .Select(m => new StudentCourses
-                                {
-                                    EnrollmentGroupID = m.EnrollmentGroupID,
-                                    ProfessorID = m.EnrollmentGroup.ProfessorID,
-                                    CourseID = m.CourseID,
-                                    CourseCode = m.Course.Code,
-                                    CourseName = m.Course.Name,
-                                    PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name
-
-                                })
-                                .ToList();
-
-
-                return Json(result.ToDataSourceResult(request));
+                return Json(db.Plan_Course.ToList()
+                    .Join(db.Courses, pc => pc.CourseID, c => c.CourseID, (pc, c) => new { pc, c })
+                    .Join(db.StudentPlans, a => a.pc.PlanID, b => b.PlanID, (a, b) => new { a, b })
+                    .Where(w => w.a.pc.PlanID == PlanID && w.b.StudentID == StudentID)
+                    .Select(m => new { CourseID = m.a.c.CourseID, Name = m.a.c.Name, Code = m.a.c.Code })
+                    .Except(db.Plan_Course.ToList()
+                    .Join(db.Courses, pc => pc.CourseID, c => c.CourseID, (pc, c) => new { pc, c })
+                    .Join(db.StudentPlans, a => a.pc.PlanID, b => b.PlanID, (a, b) => new { a, b })
+                    .Join(db.Scores, c => c.a.pc.CourseID, d => d.CourseID, (c, d) => new { c, d })
+                    .Where(x => x.c.a.pc.PlanID == PlanID && x.c.b.StudentID == StudentID)
+                    .Select(n => new { CourseID = n.c.a.c.CourseID, Name = n.c.a.c.Name, Code = n.c.a.c.Code }))
+                    .ToDataSourceResult(request));
             }
             catch (Exception e)
             {
