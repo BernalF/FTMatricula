@@ -91,11 +91,46 @@ namespace FTMatricula.Controllers
                     Phone1 = result[0].Phone1
                 };
 
+                result = new List<EnrollStudent>();
+
+                this.Check_StudentPlan(model);
+
+                
+            }
+            model.StudentList = result;
+
+        }
+
+
+        /// <summary>
+        /// Check StudentPlan
+        /// </summary>
+        /// <param name="model"></param>
+        private void Check_StudentPlan(CertificationsInit model)
+        {
+
+            var r = db.StudentPlans.Where(x => x.PlanID == model.PlanID && x.StudentID == model.Student.StudentID).Select(x => x.PlanID).FirstOrDefault();
+            if (r == null)
+            {
+                model.IsStudentOK = true;
+                model.IsReadyToPrint = false;
+                model.ServerRequest = null;
+
+
+                model.Message = new ServerMessage
+                {
+                    Show = true,
+                    Text = "El Estudiante no pertenece al plan seleccionado",
+                    Severity = MessageSeverity.Error
+                };
+            }
+            else
+            {
+
                 model.IsStudentOK = true;
                 model.IsReadyToPrint = true;
                 model.ServerRequest = null;
 
-                result = new List<EnrollStudent>();
 
                 model.Message = new ServerMessage
                 {
@@ -103,10 +138,7 @@ namespace FTMatricula.Controllers
                     Text = "Verificación de estudiante completado exitosamente, Proceso listo para generar Certificación...",
                     Severity = MessageSeverity.OK
                 };
-
-                
             }
-            model.StudentList = result;
 
         }
 
