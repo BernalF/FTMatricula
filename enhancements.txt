@@ -17,7 +17,7 @@
 ++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
 ++ Cursos -> Valoracion Criterio Calificacion - Score table add isApproved
 ++ Validaciones Matricula
-			|-> Estudiante pertenece a el plan de la matricula		
+			|-> Estudiante pertenece a el plan de la matricula	-> Agregar Mant Estudiante - 109530136
 			|-> Verificar si hay Cupo disponible		
 			|-> Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
 ++ Estudiantes -> Historial Academico			
@@ -27,6 +27,8 @@
 ---------------------------------------------------------------------------------------------------------------------------
 --------------------------------- Fuera Scope 31 Mayo
 ---------------------------------------------------------------------------------------------------------------------------
+++ Meterle Periodo a Matricula
+
 ++ Validaciones Matricula
 			|-> Meter validaciones de requisitos
 			|-> Eliminar matricula con un log y con todo lo que implique

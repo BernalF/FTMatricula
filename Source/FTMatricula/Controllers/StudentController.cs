@@ -426,13 +426,13 @@ namespace FTMatricula.Controllers
                             .ToList()
                             .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
                             .Where(m => m.sp.Plan.isActive == true
-                               && m.sp.Scheme.SchoolID == schoolID)
+                               && m.sp.Scheme.SchoolID == schoolID && m.p.StudentID == new Guid(studentID))
                             .Select(m =>
                           new
                           {
                               PlanID = m.sp.PlanID,
                               PlanName = m.sp.Plan.Name + " - " + m.sp.Plan.Description + " - v. " + m.sp.Plan.Version
-                          }).Distinct()
+                          })
                 });
             }
             else
@@ -477,40 +477,54 @@ namespace FTMatricula.Controllers
         [HttpPost]
         public JsonResult InsertPlanStudent(string studentID, string[] plans)
         {
+            if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            {
+                Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
 
-            // Delete all that exists
-            //var rows = from x in db.Plan_Course
-            //           where x.PlanID == new Guid(planID)
-            //           select x;
+                var planstmp = db.StudentPlans
+                            .ToList()
+                            .Where(m => m.StudentID == new Guid(studentID))
+                            .Select(m =>
+                          new
+                          {
+                              PlanID = m.PlanID                             
+                          });
+               
+                return Json(true);
 
-            //foreach (var row in rows)
-            //{
-            //    db.Plan_Course.Remove(row);
-            //}
+            }
+            else
+            {
+                // Delete all that exists
+                var rows = from x in db.StudentPlans
+                           where x.StudentID == new Guid(studentID)
+                           select x;
 
-            //db.SaveChanges();
-
-            ////Insert again
-            //if (courses != null)
-            //{
-            //    foreach (var item in courses)
-            //    {
-            //        Plan_Course pc = new Plan_Course
-            //        {
-            //            PlanID = new Guid(planID),
-            //            CourseID = new Guid(item),
-            //            InsertUserID = SessApp.GetUserID(User.Identity.Name),
-            //            InsertDate = DateTime.Today,
-            //            IpAddress = Network.GetIpAddress(Request)
-            //        };
-            //        db.Plan_Course.Add(pc);
-            //        db.SaveChanges();
-            //    }
-            //}
+                foreach (var row in rows)
+                {
+                    db.StudentPlans.Remove(row);
+                }
+                db.SaveChanges();
+                //Insert again
+                if (plans != null)
+                {
+                    foreach (var item in plans)
+                    {
+                        StudentPlan sp = new StudentPlan
+                        {
+                            PlanID = new Guid(item),
+                            StudentID = new Guid(studentID),
+                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                            InsertDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)
+                        };
+                        db.StudentPlans.Add(sp);
+                        db.SaveChanges();
+                    }
+                }
+            }            
             return Json(true);
-
         }
-
 
         protected override void Dispose(bool disposing)
         {
