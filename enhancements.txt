@@ -16,12 +16,13 @@
 ++ Certificaciones -> Imprimir Certificaciones	
 ++ Cursos -> Valoracion Criterio Calificacion - Score table add isApproved			
 ++ Matricula -> Convalidacion de Cursos
+++ Validaciones Matricula
+			|-> Estudiante pertenece a el plan de la matricula	-> Agregar Mant Estudiante
 ---------------------------------------------------------------------------------------------------------------------------
 --------------------------------- To Do 04 Julio
 ---------------------------------------------------------------------------------------------------------------------------
 ++ Imprimir Reporte de Actas -> Agregar boton de imprimir en actas
-++ Validaciones Matricula
-			|-> Estudiante pertenece a el plan de la matricula	-> Agregar Mant Estudiante - 109530136
+++ Validaciones Matricula			
 			|-> Verificar si hay Cupo disponible		
 			|-> Validacion de Fechas en el combo de matriculas - para no mostrar las invalidas
 ++ Estudiantes -> Historial Academico			

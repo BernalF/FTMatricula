@@ -481,17 +481,35 @@ namespace FTMatricula.Controllers
             {
                 Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
 
-                var planstmp = db.StudentPlans
-                            .ToList()
-                            .Where(m => m.StudentID == new Guid(studentID))
-                            .Select(m =>
-                          new
-                          {
-                              PlanID = m.PlanID                             
-                          });
-               
-                return Json(true);
+                // Delete all that exists by school
+                var rows = from x in db.StudentPlans
+                           join y in db.Scheme_Plan on x.PlanID equals y.PlanID
+                           where x.StudentID == new Guid(studentID) && y.Scheme.SchoolID == schoolID
+                           select x;
 
+                foreach (var row in rows)
+                {
+                    db.StudentPlans.Remove(row);
+                }
+                db.SaveChanges();
+                //Insert again
+                if (plans != null)
+                {
+                    foreach (var item in plans)
+                    {
+                        StudentPlan sp = new StudentPlan
+                        {
+                            PlanID = new Guid(item),
+                            StudentID = new Guid(studentID),
+                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                            InsertDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)
+                        };
+                        db.StudentPlans.Add(sp);
+                        db.SaveChanges();
+                    }
+                }
+                return Json(true);
             }
             else
             {
@@ -522,7 +540,7 @@ namespace FTMatricula.Controllers
                         db.SaveChanges();
                     }
                 }
-            }            
+            }
             return Json(true);
         }
 
