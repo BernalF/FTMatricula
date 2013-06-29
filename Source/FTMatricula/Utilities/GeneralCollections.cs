@@ -386,8 +386,11 @@ namespace FTMatricula.Utilities
                                             db.Schemes.Where(x => x.SchoolID == schoolID).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList()
                                             : new List<Guid?>();
 
+            DateTime today = DateTime.Today;
+
             return new SelectList(db.Enrollments
-                                .Where(e => IsSchoolAdmin == false || aux.Contains(e.PlanID))
+                                .Where(e => (IsSchoolAdmin == false || aux.Contains(e.PlanID))
+                                    && (e.VerifyDates == false || (today >= e.StartDate && today <= e.EndDate) || ( today  >= e.ExtraStartDate && today <= e.ExtraEndDate)))
                                 .ToList()
                                 .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
         }
