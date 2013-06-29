@@ -41,6 +41,8 @@ namespace FTMatricula.Models
         public string CourseName { get; set; }        
         public string Professor { get; set; }
         public string Schedule { get; set; }
+        public string Score { get; set; }
+        public string RecordResult { get; set; }
 
         public Guid? EnrollmentGroupID { get; set; }
         public Guid? ProfessorID { get; set; }

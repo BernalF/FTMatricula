@@ -371,6 +371,16 @@ namespace FTMatricula.Controllers
         }
 
         /// <summary>
+        /// Score Report
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ScoreReport()
+        {
+            return View();
+        }
+
+
+        /// <summary>
         /// Link Student Plan
         /// </summary>
         /// <returns></returns>
@@ -549,5 +559,92 @@ namespace FTMatricula.Controllers
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        /// <summary>
+        /// Paging Student Courses
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingAcademicHistory([DataSourceRequest] DataSourceRequest request)
+        {
+            List<StudentCourses> result = null;
+
+            var temp = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault();
+            if (temp != null)
+            {
+                Guid? StudentID = temp.StudentID;
+
+                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
+
+                result = db.Scores
+                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
+                                .Select(m => new StudentCourses
+                                {
+                                    EnrollmentGroupID = m.EnrollmentGroupID,
+                                    ProfessorID = m.EnrollmentGroup.ProfessorID,
+                                    CourseID = m.CourseID,
+                                    CourseCode = m.Course.Code,
+                                    CourseName = m.Course.Name,
+                                    PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name,                                    
+                                    RecordResult = m.RecordResult
+                                })
+                                .ToList();
+                int i = 0;
+                foreach (var item in result)
+                {
+                    var aux = db.Students.Where(x => x.UserID == item.ProfessorID).FirstOrDefault();
+                    if (aux != null)
+                        result[i].Professor = aux.FirstName + " " + aux.LastName;
+                    i++;
+                }
+            }
+
+            return Json(result.ToDataSourceResult(request));
+        }
+
+        /// <summary>
+        /// Paging Score Report
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingScoreReport([DataSourceRequest] DataSourceRequest request)
+        {
+            List<StudentCourses> result = null;
+
+            var temp = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault();
+            if (temp != null)
+            {
+                Guid? StudentID = temp.StudentID;
+
+                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
+
+                result = db.Scores
+                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
+                                .Select(m => new StudentCourses
+                                {
+                                    EnrollmentGroupID = m.EnrollmentGroupID,
+                                    ProfessorID = m.EnrollmentGroup.ProfessorID,
+                                    CourseID = m.CourseID,
+                                    CourseCode = m.Course.Code,
+                                    CourseName = m.Course.Name,
+                                    PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name,
+                                    Score = m.Result
+                                })
+                                .ToList();
+                int i = 0;
+                foreach (var item in result)
+                {
+                    var aux = db.Students.Where(x => x.UserID == item.ProfessorID).FirstOrDefault();
+                    if (aux != null)
+                        result[i].Professor = aux.FirstName + " " + aux.LastName;
+                    i++;
+                }
+            }
+
+            return Json(result.ToDataSourceResult(request));
+        }
+
     }
 }

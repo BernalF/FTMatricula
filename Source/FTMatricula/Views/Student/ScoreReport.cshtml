@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("ACADEMIC_HISTORY");
+    ViewBag.Title = @Resources.GetValue("SCORE_CONSULT");
 }
 
 @section styles {
@@ -20,7 +20,7 @@
 
     <div class="mainBox">
 
-        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "student" })" class="internalTitle">@Resources.GetValue("HOME")/Estudiantes/Historial Académico</a></h2>
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "student" })" class="internalTitle">@Resources.GetValue("HOME")/Estudiantes/@Resources.GetValue("SCORE_CONSULT")</a></h2>
 
             <div class="detailBox100">
                 <ul>
@@ -36,7 +36,7 @@
                                           columns.Bound(m => m.CourseCode).Title("Código Curso");
                                           columns.Bound(m => m.CourseName).Title("Nombre del Curso");
                                           columns.Bound(m => m.Professor).Title("Profesor");
-                                          columns.Bound(m => m.RecordResult).Title("Nota Final");                                          
+                                          columns.Bound(m => m.Score).Title("Nota");
                                       })
                                       .Resizable(resize => resize.Columns(true))
                                       .Filterable(filter =>
@@ -67,7 +67,7 @@
                                             .Ajax()
                                             .Batch(true)
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingAcademicHistory", "Student"))
+                                            .Read(read => read.Action("PagingScoreReport", "Student"))
                                             )
                                     )
                     </li>
