@@ -27,25 +27,15 @@ namespace FTMatricula.Controllers
         /// Paging Records by Course
         /// </summary>
         [HttpPost]
-        public ActionResult PagingRecords([DataSourceRequest] DataSourceRequest request, string CourseID)
+        public ActionResult PagingRecords([DataSourceRequest] DataSourceRequest request, string GroupID)
         {
             try
             {
-                if (CourseID != "" && CourseID != null)
+                if (GroupID != "" && GroupID != null)
                 {
-                    var uID = SessApp.GetUserID(User.Identity.Name);
-
-                    var EnrollIdbyProf = db.EnrollmentGroups
-                        .Where(m => m.ProfessorID == uID)
-                        .Select(m => m.EnrollmentCourse)
-                        .Select(m => m.Enrollment)
-                        .OrderByDescending(m => m.InsertDate).ToList()
-                        .Select(m => m.EnrollmentID)
-                        .FirstOrDefault();
-
-
+                   
                     return Json(db.Scores
-                                 .Where(s => s.CourseID == new Guid(CourseID) && s.EnrollmentGroup.EnrollmentCourse.EnrollmentID == EnrollIdbyProf && s.Reason == null)
+                                 .Where(s => s.EnrollmentGroupID == new Guid(GroupID) && s.Reason == null)
                                  .Select(s => new
                                 {
                                     s.ScoreID,
@@ -140,16 +130,16 @@ namespace FTMatricula.Controllers
         /// Send the notes to Records
         /// </summary>        
         [HttpPost]
-        public JsonResult RecordAction(string CourseID)
+        public JsonResult RecordAction(string GroupID)
         {
             try
             {
-                if (CourseID != "")
+                if (GroupID != "")
                 {
                     var uID = SessApp.GetUserID(User.Identity.Name);
 
                     foreach (var item in db.Scores
-                        .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.CourseID == new Guid(CourseID))
+                        .Where(s => s.EnrollmentGroup.ProfessorID == uID && s.EnrollmentGroupID == new Guid(GroupID))
                         .Select(s => new
                         {
                             s.ScoreID,
@@ -186,13 +176,13 @@ namespace FTMatricula.Controllers
         /// <summary>
         /// Validate if a course has already a record
         /// </summary>
-        public JsonResult hasRecord(string CourseID)
+        public JsonResult hasRecord(string GroupID)
         {
             try
             {
                 var rs = from r in db.Records
                          join s in db.Scores on r.ScoreID equals s.ScoreID
-                         where s.CourseID == new Guid(CourseID)
+                         where s.EnrollmentGroupID == new Guid(GroupID)
                          select new { r.RecordID };
 
                 if (rs.ToList().Count > 0)

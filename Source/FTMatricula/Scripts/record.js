@@ -21,18 +21,18 @@ var record = new Class({
     courseOnchanged: function () {
         var self = this;
         $('#btnRecord').fadeOut();
-        $('#ddlCourseID').off('change.ddlCourseID').on('change.ddlCourseID', function () {
-            $("#CourseID").val($("#ddlCourseID").val());
-            var courseID = $("#ddlCourseID").val();
-            if (courseID != '') {
+        $('#ddlGroupID').off('change.ddlGroupID').on('change.ddlGroupID', function () {
+            $("#GroupID").val($("#ddlGroupID").val());
+            var GroupID = $("#ddlGroupID").val();
+            if (GroupID != '') {
                 var grid = $("#Grid").data("kendoGrid");
-                grid.dataSource.transport.options.read.url = "/Record/PagingRecords?CourseID=" + courseID;
+                grid.dataSource.transport.options.read.url = "/Record/PagingRecords?GroupID=" + GroupID;
                 grid.dataSource.read();
                 grid.refresh();
 
                 $.bAjax({
                     url: 'ScoreRegister/GetScoreCriteriaByPlan',
-                    data: { courseID: $(this).val() },
+                    data: { GroupID: $(this).val() },
                     async: false,
                     ajaxSuccess: function (response) {
                         var result = $.parseJSON(response);
@@ -55,7 +55,7 @@ var record = new Class({
                         $('.popupBg').fadeIn();
                         $('.loading').fadeIn();
                     },
-                    data: { CourseID: courseID },
+                    data: { GroupID: GroupID },
                     async: false,
                     ajaxSuccess: function (response) {
                         $('.popupBg').fadeOut();
@@ -87,15 +87,15 @@ var record = new Class({
         $('#btnRecord').off('click.btnRecord').on('click.btnRecord', function () {
             if (confirm('La accion enviar a actas se realiza una unica vez\n\rEsta seguro que toda la informacion es correcta y quiere proceder??'))
             {
-                $("#CourseID").val($("#ddlCourseID").val());
-                var courseID = $("#ddlCourseID").val();
+                $("#GroupID").val($("#ddlGroupID").val());
+                var GroupID = $("#ddlGroupID").val();
                 $.bAjax({
                     url: self.options.urlRecord,
                     ajaxBeforeSend: function () {
                         $('.popupBg').fadeIn();
                         $('.loading').fadeIn();
                     },
-                    data: { CourseID: courseID },
+                    data: { GroupID: GroupID },
                     async: false,
                     ajaxSuccess: function (response) {
                         $('.popupBg').fadeOut();

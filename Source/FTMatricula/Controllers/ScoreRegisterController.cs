@@ -27,11 +27,11 @@ namespace FTMatricula.Controllers
         /// Paging Scores by Course
         /// </summary>
         [HttpPost]
-        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, string CourseID)
+        public ActionResult PagingScores([DataSourceRequest] DataSourceRequest request, string GroupID)
         {
             try
             {
-                if ((CourseID != null) && (CourseID.Length > 0))
+                if ((GroupID != null) && (GroupID.Length > 0))
                 {
                     var uID = SessApp.GetUserID(User.Identity.Name);
 
@@ -44,7 +44,7 @@ namespace FTMatricula.Controllers
                         .FirstOrDefault();
 
                     return Json(db.Scores
-                                .Where(s => s.CourseID == new Guid(CourseID) && s.EnrollmentGroup.EnrollmentCourse.EnrollmentID == EnrollIdbyProf && s.Reason == null)
+                                .Where(s => s.EnrollmentGroupID == new Guid(GroupID) && s.Reason == null)
                                 .Select(s => new
                                 {
                                     s.ScoreID,
@@ -137,13 +137,15 @@ namespace FTMatricula.Controllers
         /// Get Score Criteria By Plan
         /// </summary>
         [HttpPost]
-        public JsonResult GetScoreCriteriaByPlan(string courseID)
+        public JsonResult GetScoreCriteriaByPlan(string GroupID)
         {
+            Guid? courseID = db.EnrollmentGroups.Find(new Guid(GroupID)).EnrollmentCourse.CourseID;
+
             return Json(
                 db.ScoreCriterias
                 .ToList()
                 .Join(db.Courses, sc => sc.ScoreCriteriaID, c => c.ScoreCriteriaID, (sc, c) => new { sc, c })
-                .Where(m => m.c.CourseID == new Guid(courseID))
+                .Where(m => m.c.CourseID == courseID)
                 .Select(m =>
                 new
                 {

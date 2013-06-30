@@ -31,7 +31,7 @@
                     <li class="width100">
                         @(Html.Kendo().DropDownList()
                                     .BindTo(FTMatricula.Utilities.GeneralCollections.CoursesByProf(@User.Identity.Name))
-                                    .Name("ddlCourseID")
+                                    .Name("ddlGroupID")
                                     .DataTextField("Text")
                                     .DataValueField("Value")
                                     .HtmlAttributes(new { @class = "width100" })
