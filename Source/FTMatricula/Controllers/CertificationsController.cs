@@ -196,8 +196,8 @@ namespace FTMatricula.Controllers
                         item.Course.Name, 
                         item.RecordResult, 
                         item.Course.TeachingHours.ToString(), 
-                        item.EnrollmentGroup.EnrollmentCourse.Enrollment.EndDate.Value.Month.ToString(), 
-                        item.EnrollmentGroup.EnrollmentCourse.Enrollment.EndDate.Value.Year.ToString()});
+                        (item.EnrollmentGroup != null) ? item.EnrollmentGroup.EnrollmentCourse.Enrollment.EndDate.Value.Month.ToString(): " -- ", 
+                        (item.EnrollmentGroup != null) ? item.EnrollmentGroup.EnrollmentCourse.Enrollment.EndDate.Value.Year.ToString(): "Curso Convalidado"});
 
                 }
 
