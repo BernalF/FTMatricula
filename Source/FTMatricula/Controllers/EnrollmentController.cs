@@ -681,18 +681,54 @@ namespace FTMatricula.Controllers
                                     Phone1 = result[0].Phone1
                                 };
 
+
+                result = new List<EnrollStudent>();
+
+                this.Check_StudentPlan(model);
+                
+            }
+            model.StudentList = result;
+
+        }
+
+
+        /// <summary>
+        /// Check StudentPlan
+        /// </summary>
+        /// <param name="model"></param>
+        private void Check_StudentPlan(EnrollmentInit model)
+        {
+            Guid? planID = db.Enrollments.Find(model.EnrollmentID).PlanID;
+
+            var r = db.StudentPlans.Where(x => x.PlanID == planID && x.StudentID == model.Student.StudentID).Select(x => x.PlanID).FirstOrDefault();
+            if (r == null)
+            {
+                model.IsStudentOK = true;
+                model.IsReadyToEnroll = false;
+                model.ServerRequest = null;
+
+
+                model.Message = new ServerMessage
+                {
+                    Show = true,
+                    Text = "El Estudiante no pertenece al plan de estudios relacionado a la matrícula seleccionada.",
+                    Severity = MessageSeverity.Error
+                };
+            }
+            else
+            {
+
                 model.IsStudentOK = true;
                 model.IsReadyToEnroll = true;
                 model.ServerRequest = null;
 
-                result = new List<EnrollStudent>();
 
                 //pending test
                 var enrollment = db.Enrollments.Find(model.EnrollmentID);
                 ICollection<Guid?> aux = new List<Guid?>();
                 if (enrollment != null)
                     aux = enrollment.EnrollmentCourses.Select(m => m.EnrollmentCourseID).ToList();
-                
+
                 var tmp = db.EnrollmentStudentCourses
                     .Where(m => m.StudentID == model.Student.StudentID && aux.Contains(m.EnrollmentGroup.EnrollmentCourse.EnrollmentCourseID)).ToList();
                 if (tmp.Count > 0)
@@ -715,9 +751,9 @@ namespace FTMatricula.Controllers
                     };
                 }
             }
-            model.StudentList = result;
 
         }
+
         /// <summary>
         /// Enrollment Init DEFAULT
         /// </summary>

@@ -1,6 +1,6 @@
 ﻿@{
     Layout = "~/Views/Shared/_LayoutKendo.cshtml";
-    ViewBag.Title = @Resources.GetValue("NOTES_REGISTER");
+    ViewBag.Title = @Resources.GetValue("ACADEMIC_HISTORY");
 }
 
 @section styles {
@@ -36,7 +36,7 @@
                                           columns.Bound(m => m.CourseCode).Title("Código Curso");
                                           columns.Bound(m => m.CourseName).Title("Nombre del Curso");
                                           columns.Bound(m => m.Professor).Title("Profesor");
-                                          columns.Bound(m => m.Schedule).Title("Horario");
+                                          columns.Bound(m => m.RecordResult).Title("Nota Final");                                          
                                       })
                                       .Resizable(resize => resize.Columns(true))
                                       .Filterable(filter =>
@@ -67,7 +67,7 @@
                                             .Ajax()
                                             .Batch(true)
                                             .Events(events => events.Error("error_handler"))
-                                            .Read(read => read.Action("PagingStudentCourses", "Student"))
+                                            .Read(read => read.Action("PagingAcademicHistory", "Student"))
                                             )
                                     )
                     </li>
@@ -80,14 +80,6 @@
             </ul>
         </div>
     </div>
-</div>
-
 @section Scripts {
-    <script type="text/javascript">
-        $(function () {
-            var sregis = new scoreRegister({
-                view: 'INDEX'
-            });
-        });
-    </script>
+
 }

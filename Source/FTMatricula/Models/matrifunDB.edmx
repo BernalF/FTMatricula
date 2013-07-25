@@ -594,6 +594,7 @@
           <Property Name="IpAddress" Type="varchar" MaxLength="200" />
           <Property Name="EnrollmentGroupID" Type="uniqueidentifier" />
           <Property Name="isApproved" Type="bit" />
+          <Property Name="Reason" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="ScoreCriteria">
           <Key>
@@ -2467,6 +2468,7 @@
           <NavigationProperty Name="Records" Relationship="FTMatricula.DBModel.FK_Record_Score" FromRole="Score" ToRole="Record" />
           <NavigationProperty Name="Student" Relationship="FTMatricula.DBModel.FK_Score_Student" FromRole="Score" ToRole="Student" />
           <Property Type="Boolean" Name="isApproved" />
+          <Property Type="String" Name="Reason" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Score_Course">
           <End Type="FTMatricula.DBModel.Course" Role="Course" Multiplicity="1" />
@@ -3090,6 +3092,7 @@
           <EntitySetMapping Name="Scores">
             <EntityTypeMapping TypeName="FTMatricula.DBModel.Score">
               <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
                 <ScalarProperty Name="isApproved" ColumnName="isApproved" />
                 <ScalarProperty Name="EnrollmentGroupID" ColumnName="EnrollmentGroupID" />
                 <ScalarProperty Name="IpAddress" ColumnName="IpAddress" />

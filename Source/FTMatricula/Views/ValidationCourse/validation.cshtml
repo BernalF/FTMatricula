@@ -1,0 +1,153 @@
+﻿@model FTMatricula.Models.ValidationCourseModel
+
+@{
+    Layout = "~/Views/Shared/_LayoutKendo.cshtml";
+    ViewBag.Title = "Validate";
+}
+@section styles{
+    <link rel="stylesheet" href="~/Content/styles/popup_window.css" />
+}
+
+<div id="content">
+    <div class="mainBox">
+        <h2 class="title"><a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="internalTitle">@Resources.GetValue("HOME")/@Resources.GetValue("VAL_COURSE")/Convalidar</a></h2>
+
+        <div class="editTitle">
+            @*<span>@Resources.GetValue("ENROLLMENT_ADD_TITLE") -</span>@Resources.GetValue("ENROLLMENT_GENERAL_INFO")*@
+            <span>Convalidacion de Cursos</span>
+        </div>
+
+        <div class="editDetail">
+            <div class="defaultBox ">
+                <ul class="margin5">
+                    <li>                                                
+                        <label class="subTitle cWhite">Plan: </label>
+                        <label>@Model.PlanName </label>
+                    </li>
+                    <li class="textLeft width100">
+                        <label class="subTitle cWhite">Estudiante: </label>
+                        <label>@Model.StudentName</label>
+                    </li>
+                    <li class="width100">
+                        @(Html.Kendo().Grid<FTMatricula.Models.Course>()
+                                      .Name("Grid")
+                                      .Columns(columns =>
+                                      {
+                                          columns.Bound(m => m.Code).Title(@Resources.GetValue("COURSE_CODE"));
+                                          columns.Bound(m => m.Name).Title(@Resources.GetValue("COURSE_NAME"));
+                                          columns.Command(command =>
+                                          {
+                                              command.Custom("valC").Click("validate")
+                                                  .HtmlAttributes(new { @style = "display: block" })
+                                                  .Text("Convalidar");
+                                          }).Title("Convalidar");
+                                      })
+                                      .Sortable(sor => sor.AllowUnsort(true))
+                                      .Filterable(filter =>
+                                      {
+                                          filter.Enabled(true);
+                                          filter.Extra(false);
+                                          filter.Operators(oper =>
+                                          {
+                                              oper.ForString(ostr =>
+                                              {
+                                                  ostr.IsEqualTo(@Resources.GetValue("IS_EQUAL_TO"));
+                                                  ostr.IsNotEqualTo(@Resources.GetValue("IS_NOT_EQUAL_TO"));
+                                                  ostr.StartsWith(@Resources.GetValue("STARTS_WITH"));
+                                                  ostr.Contains(@Resources.GetValue("CONTAINS"));
+                                                  ostr.DoesNotContain(@Resources.GetValue("DOES_NOT_CONTAIN"));
+                                                  ostr.EndsWith(@Resources.GetValue("ENDS_WITH"));
+                                              });
+                                          });
+                                          filter.Messages(msj =>
+                                          {
+                                              msj.Filter(@Resources.GetValue("FIND"));
+                                              msj.Clear(@Resources.GetValue("CLEAN"));
+                                              msj.Info(@Resources.GetValue("FIND_VAL_WHAT"));
+                                          });
+                                      })
+                                      .Pageable(pager => pager
+                                            .PageSizes(new int[] { 5, 10, 15 })
+                                            .Input(true)
+                                            .Numeric(true)
+                                            .Info(true)
+                                            .PreviousNext(true)
+                                            .Refresh(true)
+                                                    .Messages(messages =>
+                                                    {
+                                                        messages.Empty(@Resources.GetValue("NO_RECORDS"));
+                                                        messages.Display(@Resources.GetValue("DISPLAY_GRID"));
+                                                        messages.ItemsPerPage(@Resources.GetValue("ITEMS_PER_PAGE"));
+                                                        messages.Page(@Resources.GetValue("PAGE"));
+                                                        messages.Of(@Resources.GetValue("OF_GRID"));
+                                                        messages.First(@Resources.GetValue("FIRST_PAGE"));
+                                                        messages.Previous(@Resources.GetValue("PREVIOUS_PAGE"));
+                                                        messages.Next(@Resources.GetValue("NEXT_PAGE"));
+                                                        messages.Last(@Resources.GetValue("LAST_PAGE"));
+                                                        messages.Refresh(@Resources.GetValue("UPDATE"));
+                                                    }))
+                                      .DataSource(dataSource => dataSource
+                                            .Ajax()
+                                            .Events(events => events.Error("error_handler"))
+                                            .Read(read => read.Action("PagingCourses", "ValidationCourse"))
+                                            .Model(model => model.Id(m => m.CourseID))
+                                      )
+                                )
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="formBtnBar">
+            <a href="@Url.Action("Back", "Home", routeValues: new { opt = "enrollment" })" class="button back">Regresar</a>
+        </div>
+    </div>
+</div>
+@Html.HiddenFor(m => m.Student.StudentID)
+<a href="#ValidateReason" id="linkValidateReason" class="popUp hide">Link</a>
+<div class="popupWindow" id="ValidateReason">
+    <h2>Razon</h2>
+    <ul class="formList">
+        <li>Ingrese una Razón para la Convalidación del curso</li>
+        <li>
+            <textarea class="input width100" id="lblVal" ></textarea>
+        </li>
+        <li>
+            <div class="formBtnBar">                
+                <button id="btnValidate" class="button send">Convalidar</button>
+            </div>
+        </li>
+    </ul>
+</div>
+@section Scripts {
+    <script>
+        function validate(e) {
+            e.preventDefault();
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $('#lblVal').val('');
+            $('#linkValidateReason').trigger('click');
+            $("#btnValidate").off('click.btnValidate').on('click.btnValidate', {
+                courseID: dataItem.CourseID,                
+                studentID: $('#Student_StudentID').val()
+            }, function (e) {
+                $(".popupBg").delay(300).fadeOut(300);
+                $('#ValidateReason').fadeOut(300);
+                $.bAjax({
+                    url: '@Url.Action("ValidateCourses","ValidationCourse")',
+                    data: { studentID: e.data.studentID, courseID: e.data.courseID, reason: $('#lblVal').val() },
+                    async: false,
+                    ajaxSuccess: function (response) {
+                        r = $.parseJSON(response);
+                        if (r.result != 'OK') {
+                            alert(r.result);
+                        }
+                        else {
+                            window.location.reload();
+                        }
+                    }
+                });
+            })
+            return false;
+        }
+    </script>
+}

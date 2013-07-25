@@ -308,19 +308,34 @@ namespace FTMatricula.Utilities
             matrifunDBEntities db = new matrifunDBEntities();
 
             //Get StudentID by LoggedUserID
-            var uID = SessApp.GetUserID(userName);          
+            Guid professorID = SessApp.GetUserID(userName);          
 
-            var EnrollIdbyProf = db.EnrollmentGroups
-                        .Where(m => m.ProfessorID == uID)
-                        .Select(m => m.EnrollmentCourse)
-                        .Select(m => m.Enrollment)
-                        .OrderByDescending(m => m.InsertDate).ToList()
-                        .Select(m=> m.EnrollmentID)
-                        .FirstOrDefault();
-            
+            //new format to load course by professor, and also set description to combo: grupo + curse name + location
+            var groupsByProfessor = db.EnrollmentGroups
+                        .Where(x => x.ProfessorID == professorID)
+                        .Select(x => x.EnrollmentGroupID).ToList();
+
+            var scoresByGroup = db.Scores
+                        .Where(x => groupsByProfessor.Contains(x.EnrollmentGroupID))
+                        .Select(x => x.ScoreID).ToList();
+
+            var recordsByScore = db.Records
+                        .Where(x => scoresByGroup.Contains(x.ScoreID))
+                        .Select(x => x.ScoreID).ToList();
+
+            //Here, we select the current groups, just removing  the scores reported to Records...
+            var currentGroups = db.Scores
+                        .Where(x => !recordsByScore.Contains(x.ScoreID) && groupsByProfessor.Contains(x.EnrollmentGroupID))
+                        .Select(x => x.EnrollmentGroupID)
+                        .Distinct().ToList();
+
+
             return new SelectList(db.EnrollmentGroups
-                    .Where(x => x.EnrollmentCourse.EnrollmentID == EnrollIdbyProf && x.ProfessorID == uID)
-                    .Select(x => new { CourseID = x.EnrollmentCourse.CourseID, Name = x.EnrollmentCourse.Course.Name }), "CourseID", "Name");
+                    .Where(x => currentGroups.Contains(x.EnrollmentGroupID))
+                    .Select(x => new { GroupID = x.EnrollmentGroupID,
+                                       Name = x.GroupName + " - " + x.EnrollmentCourse.Course.Name + " / " + x.EnrollmentCourse.Enrollment.Location.Line1
+                    }), "GroupID", "Name");
+
         }
 
 
@@ -386,8 +401,11 @@ namespace FTMatricula.Utilities
                                             db.Schemes.Where(x => x.SchoolID == schoolID).FirstOrDefault().Scheme_Plan.Select(p => p.PlanID).ToList()
                                             : new List<Guid?>();
 
+            DateTime today = DateTime.Today;
+
             return new SelectList(db.Enrollments
-                                .Where(e => IsSchoolAdmin == false || aux.Contains(e.PlanID))
+                                .Where(e => (IsSchoolAdmin == false || aux.Contains(e.PlanID))
+                                    && (e.VerifyDates == false || (today >= e.StartDate && today <= e.EndDate) || ( today  >= e.ExtraStartDate && today <= e.ExtraEndDate)))
                                 .ToList()
                                 .Select(e => new { e.EnrollmentID, Description = e.Description + " -- " + e.Plan.Description }), "EnrollmentID", "Description");
         }

@@ -18,11 +18,11 @@ var scoreRegister = new Class({
         }
     },
     courseOnchanged: function () {        
-        $('#ddlCourseID').off('change.ddlCourseID').on('change.ddlCourseID', function () {
+        $('#ddlGroupID').off('change.ddlGroupID').on('change.ddlGroupID', function () {
             if ($(this).val() != "") {
                 $.bAjax({
                     url: 'ScoreRegister/GetScoreCriteriaByPlan',
-                    data: { courseID: $(this).val() },
+                    data: { GroupID: $(this).val() },
                     async: false,
                     ajaxSuccess: function (response) {
                         var result = $.parseJSON(response);
@@ -39,10 +39,10 @@ var scoreRegister = new Class({
                     }
                 });
 
-                $("#CourseID").val($("#ddlCourseID").val());
-                var courseID = $("#ddlCourseID").val();
+                $("#GroupID").val($("#ddlGroupID").val());
+                var GroupID = $("#ddlGroupID").val();
                 var grid = $("#Grid").data("kendoGrid");
-                grid.dataSource.transport.options.read.url = "/ScoreRegister/PagingScores?CourseID=" + courseID;
+                grid.dataSource.transport.options.read.url = "/ScoreRegister/PagingScores?GroupID=" + GroupID;
                 grid.dataSource.read();
                 grid.refresh();
             }

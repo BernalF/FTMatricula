@@ -317,7 +317,7 @@ namespace FTMatricula.Controllers
         public ActionResult PagingStudentCourses([DataSourceRequest] DataSourceRequest request)
         {
             List<StudentCourses> result = null;
-            
+
             var temp = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault();
             if (temp != null)
             {
@@ -352,7 +352,7 @@ namespace FTMatricula.Controllers
                     result[i].Schedule = schedule.ToString();
 
                     var aux = db.Students.Where(x => x.UserID == item.ProfessorID).FirstOrDefault();
-                    if(aux != null)
+                    if (aux != null)
                         result[i].Professor = aux.FirstName + " " + aux.LastName;
                     i++;
                 }
@@ -370,10 +370,281 @@ namespace FTMatricula.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Score Report
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ScoreReport()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// Link Student Plan
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LinkStudentPlan(string id)
+        {
+            try
+            {
+                Student x = db.Students.Find(new Guid(id));
+                return View(x);
+            }
+            catch (Exception e)
+            {
+                throw new ApplicationException(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// Get Plans List
+        /// </summary>
+        [HttpPost]
+        public JsonResult GetPlans(string studentID)
+        {
+            if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            {
+                Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+
+                return Json(new
+                {
+                    PlanLeft = db.Plans
+                        .ToList()
+                        .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                        .Where(m => m.p.isActive == true
+                               && m.sp.Scheme.SchoolID == schoolID)
+                        .Select(c =>
+                      new
+                      {
+                          PlanID = c.p.PlanID,
+                          PlanName = c.p.Name + " - " + c.p.Description + " - v. " + c.p.Version
+                      })
+                        .Except(db.StudentPlans
+                        .ToList()
+                        .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                        .Where(m => m.p.StudentID == new Guid(studentID) && m.sp.Plan.isActive == true
+                               && m.sp.Scheme.SchoolID == schoolID)
+                        .Select(m =>
+                      new
+                      {
+                          PlanID = m.sp.PlanID,
+                          PlanName = m.sp.Plan.Name + " - " + m.sp.Plan.Description + " - v. " + m.sp.Plan.Version
+                      })),
+                    //Plans that student belongs
+                    PlanRigth = db.StudentPlans
+                            .ToList()
+                            .Join(db.Scheme_Plan, p => p.PlanID, sp => sp.PlanID, (p, sp) => new { p, sp })
+                            .Where(m => m.sp.Plan.isActive == true
+                               && m.sp.Scheme.SchoolID == schoolID && m.p.StudentID == new Guid(studentID))
+                            .Select(m =>
+                          new
+                          {
+                              PlanID = m.sp.PlanID,
+                              PlanName = m.sp.Plan.Name + " - " + m.sp.Plan.Description + " - v. " + m.sp.Plan.Version
+                          })
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    PlanLeft = db.Plans
+                        .Where(c => c.isActive == true)
+                        .ToList()
+                        .Select(c =>
+                      new
+                      {
+                          PlanID = c.PlanID,
+                          PlanName = c.Name + " - " + c.Description + " - v. " + c.Version
+                      })
+                        .Except(db.StudentPlans
+                        .ToList()
+                        .Where(m => m.StudentID == new Guid(studentID))
+                        .Select(m =>
+                      new
+                      {
+                          PlanID = m.PlanID,
+                          PlanName = m.Plan.Name + " - " + m.Plan.Description + " - v. " + m.Plan.Version
+                      })),
+                    //Plans that student belongs
+                    PlanRigth = db.StudentPlans
+                            .ToList()
+                            .Where(m => m.StudentID == new Guid(studentID))
+                            .Select(m =>
+                          new
+                          {
+                              PlanID = m.PlanID,
+                              PlanName = m.Plan.Name + " - " + m.Plan.Description + " - v. " + m.Plan.Version
+                          })
+                });
+            }
+        }
+
+        /// <summary>
+        /// Insert Plans Student
+        /// </summary>
+        [HttpPost]
+        public JsonResult InsertPlanStudent(string studentID, string[] plans)
+        {
+            if (User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            {
+                Guid? schoolID = Misc.GetSchoolID(User.Identity.Name);
+
+                // Delete all that exists by school
+                var rows = from x in db.StudentPlans
+                           join y in db.Scheme_Plan on x.PlanID equals y.PlanID
+                           where x.StudentID == new Guid(studentID) && y.Scheme.SchoolID == schoolID
+                           select x;
+
+                foreach (var row in rows)
+                {
+                    db.StudentPlans.Remove(row);
+                }
+                db.SaveChanges();
+                //Insert again
+                if (plans != null)
+                {
+                    foreach (var item in plans)
+                    {
+                        StudentPlan sp = new StudentPlan
+                        {
+                            PlanID = new Guid(item),
+                            StudentID = new Guid(studentID),
+                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                            InsertDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)
+                        };
+                        db.StudentPlans.Add(sp);
+                        db.SaveChanges();
+                    }
+                }
+                return Json(true);
+            }
+            else
+            {
+                // Delete all that exists
+                var rows = from x in db.StudentPlans
+                           where x.StudentID == new Guid(studentID)
+                           select x;
+
+                foreach (var row in rows)
+                {
+                    db.StudentPlans.Remove(row);
+                }
+                db.SaveChanges();
+                //Insert again
+                if (plans != null)
+                {
+                    foreach (var item in plans)
+                    {
+                        StudentPlan sp = new StudentPlan
+                        {
+                            PlanID = new Guid(item),
+                            StudentID = new Guid(studentID),
+                            InsertUserID = SessApp.GetUserID(User.Identity.Name),
+                            InsertDate = DateTime.Today,
+                            IpAddress = Network.GetIpAddress(Request)
+                        };
+                        db.StudentPlans.Add(sp);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            return Json(true);
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
             base.Dispose(disposing);
         }
+
+        /// <summary>
+        /// Paging Student Courses
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingAcademicHistory([DataSourceRequest] DataSourceRequest request)
+        {
+            List<StudentCourses> result = null;
+
+            var temp = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault();
+            if (temp != null)
+            {
+                Guid? StudentID = temp.StudentID;
+
+                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
+
+                result = db.Scores
+                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
+                                .Select(m => new StudentCourses
+                                {
+                                    EnrollmentGroupID = m.EnrollmentGroupID,
+                                    ProfessorID = m.EnrollmentGroup.ProfessorID,
+                                    CourseID = m.CourseID,
+                                    CourseCode = m.Course.Code,
+                                    CourseName = m.Course.Name,
+                                    PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name,                                    
+                                    RecordResult = m.RecordResult
+                                })
+                                .ToList();
+                int i = 0;
+                foreach (var item in result)
+                {
+                    var aux = db.Students.Where(x => x.UserID == item.ProfessorID).FirstOrDefault();
+                    if (aux != null)
+                        result[i].Professor = aux.FirstName + " " + aux.LastName;
+                    i++;
+                }
+            }
+
+            return Json(result.ToDataSourceResult(request));
+        }
+
+        /// <summary>
+        /// Paging Score Report
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult PagingScoreReport([DataSourceRequest] DataSourceRequest request)
+        {
+            List<StudentCourses> result = null;
+
+            var temp = db.Students.Where(m => m.User.UserName == User.Identity.Name).FirstOrDefault();
+            if (temp != null)
+            {
+                Guid? StudentID = temp.StudentID;
+
+                var ScoresInRecords = db.Records.Where(m => m.Score.Student.StudentID == StudentID).Select(m => m.ScoreID).ToList();
+
+                result = db.Scores
+                                .Where(x => x.StudentID == StudentID && !ScoresInRecords.Contains(x.ScoreID))
+                                .Select(m => new StudentCourses
+                                {
+                                    EnrollmentGroupID = m.EnrollmentGroupID,
+                                    ProfessorID = m.EnrollmentGroup.ProfessorID,
+                                    CourseID = m.CourseID,
+                                    CourseCode = m.Course.Code,
+                                    CourseName = m.Course.Name,
+                                    PlanCode = m.EnrollmentGroup.EnrollmentCourse.Enrollment.Plan.Name,
+                                    Score = m.Result
+                                })
+                                .ToList();
+                int i = 0;
+                foreach (var item in result)
+                {
+                    var aux = db.Students.Where(x => x.UserID == item.ProfessorID).FirstOrDefault();
+                    if (aux != null)
+                        result[i].Professor = aux.FirstName + " " + aux.LastName;
+                    i++;
+                }
+            }
+
+            return Json(result.ToDataSourceResult(request));
+        }
+
     }
 }
