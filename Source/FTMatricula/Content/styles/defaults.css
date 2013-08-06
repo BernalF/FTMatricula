@@ -537,7 +537,7 @@ textarea.input {
 }
 
 /* TOP STARTS */
-.top {
+    .top {
     padding: 10px;
     overflow: hidden;
     position: relative;
@@ -545,13 +545,13 @@ textarea.input {
 }
 
     .top h1 {
-        padding: 5px 0 0 50px;
+        padding: 5px 0 0 230px;        
         font-size: 20px;
         line-height: 30px;
         float: left;
         height: 35px;
-        background: url(../images/defaults/logowhite.png) no-repeat center left;
-        color: #fff;
+        /*background: url(../images/defaults/logowhite.png) no-repeat center left;*/
+        color: #656565;
     }
 
 nav {
@@ -711,6 +711,8 @@ footer {
 }
 
 #header {
+    background: url(../images/defaults/logo.png) no-repeat left bottom;
+    background-size: 224px 35px;
     top: 0;
     width: 100%;
     height: 50px;
@@ -718,6 +720,8 @@ footer {
     right: 0;
     z-index: 20;
 }
+
+
 
 #login_content {
     top: 50px;
