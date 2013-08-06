@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="description" content="iSales App HTML5">
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="apple-touch-icon-precomposed" href="~/bookmark-icon1.png" />
+    <link rel="apple-touch-icon" href="~/apple-touch-icon.png" />
+
+    <link rel="stylesheet" href="~/Content/styles/defaults.css">
+    <link rel="stylesheet" href="~/Content/styles/login.css">
+    <link rel="stylesheet" href="~/Content/styles/internal.css">
+        
+    <script src="~/Content/scripts/modernizr-2.5.3.js"></script>
+
+    @RenderSection("styles", required: false)
+</head>
+<body>
+
+    <div id="header">
+        <header class="top">
+            <a  href="@Url.Action("Index", "Home", routeValues: null)">
+                <h1>Sistema de Matrícula</h1>
+            </a>
+            <nav>
+                <ul>
+                    @Html.Partial("_LoginPartial")
+                </ul>
+            </nav>
+        </header>
+    </div>
+    <!-- SECTION CONTENT STARTS -->
+    @RenderBody()
+    <!-- SECTION CONTENT ENDS -->
+    <div id="footer">
+        <footer>
+            <ul>
+                <li class="lined">@Resources.GetValue("SIGN")</li>
+            </ul>
+        </footer>
+
+    </div>
+    ​
+    <div class="popupBg">        
+    </div>
+    <div class="loading">
+        <img src="~/Content/images/defaults/loader.gif" alt="loading" />
+        <p>Please wait!</p>
+    </div>
+</body>
+</html>
+
+@RenderSection("scripts", required: false)
