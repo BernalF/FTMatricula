@@ -1,0 +1,75 @@
+﻿<!-- BEGIN enrollment -->
+<li menu-option="enrollment" class="hide">
+    <ul class="subMenuOpt">
+        <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("ENROLLMENT")</a></li>
+        <li class="optList">
+            <div class="opt">                
+                <a href="@Url.Action("Index", "Enrollment", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/ruler_pencil.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("ENROLLMENTS")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("ENROLLMENTS_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("EnrollmentInit", "Enrollment", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/student_enrollment.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("ENROLLMENT_STUDENT")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("ENROLLMENT_STUDENT_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index" , "ValidationCourse", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/convalidar.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("VAL_COURSE")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("VAL_COURSE_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        }
+        <li class="optList hide">
+            <div class="opt">
+                <a href="#">
+                    <div style="background-image: url('Content/images/icons/check_enrollment.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("STUDENT_ENROLLMENT_CONSULT")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("STUDENT_ENROLLMENT_CONSULT_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        
+    </ul>
+</li>
+<!-- END enrollment -->

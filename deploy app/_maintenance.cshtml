@@ -1,0 +1,112 @@
+﻿<!-- BEGIN Maintenance -->
+<li menu-option="maintenance" class="hide">
+    <ul class="subMenuOpt">
+        <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("MAINTENANCE")</a></li>
+        @if (!User.IsInRole("ROLE_SCHOOL_ADMIN") && !User.IsInRole("ROLE_ASSISTANCE"))
+        { 
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index", "School", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/school.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("SCHOOL")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("SCHOOL_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        }
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index", "Classroom", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/aulas.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("CLASSROOM")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("CLASSROOM_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index", "Location", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/place.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("LOCATION")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("LOCATION_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index", "Modality", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/category.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("MODALITY_TYPE")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("MODALITY_TYPE_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        }
+        <li class="optList hide">
+            <div class="opt">
+                <a href="@Url.Action("index", "Requirement", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/tipos_requisitos.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("REQUERIMENT")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("REQUERIMENT_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
+        <li class="optList">
+            <div class="opt">
+                <a href="@Url.Action("index", "User", routeValues: null)">
+                    <div style="background-image: url('Content/images/icons/user_man.png');">
+                        <ul>
+                            <li>
+                                <span>@Resources.GetValue("USERS")</span>
+                            </li>
+                            <li>
+                                <p>@Resources.GetValue("USERS_DETAIL")</p>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </div>
+        </li>
+        }
+    </ul>
+</li>
+<!-- END Maintenance -->
