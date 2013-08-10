@@ -537,7 +537,7 @@ textarea.input {
 }
 
 /* TOP STARTS */
-    .top {
+.top {
     padding: 10px;
     overflow: hidden;
     position: relative;
@@ -545,7 +545,7 @@ textarea.input {
 }
 
     .top h1 {
-        padding: 5px 0 0 230px;        
+        padding: 5px 0 0 230px;
         font-size: 20px;
         line-height: 30px;
         float: left;
@@ -973,6 +973,14 @@ footer {
     text-align: center;
     vertical-align: bottom;
 }
+
+    .defaultOptList .subMenuImage {
+        background-color: #fff;
+        border: 10px solid #fff;
+        width: 285px;
+        height: 50px;
+    }
+
 
 .optList .opt {
     width: 100%;
