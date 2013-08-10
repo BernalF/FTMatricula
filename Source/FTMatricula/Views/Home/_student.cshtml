@@ -2,6 +2,8 @@
 <li menu-option="student" class="hide">
     <ul class="subMenuOpt">
         <li><a href="#" class="optTitle">@Resources.GetValue("HOME")/@Resources.GetValue("STUDENT")</a></li>
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("StudentCourses", "Student", routeValues: null)">
@@ -18,6 +20,9 @@
                 </a>
             </div>
         </li>
+        }
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("AcademicHistory", "Student", routeValues: null)">
@@ -34,6 +39,9 @@
                 </a>
             </div>
         </li>
+        }
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("ScoreReport", "Student", routeValues: null)">
@@ -50,6 +58,7 @@
                 </a>
             </div>
         </li>
+        }
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index", "Student", routeValues: null)">

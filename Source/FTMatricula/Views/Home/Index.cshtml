@@ -10,7 +10,7 @@
     <!-- DESKTOPS STARTS -->
     <div class="desk">
         <ul class="menuOpt">
-            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_SCHOOL_ADMIN") || User.IsInRole("ROLE_ASSISTANCE"))
             { 
                 <li class="item">
                     <div class="itemContent maintenance">
@@ -23,7 +23,7 @@
                     </div>
                 </li>
             }
-            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_STUDENT") || User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_STUDENT") || User.IsInRole("ROLE_SCHOOL_ADMIN") || User.IsInRole("ROLE_ASSISTANCE"))
             { 
                 <li class="item">
                     <div class="itemContent student">
@@ -49,7 +49,7 @@
                     </div>
                 </li>
             }
-            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR") || User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR") || User.IsInRole("ROLE_SCHOOL_ADMIN") || User.IsInRole("ROLE_ASSISTANCE"))
             { 
                 <li class="item">
                     <div class="itemContent enrollment">
@@ -75,7 +75,7 @@
                     </div>
                 </li>
             }
-            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_TEACHER"))
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_TEACHER") || User.IsInRole("ROLE_ASSISTANCE"))
             { 
                 <li class="item">
                     <div class="itemContent records">
@@ -88,7 +88,7 @@
                     </div>
                 </li>
             }
-            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR") || User.IsInRole("ROLE_SCHOOL_ADMIN"))
+            @if (User.IsInRole("ROLE_ADMINISTRATOR") || User.IsInRole("ROLE_COORDINATOR") || User.IsInRole("ROLE_SCHOOL_ADMIN") || User.IsInRole("ROLE_ASSISTANCE"))
             { 
                 <li class="item">
                     <div class="itemContent certifications">

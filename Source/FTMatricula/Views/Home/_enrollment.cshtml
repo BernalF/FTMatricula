@@ -34,6 +34,8 @@
                 </a>
             </div>
         </li>
+        @if (!User.IsInRole("ROLE_ASSISTANCE"))
+        { 
         <li class="optList">
             <div class="opt">
                 <a href="@Url.Action("index" , "ValidationCourse", routeValues: null)">
@@ -50,6 +52,7 @@
                 </a>
             </div>
         </li>
+        }
         <li class="optList hide">
             <div class="opt">
                 <a href="#">
